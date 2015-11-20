@@ -1,5 +1,13 @@
 # Material-WeCenter
-# License
+## Dependency
+WeCenterMobile-Api（[https://github.com/ifLab/WeCenterMobile-Api](https://github.com/ifLab/WeCenterMobile-Api)）
+## External libraries used
+- [CircleImageView](https://github.com/hdodenhof/CircleImageView)
+- [google-gson](https://github.com/google/gson)
+- [Navigation drawer](https://github.com/rudsonlive/NavigationDrawer-MaterialDesign)
+- [FloatingActionButton](https://github.com/Clans/FloatingActionButton)
+
+## License
     Copyright 2015 Jinghong Union of ZJUT
     
     Licensed under the Apache License, Version 2.0 (the "License");

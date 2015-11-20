@@ -1,4 +1,4 @@
-package com.atzzh.material_wecenter;
+package com.zjut.material_wecenter;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

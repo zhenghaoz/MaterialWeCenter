@@ -29,6 +29,12 @@ public class Config {
     public static String FOLLOW_PEOPLE = HOST_NAME + "?/follow/ajax/follow_people/";
     public static String GET_AVATARS = HOST_NAME + "?/api/account/get_avatars/";
 
+    public static String EXPLORE = HOST_NAME + "?/api/explore/";
+
+    public static String AVATAR_DIR = HOST_NAME + "uploads/avatar/";
+
+    public static int PER_PAGE = 20;
+
     // connection
     public static int TIME_OUT = 600;
 

@@ -15,7 +15,7 @@ package com.zjut.material_wecenter.models;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class UserInfo {
+public class UserFullInfo {
 
     private RsmEntity rsm;
 

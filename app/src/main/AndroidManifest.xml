@@ -12,7 +12,8 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.zjut.material_wecenter.MainActivity"
+            android:name=".controller.activity.MainActivity"
+            android:theme="@style/nLiveoDrawer"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

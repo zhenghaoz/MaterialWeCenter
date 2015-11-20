@@ -3,4 +3,9 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <!--Main drawer-->
+    <string name="dynamic">动态</string>
+    <string name="explore">发现</string>
+    <string name="topic">话题</string>
 </resources>

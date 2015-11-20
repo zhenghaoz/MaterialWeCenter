@@ -1,7 +1,14 @@
 package com.zjut.material_wecenter;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.zjut.material_wecenter.models.LoginProcess;
+import com.zjut.material_wecenter.models.Question;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -12,7 +19,9 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -41,6 +50,30 @@ public class Client {
             return null;
         Gson gson = new Gson();
         return gson.fromJson(json, LoginProcess.class);
+    }
+
+    public static ArrayList<Question> explore(int page) {
+        String url = Config.EXPLORE + "?page=" + String.valueOf(page) + "&per_page=" + String.valueOf(Config.PER_PAGE);
+        String json = doGet(url);
+        ArrayList<Question> list = new ArrayList<>();
+        Gson gson = new Gson();
+        if (json == null)
+            return null;
+        try {
+            JSONObject obj = new JSONObject(json);
+            if (obj.getInt("errno") != 1)
+                return null;
+            JSONObject rsm = obj.getJSONObject("rsm");
+            JSONArray array = rsm.getJSONArray("rows");
+            int total_rows = rsm.getInt("total_rows");
+            for (int i = 0; i < total_rows; i++) {
+                JSONObject item = array.getJSONObject(i);
+                list.add(gson.fromJson(item.toString(), Question.class));
+            }
+        } catch (JSONException e) {
+            return null;
+        }
+        return list;
     }
 
     /*

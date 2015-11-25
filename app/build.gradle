@@ -28,5 +28,9 @@ dependencies {
     compile 'br.com.liveo:navigationdrawer-material:2.3.3'
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.getbase:floatingactionbutton:1.10.0'
+    compile 'com.nispok:snackbar:2.11.0'
+    compile ('com.github.florent37:materialviewpager:1.1.2@aar'){
+        transitive = true
+    }
     compile files('libs/gson-2.4.jar')
 }

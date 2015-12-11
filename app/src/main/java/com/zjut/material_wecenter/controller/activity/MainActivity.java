@@ -12,6 +12,7 @@ import com.zjut.material_wecenter.Client;
 import com.zjut.material_wecenter.Config;
 import com.zjut.material_wecenter.R;
 import com.zjut.material_wecenter.controller.fragment.ExploreFragment;
+import com.zjut.material_wecenter.controller.fragment.HomeFragment;
 import com.zjut.material_wecenter.models.LoginProcess;
 
 import br.liveo.Model.HelpLiveo;
@@ -30,6 +31,7 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
 
     // Fragments
     private ExploreFragment exploreFragment;
+    private HomeFragment homeFragment;
 
     @Override
     public void onInt(Bundle bundle) {
@@ -83,6 +85,8 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
         // Hide all fragments
         if (exploreFragment != null)
             transaction.hide(exploreFragment);
+        if (homeFragment != null)
+            transaction.hide(homeFragment);
         switch (i) {
             case 1: // Explore
                 if (exploreFragment == null) {
@@ -91,6 +95,13 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
                 } else
                     transaction.show(exploreFragment);
                 setTitle(R.string.explore);
+            case 2:
+                if (homeFragment == null) {
+                    homeFragment = new HomeFragment();
+                    transaction.add(R.id.container, homeFragment);
+                } else
+                    transaction.show(homeFragment);
+                setTitle(R.string.dynamic);
         }
         transaction.commit();
     }

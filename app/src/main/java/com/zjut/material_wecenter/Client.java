@@ -41,7 +41,16 @@ import java.util.Map;
  */
 public class Client {
 
-    public static LoginProcess LoginProcess(String user_name, String password) {
+    private String cooike;
+    private static Client client;
+
+    public static Client getInstance() {
+        if (client == null)
+            client = new Client();
+        return client;
+    }
+
+    public LoginProcess LoginProcess(String user_name, String password) {
         Map<String, String> params = new HashMap<>();
         params.put("user_name", user_name);
         params.put("password", password);
@@ -52,7 +61,7 @@ public class Client {
         return gson.fromJson(json, LoginProcess.class);
     }
 
-    public static ArrayList<Question> explore(int page) {
+    public ArrayList<Question> explore(int page) {
         String url = Config.EXPLORE + "?page=" + String.valueOf(page) + "&per_page=" + String.valueOf(Config.PER_PAGE);
         String json = doGet(url);
         ArrayList<Question> list = new ArrayList<>();
@@ -79,7 +88,7 @@ public class Client {
     /*
      * doPost - given uri and params, return string. Return null if there is any exception
      */
-    private static String doPost(String uri, Map<String, String> params) {
+    private String doPost(String uri, Map<String, String> params) {
         String result = null;
 
         // build request content
@@ -127,7 +136,7 @@ public class Client {
     /*
      * doGet - given url, return string. Return null if there is any exception
      */
-    private static String doGet(String strUrl) {
+    private String doGet(String strUrl) {
         try {
             URL url = new URL(strUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();

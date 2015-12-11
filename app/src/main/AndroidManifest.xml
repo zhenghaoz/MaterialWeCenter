@@ -25,6 +25,10 @@
             android:name=".controller.activity.LoginActivity"
             android:label="@string/title_activity_login" >
         </activity>
+        <activity
+            android:name=".controller.activity.PostActivity"
+            android:label="@string/title_activity_post" >
+        </activity>
     </application>
 
 </manifest>

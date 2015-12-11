@@ -9,6 +9,11 @@
     <string name="edit_password">请输入密码</string>
     <string name="button_login">登录</string>
     <string name="loginning">登录中。。。</string>
+    
+    <!--Post activity-->
+    <string name="edit_tile">标题</string>
+    <string name="edit_content">内容</string>
+    <string name="edit_topic">话题</string>
 
     <!--Main drawer-->
     <string name="dynamic">动态</string>
@@ -16,4 +21,5 @@
     <string name="topic">话题</string>
     <string name="title_activity_user">UserActivity</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_post">发布问题</string>
 </resources>

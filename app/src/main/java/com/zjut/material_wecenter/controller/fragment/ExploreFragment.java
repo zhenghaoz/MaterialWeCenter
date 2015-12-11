@@ -1,5 +1,6 @@
 package com.zjut.material_wecenter.controller.fragment;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.zjut.material_wecenter.Client;
 import com.zjut.material_wecenter.R;
+import com.zjut.material_wecenter.controller.activity.PostActivity;
 import com.zjut.material_wecenter.controller.adapter.QuestionListAdapter;
 import com.zjut.material_wecenter.models.Question;
 
@@ -29,6 +31,7 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
     private View btnPublish;
+    private Client client = Client.getInstance();
 
     private int page = 1;
 
@@ -84,11 +87,11 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-/*        switch (v.getId()) {
+        switch (v.getId()) {
             case R.id.button_publish:
-                Intent intent = new Intent(getActivity(), PublishActivity.class);
+                Intent intent = new Intent(getActivity(), PostActivity.class);
                 startActivity(intent);
-        }*/
+        }
     }
 
     private class LoadQuestionList extends AsyncTask<Void, Integer, Integer> {
@@ -102,9 +105,9 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
             try {
                 if (page == 1) {
                     mList = new ArrayList<>();
-                    mList = Client.explore(page);
+                    mList = client.explore(page);
                 } else {
-                    List list = Client.explore(page);
+                    List list = client.explore(page);
                     if (list != null)
                         mList.addAll(list);
                 }

@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.nispok.snackbar.Snackbar;
 import com.zjut.material_wecenter.Client;
 import com.zjut.material_wecenter.R;
 import com.zjut.material_wecenter.controller.activity.PostActivity;
@@ -32,6 +33,8 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
     private RecyclerView mRecyclerView;
     private View btnPublish;
     private Client client = Client.getInstance();
+
+    private static int POST_ACTIVITY = 1;
 
     private int page = 1;
 
@@ -90,7 +93,16 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.button_publish:
                 Intent intent = new Intent(getActivity(), PostActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, POST_ACTIVITY);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == POST_ACTIVITY) {
+            page = 1;
+            new LoadQuestionList().execute();
         }
     }
 

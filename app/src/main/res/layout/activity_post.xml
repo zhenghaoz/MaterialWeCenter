@@ -27,6 +27,7 @@
         <!--问题标题-->
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edit_title"
+            app:met_errorColor="#ddaa00"
             app:met_baseColor="@color/nliveo_blue_colorPrimaryDark"
             app:met_floatingLabel="highlight"
             app:met_floatingLabelText="@string/edit_tile"
@@ -37,7 +38,6 @@
         <!--问题描述-->
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edit_content"
-            app:met_singleLineEllipsis="true"
             app:met_baseColor="@color/nliveo_blue_colorPrimaryDark"
             app:met_floatingLabel="highlight"
             app:met_floatingLabelText="@string/edit_content"

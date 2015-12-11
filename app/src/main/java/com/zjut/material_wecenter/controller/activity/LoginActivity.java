@@ -17,6 +17,8 @@ import com.zjut.material_wecenter.R;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private Client client = Client.getInstance();
+
     private EditText editUsername;
     private EditText editPassword;
     private Button btnLogin;
@@ -56,7 +58,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         @Override
         protected Void doInBackground(Void... params) {
-            response = Client.LoginProcess(user_name, password);
+            response = client.LoginProcess(user_name, password);
             if (response != null && response.getErrno() == 1) {
                 // Save username and password
                 SharedPreferences preferences = getSharedPreferences("account", MODE_PRIVATE);

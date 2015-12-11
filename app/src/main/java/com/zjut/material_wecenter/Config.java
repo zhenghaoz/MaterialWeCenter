@@ -28,6 +28,7 @@ public class Config {
     public static String PROFILE_SETTING = HOST_NAME + "api/profile_setting.php";
     public static String FOLLOW_PEOPLE = HOST_NAME + "?/follow/ajax/follow_people/";
     public static String GET_AVATARS = HOST_NAME + "?/api/account/get_avatars/";
+    public static String PUSHLISH_QUESTION = HOST_NAME + "?/api/publish/publish_question/";
 
     public static String EXPLORE = HOST_NAME + "?/api/explore/";
 

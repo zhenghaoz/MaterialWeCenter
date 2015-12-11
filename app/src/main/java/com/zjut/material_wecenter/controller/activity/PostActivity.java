@@ -1,5 +1,6 @@
 package com.zjut.material_wecenter.controller.activity;
 
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,8 +11,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.nispok.snackbar.Snackbar;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.zjut.material_wecenter.Client;
 import com.zjut.material_wecenter.R;
+import com.zjut.material_wecenter.models.PublishQuestion;
 
 import java.util.ArrayList;
 
@@ -46,6 +50,7 @@ public class PostActivity extends AppCompatActivity {
         editTitle = (MaterialEditText) findViewById(R.id.edit_title);
         editContent = (MaterialEditText) findViewById(R.id.edit_content);
         editTopic = (MaterialEditText) findViewById(R.id.edit_topic);
+        editTitle.validate("\\w{5,}", "标题长度不能少于5个字");
 
         // Add topics
         btnAddTopic.setOnClickListener(new View.OnClickListener() {
@@ -78,10 +83,43 @@ public class PostActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_post) {
+            if (editTitle.validate())
+                new PublishTask().execute();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    class PublishTask extends AsyncTask<Void, Void, Void> {
+
+        String title, content;
+        PublishQuestion result;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            content = editContent.getText().toString() + "<br><br>————来自精弘论坛安卓客户端";
+            title = editTitle.getText().toString();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            Client client = Client.getInstance();
+            result = client.publishQuestion(title, content, topics);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            if (result == null)
+                Snackbar.with(PostActivity.this).text("未知错误").show(PostActivity.this);
+            else if (result.getErrno() == 1)
+                PostActivity.this.finish();
+            else
+                Snackbar.with(PostActivity.this).text((String) result.getErr()).show(PostActivity.this);
+        }
     }
 }

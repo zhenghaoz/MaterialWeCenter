@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.zjut.material_wecenter.models.LoginProcess;
+import com.zjut.material_wecenter.models.PublishQuestion;
 import com.zjut.material_wecenter.models.Question;
 
 import org.json.JSONArray;
@@ -85,6 +86,22 @@ public class Client {
         return list;
     }
 
+    public PublishQuestion publishQuestion(String content, String detail, ArrayList<String> topiclist) {
+        Map<String, String> params = new HashMap<>();
+        params.put("question_content", content);
+        params.put("question_detail", detail);
+        StringBuilder topics = new StringBuilder();
+        if (!topiclist.isEmpty()) {
+            topics.append(topiclist.get(0));
+            for (int i = 1; i < topiclist.size(); i++)
+                topics.append(',').append(topiclist.get(i));
+        }
+        params.put("topics", topics.toString());
+        String json = doPost(Config.PUSHLISH_QUESTION, params);
+        Gson gson = new Gson();
+        return gson.fromJson(json, PublishQuestion.class);
+    }
+
     /*
      * doPost - given uri and params, return string. Return null if there is any exception
      */
@@ -111,6 +128,7 @@ public class Client {
             connection.setDoOutput(true);
             connection.setRequestMethod("POST");
             connection.setUseCaches(false);
+            connection.setRequestProperty("Cookie", cooike);
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             connection.setRequestProperty("Content-Length", String.valueOf(data.length));
 
@@ -119,6 +137,10 @@ public class Client {
 
             int response = connection.getResponseCode();
             if (response == HttpURLConnection.HTTP_OK) {
+                Map<String, List<String>> header = connection.getHeaderFields();
+                List<String> cookies = header.get("Set-Cookie");
+                if (cookies.size() == 3)
+                    cooike = cookies.get(2);
                 InputStream input = connection.getInputStream();
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 byte[] buffer = new byte[Config.MAX_LINE_BUFFER];

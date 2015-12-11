@@ -21,6 +21,7 @@ import br.liveo.navigationliveo.NavigationLiveo;
 public class MainActivity extends NavigationLiveo implements OnItemClickListener {
 
     private HelpLiveo mHelpLiveo;
+    private Client client = Client.getInstance();
 
     private String uid;
     private String user_name;
@@ -98,7 +99,7 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
 
         @Override
         protected Void doInBackground(Void... params) {
-            LoginProcess response = Client.LoginProcess(uid, password);
+            LoginProcess response = client.LoginProcess(uid, password);
             if (response == null || response.getErrno() != 1) {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);

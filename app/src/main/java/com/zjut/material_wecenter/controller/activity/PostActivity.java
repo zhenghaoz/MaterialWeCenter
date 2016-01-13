@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.nispok.snackbar.Snackbar;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.zjut.material_wecenter.Client;
+import com.zjut.material_wecenter.Config;
 import com.zjut.material_wecenter.R;
 import com.zjut.material_wecenter.models.Result;
 
@@ -21,17 +22,16 @@ import java.util.ArrayList;
 
 public class PostActivity extends AppCompatActivity {
 
-    ArrayList<String> topics = new ArrayList<>();
-    Button btnAddTopic;
-    TextView textTopics;
-    MaterialEditText editTitle, editContent, editTopic;
+    private ArrayList<String> topics = new ArrayList<>();
+    private Button btnAddTopic;
+    private TextView textTopics;
+    private MaterialEditText editTitle, editContent, editTopic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
-
-        // Init toolbar
+        // 初始化工具栏
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -43,16 +43,14 @@ public class PostActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         if (ab != null)
             ab.setDisplayHomeAsUpEnabled(true);
-
-        // Init view
+        // 实例化控件
         btnAddTopic = (Button) findViewById(R.id.btn_add_topic);
         textTopics = (TextView) findViewById(R.id.txt_topics);
         editTitle = (MaterialEditText) findViewById(R.id.edit_title);
         editContent = (MaterialEditText) findViewById(R.id.edit_content);
         editTopic = (MaterialEditText) findViewById(R.id.edit_topic);
         editTitle.validate("\\w{5,}", "标题长度不能少于5个字");
-
-        // Add topics
+        // 添加话题
         btnAddTopic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,17 +79,17 @@ public class PostActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_post) {
+        if (id == R.id.action_post) {   // 点击发布问题
             if (editTitle.validate())
                 new PublishTask().execute();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * 发布问题的异步任务
+     */
     class PublishTask extends AsyncTask<Void, Void, Void> {
 
         String title, content;
@@ -100,7 +98,7 @@ public class PostActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            content = editContent.getText().toString() + "<br><br>————来自精弘论坛安卓客户端";
+            content = editContent.getText().toString() + Config.FIX;
             title = editTitle.getText().toString();
         }
 
@@ -114,12 +112,12 @@ public class PostActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            if (result == null)
+            if (result == null) // 未知错误
                 Snackbar.with(PostActivity.this).text("未知错误").show(PostActivity.this);
-            else if (result.getErrno() == 1)
+            else if (result.getErrno() == 1)    // 发布成功
                 PostActivity.this.finish();
-            else
-                Snackbar.with(PostActivity.this).text((String) result.getErr()).show(PostActivity.this);
+            else                // 显示错误
+                Snackbar.with(PostActivity.this).text(result.getErr()).show(PostActivity.this);
         }
     }
 }

@@ -10,11 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:viewpager_logo="@layout/header_logo"
-        app:viewpager_logoMarginTop="100dp"
+        app:viewpager_logoMarginTop="64dp"
         app:viewpager_color="@color/colorPrimary"
         app:viewpager_headerHeight="200dp"
         app:viewpager_headerAlpha="1.0"
-        app:viewpager_hideLogoWithFade="false"
+        app:viewpager_hideLogoWithFade="true"
         app:viewpager_hideToolbarAndTitle="false"
         app:viewpager_enableToolbarElevation="true"
         app:viewpager_parallaxHeaderFactor="1.5"
@@ -23,6 +23,7 @@
         app:viewpager_transparentToolbar="false"
         app:viewpager_animatedHeaderImage="true"
         app:viewpager_disableToolbar="false"
+
 
         />
 

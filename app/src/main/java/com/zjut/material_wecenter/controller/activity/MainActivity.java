@@ -36,7 +36,7 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
     @Override
     public void onInt(Bundle bundle) {
 
-        // Read shared preference
+        // 验证用户保存的登录信息
         SharedPreferences preferences = getSharedPreferences("account", MODE_PRIVATE);
         uid = preferences.getString("uid", "");
         user_name = preferences.getString("user_name", "");
@@ -44,24 +44,22 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
         avatar_file = preferences.getString("avatar_file", "");
         new UserLoginTask().execute();
 
-        // Creating items navigation
+        // 创建主菜单
         this.userName.setText(user_name);
         this.userEmail.setText(uid);
         Picasso.with(this).load(Config.AVATAR_DIR + avatar_file).into(this.userPhoto);
         mHelpLiveo = new HelpLiveo();
         mHelpLiveo.add(getString(R.string.dynamic), R.mipmap.ic_notifications_on_grey600_48dp);
         mHelpLiveo.add(getString(R.string.explore), R.mipmap.ic_explore_grey600_48dp);
-
         with(this).startingPosition(0)
                 .addAllHelpItem(mHelpLiveo.getHelp())
                 .colorNameSubHeader(R.color.nliveo_blue_colorPrimary)
                 .colorItemSelected(R.color.nliveo_blue_colorPrimary)
                 .setOnClickUser(onClickPhoto)
-                .setOnClickFooter(onClickFooter)
                 .build();
-
     }
 
+    // 点击用户头像，查看用户信息
     private View.OnClickListener onClickPhoto = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -71,46 +69,45 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
         }
     };
 
-    private View.OnClickListener onClickFooter = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            closeDrawer();
-        }
-    };
-
     @Override
     public void onItemClick(int i) {
-        // Get manager
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        // Hide all fragments
+        // 隐藏所有的Fragment
         if (exploreFragment != null)
             transaction.hide(exploreFragment);
         if (homeFragment != null)
             transaction.hide(homeFragment);
+        // 显示被选中的Fragment
         switch (i) {
-            case 1: // Explore
-                if (exploreFragment == null) {
-                    exploreFragment = new ExploreFragment();
-                    transaction.add(R.id.container, exploreFragment);
-                } else
-                    transaction.show(exploreFragment);
-                setTitle(R.string.explore);
-            case 2:
+            case 0:     // 动态
                 if (homeFragment == null) {
                     homeFragment = new HomeFragment();
                     transaction.add(R.id.container, homeFragment);
                 } else
                     transaction.show(homeFragment);
                 setTitle(R.string.dynamic);
+                break;
+            case 1:     // 发现
+                if (exploreFragment == null) {
+                    exploreFragment = new ExploreFragment();
+                    transaction.add(R.id.container, exploreFragment);
+                } else
+                    transaction.show(exploreFragment);
+                setTitle(R.string.explore);
+                break;
         }
         transaction.commit();
     }
 
+    /**
+     * 用户登录验证
+     */
     private class UserLoginTask extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... params) {
             Result response = client.loginProcess(uid, password);
+            // 验证失败，要求用户重新输入登录信息
             if (response == null || response.getErrno() != 1) {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);

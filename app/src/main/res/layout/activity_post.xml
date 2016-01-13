@@ -1,7 +1,8 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.zjut.material_wecenter.controller.activity.PostActivity">
 
     <android.support.v7.widget.Toolbar
@@ -14,73 +15,81 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
-        android:layout_below="@id/toolbar"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:orientation="vertical"
+    <android.support.v7.widget.CardView
+        android:layout_margin="8dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <!--问题标题-->
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edit_title"
-            app:met_errorColor="#ddaa00"
-            app:met_baseColor="@color/nliveo_blue_colorPrimaryDark"
-            app:met_floatingLabel="highlight"
-            app:met_floatingLabelText="@string/edit_tile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/edit_tile"/>
-
-        <!--问题描述-->
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edit_content"
-            app:met_baseColor="@color/nliveo_blue_colorPrimaryDark"
-            app:met_floatingLabel="highlight"
-            app:met_floatingLabelText="@string/edit_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/edit_content"/>
-
-        <!--标题-->
-        <TextView
-            android:id="@+id/txt_topics"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!--添加标题-->
         <LinearLayout
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:orientation="horizontal"
+            android:layout_below="@id/toolbar"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
+            <!--问题标题-->
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/edit_topic"
-                app:met_singleLineEllipsis="true"
+                android:id="@+id/edit_title"
+                app:met_errorColor="#ddaa00"
                 app:met_baseColor="@color/nliveo_blue_colorPrimaryDark"
                 app:met_floatingLabel="highlight"
-                app:met_floatingLabelText="@string/edit_topic"
-                android:layout_weight="1"
+                app:met_floatingLabelText="@string/edit_tile"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/edit_topic"
-                android:layout_width="match_parent" />
+                android:hint="@string/edit_tile"/>
 
-            <Button
-                android:id="@+id/btn_add_topic"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:text="添加标题"
-                android:textColor="@android:color/white"
-                android:background="@color/nliveo_blue_colorPrimary"
-                android:layout_weight="2"
-                android:layout_height="36dp"
-                android:layout_width="match_parent" />
+            <!--问题描述-->
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/edit_content"
+                app:met_baseColor="@color/nliveo_blue_colorPrimaryDark"
+                app:met_floatingLabel="highlight"
+                app:met_floatingLabelText="@string/edit_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/edit_content"/>
+
+            <!--添加标题-->
+            <LinearLayout
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edit_topic"
+                    app:met_singleLineEllipsis="true"
+                    app:met_baseColor="@color/nliveo_blue_colorPrimaryDark"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelText="@string/edit_topic"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/edit_topic"
+                    android:layout_width="match_parent" />
+
+                <Button
+                    android:id="@+id/btn_add_topic"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:text="添加标题"
+                    android:textColor="@android:color/white"
+                    android:background="@color/nliveo_blue_colorPrimary"
+                    android:layout_weight="2"
+                    android:layout_height="36dp"
+                    android:layout_width="match_parent" />
+
+            </LinearLayout>
+
+            <!--话题-->
+            <TextView
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:id="@+id/txt_topics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
-    </LinearLayout>
+    </android.support.v7.widget.CardView>
 
-</RelativeLayout>
+</LinearLayout>

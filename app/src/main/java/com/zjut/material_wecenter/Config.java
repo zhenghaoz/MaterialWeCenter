@@ -41,4 +41,6 @@ public class Config {
 
     // application
     public static int MAX_LINE_BUFFER = 1024;
+
+    public static String FIX = "\"<br><br>————来自精弘论坛安卓客户端\"";
 }

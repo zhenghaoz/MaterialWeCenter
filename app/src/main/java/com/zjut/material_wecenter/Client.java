@@ -68,7 +68,7 @@ public class Client {
     }
 
     /**
-     * getUserInfo 获取洪湖信息
+     * getUserInfo 获取用户信息
      * @param uid 用户ID
      * @return 包含UserInfo的Result对象
      */

@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.zjut.material_wecenter.controller.activity.PostActivity">
     <item android:id="@+id/action_post"
-        android:icon="@mipmap/ic_send_white_48dp"
         android:title="@string/title_activity_post"
         app:showAsAction="ifRoom"/>
 </menu>

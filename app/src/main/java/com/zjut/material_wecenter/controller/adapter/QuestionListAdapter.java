@@ -36,7 +36,6 @@ public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListAdapte
             Picasso.with(mContext)
                     .load(Config.AVATAR_DIR + avatarFile)
                     .into(holder.avatarImg);
-        Log.d("Avatar", Config.AVATAR_DIR + question.getUser_info().getAvatar_file());
         holder.questionTitle.setText(question.getQuestion_content());
         holder.questionInfo.setText(String.valueOf(question.getFocus_count()) + "人关注 • "
                 + String.valueOf(question.getAnswer_count()) + "个回答 • "

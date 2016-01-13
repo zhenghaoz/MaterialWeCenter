@@ -1,11 +1,13 @@
 package com.zjut.material_wecenter;
 
-import android.util.Log;
+import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
+import com.zjut.material_wecenter.models.Result;
 import com.zjut.material_wecenter.models.LoginProcess;
 import com.zjut.material_wecenter.models.PublishQuestion;
 import com.zjut.material_wecenter.models.Question;
+import com.zjut.material_wecenter.models.UserInfo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,15 +53,28 @@ public class Client {
         return client;
     }
 
-    public LoginProcess LoginProcess(String user_name, String password) {
+    /**
+     * loginProcess 用户登录
+     * @param user_name 用户名
+     * @param password 用户密码
+     * @return 包含LoginProcess的Result对象
+     */
+    public Result loginProcess(String user_name, String password) {
         Map<String, String> params = new HashMap<>();
         params.put("user_name", user_name);
         params.put("password", password);
         String json = doPost(Config.LOGIN_PROCESS, params);
-        if (json == null)
-            return null;
-        Gson gson = new Gson();
-        return gson.fromJson(json, LoginProcess.class);
+        return getJavaBean(json, LoginProcess.class);
+    }
+
+    /**
+     * getUserInfo 获取洪湖信息
+     * @param uid 用户ID
+     * @return 包含UserInfo的Result对象
+     */
+    public Result getUserInfo(String uid) {
+        String json = doGet(Config.GET_USERINFO + "?uid=" + uid);
+        return getJavaBean(json, UserInfo.class);
     }
 
     public ArrayList<Question> explore(int page) {
@@ -86,29 +101,60 @@ public class Client {
         return list;
     }
 
-    public PublishQuestion publishQuestion(String content, String detail, ArrayList<String> topiclist) {
+    /**
+     * publishQuestion
+     * @param content 问题的标题
+     * @param detail 问题的内容
+     * @param topics 问题的话题
+     * @return 包含PublishQuestion对象的Result对象
+     */
+    public Result publishQuestion(String content, String detail, ArrayList<String> topics) {
         Map<String, String> params = new HashMap<>();
         params.put("question_content", content);
         params.put("question_detail", detail);
-        StringBuilder topics = new StringBuilder();
-        if (!topiclist.isEmpty()) {
-            topics.append(topiclist.get(0));
-            for (int i = 1; i < topiclist.size(); i++)
-                topics.append(',').append(topiclist.get(i));
+        // 生成话题列表
+        StringBuilder topic = new StringBuilder();
+        if (!topics.isEmpty()) {
+            topic.append(topics.get(0));
+            for (int i = 1; i < topics.size(); i++)
+                topic.append(',').append(topics.get(i));
         }
         params.put("topics", topics.toString());
         String json = doPost(Config.PUSHLISH_QUESTION, params);
-        Gson gson = new Gson();
-        return gson.fromJson(json, PublishQuestion.class);
+        return getJavaBean(json, PublishQuestion.class);
     }
 
-    /*
-     * doPost - given uri and params, return string. Return null if there is any exception
+    /**
+     * getJavaBean 将返回的JSON对象转换为Result类
+     * @param json JSON字符串
+     * @param classType 类类型
+     * @return Result（如果有错误，返回NULL）
      */
-    private String doPost(String uri, Map<String, String> params) {
-        String result = null;
+    private Result getJavaBean(String json, @NonNull Class<? extends Object> classType) {
+        try {
+            JSONObject jsonObject = new JSONObject(json);
+            Result resualt = new Result();
+            resualt.setErr(jsonObject.getString("err"));
+            resualt.setErrno(jsonObject.getInt("errno"));
+            if (resualt.getErrno() == 1) {
+                Gson gson = new Gson();
+                resualt.setRsm(gson.fromJson(jsonObject.getJSONObject("rsm").toString(), classType));
+            } else
+                resualt.setRsm(null);
+            return resualt;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
-        // build request content
+    /**
+     * doPost 发送POST请求
+     * @param URL 请求的URL
+     * @param params 请求中的参数
+     * @return 字符串（如果发生错误，那么返回NULL）
+     */
+    private String doPost(String URL, Map<String, String> params) {
+        // 建立请求内容
         StringBuilder builder = new StringBuilder();
         for (Map.Entry<String, String> entry : params.entrySet()) {
             builder.append(entry.getKey())
@@ -118,49 +164,53 @@ public class Client {
         }
         builder.deleteCharAt(builder.length() - 1);
         byte[] data = builder.toString().getBytes();
-
-        // connection
+        // 发出请求
         try {
-            URL url = new URL(uri);
+            URL url = new URL(URL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setConnectTimeout(Config.TIME_OUT);
             connection.setDoInput(true);
             connection.setDoOutput(true);
             connection.setRequestMethod("POST");
             connection.setUseCaches(false);
+            // 附上Cookie
             connection.setRequestProperty("Cookie", cooike);
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             connection.setRequestProperty("Content-Length", String.valueOf(data.length));
-
+            // 发送请求内容
             OutputStream output = connection.getOutputStream();
             output.write(data);
-
+            // 接收返回信息
             int response = connection.getResponseCode();
             if (response == HttpURLConnection.HTTP_OK) {
+                // 保存Cookie
                 Map<String, List<String>> header = connection.getHeaderFields();
                 List<String> cookies = header.get("Set-Cookie");
                 if (cookies.size() == 3)
                     cooike = cookies.get(2);
+                // 处理返回的字符串流
                 InputStream input = connection.getInputStream();
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 byte[] buffer = new byte[Config.MAX_LINE_BUFFER];
                 int len = 0;
                 while ((len = input.read(buffer)) != -1)
                     byteArrayOutputStream.write(buffer, 0, len);
-                result = new String(byteArrayOutputStream.toByteArray());
+                return new String(byteArrayOutputStream.toByteArray());
             }
         } catch (IOException e) {
             return null;
         }
-        return result;
+        return null;
     }
 
-    /*
-     * doGet - given url, return string. Return null if there is any exception
+    /**
+     * doGet 发送GET请求
+     * @param URL 请求的URL地址
+     * @return 字符串（如果发生错误，那么返回NULL）
      */
-    private String doGet(String strUrl) {
+    private String doGet(String URL) {
         try {
-            URL url = new URL(strUrl);
+            URL url = new URL(URL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             InputStreamReader input = new InputStreamReader(connection.getInputStream());
             BufferedReader reader = new BufferedReader(input);

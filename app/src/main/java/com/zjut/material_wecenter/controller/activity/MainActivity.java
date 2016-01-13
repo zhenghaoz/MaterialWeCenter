@@ -13,7 +13,7 @@ import com.zjut.material_wecenter.Config;
 import com.zjut.material_wecenter.R;
 import com.zjut.material_wecenter.controller.fragment.ExploreFragment;
 import com.zjut.material_wecenter.controller.fragment.HomeFragment;
-import com.zjut.material_wecenter.models.LoginProcess;
+import com.zjut.material_wecenter.models.Result;
 
 import br.liveo.Model.HelpLiveo;
 import br.liveo.interfaces.OnItemClickListener;
@@ -110,7 +110,7 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
 
         @Override
         protected Void doInBackground(Void... params) {
-            LoginProcess response = client.LoginProcess(uid, password);
+            Result response = client.loginProcess(uid, password);
             if (response == null || response.getErrno() != 1) {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);

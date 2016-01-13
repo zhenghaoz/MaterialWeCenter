@@ -1,54 +1,30 @@
 package com.zjut.material_wecenter.models;
 
+/**
+ * Copyright (C) 2015 Jinghong Union of ZJUT
+ * <p/>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 public class PublishQuestion {
 
-    /**
-     * question_id : 3572
-     */
+    private String question_id;
 
-    private RsmEntity rsm;
-    /**
-     * rsm : {"question_id":"3572"}
-     * errno : 1
-     * err : null
-     */
-
-    private int errno;
-    private Object err;
-
-    public void setRsm(RsmEntity rsm) {
-        this.rsm = rsm;
+    public String getQuestion_id() {
+        return question_id;
     }
 
-    public void setErrno(int errno) {
-        this.errno = errno;
-    }
-
-    public void setErr(Object err) {
-        this.err = err;
-    }
-
-    public RsmEntity getRsm() {
-        return rsm;
-    }
-
-    public int getErrno() {
-        return errno;
-    }
-
-    public Object getErr() {
-        return err;
-    }
-
-    public static class RsmEntity {
-        private String question_id;
-
-        public void setQuestion_id(String question_id) {
-            this.question_id = question_id;
-        }
-
-        public String getQuestion_id() {
-            return question_id;
-        }
+    public void setQuestion_id(String question_id) {
+        this.question_id = question_id;
     }
 }

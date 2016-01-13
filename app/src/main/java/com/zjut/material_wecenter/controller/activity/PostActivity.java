@@ -15,7 +15,7 @@ import com.nispok.snackbar.Snackbar;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.zjut.material_wecenter.Client;
 import com.zjut.material_wecenter.R;
-import com.zjut.material_wecenter.models.PublishQuestion;
+import com.zjut.material_wecenter.models.Result;
 
 import java.util.ArrayList;
 
@@ -95,7 +95,7 @@ public class PostActivity extends AppCompatActivity {
     class PublishTask extends AsyncTask<Void, Void, Void> {
 
         String title, content;
-        PublishQuestion result;
+        Result result;
 
         @Override
         protected void onPreExecute() {

@@ -5,13 +5,13 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.nispok.snackbar.Snackbar;
 import com.zjut.material_wecenter.Client;
+import com.zjut.material_wecenter.models.Result;
 import com.zjut.material_wecenter.models.LoginProcess;
 import com.zjut.material_wecenter.R;
 
@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         private String user_name;
         private String password;
-        private LoginProcess response;
+        private Result response;
 
         @Override
         protected void onPreExecute() {
@@ -58,15 +58,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         @Override
         protected Void doInBackground(Void... params) {
-            response = client.LoginProcess(user_name, password);
+            response = client.loginProcess(user_name, password);
             if (response != null && response.getErrno() == 1) {
                 // Save username and password
                 SharedPreferences preferences = getSharedPreferences("account", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("uid", user_name);
                 editor.putString("password", password);
-                editor.putString("user_name", response.getRsm().getUser_name());
-                editor.putString("avatar_file", response.getRsm().getAvatar_file());
+                editor.putString("user_name", ((LoginProcess)response.getRsm()).getUser_name());
+                editor.putString("avatar_file", ((LoginProcess) response.getRsm()).getAvatar_file());
                 editor.apply();
                 // Load main activity
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);

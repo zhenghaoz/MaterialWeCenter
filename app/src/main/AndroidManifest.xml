@@ -29,6 +29,10 @@
             android:name=".controller.activity.PostActivity"
             android:label="@string/title_activity_post" >
         </activity>
+        <activity
+            android:name=".controller.activity.UserActivity"
+            android:label="@string/title_activity_user" >
+        </activity>
     </application>
 
 </manifest>

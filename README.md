@@ -1,6 +1,6 @@
 # Material-WeCenter
 ## Screenshot
-<img src="https://raw.githubusercontent.com/ZhangZhenghao/Material-WeCenter/master/screenshot/Screenshot_2016-01-13-20-53-27.png" width="36%" height="36%">
+<img src="https://raw.githubusercontent.com/ZhangZhenghao/Material-WeCenter/master/screenshot/Screenshot_2016-01-13-20-53-27.png" width="30%" height="30%">    <img src="https://raw.githubusercontent.com/ZhangZhenghao/Material-WeCenter/master/screenshot/Screenshot_2016-01-13-21-15-18.png" width="30%" height="30%">    <img src="https://raw.githubusercontent.com/ZhangZhenghao/Material-WeCenter/master/screenshot/Screenshot_2016-01-13-21-16-57.png" width="30%" height="30%">
 ## Dependency
 WeCenterMobile-Api（[https://github.com/ifLab/WeCenterMobile-Api](https://github.com/ifLab/WeCenterMobile-Api)）
 ## External libraries used

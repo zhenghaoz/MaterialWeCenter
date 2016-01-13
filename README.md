@@ -1,14 +1,20 @@
 # Material-WeCenter
+## Screenshot
+<img src="https://raw.githubusercontent.com/ZhangZhenghao/Material-WeCenter/master/screenshot/Screenshot_2016-01-13-20-53-27.png" width="36%" height="36%">
 ## Dependency
 WeCenterMobile-Api（[https://github.com/ifLab/WeCenterMobile-Api](https://github.com/ifLab/WeCenterMobile-Api)）
 ## External libraries used
+- [Android-ObservableScrollView](https://github.com/ksoichiro/Android-ObservableScrollView)
 - [CircleImageView](https://github.com/hdodenhof/CircleImageView)
-- [google-gson](https://github.com/google/gson)
-- [Navigation drawer](https://github.com/rudsonlive/NavigationDrawer-MaterialDesign)
 - [FloatingActionButton](https://github.com/Clans/FloatingActionButton)
+- [google-gson](https://github.com/google/gson)
+- [MaterialEditText](https://github.com/rengwuxian/MaterialEditText)
+- [MaterialViewPager](https://github.com/florent37/MaterialViewPager)
+- [Navigation drawer](https://github.com/rudsonlive/NavigationDrawer-MaterialDesign)
+- [Picasso](https://github.com/square/picasso)
 
 ## License
-    Copyright 2015 Jinghong Union of ZJUT
+    Copyright 2016 Jinghong Union of ZJUT
     
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

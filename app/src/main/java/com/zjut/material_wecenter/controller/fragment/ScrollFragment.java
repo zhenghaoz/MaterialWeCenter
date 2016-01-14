@@ -17,7 +17,19 @@ import com.zjut.material_wecenter.models.Result;
 import com.zjut.material_wecenter.models.UserInfo;
 
 /**
- * Created by florentchampigny on 24/04/15.
+ * Copyright (C) 2016 Jinghong Union of ZJUT
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 public class ScrollFragment extends Fragment {
 
@@ -74,6 +86,7 @@ public class ScrollFragment extends Fragment {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             if (result != null && result.getRsm() != null) {
+                // 显示用户个人信息
                 UserInfo info = (UserInfo) result.getRsm();
                 fans.setText(String.valueOf(info.getFans_count()));
                 agree.setText(String.valueOf(info.getAgree_count()));

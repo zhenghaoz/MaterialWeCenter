@@ -1,7 +1,7 @@
 package com.zjut.material_wecenter;
 
 /**
- * Copyright (C) 2015 Jinghong Union of ZJUT
+ * Copyright (C) 2016 Jinghong Union of ZJUT
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,28 @@ package com.zjut.material_wecenter;
  */
 public class Config {
 
-    // Host name
+    /**
+     * 应用配置
+     */
+
+    // 应用名称
+    public static String APP_NAME = "精弘论坛";
+    // 网址
     public static String HOST_NAME = "http://bbs.zjut.edu.cn/";
-    // Account API URI
+    // 文本后缀
+    public static String FIX = "\"<br><br>————来自精弘论坛安卓客户端\"";
+    // 每页问题数量
+    public static int PER_PAGE = 20;
+    // 设置网络超时时间
+    public static int TIME_OUT = 600;
+    // 缓冲大小
+    public static int MAX_LINE_BUFFER = 1024;
+
+    /**
+     * 警告！ 修改下面内容可能会导致应用无法使用
+     */
+
+    // API请求URL
     public static String LOGIN_PROCESS = HOST_NAME + "?/api/account/login_process/";
     public static String AVATAR_UPLOAD = HOST_NAME + "?/api/account/avatar_upload/";
     public static String GET_USERINFO = HOST_NAME + "?/api/account/get_userinfo/";
@@ -29,18 +48,6 @@ public class Config {
     public static String FOLLOW_PEOPLE = HOST_NAME + "?/follow/ajax/follow_people/";
     public static String GET_AVATARS = HOST_NAME + "?/api/account/get_avatars/";
     public static String PUSHLISH_QUESTION = HOST_NAME + "?/api/publish/publish_question/";
-
     public static String EXPLORE = HOST_NAME + "?/api/explore/";
-
     public static String AVATAR_DIR = HOST_NAME + "uploads/avatar/";
-
-    public static int PER_PAGE = 20;
-
-    // connection
-    public static int TIME_OUT = 600;
-
-    // application
-    public static int MAX_LINE_BUFFER = 1024;
-
-    public static String FIX = "\"<br><br>————来自精弘论坛安卓客户端\"";
 }

@@ -8,9 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.nispok.snackbar.Snackbar;
 import com.zjut.material_wecenter.Client;
+import com.zjut.material_wecenter.Config;
 import com.zjut.material_wecenter.models.Result;
 import com.zjut.material_wecenter.models.LoginProcess;
 import com.zjut.material_wecenter.R;
@@ -21,16 +23,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText editUsername;
     private EditText editPassword;
     private Button btnLogin;
+    private TextView appName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // 实例化控件
+        appName = (TextView) findViewById(R.id.app_name);
         editUsername = (EditText) findViewById(R.id.edit_username);
         editPassword = (EditText) findViewById(R.id.edit_password);
         btnLogin = (Button) findViewById(R.id.button_login);
         btnLogin.setOnClickListener(this);
+        // 显示应用名称
+        appName.setText(Config.APP_NAME);
     }
 
     @Override

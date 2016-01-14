@@ -19,6 +19,7 @@ import com.zjut.material_wecenter.R;
 import com.zjut.material_wecenter.controller.activity.PostActivity;
 import com.zjut.material_wecenter.controller.adapter.QuestionListAdapter;
 import com.zjut.material_wecenter.models.Question;
+import com.zjut.material_wecenter.models.Result;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,6 +108,7 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
     }
 
     private class LoadQuestionList extends AsyncTask<Void, Integer, Integer> {
+        private Result result;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -114,17 +116,13 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
 
         @Override
         protected Integer doInBackground(Void... params) {
-            try {
+            result = client.explore(page);
+            if (result != null && result.getErrno() == 1) {
                 if (page == 1) {
-                    mList = new ArrayList<>();
-                    mList = client.explore(page);
+                    mList = (ArrayList<Question>) result.getRsm();
                 } else {
-                    List list = client.explore(page);
-                    if (list != null)
-                        mList.addAll(list);
+                    mList.addAll((ArrayList<Question>) result.getRsm());
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
             return null;
         }

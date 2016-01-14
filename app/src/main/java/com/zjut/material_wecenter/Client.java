@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Copyright (C) 2015 Jinghong Union of ZJUT
+ * Copyright (C) 2016 Jinghong Union of ZJUT
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,6 +47,10 @@ public class Client {
     private String cooike;
     private static Client client;
 
+    /**
+     * 获得一个实例
+     * @return Client对象
+     */
     public static Client getInstance() {
         if (client == null)
             client = new Client();
@@ -64,7 +68,7 @@ public class Client {
         params.put("user_name", user_name);
         params.put("password", password);
         String json = doPost(Config.LOGIN_PROCESS, params);
-        return getJavaBean(json, LoginProcess.class);
+        return getResult(json, LoginProcess.class);
     }
 
     /**
@@ -74,35 +78,22 @@ public class Client {
      */
     public Result getUserInfo(String uid) {
         String json = doGet(Config.GET_USERINFO + "?uid=" + uid);
-        return getJavaBean(json, UserInfo.class);
-    }
-
-    public ArrayList<Question> explore(int page) {
-        String url = Config.EXPLORE + "?page=" + String.valueOf(page) + "&per_page=" + String.valueOf(Config.PER_PAGE);
-        String json = doGet(url);
-        ArrayList<Question> list = new ArrayList<>();
-        Gson gson = new Gson();
-        if (json == null)
-            return null;
-        try {
-            JSONObject obj = new JSONObject(json);
-            if (obj.getInt("errno") != 1)
-                return null;
-            JSONObject rsm = obj.getJSONObject("rsm");
-            JSONArray array = rsm.getJSONArray("rows");
-            int total_rows = rsm.getInt("total_rows");
-            for (int i = 0; i < total_rows; i++) {
-                JSONObject item = array.getJSONObject(i);
-                list.add(gson.fromJson(item.toString(), Question.class));
-            }
-        } catch (JSONException e) {
-            return null;
-        }
-        return list;
+        return getResult(json, UserInfo.class);
     }
 
     /**
-     * publishQuestion
+     * explore 发现页面
+     * @param page 页数
+     * @return Result对象
+     */
+    public Result explore(int page) {
+        String url = Config.EXPLORE + "?page=" + String.valueOf(page) + "&per_page=" + String.valueOf(Config.PER_PAGE);
+        String json = doGet(url);
+        return getResults(json, Question.class);
+    }
+
+    /**
+     * publishQuestion 发起问题
      * @param content 问题的标题
      * @param detail 问题的内容
      * @param topics 问题的话题
@@ -121,16 +112,16 @@ public class Client {
         }
         params.put("topics", topics.toString());
         String json = doPost(Config.PUSHLISH_QUESTION, params);
-        return getJavaBean(json, PublishQuestion.class);
+        return getResult(json, PublishQuestion.class);
     }
 
     /**
-     * getJavaBean 将返回的JSON对象转换为Result类
+     * getResult 将返回的JSON对象转换为Result类
      * @param json JSON字符串
      * @param classType 类类型
      * @return Result（如果有错误，返回NULL）
      */
-    private Result getJavaBean(String json, @NonNull Class<? extends Object> classType) {
+    private Result getResult(String json, @NonNull Class<? extends Object> classType) {
         try {
             JSONObject jsonObject = new JSONObject(json);
             Result resualt = new Result();
@@ -143,6 +134,37 @@ public class Client {
                 resualt.setRsm(null);
             return resualt;
         } catch (Exception e) {
+            return null;
+        }
+    }
+
+    /**
+     * getResults 将返回的JSON数组转换为Result类
+     * @param json JSON字符串
+     * @param classType 类型
+     * @return Result对象
+     */
+    private Result getResults(String json,  @NonNull Class<? extends Object> classType) {
+        try {
+            JSONObject jsonObject = new JSONObject(json);
+            Result result = new Result();
+            result.setErr(jsonObject.getString("err"));
+            result.setErrno(jsonObject.getInt("errno"));
+            if (result.getErrno() == 1) {
+                ArrayList<Object> list = new ArrayList<>();
+                JSONObject rsm = jsonObject.getJSONObject("rsm");
+                JSONArray array = rsm.getJSONArray("rows");
+                int total_rows = rsm.getInt("total_rows");
+                Gson gson = new Gson();
+                for (int i = 0; i < total_rows; i++) {
+                    JSONObject item = array.getJSONObject(i);
+                    list.add(gson.fromJson(item.toString(), Question.class));
+                }
+                result.setRsm(list);
+            } else
+                result.setRsm(null);
+            return result;
+        } catch (JSONException e) {
             return null;
         }
     }

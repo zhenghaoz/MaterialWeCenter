@@ -31,7 +31,7 @@ import com.zjut.material_wecenter.models.UserInfo;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class ScrollFragment extends Fragment {
+public class UserInfoFragment extends Fragment {
 
     private ObservableScrollView mScrollView;
 
@@ -39,10 +39,10 @@ public class ScrollFragment extends Fragment {
 
     private String uid;
 
-    public static ScrollFragment newInstance(String uid) {
+    public static UserInfoFragment newInstance(String uid) {
         Bundle args = new Bundle();
         args.putString("uid", uid);
-        ScrollFragment fragment = new ScrollFragment();
+        UserInfoFragment fragment = new UserInfoFragment();
         fragment.setArguments(args);
         return fragment;
     }

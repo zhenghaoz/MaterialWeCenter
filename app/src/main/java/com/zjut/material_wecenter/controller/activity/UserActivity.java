@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso;
 import com.zjut.material_wecenter.Config;
 import com.zjut.material_wecenter.R;
 import com.zjut.material_wecenter.controller.fragment.RecyclerViewFragment;
-import com.zjut.material_wecenter.controller.fragment.ScrollFragment;
+import com.zjut.material_wecenter.controller.fragment.UserInfoFragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -69,7 +69,7 @@ public class UserActivity extends AppCompatActivity {
             public Fragment getItem(int position) {
                 switch (position % 4) {
                     case 0:
-                        return ScrollFragment.newInstance(uid);
+                        return UserInfoFragment.newInstance(uid);
                     //case 1:
                     //    return RecyclerViewFragment.newInstance();
                     //case 2:

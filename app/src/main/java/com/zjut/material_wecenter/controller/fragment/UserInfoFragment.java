@@ -35,7 +35,7 @@ public class UserInfoFragment extends Fragment {
 
     private ObservableScrollView mScrollView;
 
-    private TextView fans, agree, thanks, signature;
+    private TextView fans, agree, thanks, signature, city;
 
     private String uid;
 
@@ -66,6 +66,7 @@ public class UserInfoFragment extends Fragment {
         agree = (TextView) view.findViewById(R.id.agree);
         thanks = (TextView) view.findViewById(R.id.thanks);
         signature = (TextView) view.findViewById(R.id.signature);
+        city = (TextView) view.findViewById(R.id.city);
         MaterialViewPagerHelper.registerScrollView(getActivity(), mScrollView, null);
         new LoadUserInfo().execute();
     }
@@ -92,6 +93,8 @@ public class UserInfoFragment extends Fragment {
                 agree.setText(String.valueOf(info.getAgree_count()));
                 thanks.setText(String.valueOf(info.getThanks_count()));
                 signature.setText(info.getSignature());
+                String pc = info.getProvince() + info.getCity();
+                city.setText(pc);
             }
         }
     }

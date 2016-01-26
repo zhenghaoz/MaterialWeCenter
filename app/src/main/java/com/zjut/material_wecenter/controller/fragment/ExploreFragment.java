@@ -8,22 +8,20 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.nispok.snackbar.Snackbar;
 import com.zjut.material_wecenter.Client;
 import com.zjut.material_wecenter.R;
 import com.zjut.material_wecenter.controller.activity.PostActivity;
-import com.zjut.material_wecenter.controller.adapter.QuestionListAdapter;
+import com.zjut.material_wecenter.controller.adapter.QuestionViewAdapter;
 import com.zjut.material_wecenter.models.Question;
 import com.zjut.material_wecenter.models.Result;
 
 import java.util.ArrayList;
-import java.util.List;
+
 /**
  * Copyright (C) 2016 Jinghong Union of ZJUT
  *
@@ -44,7 +42,7 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
     // Loading state
     private boolean loading = true;
     private ArrayList<Question> mList;
-    private QuestionListAdapter mAdapter;
+    private QuestionViewAdapter mAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
     private View btnPublish;
@@ -157,7 +155,7 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
             super.onPostExecute(integer);
             mSwipeRefreshLayout.setRefreshing(false);
             if (page == 1) {
-                mAdapter = new QuestionListAdapter(getActivity(), mList);
+                mAdapter = new QuestionViewAdapter(getActivity(), mList);
                 mRecyclerView.setAdapter(mAdapter);
             } else
                 mAdapter.notifyDataSetChanged();

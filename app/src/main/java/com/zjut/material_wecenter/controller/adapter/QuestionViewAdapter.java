@@ -2,14 +2,12 @@ package com.zjut.material_wecenter.controller.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.zjut.material_wecenter.Config;
 import com.zjut.material_wecenter.R;
 import com.zjut.material_wecenter.models.Question;
 
@@ -17,12 +15,12 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListAdapter.ViewHolder> {
+public class QuestionViewAdapter extends RecyclerView.Adapter<QuestionViewAdapter.ViewHolder> {
 
     private ArrayList<Question> mList;
     private Context mContext;
 
-    public QuestionListAdapter(Context context, ArrayList<Question> list) {
+    public QuestionViewAdapter(Context context, ArrayList<Question> list) {
         this.mContext = context;
         this.mList = list;
     }
@@ -34,7 +32,7 @@ public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListAdapte
         String avatarFile = question.getUser_info().getAvatar_file();
         if (!avatarFile.isEmpty())
             Picasso.with(mContext)
-                    .load(Config.AVATAR_DIR + avatarFile)
+                    .load(avatarFile)
                     .into(holder.avatarImg);
         holder.questionTitle.setText(question.getQuestion_content());
         holder.questionInfo.setText(String.valueOf(question.getFocus_count()) + "人关注 • "

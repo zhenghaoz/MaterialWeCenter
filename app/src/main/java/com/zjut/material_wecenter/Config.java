@@ -40,13 +40,9 @@ public class Config {
 
     // API请求URL
     public static String LOGIN_PROCESS = HOST_NAME + "?/api/account/login_process/";
-    public static String AVATAR_UPLOAD = HOST_NAME + "?/api/account/avatar_upload/";
     public static String GET_USERINFO = HOST_NAME + "?/api/account/get_userinfo/";
-    public static String USER = HOST_NAME + "api/user.php";
-    public static String PROFILE = HOST_NAME + "api/profile.php";
-    public static String PROFILE_SETTING = HOST_NAME + "api/profile_setting.php";
+    public static String GET_USER_ACTIONS = HOST_NAME + "?/api/people/user_actions/";
     public static String FOLLOW_PEOPLE = HOST_NAME + "?/follow/ajax/follow_people/";
-    public static String GET_AVATARS = HOST_NAME + "?/api/account/get_avatars/";
     public static String PUSHLISH_QUESTION = HOST_NAME + "?/api/publish/publish_question/";
     public static String EXPLORE = HOST_NAME + "?/api/explore/";
     public static String AVATAR_DIR = HOST_NAME + "uploads/avatar/";

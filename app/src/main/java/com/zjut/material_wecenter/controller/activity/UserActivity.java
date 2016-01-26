@@ -70,12 +70,10 @@ public class UserActivity extends AppCompatActivity {
                 switch (position % 4) {
                     case 0:
                         return UserInfoFragment.newInstance(uid);
-                    //case 1:
-                    //    return RecyclerViewFragment.newInstance();
-                    //case 2:
-                    //    return WebViewFragment.newInstance();
+                    case 1:
+                        return RecyclerViewFragment.newInstance(uid, RecyclerViewFragment.PUBLISH);
                     default:
-                        return RecyclerViewFragment.newInstance();
+                        return RecyclerViewFragment.newInstance(uid, RecyclerViewFragment.ANSWER);
                 }
             }
 
@@ -126,7 +124,7 @@ public class UserActivity extends AppCompatActivity {
         mViewPager.getPagerTitleStrip().setViewPager(mViewPager.getViewPager());
 
         CircleImageView logo = (CircleImageView) findViewById(R.id.logo_white);
-        Picasso.with(this).load(Config.AVATAR_DIR + avatar_file).into(logo);
+        Picasso.with(this).load(avatar_file).into(logo);
         if (logo != null)
             logo.setOnClickListener(new View.OnClickListener() {
                 @Override

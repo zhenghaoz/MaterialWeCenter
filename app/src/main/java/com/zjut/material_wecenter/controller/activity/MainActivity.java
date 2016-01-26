@@ -47,10 +47,12 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
         // 创建主菜单
         this.userName.setText(user_name);
         this.userEmail.setText(uid);
-        Picasso.with(this).load(Config.AVATAR_DIR + avatar_file).into(this.userPhoto);
+        Picasso.with(this).load(avatar_file).into(this.userPhoto);
         mHelpLiveo = new HelpLiveo();
         mHelpLiveo.add(getString(R.string.dynamic), R.mipmap.ic_notifications_on_grey600_48dp);
         mHelpLiveo.add(getString(R.string.explore), R.mipmap.ic_explore_grey600_48dp);
+        mHelpLiveo.addSeparator();
+        mHelpLiveo.add(getString(R.string.settings), R.mipmap.ic_settings_grey600_48dp);
         with(this).startingPosition(0)
                 .addAllHelpItem(mHelpLiveo.getHelp())
                 .colorNameSubHeader(R.color.nliveo_blue_colorPrimary)

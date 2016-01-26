@@ -3,6 +3,7 @@ package com.zjut.material_wecenter;
 import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
+import com.zjut.material_wecenter.models.Action;
 import com.zjut.material_wecenter.models.Result;
 import com.zjut.material_wecenter.models.LoginProcess;
 import com.zjut.material_wecenter.models.PublishQuestion;
@@ -80,6 +81,20 @@ public class Client {
         String json = doGet(Config.GET_USERINFO + "?uid=" + uid);
         return getResult(json, UserInfo.class);
     }
+
+    /**
+     * getUserActions获取用户回答或提问记录
+     * @param uid 用户ID
+     * @param actions 101-获取用户提问列表 201-获取用户回答列表
+     * @return 包含Action对象数组的Result对象
+     */
+    public Result getUserActions(String uid, int actions) {
+        String json = doGet(Config.GET_USER_ACTIONS + "?uid=" + uid + "&actions=" + String.valueOf(actions));
+        return getResults(json, Action.class);
+    }
+
+    public static int PUBLISH = 101;
+    public static int ANSWER = 201;
 
     /**
      * explore 发现页面
@@ -234,6 +249,8 @@ public class Client {
         try {
             URL url = new URL(URL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            // 附上Cookie
+            connection.setRequestProperty("Cookie", cooike);
             InputStreamReader input = new InputStreamReader(connection.getInputStream());
             BufferedReader reader = new BufferedReader(input);
             StringBuilder builder = new StringBuilder();

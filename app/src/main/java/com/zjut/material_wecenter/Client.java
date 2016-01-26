@@ -158,7 +158,7 @@ public class Client {
                 Gson gson = new Gson();
                 for (int i = 0; i < total_rows; i++) {
                     JSONObject item = array.getJSONObject(i);
-                    list.add(gson.fromJson(item.toString(), Question.class));
+                    list.add(gson.fromJson(item.toString(), classType));
                 }
                 result.setRsm(list);
             } else

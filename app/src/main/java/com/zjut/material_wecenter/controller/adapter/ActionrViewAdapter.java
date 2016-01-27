@@ -1,6 +1,7 @@
 package com.zjut.material_wecenter.controller.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,7 @@ public class ActionrViewAdapter extends RecyclerView.Adapter<ActionrViewAdapter.
             info = String.valueOf(contents.get(position).getQuestion_info().getAnswer_count())
                     + "个回答";
         } else {
-            holder.answer.setText(contents.get(position).getAnswer_info().getAnswer_content());
+            holder.answer.setText(Html.fromHtml(Html.fromHtml(contents.get(position).getAnswer_info().getAnswer_content()).toString()));
             info = String.valueOf(contents.get(position).getAnswer_info().getAgree_count()) + "个赞同 • "
                     + String.valueOf(contents.get(position).getAnswer_info().getAgainst_count()) + "个反对";
         }

@@ -1,8 +1,9 @@
 package com.zjut.material_wecenter.controller.activity;
 
 import android.content.SharedPreferences;
-import android.support.v4.app.Fragment;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -13,10 +14,12 @@ import android.widget.Toast;
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.squareup.picasso.Picasso;
-import com.zjut.material_wecenter.Config;
+import com.zjut.material_wecenter.Client;
 import com.zjut.material_wecenter.R;
 import com.zjut.material_wecenter.controller.fragment.RecyclerViewFragment;
 import com.zjut.material_wecenter.controller.fragment.UserInfoFragment;
+import com.zjut.material_wecenter.models.Result;
+import com.zjut.material_wecenter.models.UserInfo;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -25,21 +28,16 @@ public class UserActivity extends AppCompatActivity {
     private MaterialViewPager mViewPager;
 
     private Toolbar toolbar;
+    private CircleImageView logo;
     private String uid;
-    private String user_name;
-    private String avatar_file;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-        // 获取用户名和头像
-        SharedPreferences preferences = getSharedPreferences("account", MODE_PRIVATE);
-        uid = preferences.getString("uid", "");
-        user_name = preferences.getString("user_name", "");
-        avatar_file = preferences.getString("avatar_file", "");
-        // 清除原来的变体
-        setTitle(user_name + "的主页");
+        // 获取用户ID
+        uid = getIntent().getStringExtra("uid");
+        setTitle("");
         // 实例化控件
         mViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager);
         // 初始化工具栏
@@ -99,40 +97,42 @@ public class UserActivity extends AppCompatActivity {
         mViewPager.setMaterialViewPagerListener(new MaterialViewPager.Listener() {
             @Override
             public HeaderDesign getHeaderDesign(int page) {
-                switch (page) {
-                    case 0:
-                        return HeaderDesign.fromColorResAndUrl(
-                                R.color.nliveo_blue_colorPrimary,
-                                "https://fs01.androidpit.info/a/63/0e/android-l-wallpapers-630ea6-h900.jpg");
-                    case 1:
-                        return HeaderDesign.fromColorResAndUrl(
-                                R.color.nliveo_blue_colorPrimary,
-                                "https://fs01.androidpit.info/a/63/0e/android-l-wallpapers-630ea6-h900.jpg");
-                    case 2:
-                        return HeaderDesign.fromColorResAndUrl(
-                                R.color.nliveo_blue_colorPrimary,
-                                "https://fs01.androidpit.info/a/63/0e/android-l-wallpapers-630ea6-h900.jpg");
-                }
-
-                //execute others actions if needed (ex : modify your header logo)
-
-                return null;
+                return HeaderDesign.fromColorResAndUrl(
+                        R.color.nliveo_blue_colorPrimary,
+                        "file:///android_asset/background.jpg");
             }
         });
 
         mViewPager.getViewPager().setOffscreenPageLimit(mViewPager.getViewPager().getAdapter().getCount());
         mViewPager.getPagerTitleStrip().setViewPager(mViewPager.getViewPager());
 
-        CircleImageView logo = (CircleImageView) findViewById(R.id.logo_white);
-        Picasso.with(this).load(avatar_file).into(logo);
-        if (logo != null)
-            logo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mViewPager.notifyHeaderChanged();
-                    Toast.makeText(getApplicationContext(), "Yes, the title is clickable", Toast.LENGTH_SHORT).show();
-                }
-            });
+        logo = (CircleImageView) findViewById(R.id.logo_white);
+
+        new LoadUserInfo().execute();
+    }
+
+    /**
+     * 获取用户信息的异步任务
+     */
+    class LoadUserInfo extends AsyncTask<Void, Void, Void> {
+        Result result;
+        @Override
+        protected Void doInBackground(Void... params) {
+            Client client = Client.getInstance();
+            result = client.getUserInfo(uid);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            if (result != null && result.getRsm() != null) {
+                // 显示用户个人信息
+                UserInfo info = (UserInfo) result.getRsm();
+                setTitle(info.getUser_name() + "的主页");
+                Picasso.with(UserActivity.this).load(info.getAvatar_file()).into(logo);
+            }
+        }
     }
 
 }

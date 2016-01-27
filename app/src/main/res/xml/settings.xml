@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.preference.PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.preference.PreferenceCategory
+        android:key="about"
+        android:summary="关于"
+        android:title="关于">
+        <android.support.v7.preference.Preference
+            android:key="version"
+            android:summary="版本号"
+            android:title="不能拨号"/>
+    </android.support.v7.preference.PreferenceCategory>
+</android.support.v7.preference.PreferenceScreen>

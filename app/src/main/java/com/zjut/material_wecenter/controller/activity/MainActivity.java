@@ -13,6 +13,7 @@ import com.zjut.material_wecenter.Config;
 import com.zjut.material_wecenter.R;
 import com.zjut.material_wecenter.controller.fragment.ExploreFragment;
 import com.zjut.material_wecenter.controller.fragment.HomeFragment;
+import com.zjut.material_wecenter.controller.fragment.SettingsFragment;
 import com.zjut.material_wecenter.models.Result;
 
 import br.liveo.Model.HelpLiveo;
@@ -32,6 +33,7 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
     // Fragments
     private ExploreFragment exploreFragment;
     private HomeFragment homeFragment;
+    private SettingsFragment settingsFragment;
 
     @Override
     public void onInt(Bundle bundle) {
@@ -47,7 +49,9 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
         // 创建主菜单
         this.userName.setText(user_name);
         this.userEmail.setText(uid);
-        Picasso.with(this).load(avatar_file).into(this.userPhoto);
+        this.userBackground.setImageResource(R.drawable.background);
+        if (!avatar_file.isEmpty())
+            Picasso.with(this).load(avatar_file).into(this.userPhoto);
         mHelpLiveo = new HelpLiveo();
         mHelpLiveo.add(getString(R.string.dynamic), R.mipmap.ic_notifications_on_grey600_48dp);
         mHelpLiveo.add(getString(R.string.explore), R.mipmap.ic_explore_grey600_48dp);
@@ -67,6 +71,7 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
         public void onClick(View v) {
             closeDrawer();
             Intent intent = new Intent(MainActivity.this, UserActivity.class);
+            intent.putExtra("uid", uid);
             startActivity(intent);
         }
     };
@@ -79,6 +84,8 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
             transaction.hide(exploreFragment);
         if (homeFragment != null)
             transaction.hide(homeFragment);
+        if (settingsFragment != null)
+            transaction.hide(settingsFragment);
         // 显示被选中的Fragment
         switch (i) {
             case 0:     // 动态
@@ -97,6 +104,13 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
                     transaction.show(exploreFragment);
                 setTitle(R.string.explore);
                 break;
+            case 3:
+                if (settingsFragment == null) {
+                    settingsFragment = new SettingsFragment();
+                    transaction.add(R.id.container, settingsFragment);
+                } else
+                    transaction.show(settingsFragment);
+                setTitle("设置");
         }
         transaction.commit();
     }

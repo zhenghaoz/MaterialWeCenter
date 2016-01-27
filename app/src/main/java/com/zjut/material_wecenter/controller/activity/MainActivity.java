@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.squareup.picasso.Picasso;
 import com.zjut.material_wecenter.Client;
+import com.zjut.material_wecenter.Config;
 import com.zjut.material_wecenter.R;
 import com.zjut.material_wecenter.controller.fragment.ExploreFragment;
 import com.zjut.material_wecenter.controller.fragment.HomeFragment;

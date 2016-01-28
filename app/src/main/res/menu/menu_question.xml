@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.zjut.material_wecenter.controller.activity.QuestionActivity">
+    <item android:id="@+id/action_answer"
+        android:icon="@drawable/iconfont_comment"
+        android:title="answer"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"/>
+</menu>

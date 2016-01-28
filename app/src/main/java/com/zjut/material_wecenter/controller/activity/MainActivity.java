@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
+import android.app.FragmentTransaction;
 import android.view.View;
 
 import com.squareup.picasso.Picasso;
@@ -78,7 +78,7 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
 
     @Override
     public void onItemClick(int i) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
         // 隐藏所有的Fragment
         if (exploreFragment != null)
             transaction.hide(exploreFragment);

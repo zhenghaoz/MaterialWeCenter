@@ -4,10 +4,11 @@ import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.zjut.material_wecenter.models.Action;
-import com.zjut.material_wecenter.models.Result;
+import com.zjut.material_wecenter.models.Dynamic;
 import com.zjut.material_wecenter.models.LoginProcess;
 import com.zjut.material_wecenter.models.PublishQuestion;
 import com.zjut.material_wecenter.models.Question;
+import com.zjut.material_wecenter.models.Result;
 import com.zjut.material_wecenter.models.UserInfo;
 
 import org.json.JSONArray;
@@ -106,6 +107,18 @@ public class Client {
         String json = doGet(url);
         return getResults(json, Question.class);
     }
+
+    /**
+     * getDynamic 首页动态（home）页面
+     * @return Result对象
+     */
+
+    public Result getDynamic() {
+        String url = Config.HOME_DYNAMIC;
+        String json = doGet(url);
+        return getResults(json, Dynamic.class);
+    }
+
 
     /**
      * publishQuestion 发起问题

@@ -46,4 +46,6 @@ public class Config {
     public static String PUSHLISH_QUESTION = HOST_NAME + "?/api/publish/publish_question/";
     public static String EXPLORE = HOST_NAME + "?/api/explore/";
     public static String AVATAR_DIR = HOST_NAME + "uploads/avatar/";
+
+    public static String HOME_DYNAMIC = HOST_NAME + "?/api/home/";
 }

@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onRefresh() {
                 // 下拉刷新
-/*                new LoadDynamicList().execute();*/
+                new LoadDynamicList().execute();
             }
         });
         mSwipeRefreshLayout.setRefreshing(true);
@@ -63,10 +63,10 @@ public class HomeFragment extends Fragment {
         final LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         // 开始载入动态操作
-/*        new LoadDynamicList().execute();*/
+        new LoadDynamicList().execute();
     }
 
-/*    private class LoadDynamicList extends AsyncTask<Void, Void, Void> {
+    private class LoadDynamicList extends AsyncTask<Void, Void, Void> {
 
         private Result result;
 
@@ -89,5 +89,5 @@ public class HomeFragment extends Fragment {
             } else
                 mAdapter.notifyDataSetChanged();
         }
-    }*/
+    }
 }

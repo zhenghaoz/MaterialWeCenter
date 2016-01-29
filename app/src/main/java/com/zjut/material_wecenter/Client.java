@@ -129,9 +129,7 @@ public class Client {
      */
     public Result getDynamic() {
         String url = Config.HOME_DYNAMIC;
-
         String json = doGet(url);
-        Log.d("D", json);
         return getResults(json, Dynamic.class);
     }
 

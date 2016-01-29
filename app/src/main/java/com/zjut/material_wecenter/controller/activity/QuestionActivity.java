@@ -80,7 +80,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onRefresh() {
                 // 下拉刷新
-/*                new LoadAnswers().execute();*/
+                new LoadAnswers().execute();
             }
         });
 
@@ -101,16 +101,8 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
         });
-
         swipeRefreshLayout.setRefreshing(true);
-<<<<<<< HEAD
-/*
-=======
-
->>>>>>> 2bcdcfbc5a14daadc62e631d7e8d13eb62043e68
         new LoadAnswers().execute();
-*/
-
     }
 
     @Override
@@ -130,12 +122,9 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-/*        new LoadAnswers().execute();*/
+        new LoadAnswers().execute();
     }
 
-<<<<<<< HEAD
-/*    private class LoadAnswers extends AsyncTask<Integer,Integer,Integer> {
-=======
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -154,7 +143,6 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private class LoadAnswers extends AsyncTask<Integer,Integer,Integer> {
->>>>>>> 2bcdcfbc5a14daadc62e631d7e8d13eb62043e68
 
         @Override
         protected void onPreExecute() {
@@ -185,5 +173,5 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             }
             else Toast.makeText(QuestionActivity.this,"更新完成",Toast.LENGTH_SHORT).show();
         }
-    }*/
+    }
 }

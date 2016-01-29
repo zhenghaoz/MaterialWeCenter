@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.clans.fab.FloatingActionButton;
 import com.zjut.material_wecenter.Client;
 import com.zjut.material_wecenter.R;
 import com.zjut.material_wecenter.controller.activity.PostActivity;
@@ -40,12 +41,13 @@ import java.util.ArrayList;
 public class ExploreFragment extends Fragment implements View.OnClickListener {
 
     // Loading state
+    private final int ScrollOffset = 4;
     private boolean loading = true;
     private ArrayList<Question> mList;
     private QuestionViewAdapter mAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
-    private View btnPublish;
+    private FloatingActionButton btnPublish;
     private Client client = Client.getInstance();
 
     private static int POST_ACTIVITY = 1;
@@ -63,7 +65,7 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // 实例化发布问题按钮
-        btnPublish = view.findViewById(R.id.button_publish);
+        btnPublish = (FloatingActionButton)view.findViewById(R.id.button_publish);
         btnPublish.setOnClickListener(this);
         // 实例化刷新布局
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
@@ -99,6 +101,14 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
                         loading = false;
                         mSwipeRefreshLayout.setRefreshing(true);
                         new LoadQuestionList().execute();
+                    }
+                }
+
+                if (Math.abs(dy) > ScrollOffset) {
+                    if (dy > 0) {
+                        btnPublish.hide(true);
+                    } else {
+                        btnPublish.show(true);
                     }
                 }
             }

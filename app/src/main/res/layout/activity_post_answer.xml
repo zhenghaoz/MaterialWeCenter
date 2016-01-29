@@ -25,7 +25,7 @@
         android:id="@+id/editText_answerContent"
         android:layout_weight="1"
         android:textColor="@android:color/widget_edittext_dark"
-        android:textSize="@dimen/abc_text_size_large_material" />
+        android:textSize="@dimen/abc_text_size_medium_material" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,8 +36,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="10dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/iconfont_send"
+            android:src="@drawable/ic_send"
             android:id="@+id/imageButton_publishAnswer"
             android:background="#00000000" />
     </LinearLayout>

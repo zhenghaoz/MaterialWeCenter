@@ -39,7 +39,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public int getItemViewType(int position) {
         if(position==0) return TYPE_HEADER;
-        else if(position==getItemCount()-1) return TYPE_FOOTER;
+     //   else if(position==getItemCount()-1) return TYPE_FOOTER;
         else return TYPE_ITEM;
     }
 
@@ -51,11 +51,11 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     .inflate(R.layout.item_question_header, parent, false);
             return new HeaderViewHolder(view);
         }
-        else if(viewType==TYPE_FOOTER){
+      /*  else if(viewType==TYPE_FOOTER){
             View view= LayoutInflater.from(mContext)
                     .inflate(R.layout.item_question_footer, parent, false);
             return new FooterViewHolder(view);
-        }
+        }*/
         else {
             View view= LayoutInflater.from(mContext)
                     .inflate(R.layout.item_answer, parent, false);
@@ -84,28 +84,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             headerViewHolder.detail.setText(questionInfo.getQuestion_detail());
             headerViewHolder.viewCount.setText(questionInfo.getView_count() + "");
             headerViewHolder.answerCount.setText(questionInfo.getAnswer_count() + "");
-
-            if(questionInfo.getUser_follow_check()==1){
-                headerViewHolder.follow.setText("取消关注");
-            }
-            else{
-                headerViewHolder.follow.setText("关注");
-            }
-
-            headerViewHolder.follow.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(questionInfo.getUser_follow_check()==0){
-                        ((TextView) v).setText("取消关注");
-                    }
-                    else{
-                        ((TextView) v).setText("关注");
-                    }
-
-                }
-            });
-
-
+            headerViewHolder.thankCount.setText(questionInfo.getThanks_count()+"");
 
         }
         else if(holder instanceof ItemViewHolder){
@@ -130,7 +109,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public int getItemCount() {
-        return questionDetail.getQuestion_info().getAnswer_count()+2;
+        return questionDetail.getQuestion_info().getAnswer_count()+1;
     }
 
     public class HeaderViewHolder extends RecyclerView.ViewHolder{
@@ -142,7 +121,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         private TextView detail;
         private TextView viewCount;
         private TextView answerCount;
-        private TextView follow;
+        private TextView thankCount;
 
         public HeaderViewHolder(View view) {
             super(view);
@@ -153,7 +132,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             detail=(TextView) view.findViewById(R.id.textView_detail_question);
             viewCount=(TextView) view.findViewById(R.id.textView_viewCount_question);
             answerCount=(TextView) view.findViewById(R.id.textView_answerCount_question);
-            follow=(Button) view.findViewById(R.id.button_follow_question);
+            thankCount=(TextView) view.findViewById(R.id.textView_thankCount_question);
         }
 
     }

@@ -70,20 +70,20 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="5dp"
                 android:gravity="left">
                 <ImageView
                     android:id="@+id/imageView_viewCount_question"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/iconfont_views"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" />
+                    android:src="@drawable/ic_views"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
                 <TextView
                     android:id="@+id/textView_viewCount_question"
                     android:layout_width="60dp"
@@ -96,10 +96,10 @@
                     android:textSize="18dp" />
                 <ImageView
                     android:id="@+id/imageView_answerCount_question"
-                    android:src="@drawable/iconfont_answers"
+                    android:src="@drawable/ic_answers"
                     android:layout_gravity="center_vertical"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
                 <TextView
                     android:id="@+id/textView_answerCount_question"
                     android:layout_width="60dp"
@@ -110,23 +110,23 @@
                     android:text="0"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="18dp" />
+                <ImageView
+                    android:id="@+id/imageView_thankCount_question"
+                    android:src="@drawable/ic_blue_heart"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/textView_thankCount_question"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:ellipsize="end"
+                    android:paddingLeft="5dp"
+                    android:text="0"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="18dp" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp"
-                android:gravity="right">
-                <Button
-                    android:layout_width="77dp"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="90dp"
-                    android:text="关注"
-                    android:textSize="15dp"
-                    android:id="@+id/button_follow_question"
-                    android:background="@color/nliveo_blue_colorAccent" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

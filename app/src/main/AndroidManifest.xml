@@ -34,6 +34,14 @@
             android:name=".controller.activity.UserActivity"
             android:label="@string/title_activity_user" >
         </activity>
+        <activity
+            android:name=".controller.activity.PostAnswerActivity"
+            android:label="PostAnswerActivity" >
+        </activity>
+        <activity
+            android:name=".controller.activity.QuestionActivity"
+            android:label="QuestionActivity" >
+        </activity>
     </application>
 
 </manifest>

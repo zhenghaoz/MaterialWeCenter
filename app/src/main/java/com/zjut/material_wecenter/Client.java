@@ -1,7 +1,6 @@
 package com.zjut.material_wecenter;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.zjut.material_wecenter.models.Action;
@@ -127,8 +126,8 @@ public class Client {
      * getDynamic 首页动态（home）页面
      * @return Result对象
      */
-    public Result getDynamic() {
-        String url = Config.HOME_DYNAMIC;
+    public Result getDynamic(int page) {
+        String url = Config.HOME_DYNAMIC + "?page=" + String.valueOf(page) + "&per_page=" + String.valueOf(Config.PER_PAGE);
         String json = doGet(url);
         return getResults(json, Dynamic.class);
     }

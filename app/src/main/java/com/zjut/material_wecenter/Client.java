@@ -6,8 +6,10 @@ import com.google.gson.Gson;
 import com.zjut.material_wecenter.models.Action;
 import com.zjut.material_wecenter.models.Dynamic;
 import com.zjut.material_wecenter.models.LoginProcess;
+import com.zjut.material_wecenter.models.PublishAnswer;
 import com.zjut.material_wecenter.models.PublishQuestion;
 import com.zjut.material_wecenter.models.Question;
+import com.zjut.material_wecenter.models.QuestionDetail;
 import com.zjut.material_wecenter.models.Result;
 import com.zjut.material_wecenter.models.UserInfo;
 
@@ -109,6 +111,18 @@ public class Client {
     }
 
     /**
+     * getQuestion 获取问题详情
+     * @param questionID 问题的编号
+     * @return Result对象
+     */
+
+    public Result getQuestion(int questionID){
+        String url = Config.QUESTION + questionID;
+        String json = doGet(url);
+        return getResult(json, QuestionDetail.class);
+    }
+
+    /**
      * getDynamic 首页动态（home）页面
      * @return Result对象
      */
@@ -141,6 +155,21 @@ public class Client {
         params.put("topics", topics.toString());
         String json = doPost(Config.PUSHLISH_QUESTION, params);
         return getResult(json, PublishQuestion.class);
+    }
+
+    /**
+     * publishAnswer 添加问题答案
+     * @param questionID 问题编号
+     * @param content 答案的内容
+     * @return 包含PublishAnswer对象的Result对象
+     */
+
+    public Result publishAnswer(int questionID,String content){
+        Map<String, String> params = new HashMap<>();
+        params.put("question_id", questionID+"");
+        params.put("answer_content", content);
+        String json = doPost(Config.PUSHLISH_ANSWER, params);
+        return getResult(json, PublishAnswer.class);
     }
 
     /**

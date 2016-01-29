@@ -66,7 +66,7 @@ public class QuestionActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 // 下拉刷新
-                new LoadAnswers().execute();
+/*                new LoadAnswers().execute();*/
             }
         });
 
@@ -76,7 +76,9 @@ public class QuestionActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new ItemDivider(this,LinearLayoutManager.VERTICAL));
 
         swipeRefreshLayout.setRefreshing(true);
+/*
         new LoadAnswers().execute();
+*/
 
     }
 
@@ -109,10 +111,10 @@ public class QuestionActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        new LoadAnswers().execute();
+/*        new LoadAnswers().execute();*/
     }
 
-    private class LoadAnswers extends AsyncTask<Integer,Integer,Integer> {
+/*    private class LoadAnswers extends AsyncTask<Integer,Integer,Integer> {
 
         @Override
         protected void onPreExecute() {
@@ -139,5 +141,5 @@ public class QuestionActivity extends AppCompatActivity {
             recyclerView.setAdapter(questionDetailAdapter);
             questionDetailAdapter.notifyDataSetChanged();
         }
-    }
+    }*/
 }

@@ -55,13 +55,13 @@ public class PostAnswerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String text = editContent.getText().toString();
                 if(!text.isEmpty()){
-                    new PublishTask().execute();
+/*                    new PublishTask().execute();*/
                 }
             }
         });
     }
 
-    private class PublishTask extends AsyncTask<Void, Void, Void> {
+/*    private class PublishTask extends AsyncTask<Void, Void, Void> {
 
         String content;
         Result result;
@@ -89,5 +89,5 @@ public class PostAnswerActivity extends AppCompatActivity {
             else                // 显示错误
                 Snackbar.with(PostAnswerActivity.this).text(result.getErr()).show(PostAnswerActivity.this);
         }
-    }
+    }*/
 }

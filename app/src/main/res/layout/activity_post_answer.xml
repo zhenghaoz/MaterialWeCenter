@@ -1,0 +1,44 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zjut.material_wecenter.controller.activity.PostAnswerActivity"
+    android:weightSum="1">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_publishAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/nliveo_blue_colorPrimary"
+        android:elevation="@dimen/appbar_elevation"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    </android.support.v7.widget.Toolbar>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:gravity="left|top"
+        android:hint="请输入评论内容！"
+        android:ems="10"
+        android:id="@+id/editText_answerContent"
+        android:layout_weight="1"
+        android:textColor="@android:color/widget_edittext_dark"
+        android:textSize="@dimen/abc_text_size_medium_material" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:background="@color/nliveo_blue_colorAccent">
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_send"
+            android:id="@+id/imageButton_publishAnswer"
+            android:background="#00000000" />
+    </LinearLayout>
+
+</LinearLayout>

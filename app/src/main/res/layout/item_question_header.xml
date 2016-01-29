@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginTop="@dimen/cardMarginVertical"
+    android:layout_marginBottom="@dimen/cardMarginVertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:weightSum="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avatar_img_question"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/avatar_max_img" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/textView_userName_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingTop="5dp"
+                    android:text="name"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/abc_text_size_subhead_material" />
+                <TextView
+                    android:id="@+id/textView_addTime_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="signature"
+                    android:textColor="@android:color/tertiary_text_light"
+                    android:textSize="@dimen/abc_text_size_small_material" />
+            </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/textView_title_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:text="title"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/abc_text_size_medium_material" />
+        <TextView
+            android:id="@+id/textView_detail_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:text="detail"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/abc_text_size_menu_material" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:gravity="left">
+                <ImageView
+                    android:id="@+id/imageView_viewCount_question"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_views"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/textView_viewCount_question"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:ellipsize="end"
+                    android:paddingLeft="5dp"
+                    android:text="0"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="18dp" />
+                <ImageView
+                    android:id="@+id/imageView_answerCount_question"
+                    android:src="@drawable/ic_answers"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/textView_answerCount_question"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:ellipsize="end"
+                    android:paddingLeft="5dp"
+                    android:text="0"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="18dp" />
+                <ImageView
+                    android:id="@+id/imageView_thankCount_question"
+                    android:src="@drawable/ic_blue_heart"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/textView_thankCount_question"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:ellipsize="end"
+                    android:paddingLeft="5dp"
+                    android:text="0"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="18dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

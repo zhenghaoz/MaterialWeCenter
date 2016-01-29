@@ -1,6 +1,7 @@
 package com.zjut.material_wecenter.controller.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.zjut.material_wecenter.R;
+import com.zjut.material_wecenter.controller.activity.QuestionActivity;
 import com.zjut.material_wecenter.models.Question;
 
 import java.util.ArrayList;
@@ -41,9 +43,9 @@ public class QuestionViewAdapter extends RecyclerView.Adapter<QuestionViewAdapte
         holder.questionTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-/*                Intent intent = new Intent(mContext, QuestionViewActivity.class);
-                intent.putExtra("question_id", question.getQuestionID());
-                mContext.startActivity(intent);*/
+                Intent intent = new Intent(mContext, QuestionActivity.class);
+                intent.putExtra("questionID", question.getQuestion_id());
+                mContext.startActivity(intent);
             }
         });
     }

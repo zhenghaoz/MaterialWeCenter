@@ -13,14 +13,6 @@
         <item name="colorPrimary">@color/nliveo_blue_colorPrimary</item>
         <item name="colorPrimaryDark">@color/nliveo_blue_alpha_colorPrimaryDark</item>
         <item name="colorAccent">@color/nliveo_blue_colorPrimaryDark</item>
-        <item name="preferenceTheme">@style/settingsTheme</item>
-    </style>
-
-    <style name="settingsTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/nliveo_blue_colorPrimary</item>
-        <item name="colorAccent">@color/nliveo_blue_colorPrimaryDark</item>
-        <item name="android:textColor">@android:color/black</item>
-        <item name="android:textColorSecondary">@android:color/black</item>
     </style>
 
     <style name="AppTheme.ActionBarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">

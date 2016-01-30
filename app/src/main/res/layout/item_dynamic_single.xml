@@ -49,6 +49,15 @@
                     />
 
                 <TextView
+                    android:id="@+id/dynamic_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="XXX did sth"
+                    android:textSize="@dimen/abc_text_size_subhead_material"
+                    android:textColor="@android:color/tertiary_text_light"
+                    />
+
+                <TextView
                     android:id="@+id/dynamic_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

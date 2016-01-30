@@ -2,5 +2,5 @@
 <resources>
     <color name="dynamic_item_background" >#33b5e5</color>
     <color name="dynamic_item_info_text" >#aaaaaa</color>
-    <color name="dynamic_sub_card" >#88bbdd</color>
+    <color name="dynamic_sub_card" >#ecfcff</color>
 </resources>

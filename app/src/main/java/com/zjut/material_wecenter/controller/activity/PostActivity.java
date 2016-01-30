@@ -92,20 +92,19 @@ public class PostActivity extends AppCompatActivity {
      */
     class PublishTask extends AsyncTask<Void, Void, Void> {
 
-        String title, content;
-        Result result;
+        private String title, content;
+        private Result result;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            content = editContent.getText().toString() + Config.FIX;
+            content = editContent.getText().toString();
             title = editTitle.getText().toString();
         }
 
         @Override
         protected Void doInBackground(Void... params) {
-            Client client = Client.getInstance();
-            result = client.publishQuestion(title, content, topics);
+            result = Client.getInstance().publishQuestion(title, content, topics);
             return null;
         }
 

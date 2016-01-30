@@ -26,15 +26,18 @@ public class Dynamic {
      */
 
     private UserInfoEntity user_info;
+
     /**
      * answer_id : 13612
      * answer_content : 王老菊
+
      * add_time : 1453863313
      * against_count : 0
      * agree_count : 0
      */
 
     private AnswerInfoEntity answer_info;
+
     /**
      * question_id : 4489
      * question_content : 我被催眠了，你要不要试试
@@ -44,7 +47,26 @@ public class Dynamic {
      * agree_count : 0
      */
 
+    private ArticleInfoEntity article_info;
+
+    private CommentInfoEntity comment_info;
     private QuestionInfoEntity question_info;
+
+    public ArticleInfoEntity getArticle_info() {
+        return article_info;
+    }
+
+    public void setArticle_info(ArticleInfoEntity article_info) {
+        this.article_info = article_info;
+    }
+
+    public CommentInfoEntity getComment_info() {
+        return comment_info;
+    }
+
+    public void setComment_info(CommentInfoEntity comment_info) {
+        this.comment_info = comment_info;
+    }
 
     public void setHistory_id(int history_id) {
         this.history_id = history_id;
@@ -235,6 +257,103 @@ public class Dynamic {
 
         public int getAgree_count() {
             return agree_count;
+        }
+    }
+
+    public static class ArticleInfoEntity {
+        private int id;
+        private String title;
+        private String message;
+        private int comments;
+        private int views;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        public int getComments() {
+            return comments;
+        }
+
+        public void setComments(int comments) {
+            this.comments = comments;
+        }
+
+        public int getViews() {
+            return views;
+        }
+
+        public void setViews(int views) {
+            this.views = views;
+        }
+
+        public int getAdd_time() {
+            return add_time;
+        }
+
+        public void setAdd_time(int add_time) {
+            this.add_time = add_time;
+        }
+
+        private int add_time;
+    }
+
+    public static class CommentInfoEntity {
+        private int id;
+        private String message;
+        private int add_time;
+        private int votes;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        public int getAdd_time() {
+            return add_time;
+        }
+
+        public void setAdd_time(int add_time) {
+            this.add_time = add_time;
+        }
+
+        public int getVotes() {
+            return votes;
+        }
+
+        public void setVotes(int votes) {
+            this.votes = votes;
         }
     }
 }

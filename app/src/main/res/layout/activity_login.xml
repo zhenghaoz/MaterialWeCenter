@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/app_name"
+        android:text="@string/app_name"
         android:paddingTop="64dp"
         android:paddingBottom="32dp"
         android:gravity="center_horizontal"

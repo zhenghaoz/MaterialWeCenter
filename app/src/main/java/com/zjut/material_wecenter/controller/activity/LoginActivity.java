@@ -19,24 +19,19 @@ import com.zjut.material_wecenter.R;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Client client = Client.getInstance();
     private EditText editUsername;
     private EditText editPassword;
     private Button btnLogin;
-    private TextView appName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // 实例化控件
-        appName = (TextView) findViewById(R.id.app_name);
         editUsername = (EditText) findViewById(R.id.edit_username);
         editPassword = (EditText) findViewById(R.id.edit_password);
         btnLogin = (Button) findViewById(R.id.button_login);
         btnLogin.setOnClickListener(this);
-        // 显示应用名称
-        appName.setText(Config.APP_NAME);
     }
 
     @Override
@@ -59,15 +54,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            // 从输入框获取用户名和密码
             user_name = editUsername.getText().toString();
             password = editPassword.getText().toString();
         }
         // 验证登录信息
         @Override
         protected Void doInBackground(Void... params) {
-            response = client.loginProcess(user_name, password);
+            response = Client.getInstance().loginProcess(user_name, password);
             if (response != null && response.getErrno() == 1) {
-                // Save username and password
+                // 保存用户名和密码
                 SharedPreferences preferences = getSharedPreferences("account", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("uid", user_name);
@@ -75,7 +71,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 editor.putString("user_name", ((LoginProcess)response.getRsm()).getUser_name());
                 editor.putString("avatar_file", ((LoginProcess) response.getRsm()).getAvatar_file());
                 editor.apply();
-                // Load main activity
+                // 加载主页
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
@@ -86,13 +82,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            String snacktext;
+            // 显示登陆错误原因
+            String errmsg;
             if (response == null)
-                snacktext = "登录时发生错误";
+                errmsg = "登录时发生错误";
             else
-                snacktext = (String) response.getErr();
+                errmsg = response.getErr();
             Snackbar.with(getApplicationContext())
-                    .text(snacktext)
+                    .text(errmsg)
                     .show(LoginActivity.this);
         }
     }

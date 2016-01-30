@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">Material-WeCenter</string>
+
+    <!--Application Basic-->
+    <string name="app_name">精弘论坛</string>
+    <string name="postfix">————来自精弘论坛安卓客户端</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -14,6 +17,7 @@
     <string name="edit_tile">标题</string>
     <string name="edit_content">内容</string>
     <string name="edit_topic">话题</string>
+    <string name="add_topic">添加话题</string>
 
     <!--Main drawer-->
     <string name="dynamic">动态</string>
@@ -24,6 +28,15 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_post">发布问题</string>
 
+    <!--Settings-->
+    <string name="about">关于</string>
+    <string name="version">版本号</string>
+    <string name="contributor">贡献者</string>
+    <string name="contributors">\@ZhangZhenghao\n\@windness97\n\@Dartick</string>
+    <string name="github">GitHub项目地址</string>
+    <string name="github_url">https://github.com/ZhangZhenghao/Material-WeCenter</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_lauch">LauchActivity</string>
 </resources>

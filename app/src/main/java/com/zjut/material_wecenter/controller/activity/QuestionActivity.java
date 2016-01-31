@@ -1,6 +1,7 @@
 package com.zjut.material_wecenter.controller.activity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
@@ -9,6 +10,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -24,11 +27,15 @@ import com.zjut.material_wecenter.controller.adapter.QuestionDetailAdapter;
 import com.zjut.material_wecenter.models.QuestionDetail;
 import com.zjut.material_wecenter.ui.ItemDivider;
 
-public class QuestionActivity extends AppCompatActivity implements View.OnClickListener {
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+public class QuestionActivity extends AppCompatActivity implements View.OnClickListener{
 
     private boolean isFirstRefresh=true;
     private final int ScrollOffset = 4;
-    private final int resultCode=1;
+    private int resultCode=0;
     private int questionID;
     private QuestionDetail questionDetail;
     private QuestionDetailAdapter questionDetailAdapter;
@@ -87,7 +94,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         recyclerView=(RecyclerView) findViewById(R.id.recyclerView_answerList);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.addItemDecoration(new ItemDivider(this,LinearLayoutManager.VERTICAL));
+        recyclerView.addItemDecoration(new ItemDivider(this,LinearLayoutManager.VERTICAL,ItemDivider.TITLE_INDEX));
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -106,6 +113,8 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
 
         new LoadAnswers().execute();
 
+
+
     }
 
     @Override
@@ -119,13 +128,23 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        int id=item.getItemId();
+        switch (id){
+            case R.id.action_toTop:
+                recyclerView.smoothScrollToPosition(0);
+                break;
+            default:
+                break;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        new LoadAnswers().execute();
+        if(requestCode==1)
+           new LoadAnswers().execute();
     }
 
     @Override
@@ -157,6 +176,8 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             try {
                 Log.e("Load", "load has started");
                 questionDetail=(QuestionDetail) client.getQuestion(questionID).getRsm();
+                questionDetailAdapter=new QuestionDetailAdapter
+                        (QuestionActivity.this,questionDetail);
             }catch (Exception e) {
                 e.printStackTrace();
             }
@@ -167,8 +188,6 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
             swipeRefreshLayout.setRefreshing(false);
-            questionDetailAdapter=new QuestionDetailAdapter
-                    (QuestionActivity.this,questionDetail);
             recyclerView.setAdapter(questionDetailAdapter);
             questionDetailAdapter.notifyDataSetChanged();
             if(isFirstRefresh){
@@ -177,4 +196,5 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             else Toast.makeText(QuestionActivity.this,"更新完成",Toast.LENGTH_SHORT).show();
         }
     }
+
 }

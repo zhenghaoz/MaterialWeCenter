@@ -13,24 +13,22 @@
         android:background="@color/nliveo_blue_colorPrimary"
         android:elevation="@dimen/appbar_elevation"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh_layout_question"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar_questionDetail"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView_answerList"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout_question"
+            android:layout_below="@+id/toolbar_questionDetail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:scrollbars="vertical"/>
-    </android.support.v4.widget.SwipeRefreshLayout>
-
+            android:layout_alignParentStart="true">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView_answerList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:scrollbars="vertical"/>
+        </android.support.v4.widget.SwipeRefreshLayout>
     <com.github.clans.fab.FloatingActionMenu
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

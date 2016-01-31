@@ -24,6 +24,7 @@ public class PostAnswerActivity extends AppCompatActivity {
     private String questionTitle;
     private EditText editContent;
     private ImageButton publish;
+    private final int resultCode=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,8 +85,11 @@ public class PostAnswerActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
             if (result == null) // 未知错误
                 Snackbar.with(PostAnswerActivity.this).text("未知错误").show(PostAnswerActivity.this);
-            else if (result.getErrno() == 1)    // 发布成功
+            else if (result.getErrno() == 1){ // 发布成功
+                PostAnswerActivity.this.setResult(resultCode);
                 PostAnswerActivity.this.finish();
+            }
+
             else                // 显示错误
                 Snackbar.with(PostAnswerActivity.this).text(result.getErr()).show(PostAnswerActivity.this);
         }

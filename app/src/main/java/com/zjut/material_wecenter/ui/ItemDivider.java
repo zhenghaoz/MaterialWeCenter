@@ -22,12 +22,19 @@ public class ItemDivider extends RecyclerView.ItemDecoration{
 
     public static final int VERTICAL_LIST = LinearLayoutManager.VERTICAL;
 
+    public static final int TITLE_INDEX=0;
+
+    public static final int DETAIL_INDEX=1;
+
     private Drawable mDivider;
 
     private int mOrientation;
 
-    public ItemDivider(Context context, int orientation) {
+    private int startIndex;
+
+    public ItemDivider(Context context, int orientation,int startIndex) {
         final TypedArray a = context.obtainStyledAttributes(ATTRS);
+        this.startIndex=startIndex;
         mDivider = a.getDrawable(0);
         a.recycle();
         setOrientation(orientation);
@@ -54,7 +61,7 @@ public class ItemDivider extends RecyclerView.ItemDecoration{
         final int right = parent.getWidth() - parent.getPaddingRight();
 
         final int childCount = parent.getChildCount();
-        for (int i = 0; i < childCount; i++) {
+        for (int i = startIndex; i < childCount; i++) {
             final View child = parent.getChildAt(i);
             final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
                     .getLayoutParams();
@@ -70,7 +77,7 @@ public class ItemDivider extends RecyclerView.ItemDecoration{
         final int bottom = parent.getHeight() - parent.getPaddingBottom();
 
         final int childCount = parent.getChildCount();
-        for (int i = 0; i < childCount; i++) {
+        for (int i = startIndex; i < childCount; i++) {
             final View child = parent.getChildAt(i);
             final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
                     .getLayoutParams();

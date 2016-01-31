@@ -2,26 +2,27 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:weightSum="1">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/avatar_img_answer"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:src="@drawable/avatar_max_img" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/textView_userName_answer"
@@ -30,7 +31,7 @@
                 android:gravity="center_vertical"
                 android:paddingTop="5dp"
                 android:text="name"
-                android:textColor="@android:color/black"
+                android:textColor="@color/nliveo_blue_colorPrimary"
                 android:textSize="@dimen/abc_text_size_small_material" />
             <TextView
                 android:id="@+id/textView_addTime_answer"
@@ -38,21 +39,19 @@
                 android:layout_height="wrap_content"
                 android:text="addTime"
                 android:textColor="@android:color/tertiary_text_dark"
-                android:textSize="@dimen/bottom_text_size" />
+                android:textSize="10sp" />
+            <TextView
+                android:id="@+id/textView_briefDetail_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:paddingBottom="10dp"
+                android:paddingTop="5dp"
+                android:text="detail"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/abc_text_size_menu_material" />
         </LinearLayout>
 
     </LinearLayout>
-    <TextView
-        android:id="@+id/textView_briefDetail_answer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:maxLines="3"
-        android:paddingBottom="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="5dp"
-        android:text="detail"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/abc_text_size_menu_material" />
 </LinearLayout>

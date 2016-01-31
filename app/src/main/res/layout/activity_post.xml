@@ -72,7 +72,7 @@
                 <Button
                     android:id="@+id/btn_add_topic"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                    android:text="添加标题"
+                    android:text="@string/add_topic"
                     android:textColor="@android:color/white"
                     android:background="@color/nliveo_blue_colorPrimary"
                     android:layout_weight="2"

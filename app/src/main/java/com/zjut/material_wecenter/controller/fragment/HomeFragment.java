@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +29,10 @@ public class HomeFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private Client client = Client.getInstance();
 
-//    private boolean loading = false;
+    //初始化一定处于刷新状态
+    private boolean loading = true;
+    //记录当前已经加载的页数
+    private int page = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,6 +58,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onRefresh() {
                 // 下拉刷新
+                page = 0;
                 new LoadDynamicList().execute();
             }
         });
@@ -62,6 +67,25 @@ public class HomeFragment extends Fragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.dynamic_list);
         final LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                int visibleItemCount = mLayoutManager.getChildCount();
+                int totalItemCount = mLayoutManager.getItemCount();
+                int pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
+                if (!loading) {
+                    //当前不在加载，才进行新的加载
+                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                        // 达到底部加载更多
+
+                        //设置flag，标记当前正在刷新(加载）
+                        loading = true;
+                        mSwipeRefreshLayout.setRefreshing(true);
+                        new LoadDynamicList().execute();
+                    }
+                }
+            }
+        });
         // 开始载入动态操作
         new LoadDynamicList().execute();
     }
@@ -72,9 +96,17 @@ public class HomeFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            result = client.getDynamic();
+            result = client.getDynamic(page);
             if (result != null && result.getErrno() == 1) {
-                mList = (ArrayList<Dynamic>) result.getRsm();
+                ArrayList<Dynamic> rsm = (ArrayList<Dynamic>) result.getRsm();
+                if (rsm.size() == 0) {
+                    // TODO: 2016/1/29 add toasts or something else to tell users that "there is no more dynamics".
+                    Log.d("homefragment", "no more dynamics");
+                } else if (page == 0) {
+                    mList = rsm;
+                } else {
+                    mList.addAll(rsm);
+                }
             }
             return null;
         }
@@ -83,11 +115,15 @@ public class HomeFragment extends Fragment {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             mSwipeRefreshLayout.setRefreshing(false);
-            if (mAdapter == null) {
+            if (page == 0) {
                 mAdapter = new DynamicViewAdapter(getActivity(), mList);
                 mRecyclerView.setAdapter(mAdapter);
             } else
                 mAdapter.notifyDataSetChanged();
+
+            //加载完成，更新flag
+            page ++;
+            loading = false;
         }
     }
 }

@@ -5,35 +5,68 @@ package com.zjut.material_wecenter.models;
  */
 public class Dynamic {
 
+
     /**
-     * history_id : 48684
-     * associate_action : 101
-     * add_time : 1452927267
-     * user_info : {"uid":1,"user_name":"精弘网络","signature":"","avatar_file":"http://bbs.zjut.edu.cn/uploads/avatar/1///1_avatar_mid.jpg"}
-     * question_info : {"question_id":4371,"question_content":"1月14曰上午，我校一大三男生不幸去世，公安部门己于第一时间介入，死亡原因正在调查中。学校老师和同学们感到很悲痛，希望大家珍爱生命，每一位同学都身心健康，学习进步。","add_time":1452927267,"update_time":1453359295,"answer_count":13,"agree_count":7}
+     * history_id : 50034
+     * associate_action : 201
+     * add_time : 1453863313
+     * user_info : {"uid":201319630201,"user_name":"丶然后先森","signature":"做论坛的苦逼背锅员","avatar_file":"http://bbs.zjut.edu.cn/uploads/avatar/2013/1963/02/01_avatar_mid.jpg"}
+     * answer_info : {"answer_id":13612,"answer_content":"王老菊","add_time":1453863313,"against_count":0,"agree_count":0}
+     * question_info : {"question_id":4489,"question_content":"我被催眠了，你要不要试试","add_time":1453820724,"update_time":1453863313,"answer_count":2,"agree_count":0}
      */
 
     private int history_id;
     private int associate_action;
     private int add_time;
     /**
-     * uid : 1
-     * user_name : 精弘网络
-     * signature :
-     * avatar_file : http://bbs.zjut.edu.cn/uploads/avatar/1///1_avatar_mid.jpg
+     * uid : 201319630201
+     * user_name : 丶然后先森
+     * signature : 做论坛的苦逼背锅员
+     * avatar_file : http://bbs.zjut.edu.cn/uploads/avatar/2013/1963/02/01_avatar_mid.jpg
      */
 
     private UserInfoEntity user_info;
+
     /**
-     * question_id : 4371
-     * question_content : 1月14曰上午，我校一大三男生不幸去世，公安部门己于第一时间介入，死亡原因正在调查中。学校老师和同学们感到很悲痛，希望大家珍爱生命，每一位同学都身心健康，学习进步。
-     * add_time : 1452927267
-     * update_time : 1453359295
-     * answer_count : 13
-     * agree_count : 7
+     * answer_id : 13612
+     * answer_content : 王老菊
+
+     * add_time : 1453863313
+     * against_count : 0
+     * agree_count : 0
      */
 
+    private AnswerInfoEntity answer_info;
+
+    /**
+     * question_id : 4489
+     * question_content : 我被催眠了，你要不要试试
+     * add_time : 1453820724
+     * update_time : 1453863313
+     * answer_count : 2
+     * agree_count : 0
+     */
+
+    private ArticleInfoEntity article_info;
+
+    private CommentInfoEntity comment_info;
     private QuestionInfoEntity question_info;
+
+    public ArticleInfoEntity getArticle_info() {
+        return article_info;
+    }
+
+    public void setArticle_info(ArticleInfoEntity article_info) {
+        this.article_info = article_info;
+    }
+
+    public CommentInfoEntity getComment_info() {
+        return comment_info;
+    }
+
+    public void setComment_info(CommentInfoEntity comment_info) {
+        this.comment_info = comment_info;
+    }
 
     public void setHistory_id(int history_id) {
         this.history_id = history_id;
@@ -49,6 +82,10 @@ public class Dynamic {
 
     public void setUser_info(UserInfoEntity user_info) {
         this.user_info = user_info;
+    }
+
+    public void setAnswer_info(AnswerInfoEntity answer_info) {
+        this.answer_info = answer_info;
     }
 
     public void setQuestion_info(QuestionInfoEntity question_info) {
@@ -71,17 +108,21 @@ public class Dynamic {
         return user_info;
     }
 
+    public AnswerInfoEntity getAnswer_info() {
+        return answer_info;
+    }
+
     public QuestionInfoEntity getQuestion_info() {
         return question_info;
     }
 
     public static class UserInfoEntity {
-        private int uid;
+        private long uid;
         private String user_name;
         private String signature;
         private String avatar_file;
 
-        public void setUid(int uid) {
+        public void setUid(long uid) {
             this.uid = uid;
         }
 
@@ -97,7 +138,7 @@ public class Dynamic {
             this.avatar_file = avatar_file;
         }
 
-        public int getUid() {
+        public long getUid() {
             return uid;
         }
 
@@ -111,6 +152,54 @@ public class Dynamic {
 
         public String getAvatar_file() {
             return avatar_file;
+        }
+    }
+
+    public static class AnswerInfoEntity {
+        private int answer_id;
+        private String answer_content;
+        private int add_time;
+        private int against_count;
+        private int agree_count;
+
+        public void setAnswer_id(int answer_id) {
+            this.answer_id = answer_id;
+        }
+
+        public void setAnswer_content(String answer_content) {
+            this.answer_content = answer_content;
+        }
+
+        public void setAdd_time(int add_time) {
+            this.add_time = add_time;
+        }
+
+        public void setAgainst_count(int against_count) {
+            this.against_count = against_count;
+        }
+
+        public void setAgree_count(int agree_count) {
+            this.agree_count = agree_count;
+        }
+
+        public int getAnswer_id() {
+            return answer_id;
+        }
+
+        public String getAnswer_content() {
+            return answer_content;
+        }
+
+        public int getAdd_time() {
+            return add_time;
+        }
+
+        public int getAgainst_count() {
+            return against_count;
+        }
+
+        public int getAgree_count() {
+            return agree_count;
         }
     }
 
@@ -168,6 +257,103 @@ public class Dynamic {
 
         public int getAgree_count() {
             return agree_count;
+        }
+    }
+
+    public static class ArticleInfoEntity {
+        private int id;
+        private String title;
+        private String message;
+        private int comments;
+        private int views;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        public int getComments() {
+            return comments;
+        }
+
+        public void setComments(int comments) {
+            this.comments = comments;
+        }
+
+        public int getViews() {
+            return views;
+        }
+
+        public void setViews(int views) {
+            this.views = views;
+        }
+
+        public int getAdd_time() {
+            return add_time;
+        }
+
+        public void setAdd_time(int add_time) {
+            this.add_time = add_time;
+        }
+
+        private int add_time;
+    }
+
+    public static class CommentInfoEntity {
+        private int id;
+        private String message;
+        private int add_time;
+        private int votes;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        public int getAdd_time() {
+            return add_time;
+        }
+
+        public void setAdd_time(int add_time) {
+            this.add_time = add_time;
+        }
+
+        public int getVotes() {
+            return votes;
+        }
+
+        public void setVotes(int votes) {
+            this.votes = votes;
         }
     }
 }

@@ -21,8 +21,6 @@ public class Config {
      * 应用配置
      */
 
-    // 应用名称
-    public static String APP_NAME = "精弘论坛";
     // 网址
     public static String HOST_NAME = "http://bbs.zjut.edu.cn/";
     // 文本后缀

@@ -34,7 +34,7 @@
                     android:id="@+id/dynamic_user_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/abc_action_bar_home_description"
+                    android:text="XXX did sth"
                     android:textSize="@dimen/abc_text_size_subhead_material"
                     android:textColor="@android:color/tertiary_text_light"
                     />
@@ -43,37 +43,19 @@
                     android:id="@+id/dynamic_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="123"
+                    android:text="@string/abc_action_bar_home_description"
                     android:textSize="@dimen/abc_text_size_subhead_material"
                     android:textColor="@android:color/black"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
                     />
 
-                <android.support.v7.widget.CardView
+                <TextView
+                    android:id="@+id/dynamic_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    card_view:cardCornerRadius="8dp"
-                    card_view:cardBackgroundColor="@color/dynamic_sub_card"
-                    android:layout_marginBottom="3dp"
-                    >
-
-                    <TextView
-                        android:id="@+id/dynamic_content"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/abc_action_bar_home_description"
-                        android:textSize="@dimen/abc_text_size_subhead_material"
-                        android:textColor="@android:color/black"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        />
-
-                </android.support.v7.widget.CardView>
+                    android:text="XXX did sth"
+                    android:textSize="@dimen/abc_text_size_subhead_material"
+                    android:textColor="@android:color/tertiary_text_light"
+                    />
 
                 <TextView
                     android:id="@+id/dynamic_info"

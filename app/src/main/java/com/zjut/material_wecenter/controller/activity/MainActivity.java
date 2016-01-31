@@ -1,19 +1,16 @@
 package com.zjut.material_wecenter.controller.activity;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.FragmentTransaction;
 import android.view.View;
 
 import com.squareup.picasso.Picasso;
-import com.zjut.material_wecenter.Client;
 import com.zjut.material_wecenter.R;
 import com.zjut.material_wecenter.controller.fragment.ExploreFragment;
 import com.zjut.material_wecenter.controller.fragment.HomeFragment;
 import com.zjut.material_wecenter.controller.fragment.SettingsFragment;
-import com.zjut.material_wecenter.models.Result;
 
 import br.liveo.Model.HelpLiveo;
 import br.liveo.interfaces.OnItemClickListener;
@@ -22,11 +19,9 @@ import br.liveo.navigationliveo.NavigationLiveo;
 public class MainActivity extends NavigationLiveo implements OnItemClickListener {
 
     private HelpLiveo mHelpLiveo;
-    private Client client = Client.getInstance();
 
     private String uid;
     private String user_name;
-    private String password;
     private String avatar_file;
 
     // Fragments
@@ -41,9 +36,7 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
         SharedPreferences preferences = getSharedPreferences("account", MODE_PRIVATE);
         uid = preferences.getString("uid", "");
         user_name = preferences.getString("user_name", "");
-        password = preferences.getString("password", "");
         avatar_file = preferences.getString("avatar_file", "");
-        new UserLoginTask().execute();
 
         // 创建主菜单
         this.userName.setText(user_name);
@@ -112,23 +105,5 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
                 setTitle("设置");
         }
         transaction.commit();
-    }
-
-    /**
-     * 用户登录验证
-     */
-    private class UserLoginTask extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            Result response = client.loginProcess(uid, password);
-            // 验证失败，要求用户重新输入登录信息
-            if (response == null || response.getErrno() != 1) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
-            return null;
-        }
     }
 }

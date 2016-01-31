@@ -16,6 +16,7 @@
         <activity
             android:name=".controller.activity.MainActivity"
             android:label="@string/app_name"
+<<<<<<< HEAD
             android:theme="@style/nLiveoDrawer">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,6 +39,33 @@
         <activity
             android:name=".controller.activity.QuestionActivity"
             android:label="QuestionActivity"></activity>
+=======
+            android:theme="@style/nLiveoDrawer"/>
+        <activity
+            android:name=".controller.activity.LoginActivity"
+            android:label="@string/title_activity_login"/>
+        <activity
+            android:name=".controller.activity.PostActivity"
+            android:label="@string/title_activity_post"/>
+        <activity
+            android:name=".controller.activity.UserActivity"
+            android:label="@string/title_activity_user"/>
+        <activity
+            android:name=".controller.activity.PostAnswerActivity"
+            android:label="PostAnswerActivity"/>
+        <activity
+            android:name=".controller.activity.QuestionActivity"
+            android:label="QuestionActivity"/>
+        <activity
+            android:name=".controller.activity.LauchActivity"
+            android:label="@string/title_activity_lauch"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+>>>>>>> refs/remotes/origin/master
     </application>
 
 </manifest>

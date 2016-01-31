@@ -40,15 +40,13 @@ import java.util.ArrayList;
  */
 public class ExploreFragment extends Fragment implements View.OnClickListener {
 
-    // Loading state
     private final int ScrollOffset = 4;
     private boolean loading = true;
-    private ArrayList<Question> mList;
+    private ArrayList<Question> mList = new ArrayList<>();
     private QuestionViewAdapter mAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
     private FloatingActionButton btnPublish;
-    private Client client = Client.getInstance();
 
     private static int POST_ACTIVITY = 1;
 
@@ -89,6 +87,8 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.question_list);
         final LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new QuestionViewAdapter(getActivity(), mList);
+        mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -103,14 +103,12 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
                         new LoadQuestionList().execute();
                     }
                 }
-
-                if (Math.abs(dy) > ScrollOffset) {
-                    if (dy > 0) {
+                // 自动隐藏发布按钮
+                if (Math.abs(dy) > ScrollOffset)
+                    if (dy > 0)
                         btnPublish.hide(true);
-                    } else {
+                    else
                         btnPublish.show(true);
-                    }
-                }
             }
         });
         // 开始载入问题操作
@@ -141,22 +139,16 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
      * 加载发现页面的异步任务
      */
     private class LoadQuestionList extends AsyncTask<Void, Integer, Integer> {
+
         private Result result;
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
 
         @Override
         protected Integer doInBackground(Void... params) {
-            result = client.explore(page);
-            if (result != null && result.getErrno() == 1) {
-                if (page == 1) {
-                    mList = (ArrayList<Question>) result.getRsm();
-                } else {
-                    mList.addAll((ArrayList<Question>) result.getRsm());
-                }
-            }
+            result = Client.getInstance().explore(page);
+            if (result != null && result.getErrno() == 1)
+                if (page == 1)  // 首页
+                    mList.clear();
+                mList.addAll((ArrayList<Question>) result.getRsm());
             return null;
         }
 
@@ -164,11 +156,7 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
             mSwipeRefreshLayout.setRefreshing(false);
-            if (page == 1) {
-                mAdapter = new QuestionViewAdapter(getActivity(), mList);
-                mRecyclerView.setAdapter(mAdapter);
-            } else
-                mAdapter.notifyDataSetChanged();
+            mAdapter.notifyDataSetChanged();
             page++;
             loading = true;
         }

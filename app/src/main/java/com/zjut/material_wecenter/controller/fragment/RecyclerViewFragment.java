@@ -62,7 +62,7 @@ public class RecyclerViewFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
-        mAdapter = new RecyclerViewMaterialAdapter(new ActionrViewAdapter(mContentItems, actions));
+        mAdapter = new RecyclerViewMaterialAdapter(new ActionrViewAdapter(getActivity(), mContentItems, actions));
         mRecyclerView.setAdapter(mAdapter);
         MaterialViewPagerHelper.registerRecyclerView(getActivity(), mRecyclerView, null);
         new LoadActions().execute();

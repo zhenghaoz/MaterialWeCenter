@@ -7,8 +7,6 @@
     <dimen name="card_margin">3dp</dimen>
 
     <dimen name="parallax_image_height">180dp</dimen>
-<<<<<<< HEAD
-
     <dimen name="toolbar_margin_start">72dp</dimen>
     <dimen name="flexible_space_height">72dp</dimen>
     <dimen name="flexible_space_image_height">240dp</dimen>
@@ -27,7 +25,7 @@
 
     <dimen name="sliding_slop">32dp</dimen>
     <dimen name="sliding_overlay_blur_size">4dp</dimen>
-=======
+
     <dimen name="fab_margin">16dp</dimen>
->>>>>>> refs/remotes/origin/master
+
 </resources>

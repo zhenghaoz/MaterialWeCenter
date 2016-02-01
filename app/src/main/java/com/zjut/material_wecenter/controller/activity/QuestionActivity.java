@@ -110,12 +110,6 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         });
         swipeRefreshLayout.setRefreshing(true);
         new LoadAnswers().execute();
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> refs/remotes/origin/master
     }
 
     @Override

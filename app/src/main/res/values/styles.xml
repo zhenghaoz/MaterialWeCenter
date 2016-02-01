@@ -8,6 +8,10 @@
         <item name="android:textColorPrimary">@android:color/white</item>
     </style>
 
+    <style name="LaunchTheme" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
     <style name="nLiveoDrawer" parent="nLiveo.Theme.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/nliveo_blue_colorPrimary</item>

@@ -4,6 +4,8 @@ import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.zjut.material_wecenter.models.Action;
+import com.zjut.material_wecenter.models.AnswerComment;
+import com.zjut.material_wecenter.models.AnswerDetail;
 import com.zjut.material_wecenter.models.Dynamic;
 import com.zjut.material_wecenter.models.LoginProcess;
 import com.zjut.material_wecenter.models.PublishAnswer;
@@ -48,8 +50,10 @@ import java.util.Map;
  */
 public class Client {
 
-    private String cooike;
+    public static int PUBLISH = 101;
+    public static int ANSWER = 201;
     private static Client client;
+    private String cooike;
 
     /**
      * 获得一个实例
@@ -96,9 +100,6 @@ public class Client {
         return getResults(json, Action.class);
     }
 
-    public static int PUBLISH = 101;
-    public static int ANSWER = 201;
-
     /**
      * explore 发现页面
      * @param page 页数
@@ -123,6 +124,30 @@ public class Client {
     }
 
     /**
+     * getAnswer 获取答案详情
+     * @param answerID 答案的编号
+     * @return Result对象
+     */
+
+    public Result getAnswer(int answerID){
+        String url = Config.ANSWER + answerID;
+        String json = doGet(url);
+        return getResult(json, AnswerDetail.class);
+    }
+
+    /**
+     * getAnswer 获取答案评论列表
+     * @param answerID 答案的编号
+     * @return Result对象
+     */
+
+    public Result getAnswerComments(int answerID){
+        String url = Config.ANSWER_COMMENT + answerID;
+        String json = doGet(url);
+        return getResultArray(json, AnswerComment.class);
+    }
+
+    /**
      * getDynamic 首页动态（home）页面
      * @return Result对象
      */
@@ -131,6 +156,7 @@ public class Client {
         String json = doGet(url);
         return getResults(json, Dynamic.class);
     }
+
 
 
     /**
@@ -171,6 +197,29 @@ public class Client {
         return getResult(json, PublishAnswer.class);
     }
 
+    public Result postAction(Config.ActionType type,@NonNull Class<? extends Object> classType,ArrayList<String> strs){
+
+        Map<String, String> params = new HashMap<>();
+        String json;
+        if(type==Config.ActionType.QUESTION_FOCUS){
+            params.put("question_id",strs.get(0));
+            json=doPost(Config.QUESTION_FOCUS,params);
+            return getResult(json,classType);
+        }
+        else if(type==Config.ActionType.QUESTION_THANKS){
+            params.put("question_id",strs.get(0));
+            json=doPost(Config.QUESTION_THANKS,params);
+            return getResult(json,classType);
+        }
+        else if(type==Config.ActionType.PUSHLISH_ANSWER_COMMENT){
+            params.put("answer_id",strs.get(0));
+            params.put("message",strs.get(1));
+            json=doPost(Config.PUSHLISH_ANSWER_COMMENT,params);
+            return getResult(json,classType);
+        }
+        return null;
+    }
+
     /**
      * getResult 将返回的JSON对象转换为Result类
      * @param json JSON字符串
@@ -194,6 +243,37 @@ public class Client {
         }
     }
 
+    /**
+     * getResultArray 将返回的JSON数组转换为Result类
+     * @param json JSON字符串
+     * @param classType 类型
+     * @return Result对象
+     */
+
+    private Result getResultArray(String json,  @NonNull Class<? extends Object> classType){
+        try {
+
+            JSONObject jsonObject = new JSONObject(json);
+            Result result = new Result();
+            result.setErr(jsonObject.getString("err"));
+            result.setErrno(jsonObject.getInt("errno"));
+            if (result.getErrno() == 1) {
+                ArrayList<Object> list = new ArrayList<>();
+                JSONArray array = jsonObject.getJSONArray("rsm");
+                int size=array.length();
+                Gson gson = new Gson();
+                for (int i=0;i<size;i++) {
+                    JSONObject item = array.getJSONObject(i);
+                    list.add(gson.fromJson(item.toString(), classType));
+                }
+                result.setRsm(list);
+            } else
+                result.setRsm(null);
+            return result;
+        } catch (JSONException e) {
+            return null;
+        }
+    }
     /**
      * getResults 将返回的JSON数组转换为Result类
      * @param json JSON字符串

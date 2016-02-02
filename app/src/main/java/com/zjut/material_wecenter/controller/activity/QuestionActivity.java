@@ -41,9 +41,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     private QuestionDetailAdapter questionDetailAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
-    private FloatingActionMenu floatingActionMenu;
-    private FloatingActionButton fabAnswer;
-    private FloatingActionButton fabThank;
+    private FloatingActionButton floatingActionButton;
     private Client client = Client.getInstance();
 
     @Override
@@ -67,11 +65,8 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         Intent mIntent=getIntent();
         questionID=mIntent.getIntExtra("questionID", -1);
 
-        floatingActionMenu=(FloatingActionMenu) findViewById(R.id.fab_question_menu);
-        fabAnswer=(FloatingActionButton) findViewById(R.id.fab_menu_item_comment);
-        fabAnswer.setOnClickListener(this);
-        fabThank=(FloatingActionButton) findViewById(R.id.fab_menu_item_thanks);
-        fabThank.setOnClickListener(this);
+        floatingActionButton=(FloatingActionButton) findViewById(R.id.fab_question_menu);
+        floatingActionButton.setOnClickListener(this);
 
         swipeRefreshLayout=(SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout_question);
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light,
@@ -101,9 +96,9 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                 super.onScrolled(recyclerView, dx, dy);
                 if (Math.abs(dy) > ScrollOffset) {
                     if (dy > 0) {
-                        floatingActionMenu.hideMenu(true);
+                        floatingActionButton.hide(true);
                     } else {
-                        floatingActionMenu.showMenu(true);
+                        floatingActionButton.show(true);
                     }
                 }
             }
@@ -144,18 +139,18 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()){
-            case R.id.fab_menu_item_comment:
-                Intent intent=new Intent(this,PostAnswerActivity.class);
+            case R.id.fab_question_menu:
+                intent=new Intent(this,QuestionMenuActivity.class);
                 intent.putExtra("questionID",questionID);
                 intent.putExtra("questionTitle",questionDetail.getQuestion_info().getQuestion_content());
+                intent.putExtra("isFocus",questionDetail.getQuestion_info().getUser_question_focus());
+                intent.putExtra("isThanks",questionDetail.getQuestion_info().getUser_thanks());
+                intent.putExtra("isAllowToAnswer",questionDetail.getQuestion_info().getUser_answered());
                 startActivityForResult(intent,resultCode);
-                break;
-            case R.id.fab_menu_item_thanks:
-                break;
             default:
                 break;
-
         }
     }
 
@@ -171,8 +166,6 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             try {
                 Log.e("Load", "load has started");
                 questionDetail=(QuestionDetail) client.getQuestion(questionID).getRsm();
-                questionDetailAdapter=new QuestionDetailAdapter
-                        (QuestionActivity.this,questionDetail);
             }catch (Exception e) {
                 e.printStackTrace();
             }
@@ -182,9 +175,11 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         @Override
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
-            swipeRefreshLayout.setRefreshing(false);
+            questionDetailAdapter=new QuestionDetailAdapter
+                    (QuestionActivity.this,questionDetail);
             recyclerView.setAdapter(questionDetailAdapter);
             questionDetailAdapter.notifyDataSetChanged();
+            swipeRefreshLayout.setRefreshing(false);
             if(isFirstRefresh){
                 isFirstRefresh=false;
             }

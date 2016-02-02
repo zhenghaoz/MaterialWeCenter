@@ -43,8 +43,20 @@ public class Config {
     public static String FOLLOW_PEOPLE = HOST_NAME + "?/follow/ajax/follow_people/";
     public static String PUSHLISH_QUESTION = HOST_NAME + "?/api/publish/publish_question/";
     public static String PUSHLISH_ANSWER = HOST_NAME + "api/publish/save_answer/";
+    public static String PUSHLISH_ANSWER_COMMENT=HOST_NAME+"api/question/save_answer_comment/";
     public static String EXPLORE = HOST_NAME + "?/api/explore/";
     public static String QUESTION = HOST_NAME + "api/question/";
+    public static String QUESTION_FOCUS=HOST_NAME+"question/ajax/focus/";
+    public static String QUESTION_THANKS=HOST_NAME+"question/ajax/question_thanks/";
+    public static String ANSWER=HOST_NAME+"api/question/answer/?answer_id=";
+    public static String ANSWER_COMMENT=HOST_NAME+"api/question/answer_comments/?answer_id=";
     public static String AVATAR_DIR = HOST_NAME + "uploads/avatar/";
     public static String HOME_DYNAMIC = HOST_NAME + "?/api/home/";
+
+    //操作枚举
+    public enum ActionType{
+        QUESTION_FOCUS,
+        QUESTION_THANKS,
+        PUSHLISH_ANSWER_COMMENT
+    }
 }

@@ -16,30 +16,40 @@
         <activity
             android:name=".controller.activity.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/nLiveoDrawer"/>
+            android:theme="@style/nLiveoDrawer" />
         <activity
             android:name=".controller.activity.LoginActivity"
-            android:label="@string/title_activity_login"/>
+            android:label="@string/title_activity_login" />
         <activity
             android:name=".controller.activity.PostActivity"
-            android:label="@string/title_activity_post"/>
+            android:label="@string/title_activity_post" />
         <activity
             android:name=".controller.activity.UserActivity"
-            android:label="@string/title_activity_user"/>
+            android:label="@string/title_activity_user" />
         <activity
             android:name=".controller.activity.PostAnswerActivity"
-            android:label="PostAnswerActivity"/>
+            android:label="PostAnswerActivity" />
         <activity
             android:name=".controller.activity.QuestionActivity"
-            android:label="QuestionActivity"/>
+            android:label="QuestionActivity" />
         <activity
             android:name=".controller.activity.LauchActivity"
             android:label="@string/app_name"
             android:theme="@style/LaunchTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".controller.activity.AnswerActivity"
+            android:label="查看答案"
+            android:theme="@style/AnswerTheme"></activity>
+        <activity
+            android:name=".controller.activity.QuestionMenuActivity"
+            android:theme="@style/BottomMenuTheme"
+            >
         </activity>
     </application>
 

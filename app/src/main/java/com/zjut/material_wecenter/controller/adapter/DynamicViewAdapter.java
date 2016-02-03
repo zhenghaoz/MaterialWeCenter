@@ -130,7 +130,7 @@ public class DynamicViewAdapter extends RecyclerView.Adapter<DynamicViewAdapter.
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return mList==null?0:mList.size();
     }
 
     //101 - 110

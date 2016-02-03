@@ -1,9 +1,11 @@
 package com.zjut.material_wecenter.controller.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.webkit.WebView;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.zjut.material_wecenter.R;
+import com.zjut.material_wecenter.controller.activity.AnswerActivity;
 import com.zjut.material_wecenter.models.QuestionDetail;
 
 import java.net.URL;
@@ -21,11 +24,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * Created by Administrator on 2016/1/27.
  */
-public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Html.ImageGetter{
+public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private static final int TYPE_TITLE=0;
     private static final int TYPE_DETAIL=1;
-   // private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 2;
     private static final int TYPE_FOOTER = 3;
     private Context mContext;
@@ -98,6 +100,8 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     "text/html", "utf-8", null);
             detailViewHolder.detail.setVisibility(View.VISIBLE);
 
+            String time=getTime(questionInfo.getAdd_time());
+            detailViewHolder.addTime.setText(time);
             detailViewHolder.viewCount.setText(questionInfo.getView_count() + "");
             detailViewHolder.answerCount.setText(questionInfo.getAnswer_count() + "");
             detailViewHolder.thankCount.setText(questionInfo.getThanks_count() + "");
@@ -117,30 +121,23 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             String addTime=getTime(answerInfo.getAdd_time());
             itemViewHolder.addTime.setText(addTime);
             itemViewHolder.userName.setText(answerInfo.getUser_info().getUser_name());
-            itemViewHolder.briefDetail.setText(Html.fromHtml(answerInfo.getAnswer_content(),this,null));
+            itemViewHolder.briefDetail.setText(Html.fromHtml(answerInfo.getAnswer_content()));
             itemViewHolder.briefDetail.setVisibility(View.VISIBLE);
+            itemViewHolder.briefDetail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, AnswerActivity.class);
+                    intent.putExtra("answerID", answerInfo.getAnswer_id());
+                    mContext.startActivity(intent);
+                }
+            });
         }
 
     }
 
     @Override
     public int getItemCount() {
-        return questionDetail.getQuestion_info().getAnswer_count()+3;
-    }
-
-    @Override
-    public Drawable getDrawable(String source) {
-        Drawable drawable=null;
-        URL url;
-        try {
-            url = new URL(source);
-            drawable = Drawable.createFromStream(url.openStream(), "");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-        drawable.setBounds(0, 0, drawable.getIntrinsicWidth()*10, drawable.getIntrinsicHeight()*10);
-        return drawable;
+        return questionDetail.getAnswers()==null?3:questionDetail.getAnswers().size()+3;
     }
 
     public class TitleViewHolder extends RecyclerView.ViewHolder{
@@ -165,6 +162,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         private TextView viewCount;
         private TextView answerCount;
         private TextView thankCount;
+        private TextView addTime;
 
         public DetailViewHolder(View view) {
             super(view);
@@ -172,6 +170,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             viewCount=(TextView) view.findViewById(R.id.textView_viewCount_question);
             answerCount=(TextView) view.findViewById(R.id.textView_answerCount_question);
             thankCount=(TextView) view.findViewById(R.id.textView_thankCount_question);
+            addTime=(TextView) view.findViewById(R.id.textView_addTime_question);
         }
 
     }

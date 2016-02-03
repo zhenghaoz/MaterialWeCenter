@@ -16,6 +16,13 @@
             android:textColor="@android:color/black"
             android:background="@android:color/transparent"
             android:textSize="@dimen/abc_text_size_menu_material"/>
+        <TextView
+            android:id="@+id/textView_addTime_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_marginRight="5dp"
+            android:gravity="right" />
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"

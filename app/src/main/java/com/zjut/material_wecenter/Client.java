@@ -1,6 +1,7 @@
 package com.zjut.material_wecenter;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.zjut.material_wecenter.models.Action;
@@ -95,8 +96,13 @@ public class Client {
      * @param actions 101-获取用户提问列表 201-获取用户回答列表
      * @return 包含Action对象数组的Result对象
      */
-    public Result getUserActions(String uid, int actions) {
-        String json = doGet(Config.GET_USER_ACTIONS + "?uid=" + uid + "&actions=" + String.valueOf(actions));
+    public Result getUserActions(String uid, int actions, int page) {
+        Log.d("page", String.valueOf(page));
+        String json = doGet(Config.GET_USER_ACTIONS
+                + "?uid=" + uid
+                + "&actions=" + String.valueOf(actions)
+                + "&page=" + String.valueOf(page));
+        Log.d("JSON", json);
         return getResults(json, Action.class);
     }
 

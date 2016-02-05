@@ -1,7 +1,9 @@
 package com.zjut.material_wecenter.controller.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.zjut.material_wecenter.R;
+import com.zjut.material_wecenter.controller.activity.QuestionActivity;
+import com.zjut.material_wecenter.controller.activity.UserActivity;
 import com.zjut.material_wecenter.models.Dynamic;
 
 import java.util.ArrayList;
@@ -60,9 +64,9 @@ public class DynamicViewAdapter extends RecyclerView.Adapter<DynamicViewAdapter.
     private boolean articleOnly(int n) {return n >= ADD_ARTICLE && n <= ADD_AGREE;}
     private boolean articleAndComment(int n) {return n == ADD_COMMENT_ARTICLE;}
 
-    private static Map<Integer, String> action;
+    private static SparseArray<String> action;
     static {
-        action = new HashMap<Integer, String>() {
+        action = new SparseArray<String>() {
             {
                 put(ADD_QUESTION, "发起了问题");
                 put(MOD_QUESTON_TITLE, "修改了问题标题");
@@ -134,19 +138,51 @@ public class DynamicViewAdapter extends RecyclerView.Adapter<DynamicViewAdapter.
     }
 
     //101 - 110
-    private void setQuestionView(ViewHolder holder, Dynamic dynamic) {
-//        holder.dynamicTitle.setText();
-        holder.dynamicContent.setText(dynamic.getQuestion_info().getQuestion_content());
+    private void setQuestionView(ViewHolder holder, final Dynamic dynamic) {
+        holder.dynamicContent.setVisibility(View.GONE);
+        holder.dynamicTitle.setText(dynamic.getQuestion_info().getQuestion_content());
         holder.dynamicInfo.setText(dynamic.getQuestion_info().getAgree_count() + "次赞同 • "
                 + dynamic.getQuestion_info().getAnswer_count() + "次回答");
+        holder.dynamicTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, QuestionActivity.class);
+                intent.putExtra("questionID", dynamic.getQuestion_info().getQuestion_id());
+                mContext.startActivity(intent);
+            }
+        });
+        holder.avatarImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, UserActivity.class);
+                intent.putExtra("uid", String.valueOf(dynamic.getUser_info().getUid()));
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     //201 - 207
-    private void setQuestionAndAnswerView(ViewHolder holder, Dynamic dynamic) {
-        holder.dynamicTitle.setText("问题： " + dynamic.getQuestion_info().getQuestion_content());
+    private void setQuestionAndAnswerView(ViewHolder holder, final Dynamic dynamic) {
+        holder.dynamicTitle.setText(dynamic.getQuestion_info().getQuestion_content());
         holder.dynamicContent.setText(dynamic.getAnswer_info().getAnswer_content());
         holder.dynamicInfo.setText(dynamic.getAnswer_info().getAgree_count() + "次赞同 • "
                 + dynamic.getAnswer_info().getAgainst_count() + "次反对");
+        holder.dynamicTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, QuestionActivity.class);
+                intent.putExtra("questionID", dynamic.getQuestion_info().getQuestion_id());
+                mContext.startActivity(intent);
+            }
+        });
+        holder.avatarImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, UserActivity.class);
+                intent.putExtra("uid", String.valueOf(dynamic.getUser_info().getUid()));
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     private void setTopicView(ViewHolder holder, Dynamic dynamic) {

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.zjut.material_wecenter.R;
 import com.zjut.material_wecenter.controller.activity.QuestionActivity;
+import com.zjut.material_wecenter.controller.activity.UserActivity;
 import com.zjut.material_wecenter.models.Question;
 
 import java.util.ArrayList;
@@ -45,6 +46,14 @@ public class QuestionViewAdapter extends RecyclerView.Adapter<QuestionViewAdapte
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, QuestionActivity.class);
                 intent.putExtra("questionID", question.getQuestion_id());
+                mContext.startActivity(intent);
+            }
+        });
+        holder.avatarImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, UserActivity.class);
+                intent.putExtra("uid", String.valueOf(question.getUser_info().getUid()));
                 mContext.startActivity(intent);
             }
         });

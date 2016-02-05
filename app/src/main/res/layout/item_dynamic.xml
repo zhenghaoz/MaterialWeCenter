@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="@dimen/card_content_padding"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    card_view:cardCornerRadius="12dp"
     >
 
     <LinearLayout
@@ -35,7 +34,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/abc_action_bar_home_description"
-                    android:textSize="@dimen/abc_text_size_subhead_material"
                     android:textColor="@android:color/tertiary_text_light"
                     />
 
@@ -43,37 +41,20 @@
                     android:id="@+id/dynamic_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="123"
                     android:textSize="@dimen/abc_text_size_subhead_material"
                     android:textColor="@android:color/black"
                     android:paddingTop="3dp"
                     android:paddingBottom="3dp"
-                    android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     />
 
-                <android.support.v7.widget.CardView
+                <TextView
+                    android:id="@+id/dynamic_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    card_view:cardCornerRadius="8dp"
-                    card_view:cardBackgroundColor="@color/dynamic_sub_card"
-                    android:layout_marginBottom="3dp"
-                    >
-
-                    <TextView
-                        android:id="@+id/dynamic_content"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/abc_action_bar_home_description"
-                        android:textSize="@dimen/abc_text_size_subhead_material"
-                        android:textColor="@android:color/black"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        />
-
-                </android.support.v7.widget.CardView>
+                    android:textColor="@android:color/secondary_text_light"
+                    android:paddingBottom="3dp"
+                    android:paddingRight="10dp"/>
 
                 <TextView
                     android:id="@+id/dynamic_info"

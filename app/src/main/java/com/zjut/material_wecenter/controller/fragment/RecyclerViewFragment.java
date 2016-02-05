@@ -25,6 +25,7 @@ public class RecyclerViewFragment extends Fragment {
 
     public static int PUBLISH = 101;
     public static int ANSWER = 201;
+    private boolean loading = true;
 
     private String uid;
     private int actions;
@@ -33,6 +34,8 @@ public class RecyclerViewFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
 
     private List<Action> mContentItems = new ArrayList<>();
+
+    private int page = 1;   // 当前页面的页码
 
     public static RecyclerViewFragment newInstance(String uid, int actions) {
         Bundle args = new Bundle();
@@ -59,11 +62,26 @@ public class RecyclerViewFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
         mAdapter = new RecyclerViewMaterialAdapter(new ActionrViewAdapter(getActivity(), mContentItems, actions));
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int pastVisiblesItems = layoutManager.findFirstVisibleItemPosition();
+                if (loading) {
+                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                        // 达到底部加载更多
+                        loading = false;
+                        new LoadActions().execute();
+                    }
+                }
+            }
+        });
         MaterialViewPagerHelper.registerRecyclerView(getActivity(), mRecyclerView, null);
         new LoadActions().execute();
     }
@@ -74,7 +92,7 @@ public class RecyclerViewFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-            result = Client.getInstance().getUserActions(uid, actions);
+            result = Client.getInstance().getUserActions(uid, actions, page);
             return null;
         }
 
@@ -84,6 +102,8 @@ public class RecyclerViewFragment extends Fragment {
             if (result!=null && result.getErrno()==1) {
                 mContentItems.addAll((ArrayList<Action>) result.getRsm());
                 mAdapter.notifyDataSetChanged();
+                page++;
+                loading = true;
             }
         }
     }

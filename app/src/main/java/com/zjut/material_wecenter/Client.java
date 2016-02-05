@@ -197,6 +197,15 @@ public class Client {
         return getResult(json, PublishAnswer.class);
     }
 
+
+    /**
+     * postAction 对问题或答案进行感谢、点赞等动作
+     * @param type 动作的类型
+     * @param classType 类类型
+     * @param strs 动作所需参的数列表
+     * @return Result（如果有错误，返回NULL）
+     */
+
     public Result postAction(Config.ActionType type,@NonNull Class<? extends Object> classType,ArrayList<String> strs){
 
         Map<String, String> params = new HashMap<>();

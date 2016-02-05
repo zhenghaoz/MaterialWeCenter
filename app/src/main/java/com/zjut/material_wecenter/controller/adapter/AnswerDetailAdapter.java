@@ -5,16 +5,19 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.zjut.material_wecenter.R;
 import com.zjut.material_wecenter.models.AnswerComment;
 import com.zjut.material_wecenter.models.AnswerDetail;
+import com.zjut.material_wecenter.models.WebData;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -29,21 +32,39 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Html.ImageGetter{
 
     private final int TYPE_HEADER=0;
-    private final int TYPE_ITEM = 1;
+    private final int TYPE_DETAIL_TEXT=1;
+    private final int TYPE_DETAIL_IMAGE=2;
+    private final int TYPE_ITEM = 3;
+
+    private int detailIndex;
+    private int itemIndex;
     private Context mContext;
     private AnswerDetail answerDetail;
     private ArrayList<AnswerComment> answerComments;
+    private ArrayList<WebData> webDatas;
 
     public AnswerDetailAdapter(Context context, AnswerDetail answerDetail,
                                ArrayList<AnswerComment> answerComments){
         this.mContext = context;
         this.answerDetail=answerDetail;
         this.answerComments=answerComments;
+        this.webDatas=QuestionDetailAdapter.getData(answerDetail.getAnswer().getAnswer_content());
     }
 
     @Override
     public int getItemViewType(int position) {
         if(position==0) return TYPE_HEADER;
+        else if(position<itemIndex&&position>=detailIndex) {
+
+            if(webDatas.get(position-detailIndex).getType()== WebData.Type.TEXT){
+                return TYPE_DETAIL_TEXT;
+            }
+
+            else {
+                return TYPE_DETAIL_IMAGE;
+            }
+
+        }
         else return TYPE_ITEM;
     }
 
@@ -54,6 +75,16 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             View view= LayoutInflater.from(mContext)
                     .inflate(R.layout.item_answer_detail, parent, false);
             return new HeaderViewHolder(view);
+        }
+        else if(viewType==TYPE_DETAIL_TEXT){
+            View view= LayoutInflater.from(mContext)
+                    .inflate(R.layout.item_text, parent, false);
+            return new TextViewHolder(view);
+        }
+        else if(viewType==TYPE_DETAIL_IMAGE){
+            View view= LayoutInflater.from(mContext)
+                    .inflate(R.layout.item_image, parent, false);
+            return new ImageViewHolder(view);
         }
         else {
             View view= LayoutInflater.from(mContext)
@@ -77,14 +108,37 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         .into(headerViewHolder.avatar);
             headerViewHolder.userName.setText(answer.getUser_info().getUser_name());
             headerViewHolder.signature.setText(answer.getUser_info().getSignature());
-            headerViewHolder.agreeCount.setText(answer.getAgree_count()+"");
-            headerViewHolder.commentCount.setText(answer.getComment_count()+"");
-            headerViewHolder.thankCount.setText(answer.getThanks_count()+"");
+            headerViewHolder.agreeCount.setText(answer.getAgree_count() + "");
+            headerViewHolder.commentCount.setText(answer.getComment_count() + "");
+            headerViewHolder.thankCount.setText(answer.getThanks_count() + "");
 
-            headerViewHolder.detail.setBackgroundColor(0);
-            headerViewHolder.detail.loadDataWithBaseURL(null, answer.getAnswer_content(),
-                    "text/html", "utf-8", null);
-            headerViewHolder.detail.setVisibility(View.VISIBLE);
+        }
+        else if (holder instanceof TextViewHolder){
+            TextViewHolder textViewHolder=(TextViewHolder) holder;
+            WebData webData=webDatas.get(position-detailIndex);
+            if(webData.getGravity()== WebData.Gravity.CENTER)
+                textViewHolder.text.setGravity(Gravity.CENTER);
+            else if(webData.getGravity()== WebData.Gravity.RIGHT)
+                textViewHolder.text.setGravity(Gravity.RIGHT);
+            else textViewHolder.text.setGravity(Gravity.LEFT);
+            Log.e("webData",webDatas.get(position-detailIndex).getData());
+            textViewHolder.text.setText(Html.fromHtml(webDatas.get(position - detailIndex).getData()));
+            textViewHolder.text.setVisibility(View.VISIBLE);
+        }
+        else if(holder instanceof ImageViewHolder){
+            final ImageViewHolder imageViewHolder=(ImageViewHolder) holder;
+            Log.e("webData",webDatas.get(position-detailIndex).getData());
+            final String file=webDatas.get(position-detailIndex).getData();
+            imageViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(!file.isEmpty())
+                        Picasso.with(mContext).load(file).into(imageViewHolder.imageView);
+                }
+            });
+
+            imageViewHolder.imageView.setVisibility(View.VISIBLE);
+
         }
         else if(holder instanceof ItemViewHolder){
 
@@ -109,7 +163,26 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        return answerComments==null?1:answerComments.size()+1;
+        if(webDatas==null&&answerComments==null){
+            detailIndex=1;
+            itemIndex=detailIndex;
+            return 1;
+        }
+        else if(webDatas==null){
+            detailIndex=1;
+            itemIndex=detailIndex;
+            return answerComments.size()+1;
+        }
+        else if(answerComments==null){
+            detailIndex=1;
+            itemIndex=webDatas.size()+detailIndex;
+            return webDatas.size()+1;
+        }
+        else {
+            detailIndex=1;
+            itemIndex=webDatas.size()+detailIndex;
+            return webDatas.size()+answerComments.size()+1;
+        }
     }
 
     @Override
@@ -132,7 +205,6 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         private CircleImageView avatar;
         private TextView userName;
         private TextView signature;
-        private WebView detail;
         private TextView agreeCount;
         private TextView commentCount;
         private TextView thankCount;
@@ -142,7 +214,6 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             avatar=(CircleImageView) view.findViewById(R.id.avatar_img_answer);
             userName=(TextView) view.findViewById(R.id.textView_userName_answer);
             signature=(TextView) view.findViewById(R.id.textView_signature_answer);
-            detail=(WebView) view.findViewById(R.id.webView_detail_answer);
             agreeCount=(TextView) view.findViewById(R.id.textView_agreeCount_answer);
             commentCount=(TextView) view.findViewById(R.id.textView_commentCount_answer);
             thankCount=(TextView) view.findViewById(R.id.textView_thankCount_answer);
@@ -164,6 +235,28 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             addTime=(TextView) view.findViewById(R.id.textView_addTime_answer_comment);
             message=(TextView) view.findViewById(R.id.textView_message_answer_comment);
         }
+    }
+
+    public class TextViewHolder extends RecyclerView.ViewHolder{
+
+        TextView text;
+
+        public TextViewHolder(View view) {
+            super(view);
+            text=(TextView) view.findViewById(R.id.textView_detailText_question);
+        }
+
+    }
+
+    public class ImageViewHolder extends RecyclerView.ViewHolder{
+
+        ImageView imageView;
+
+        public ImageViewHolder(View view) {
+            super(view);
+            imageView=(ImageView) view.findViewById(R.id.imageView_detailImage_question);
+        }
+
     }
 
     private String getTime(long dateLong){

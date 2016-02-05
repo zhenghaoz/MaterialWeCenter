@@ -89,7 +89,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         recyclerView=(RecyclerView) findViewById(R.id.recyclerView_answerList);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.addItemDecoration(new ItemDivider(this,LinearLayoutManager.VERTICAL,ItemDivider.TITLE_INDEX));
+      //  recyclerView.addItemDecoration(new ItemDivider(this,LinearLayoutManager.VERTICAL,ItemDivider.TITLE_INDEX));
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {

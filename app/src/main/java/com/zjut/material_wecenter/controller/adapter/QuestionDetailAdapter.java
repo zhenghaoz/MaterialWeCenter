@@ -38,10 +38,11 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private final int TYPE_DETAIL_IMAGE=2;
     private final int TYPE_ITEM = 3;
     private final int TYPE_FOOTER = 4;
+    private final int TYPE_INFO=5;
 
     private int detailIndex;
     private int itemIndex;
-    private int footerIndex;
+    private int infoIndex;
     private Context mContext;
     private QuestionDetail questionDetail;
     private ArrayList<WebData> webDatas;
@@ -57,7 +58,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public int getItemViewType(int position) {
         if(position==0) return TYPE_TITLE;
         else if(position==getItemCount()-1) return TYPE_FOOTER;
-        else if(position<itemIndex&&position>=detailIndex) {
+        else if(position<infoIndex&&position>=detailIndex) {
 
             if(webDatas.get(position-detailIndex).getType()== WebData.Type.TEXT){
                 return TYPE_DETAIL_TEXT;
@@ -67,6 +68,9 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 return TYPE_DETAIL_IMAGE;
             }
 
+        }
+        else if(position==infoIndex){
+            return TYPE_INFO;
         }
         else return TYPE_ITEM;
     }
@@ -94,6 +98,11 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     .inflate(R.layout.item_question_footer, parent, false);
             return new FooterViewHolder(view);
         }
+        else if(viewType==TYPE_INFO){
+            View view= LayoutInflater.from(mContext)
+                    .inflate(R.layout.item_question_info, parent, false);
+            return new InfoViewHolder(view);
+        }
         else {
             View view= LayoutInflater.from(mContext)
                     .inflate(R.layout.item_answer, parent, false);
@@ -118,23 +127,6 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             titleViewHolder.userName.setText(questionInfo.getUser_info().getUser_name());
             titleViewHolder.title.setText(questionInfo.getQuestion_content());
         }
-       /* else if(holder instanceof DetailViewHolder){
-            final QuestionDetail.QuestionInfo questionInfo=questionDetail.getQuestion_info();
-            DetailViewHolder detailViewHolder=(DetailViewHolder) holder;
-
-            //headerViewHolder.detail.setText(Html.fromHtml(questionInfo.getQuestion_detail(),this,null1));
-            detailViewHolder.detail.setBackgroundColor(0);
-            detailViewHolder.detail.loadDataWithBaseURL(null, questionInfo.getQuestion_detail(),
-                    "text/html", "utf-8", null);
-            detailViewHolder.detail.setVisibility(View.VISIBLE);
-
-            String time=getTime(questionInfo.getAdd_time());
-            detailViewHolder.addTime.setText(time);
-            detailViewHolder.viewCount.setText(questionInfo.getView_count() + "");
-            detailViewHolder.answerCount.setText(questionInfo.getAnswer_count() + "");
-            detailViewHolder.thankCount.setText(questionInfo.getThanks_count() + "");
-
-        }*/
         else if (holder instanceof TextViewHolder){
             TextViewHolder textViewHolder=(TextViewHolder) holder;
             WebData webData=webDatas.get(position-detailIndex);
@@ -149,7 +141,6 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
         else if(holder instanceof ImageViewHolder){
             final ImageViewHolder imageViewHolder=(ImageViewHolder) holder;
-            Log.e("webData",webDatas.get(position-detailIndex).getData());
             final String file=webDatas.get(position-detailIndex).getData();
             imageViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -160,6 +151,18 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             });
 
             imageViewHolder.imageView.setVisibility(View.VISIBLE);
+
+        }
+        else if(holder instanceof InfoViewHolder){
+
+            final QuestionDetail.QuestionInfo questionInfo=questionDetail.getQuestion_info();
+            InfoViewHolder infoViewHolder=(InfoViewHolder) holder;
+            infoViewHolder.viewCount.setText(questionInfo.getView_count()+"");
+            infoViewHolder.answerCount.setText(questionInfo.getAnswer_count()+"");
+            infoViewHolder.thankCount.setText(questionInfo.getThanks_count()+"");
+            String time=getTime(questionInfo.getAdd_time());
+            infoViewHolder.addTime.setGravity(Gravity.RIGHT);
+            infoViewHolder.addTime.setText("发布于  "+time);
 
         }
         else if(holder instanceof ItemViewHolder){
@@ -194,27 +197,27 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public int getItemCount() {
         if(webDatas==null&&questionDetail.getAnswers()==null){
             detailIndex=1;
-            itemIndex=detailIndex;
-            footerIndex=itemIndex;
-            return 2;
+            infoIndex=detailIndex;
+            itemIndex=infoIndex;
+            return 3;
         }
         else if(webDatas==null){
             detailIndex=1;
-            itemIndex=detailIndex;
-            footerIndex=questionDetail.getAnswers().size()+detailIndex;
-            return questionDetail.getAnswers().size()+2;
+            infoIndex=detailIndex;
+            itemIndex=infoIndex+1;
+            return questionDetail.getAnswers().size()+3;
         }
         else if(questionDetail.getAnswers()==null){
             detailIndex=1;
-            itemIndex=webDatas.size()+detailIndex;
-            footerIndex=webDatas.size()+detailIndex;
-            return webDatas.size()+2;
+            infoIndex=webDatas.size()+detailIndex;
+            itemIndex=infoIndex+1;
+            return webDatas.size()+3;
         }
         else {
             detailIndex=1;
-            itemIndex=webDatas.size()+detailIndex;
-            footerIndex=questionDetail.getAnswers().size()+itemIndex;
-            return webDatas.size()+questionDetail.getAnswers().size()+2;
+            infoIndex=webDatas.size()+detailIndex;
+            itemIndex=1+infoIndex;
+            return webDatas.size()+questionDetail.getAnswers().size()+3;
         }
     }
 
@@ -234,25 +237,6 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
     }
 
-    public class DetailViewHolder extends RecyclerView.ViewHolder{
-
-        private WebView detail;
-        private TextView viewCount;
-        private TextView answerCount;
-        private TextView thankCount;
-        private TextView addTime;
-
-        public DetailViewHolder(View view) {
-            super(view);
-            detail=(WebView) view.findViewById(R.id.webView_detail_question);
-            viewCount=(TextView) view.findViewById(R.id.textView_viewCount_question);
-            answerCount=(TextView) view.findViewById(R.id.textView_answerCount_question);
-            thankCount=(TextView) view.findViewById(R.id.textView_thankCount_question);
-            addTime=(TextView) view.findViewById(R.id.textView_addTime_question);
-        }
-
-    }
-
     public class ItemViewHolder extends RecyclerView.ViewHolder{
 
         private CircleImageView avatar;
@@ -268,6 +252,21 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             briefDetail=(TextView) view.findViewById(R.id.textView_briefDetail_answer);
         }
     }
+    public class InfoViewHolder extends RecyclerView.ViewHolder{
+
+        TextView addTime;
+        TextView viewCount;
+        TextView answerCount;
+        TextView thankCount;
+        public InfoViewHolder(View view) {
+            super(view);
+            addTime=(TextView) view.findViewById(R.id.textView_addTime_question);
+            viewCount=(TextView) view.findViewById(R.id.textView_viewCount_question);
+            answerCount=(TextView) view.findViewById(R.id.textView_answerCount_question);
+            thankCount=(TextView) view.findViewById(R.id.textView_thankCount_question);
+        }
+    }
+
 
     public class FooterViewHolder extends RecyclerView.ViewHolder{
 
@@ -340,7 +339,6 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         ArrayList<WebData> list=new ArrayList<>();
         Document doc= Jsoup.parse(html);
         String docHtml=doc.html();
-        Log.e("docHtml",docHtml);
         if(!docHtml.contains("<p")&&!docHtml.contains("<div")){
             WebData webData=new WebData(WebData.Type.TEXT,docHtml, WebData.Gravity.LEFT);
             list.add(webData);
@@ -349,7 +347,6 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         Elements tags=doc.select("p,div");
         for(Element tag : tags){
             String tagHtml=tag.html();
-            Log.e("tagHtml", tagHtml);
             if(tag.tagName().equals("p")){
                 WebData webData;
                 String pHtml=tag.html();

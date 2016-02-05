@@ -50,6 +50,8 @@ public class Config {
     public static String QUESTION_THANKS=HOST_NAME+"question/ajax/question_thanks/";
     public static String ANSWER=HOST_NAME+"api/question/answer/?answer_id=";
     public static String ANSWER_COMMENT=HOST_NAME+"api/question/answer_comments/?answer_id=";
+    public static String ANSWER_RATE=HOST_NAME+"question/ajax/question_answer_rate/";
+    public static String ANSWER_VOTE=HOST_NAME+"question/ajax/answer_vote/";
     public static String AVATAR_DIR = HOST_NAME + "uploads/avatar/";
     public static String HOME_DYNAMIC = HOST_NAME + "?/api/home/";
 
@@ -57,6 +59,8 @@ public class Config {
     public enum ActionType{
         QUESTION_FOCUS,
         QUESTION_THANKS,
-        PUSHLISH_ANSWER_COMMENT
+        PUSHLISH_ANSWER_COMMENT,
+        ANSWER_RATE,
+        ANSWER_VOTE
     }
 }

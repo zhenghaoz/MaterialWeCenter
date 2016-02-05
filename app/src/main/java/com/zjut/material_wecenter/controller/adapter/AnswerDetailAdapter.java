@@ -142,7 +142,7 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
         else if(holder instanceof ItemViewHolder){
 
-            final AnswerComment answerComment= answerComments.get(position-1);
+            final AnswerComment answerComment= answerComments.get(position-itemIndex);
             ItemViewHolder itemViewHolder=(ItemViewHolder) holder;
 
             String avatarFile =answerComment.getUser_info().getAvatar_file();
@@ -292,5 +292,6 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         else return sdf.format(longDate);
 
     }
+
 
 }

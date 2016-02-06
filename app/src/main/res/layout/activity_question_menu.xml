@@ -4,10 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     tools:context="com.zjut.material_wecenter.controller.activity.QuestionMenuActivity"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
     <android.support.v7.widget.CardView
-        android:layout_width="400dp"
+        android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_alignParentBottom="true">
         <LinearLayout
@@ -29,6 +29,7 @@
                         android:id="@+id/fab_question_focus"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:src="@drawable/ic_follow_white"
                         app:fab_showShadow="false"
                         fab:fab_colorNormal="@color/nliveo_green_colorPrimary"
                         fab:fab_colorRipple="@color/nliveo_green_colorPrimaryDark"/>
@@ -49,6 +50,7 @@
                         android:id="@+id/fab_question_thanks"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:src="@drawable/ic_white_heart"
                         app:fab_showShadow="false"
                         fab:fab_colorNormal="@color/nliveo_red_colorPrimary"
                         fab:fab_colorRipple="@color/nliveo_red_colorPrimaryDark"/>
@@ -74,6 +76,7 @@
                         android:id="@+id/fab_question_answer"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:src="@drawable/ic_answer_white"
                         app:fab_showShadow="false"
                         fab:fab_colorNormal="@color/nliveo_blue_colorPrimary"
                         fab:fab_colorRipple="@color/nliveo_blue_colorPrimaryDark"/>
@@ -94,6 +97,7 @@
                         android:id="@+id/fab_question_close"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:src="@drawable/ic_close_white"
                         app:fab_showShadow="false"
                         fab:fab_colorNormal="@color/nliveo_purple_colorPrimary"
                         fab:fab_colorRipple="@color/nliveo_purple_colorPrimaryDark"/>
@@ -113,6 +117,7 @@
                         android:id="@+id/fab_question_invite"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:src="@drawable/ic_invite_white"
                         app:fab_showShadow="false"
                         fab:fab_colorNormal="@color/nliveo_orange_colorPrimary"
                         fab:fab_colorRipple="@color/nliveo_orange_colorPrimaryDark"/>

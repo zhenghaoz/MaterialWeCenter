@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -20,7 +19,6 @@ import com.zjut.material_wecenter.controller.adapter.AnswerDetailAdapter;
 import com.zjut.material_wecenter.models.AnswerComment;
 import com.zjut.material_wecenter.models.AnswerDetail;
 import com.zjut.material_wecenter.models.Result;
-import com.zjut.material_wecenter.ui.ItemDivider;
 
 import java.util.ArrayList;
 
@@ -39,20 +37,21 @@ public class AnswerActivity extends Activity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer);
-        getWindow().setLayout(CardView.LayoutParams.MATCH_PARENT, CardView.LayoutParams.MATCH_PARENT);
 
+        //获取intent
         Intent mIntent=getIntent();
         answerID=mIntent.getIntExtra("answerID", -1);
-        Log.e("AnswerActivity","start"+answerID);
 
+        //实例化recyclerView
         recyclerView=(RecyclerView) findViewById(R.id.recyclerView_answer);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.addItemDecoration(new ItemDivider(this, LinearLayoutManager.VERTICAL, ItemDivider.TITLE_INDEX));
 
+        //实例化EdiText和发布按钮
         content=(EditText) findViewById(R.id.edit_content_answerComment);
         publish=(Button) findViewById(R.id.btn_add_answerComment);
         publish.setOnClickListener(this);
+
         new LoadAnswerDetail().execute();
     }
 
@@ -60,6 +59,7 @@ public class AnswerActivity extends Activity implements View.OnClickListener{
     public void onClick(View v) {
         String mContent=content.getText().toString();
         switch (v.getId()){
+            //发布评论
             case R.id.btn_add_answerComment:
                 if(!mContent.isEmpty()){
                     new PublishTask().execute();
@@ -69,6 +69,8 @@ public class AnswerActivity extends Activity implements View.OnClickListener{
                 break;
         }
     }
+
+    //异步获取回答详细信息
 
     private class LoadAnswerDetail extends AsyncTask<Integer,Integer,Integer> {
 
@@ -100,7 +102,9 @@ public class AnswerActivity extends Activity implements View.OnClickListener{
         }
     }
 
-    private class PublishTask extends AsyncTask<Void, Void, Void> {
+    //异步进行评论
+
+    private  class PublishTask extends AsyncTask<Void, Void, Void> {
 
         String mContent;
         Result result;
@@ -124,17 +128,20 @@ public class AnswerActivity extends Activity implements View.OnClickListener{
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            answerDetailAdapter.notifyItemInserted(answerDetailAdapter.getItemCount());
+
+            answerDetailAdapter.notifyDataSetChanged();
             if (result == null) // 未知错误
                 Snackbar.with(AnswerActivity.this).text("未知错误").show(AnswerActivity.this);
             else if (result.getErrno() == 1){ // 发布成功
-                AnswerActivity.this.finish();
+                new LoadAnswerDetail().execute();
             }
 
             else                // 显示错误
                 Snackbar.with(AnswerActivity.this).text(result.getErr()).show(AnswerActivity.this);
         }
     }
+
+    //评论成功返回的json对象
 
     public static class PublishAnswerComment{
 

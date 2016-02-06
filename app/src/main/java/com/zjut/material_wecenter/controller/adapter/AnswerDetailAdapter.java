@@ -1,7 +1,10 @@
 package com.zjut.material_wecenter.controller.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
@@ -12,11 +15,18 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.nispok.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
+import com.zjut.material_wecenter.Client;
+import com.zjut.material_wecenter.Config;
 import com.zjut.material_wecenter.R;
+import com.zjut.material_wecenter.controller.activity.AnswerActivity;
+import com.zjut.material_wecenter.controller.activity.UserActivity;
 import com.zjut.material_wecenter.models.AnswerComment;
 import com.zjut.material_wecenter.models.AnswerDetail;
+import com.zjut.material_wecenter.models.Result;
 import com.zjut.material_wecenter.models.WebData;
 
 import java.net.URL;
@@ -106,11 +116,40 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 Picasso.with(mContext)
                         .load(avatarFile)
                         .into(headerViewHolder.avatar);
+            headerViewHolder.avatar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, UserActivity.class);
+                    intent.putExtra("uid", answer.getUser_info().getUid() + "");
+                    mContext.startActivity(intent);
+                }
+            });
             headerViewHolder.userName.setText(answer.getUser_info().getUser_name());
             headerViewHolder.signature.setText(answer.getUser_info().getSignature());
             headerViewHolder.agreeCount.setText(answer.getAgree_count() + "");
             headerViewHolder.commentCount.setText(answer.getComment_count() + "");
             headerViewHolder.thankCount.setText(answer.getThanks_count() + "");
+
+            if(answer.getUser_vote_status()==1){
+                headerViewHolder.agree.setImageResource(R.drawable.ic_agree_red);
+            }
+
+            headerViewHolder.agree.setOnClickListener(new ItemOnClickListener(headerViewHolder.agreeCount,
+                    headerViewHolder.agree,answer.getUser_vote_status(),ItemOnClickListener.TYPE_AGREE,
+                    answer.getAnswer_id(),answer.getAgree_count()));
+
+            if(answer.getUser_thanks_status()==1){
+                headerViewHolder.thank.setImageResource(R.drawable.ic_red_heart);
+            }
+            headerViewHolder.thank.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(answer.getUser_thanks_status()!=1){
+                        new DoAction(DoAction.THANKS, answer.getAnswer_id()).execute();
+                        ((ImageView)v).setImageResource(R.drawable.ic_red_heart);
+                    }
+                }
+            });
 
         }
         else if (holder instanceof TextViewHolder){
@@ -121,13 +160,11 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             else if(webData.getGravity()== WebData.Gravity.RIGHT)
                 textViewHolder.text.setGravity(Gravity.RIGHT);
             else textViewHolder.text.setGravity(Gravity.LEFT);
-            Log.e("webData",webDatas.get(position-detailIndex).getData());
             textViewHolder.text.setText(Html.fromHtml(webDatas.get(position - detailIndex).getData()));
             textViewHolder.text.setVisibility(View.VISIBLE);
         }
         else if(holder instanceof ImageViewHolder){
             final ImageViewHolder imageViewHolder=(ImageViewHolder) holder;
-            Log.e("webData",webDatas.get(position-detailIndex).getData());
             final String file=webDatas.get(position-detailIndex).getData();
             imageViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -151,6 +188,14 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         .load(avatarFile)
                         .into(itemViewHolder.avatar);
 
+            itemViewHolder.avatar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(mContext, UserActivity.class);
+                    intent.putExtra("uid",answerComment.getUser_info().getUid()+"");
+                    mContext.startActivity(intent);
+                }
+            });
             String addTime=getTime(answerComment.getTime());
             itemViewHolder.addTime.setText(addTime);
             itemViewHolder.userName.setText(answerComment.getUser_info().getUser_name());
@@ -206,8 +251,10 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         private TextView userName;
         private TextView signature;
         private TextView agreeCount;
+        private ImageView agree;
         private TextView commentCount;
         private TextView thankCount;
+        private ImageView thank;
 
         public HeaderViewHolder(View view) {
             super(view);
@@ -215,8 +262,10 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             userName=(TextView) view.findViewById(R.id.textView_userName_answer);
             signature=(TextView) view.findViewById(R.id.textView_signature_answer);
             agreeCount=(TextView) view.findViewById(R.id.textView_agreeCount_answer);
+            agree=(ImageView) view.findViewById(R.id.imageView_agreeCount_answer);
             commentCount=(TextView) view.findViewById(R.id.textView_commentCount_answer);
             thankCount=(TextView) view.findViewById(R.id.textView_thankCount_answer);
+            thank=(ImageView) view.findViewById(R.id.imageView_thankCount_answer);
         }
 
     }
@@ -259,6 +308,7 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     }
 
+    //获取发布时间
     private String getTime(long dateLong){
 
 
@@ -293,5 +343,93 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     }
 
+    //异步进行点赞等操作
+
+    private class DoAction extends AsyncTask<Integer,Integer,Integer> {
+
+        private static final int AGREE=0;
+        private static final int THANKS=1;
+        private int answerID;
+        private int action;
+        Result result;
+
+        public DoAction(int action,int answerID){
+            this.action=action;
+            this.answerID=answerID;
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Integer doInBackground(Integer... params) {
+            try {
+                Client client=Client.getInstance();
+                ArrayList<String> strs=new ArrayList<>();
+                switch (action){
+                    case AGREE:
+                        strs.add(answerID+"");
+                        strs.add(1+"");
+                        result=client.postAction(Config.ActionType.ANSWER_VOTE,null,strs);
+                        break;
+                    case THANKS:
+                        strs.add("thanks");
+                        strs.add(answerID+"");
+                        result=client.postAction(Config.ActionType.ANSWER_RATE,null,strs);
+                        break;
+                    default:
+                        break;
+                }
+
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+        }
+    }
+
+    private class ItemOnClickListener implements View.OnClickListener {
+
+        private TextView text;
+        private ImageView image;
+        private int status;
+        private int num;
+        private int type;
+        private int answerID;
+
+        public static final int TYPE_AGREE=0;
+        public static final int TYPE_THANK=1;
+
+        public ItemOnClickListener(TextView text, ImageView image, int status,
+                                   int type, int answerID,int num) {
+            this.text = text;
+            this.image = image;
+            this.status = status;
+            this.type = type;
+            this.answerID = answerID;
+            this.num=num;
+        }
+
+        @Override
+        public void onClick(View v) {
+            new DoAction(DoAction.AGREE, answerID).execute();
+            if(status==0){
+                image.setImageResource(R.drawable.ic_agree_red);
+                text.setText((++num)+"");
+                status=1;
+            }
+            else if(status==1){
+                image.setImageResource(R.drawable.ic_agree);
+                text.setText((--num)+"");
+                status=0;
+            }
+        }
+    }
 
 }

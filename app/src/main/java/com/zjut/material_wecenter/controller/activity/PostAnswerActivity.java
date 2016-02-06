@@ -31,10 +31,12 @@ public class PostAnswerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_answer);
 
+        //获取intent
         Intent mIntent=getIntent();
         questionID=mIntent.getIntExtra("questionID", -1);
         questionTitle=mIntent.getStringExtra("questionTitle");
 
+        //init toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_publishAnswer);
         setSupportActionBar(toolbar);
         setTitle("评论 "+questionTitle);
@@ -48,6 +50,7 @@ public class PostAnswerActivity extends AppCompatActivity {
         if (ab != null)
             ab.setDisplayHomeAsUpEnabled(true);
 
+        //init editContent publish按钮
         editContent=(EditText) findViewById(R.id.editText_answerContent);
 
         publish=(ImageButton) findViewById(R.id.imageButton_publishAnswer);
@@ -62,6 +65,7 @@ public class PostAnswerActivity extends AppCompatActivity {
         });
     }
 
+    //异步发布答案
     private class PublishTask extends AsyncTask<Void, Void, Void> {
 
         String content;
@@ -86,7 +90,7 @@ public class PostAnswerActivity extends AppCompatActivity {
             if (result == null) // 未知错误
                 Snackbar.with(PostAnswerActivity.this).text("未知错误").show(PostAnswerActivity.this);
             else if (result.getErrno() == 1){ // 发布成功
-                PostAnswerActivity.this.setResult(resultCode);
+                PostAnswerActivity.this.setResult(resultCode);//设置activity结束返回值
                 PostAnswerActivity.this.finish();
             }
 

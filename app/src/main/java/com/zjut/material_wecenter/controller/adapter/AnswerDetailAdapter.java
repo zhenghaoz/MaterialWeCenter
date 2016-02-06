@@ -1,6 +1,7 @@
 package com.zjut.material_wecenter.controller.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -118,8 +119,8 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             headerViewHolder.avatar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(mContext, UserActivity.class);
-                    intent.putExtra("uid",answer.getUser_info().getUid()+"");
+                    Intent intent = new Intent(mContext, UserActivity.class);
+                    intent.putExtra("uid", answer.getUser_info().getUid() + "");
                     mContext.startActivity(intent);
                 }
             });
@@ -132,29 +133,19 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if(answer.getUser_vote_status()==1){
                 headerViewHolder.agree.setImageResource(R.drawable.ic_agree_red);
             }
-            headerViewHolder.agree.setOnClickListener(new View.OnClickListener() {
-                int status=answer.getUser_vote_status();
-                @Override
-                public void onClick(View v) {
-                    new DoAction(DoAction.AGREE, answer.getAnswer_id()).execute();
-                    if(status==0){
-                        ((ImageView)v).setImageResource(R.drawable.ic_agree_red);
-                        status=1;
-                    }
-                    else if(status==1){
-                        ((ImageView)v).setImageResource(R.drawable.ic_agree);
-                        status=0;
-                    }
-                }
-            });
+
+            headerViewHolder.agree.setOnClickListener(new ItemOnClickListener(headerViewHolder.agreeCount,
+                    headerViewHolder.agree,answer.getUser_vote_status(),ItemOnClickListener.TYPE_AGREE,
+                    answer.getAnswer_id(),answer.getAgree_count()));
+
             if(answer.getUser_thanks_status()==1){
                 headerViewHolder.thank.setImageResource(R.drawable.ic_red_heart);
             }
             headerViewHolder.thank.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new DoAction(DoAction.THANKS, answer.getAnswer_id()).execute();
                     if(answer.getUser_thanks_status()!=1){
+                        new DoAction(DoAction.THANKS, answer.getAnswer_id()).execute();
                         ((ImageView)v).setImageResource(R.drawable.ic_red_heart);
                     }
                 }
@@ -169,13 +160,11 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             else if(webData.getGravity()== WebData.Gravity.RIGHT)
                 textViewHolder.text.setGravity(Gravity.RIGHT);
             else textViewHolder.text.setGravity(Gravity.LEFT);
-            Log.e("webData",webDatas.get(position-detailIndex).getData());
             textViewHolder.text.setText(Html.fromHtml(webDatas.get(position - detailIndex).getData()));
             textViewHolder.text.setVisibility(View.VISIBLE);
         }
         else if(holder instanceof ImageViewHolder){
             final ImageViewHolder imageViewHolder=(ImageViewHolder) holder;
-            Log.e("webData",webDatas.get(position-detailIndex).getData());
             final String file=webDatas.get(position-detailIndex).getData();
             imageViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -402,6 +391,44 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         @Override
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
+        }
+    }
+
+    private class ItemOnClickListener implements View.OnClickListener {
+
+        private TextView text;
+        private ImageView image;
+        private int status;
+        private int num;
+        private int type;
+        private int answerID;
+
+        public static final int TYPE_AGREE=0;
+        public static final int TYPE_THANK=1;
+
+        public ItemOnClickListener(TextView text, ImageView image, int status,
+                                   int type, int answerID,int num) {
+            this.text = text;
+            this.image = image;
+            this.status = status;
+            this.type = type;
+            this.answerID = answerID;
+            this.num=num;
+        }
+
+        @Override
+        public void onClick(View v) {
+            new DoAction(DoAction.AGREE, answerID).execute();
+            if(status==0){
+                image.setImageResource(R.drawable.ic_agree_red);
+                text.setText((++num)+"");
+                status=1;
+            }
+            else if(status==1){
+                image.setImageResource(R.drawable.ic_agree);
+                text.setText((--num)+"");
+                status=0;
+            }
         }
     }
 

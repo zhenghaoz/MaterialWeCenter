@@ -76,7 +76,7 @@ public class QuestionMenuActivity extends Activity implements View.OnClickListen
         super.onActivityResult(requestCode, resultCode, data);
         //回答后设置返回值来更新
         if(resultCode==1){
-            setResult(resultCode);
+            this.setResult(resultCode);
             finish();
         }
 
@@ -173,6 +173,9 @@ public class QuestionMenuActivity extends Activity implements View.OnClickListen
             }
             if (result == null) // 未知错误
                 Snackbar.with(QuestionMenuActivity.this).text("未知错误").show(QuestionMenuActivity.this);
+            if(result.getErrno()==1){
+                Snackbar.with(QuestionMenuActivity.this).text("操作成功,返回后请刷新。").show(QuestionMenuActivity.this);
+            }
             else                // 显示错误
                 Snackbar.with(QuestionMenuActivity.this).text(result.getErr()).show(QuestionMenuActivity.this);
         }

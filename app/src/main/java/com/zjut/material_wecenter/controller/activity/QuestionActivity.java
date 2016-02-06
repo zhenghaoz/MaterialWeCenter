@@ -138,7 +138,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //发布答案成功后刷新
-        if(requestCode==1)
+        if(resultCode==1)
            new LoadAnswers().execute();
     }
 

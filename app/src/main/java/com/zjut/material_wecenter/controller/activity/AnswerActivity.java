@@ -102,7 +102,7 @@ public class AnswerActivity extends Activity implements View.OnClickListener{
         }
     }
 
-    //异步进行点赞，感谢，评论
+    //异步进行评论
 
     private  class PublishTask extends AsyncTask<Void, Void, Void> {
 
@@ -133,7 +133,7 @@ public class AnswerActivity extends Activity implements View.OnClickListener{
             if (result == null) // 未知错误
                 Snackbar.with(AnswerActivity.this).text("未知错误").show(AnswerActivity.this);
             else if (result.getErrno() == 1){ // 发布成功
-                AnswerActivity.this.finish();
+                new LoadAnswerDetail().execute();
             }
 
             else                // 显示错误

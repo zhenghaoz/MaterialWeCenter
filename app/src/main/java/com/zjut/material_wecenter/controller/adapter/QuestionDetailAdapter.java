@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.zjut.material_wecenter.R;
 import com.zjut.material_wecenter.controller.activity.AnswerActivity;
+import com.zjut.material_wecenter.controller.activity.UserActivity;
 import com.zjut.material_wecenter.models.QuestionDetail;
 import com.zjut.material_wecenter.models.WebData;
 
@@ -123,6 +124,14 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                         .load(avatarFile)
                         .into(titleViewHolder.avatar);
 
+            titleViewHolder.avatar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(mContext, UserActivity.class);
+                    intent.putExtra("uid",questionInfo.getUser_info().getUid()+"");
+                    mContext.startActivity(intent);
+                }
+            });
             titleViewHolder.signature.setText(questionInfo.getUser_info().getSignature());
             titleViewHolder.userName.setText(questionInfo.getUser_info().getUser_name());
             titleViewHolder.title.setText(questionInfo.getQuestion_content());
@@ -176,9 +185,19 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                         .load(avatarFile)
                         .into(itemViewHolder.avatar);
 
+            itemViewHolder.avatar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(mContext, UserActivity.class);
+                    intent.putExtra("uid",answerInfo.getUser_info().getUid()+"");
+                    mContext.startActivity(intent);
+                }
+            });
             String addTime=getTime(answerInfo.getAdd_time());
             itemViewHolder.addTime.setText(addTime);
             itemViewHolder.userName.setText(answerInfo.getUser_info().getUser_name());
+            itemViewHolder.agreeCount.setText(answerInfo.getAgree_count()+"");
+
             itemViewHolder.briefDetail.setText(Html.fromHtml(answerInfo.getAnswer_content()));
             itemViewHolder.briefDetail.setVisibility(View.VISIBLE);
             itemViewHolder.briefDetail.setOnClickListener(new View.OnClickListener() {
@@ -243,6 +262,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         private TextView userName;
         private TextView addTime;
         private TextView briefDetail;
+        private TextView agreeCount;
 
         public ItemViewHolder(View view) {
             super(view);
@@ -250,6 +270,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             userName=(TextView) view.findViewById(R.id.textView_userName_answer);
             addTime=(TextView) view.findViewById(R.id.textView_addTime_answer);
             briefDetail=(TextView) view.findViewById(R.id.textView_briefDetail_answer);
+            agreeCount=(TextView) view.findViewById(R.id.textView_agree_answer);
         }
     }
     public class InfoViewHolder extends RecyclerView.ViewHolder{
@@ -297,6 +318,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     }
 
+    //获取发布时间
 
     private String getTime(long dateLong){
 
@@ -332,6 +354,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     }
 
+    //获取内容详情，过滤文本和图片
     public static ArrayList<WebData> getData(String html){
 
         final String emotion="http://bbs.zjut.edu.cn/static/umeditor/dialogs/emotion/";

@@ -1,7 +1,6 @@
 package com.zjut.material_wecenter.controller.activity;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
@@ -10,8 +9,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
-import android.text.Spanned;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -20,16 +17,12 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
-import com.github.clans.fab.FloatingActionMenu;
 import com.zjut.material_wecenter.Client;
 import com.zjut.material_wecenter.R;
 import com.zjut.material_wecenter.controller.adapter.QuestionDetailAdapter;
 import com.zjut.material_wecenter.models.QuestionDetail;
-import com.zjut.material_wecenter.ui.ItemDivider;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
+
 
 public class QuestionActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -49,6 +42,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
 
+        //init toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_questionDetail);
         setSupportActionBar(toolbar);
         setTitle("");
@@ -62,12 +56,15 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         if (ab != null)
             ab.setDisplayHomeAsUpEnabled(true);
 
+        //get intent
         Intent mIntent=getIntent();
         questionID=mIntent.getIntExtra("questionID", -1);
 
+        //init fab
         floatingActionButton=(FloatingActionButton) findViewById(R.id.fab_question_menu);
         floatingActionButton.setOnClickListener(this);
 
+        //init swipeRefreshLayout
         swipeRefreshLayout=(SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout_question);
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light,
                 android.R.color.holo_red_light,
@@ -86,10 +83,10 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
+        //init recyclerView
         recyclerView=(RecyclerView) findViewById(R.id.recyclerView_answerList);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-      //  recyclerView.addItemDecoration(new ItemDivider(this,LinearLayoutManager.VERTICAL,ItemDivider.TITLE_INDEX));
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -120,9 +117,16 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
 
         int id=item.getItemId();
         switch (id){
+
+            //返回顶部
             case R.id.action_toTop:
                 recyclerView.smoothScrollToPosition(0);
                 break;
+
+            //刷新
+            case R.id.action_refresh:
+                swipeRefreshLayout.setRefreshing(true);
+                new LoadAnswers().execute();
             default:
                 break;
         }
@@ -133,7 +137,8 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==1)
+        //发布答案成功后刷新
+        if(resultCode==1)
            new LoadAnswers().execute();
     }
 
@@ -141,6 +146,8 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()){
+
+            //启动menu
             case R.id.fab_question_menu:
                 intent=new Intent(this,QuestionMenuActivity.class);
                 intent.putExtra("questionID",questionID);
@@ -154,6 +161,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    //异步获取答案列表
     private class LoadAnswers extends AsyncTask<Integer,Integer,Integer> {
 
         @Override

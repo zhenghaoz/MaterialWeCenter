@@ -28,6 +28,7 @@
             android:label="@string/title_activity_user" />
         <activity
             android:name=".controller.activity.PostAnswerActivity"
+            android:windowSoftInputMode="adjustResize"
             android:label="PostAnswerActivity" />
         <activity
             android:name=".controller.activity.QuestionActivity"
@@ -45,6 +46,7 @@
         <activity
             android:name=".controller.activity.AnswerActivity"
             android:label="查看答案"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/AnswerTheme"></activity>
         <activity
             android:name=".controller.activity.QuestionMenuActivity"

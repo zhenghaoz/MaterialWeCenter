@@ -232,6 +232,18 @@ public class Client {
             json=doPost(Config.PUSHLISH_ANSWER_COMMENT,params);
             return getResult(json,classType);
         }
+        else if(type== Config.ActionType.ANSWER_VOTE){
+            params.put("answer_id",strs.get(0));
+            params.put("value",strs.get(1));
+            json=doPost(Config.ANSWER_VOTE,params);
+            return getResult(json,classType);
+        }
+        else if(type== Config.ActionType.ANSWER_RATE){
+            params.put("type",strs.get(0));
+            params.put("answer_id",strs.get(1));
+            json=doPost(Config.ANSWER_RATE,params);
+            return getResult(json,classType);
+        }
         return null;
     }
 

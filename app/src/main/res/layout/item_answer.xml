@@ -24,22 +24,50 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
-                android:id="@+id/textView_userName_answer"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:paddingTop="5dp"
-                android:text="name"
-                android:textColor="@color/nliveo_blue_colorPrimary"
-                android:textSize="@dimen/abc_text_size_small_material" />
-            <TextView
-                android:id="@+id/textView_addTime_answer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="addTime"
-                android:textColor="@android:color/tertiary_text_dark"
-                android:textSize="10sp" />
+                android:orientation="horizontal"
+                android:weightSum="10">
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="2"
+                    android:layout_width="match_parent">
+                    <TextView
+                        android:id="@+id/textView_userName_answer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:paddingTop="5dp"
+                        android:text="name"
+                        android:textColor="@color/nliveo_blue_colorPrimary"
+                        android:textSize="@dimen/abc_text_size_small_material" />
+                    <TextView
+                        android:id="@+id/textView_addTime_answer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="addTime"
+                        android:textColor="@android:color/tertiary_text_dark"
+                        android:textSize="10sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="8">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_agree_gray"/>
+                    <TextView
+                        android:id="@+id/textView_agree_answer"
+                        android:layout_width="40dp"
+                        android:layout_height="match_parent"
+                        android:gravity="start|center"
+                        android:text="0"/>
+                </LinearLayout>
+            </LinearLayout>
             <TextView
                 android:id="@+id/textView_briefDetail_answer"
                 android:layout_width="match_parent"
@@ -52,6 +80,5 @@
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/abc_text_size_menu_material" />
         </LinearLayout>
-
     </LinearLayout>
 </LinearLayout>

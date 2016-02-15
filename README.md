@@ -12,9 +12,10 @@ Material-WeCenter is an Android client with Material Design for [WeCenter](http:
 
 ## Dependency
 [WeCenterMobile-Api](https://github.com/ifLab/WeCenterMobile-Api)
-## Document
-- Document for [quickstart](https://github.com/ZhangZhenghao/Material-WeCenter/wiki/0-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8)
-- Document for [development](https://github.com/ZhangZhenghao/Material-WeCenter/wiki/1-%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84)
+## Document (Simplified Chinese)
+- Document for [introduction](https://github.com/ZhangZhenghao/Material-WeCenter/wiki)
+- Document for [quickstart](https://github.com/ZhangZhenghao/Material-WeCenter/wiki/0-Quickstart)
+- Document for [development](https://github.com/ZhangZhenghao/Material-WeCenter/wiki/1-Architecture)
 
 ## External libraries used
 - [Android-ObservableScrollView](https://github.com/ksoichiro/Android-ObservableScrollView)

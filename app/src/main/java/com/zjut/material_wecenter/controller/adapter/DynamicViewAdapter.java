@@ -118,7 +118,7 @@ public class DynamicViewAdapter extends RecyclerView.Adapter<DynamicViewAdapter.
         final Dynamic dynamic = mList.get(position);
 
         String avatarFile = dynamic.getUser_info().getAvatar_file();
-        if (!avatarFile.isEmpty())
+        if (avatarFile != null && !avatarFile.isEmpty())
             Picasso.with(mContext)
                     .load(avatarFile)
                     .into(holder.avatarImg);

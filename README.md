@@ -1,12 +1,14 @@
 # Material-WeCenter
+<img src="https://raw.githubusercontent.com/ZhangZhenghao/Material-WeCenter/master/app/src/main/res/mipmap-xxhdpi/ic_launcher.png">
+
 Material-WeCenter is an Android client with Material Design for [WeCenter](http://www.wecenter.com/). We develop it bescause [the forum of our university](http://bbs.zjut.edu.cn/) use WeCenter. It's an Android client for our school's forum, but any WeCenter website can use this Android client with little modification in code.
 ## Screenshot
 <img src="https://raw.githubusercontent.com/ZhangZhenghao/Material-WeCenter/master/screenshot/Screenshot_2016-01-13-20-53-27.png" width="30%" height="30%">    <img src="https://raw.githubusercontent.com/ZhangZhenghao/Material-WeCenter/master/screenshot/Screenshot_2016-01-13-21-15-18.png" width="30%" height="30%">    <img src="https://raw.githubusercontent.com/ZhangZhenghao/Material-WeCenter/master/screenshot/Screenshot_2016-01-13-21-16-57.png" width="30%" height="30%">
 
 ## Contributor
-- [@ZhangZhenghao](https://github.com/ZhangZhenghao)
-- [@Dartick](https://github.com/Dartick)
-- [@windness97](https://github.com/windness97)
+- [ZhangZhenghao](https://github.com/ZhangZhenghao)
+- [Dartick](https://github.com/Dartick)
+- [windness97](https://github.com/windness97)
 
 ## Dependency
 [WeCenterMobile-Api](https://github.com/ifLab/WeCenterMobile-Api)

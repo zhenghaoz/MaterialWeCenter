@@ -1,7 +1,7 @@
 # Material-WeCenter
 
+[![Build Status](https://travis-ci.org/ZhangZhenghao/Material-WeCenter.svg?branch=master)](https://travis-ci.org/ZhangZhenghao/Material-WeCenter)
 [![Join the chat at https://gitter.im/ZhangZhenghao/Material-WeCenter](https://badges.gitter.im/ZhangZhenghao/Material-WeCenter.svg)](https://gitter.im/ZhangZhenghao/Material-WeCenter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 
 <img src="https://raw.githubusercontent.com/ZhangZhenghao/Material-WeCenter/master/app/src/main/res/mipmap-xxhdpi/ic_launcher.png">
 

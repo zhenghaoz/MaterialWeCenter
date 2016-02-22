@@ -1,6 +1,8 @@
 # Material-WeCenter
 
 [![Join the chat at https://gitter.im/ZhangZhenghao/Material-WeCenter](https://badges.gitter.im/ZhangZhenghao/Material-WeCenter.svg)](https://gitter.im/ZhangZhenghao/Material-WeCenter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+
 <img src="https://raw.githubusercontent.com/ZhangZhenghao/Material-WeCenter/master/app/src/main/res/mipmap-xxhdpi/ic_launcher.png">
 
 Material-WeCenter is an Android client with Material Design for [WeCenter](http://www.wecenter.com/). We develop it bescause [the forum of our university](http://bbs.zjut.edu.cn/) use WeCenter. It's an Android client for our school's forum, but any WeCenter website can use this Android client with little modification in code.

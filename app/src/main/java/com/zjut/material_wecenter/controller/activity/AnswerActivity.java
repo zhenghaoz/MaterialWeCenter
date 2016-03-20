@@ -98,7 +98,6 @@ public class AnswerActivity extends Activity implements View.OnClickListener{
             answerDetailAdapter=new AnswerDetailAdapter(AnswerActivity.this,answerDetail,answerComments);
             recyclerView.setAdapter(answerDetailAdapter);
             answerDetailAdapter.notifyDataSetChanged();
-
         }
     }
 
@@ -134,6 +133,7 @@ public class AnswerActivity extends Activity implements View.OnClickListener{
                 Snackbar.with(AnswerActivity.this).text("未知错误").show(AnswerActivity.this);
             else if (result.getErrno() == 1){ // 发布成功
                 new LoadAnswerDetail().execute();
+                content.setText("");
             }
 
             else                // 显示错误

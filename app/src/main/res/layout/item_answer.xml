@@ -79,6 +79,11 @@
                 android:text="detail"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/abc_text_size_menu_material" />
+            <View
+                android:background="@android:color/darker_gray"
+                android:layout_width="match_parent"
+                android:layout_height="1px">
+            </View>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -7,11 +7,17 @@
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <View
+        android:background="@android:color/darker_gray"
+        android:layout_width="match_parent"
+        android:layout_height="1px">
+    </View>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/question_shape"
         android:padding="5dp"
         android:gravity="center">
         <ImageView
@@ -64,5 +70,21 @@
             android:textSize="18dp" />
 
     </LinearLayout>
+    <View
+        android:background="#BEBEBE"
+        android:layout_width="match_parent"
+        android:layout_height="5px">
+    </View>
+    <View
+        android:background="#E0E0E0"
+        android:layout_width="match_parent"
+        android:layout_height="20px">
+    </View>
+    <View
+        android:background="@color/material_grey_300"
+        android:layout_width="match_parent"
+        android:layout_height="1px">
+    </View>
+
 
 </LinearLayout>

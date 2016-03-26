@@ -11,12 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/nliveo_blue_colorPrimary"
-        android:elevation="@dimen/appbar_elevation"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:background="@color/nliveo_blue_colorPrimaryDark"
+        android:background="@color/nliveo_blue_colorPrimary"
         android:weightSum="5"
         android:layout_height="40dp">
         <TextView
@@ -24,6 +23,7 @@
             android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/nliveo_white"
             android:gravity="center"
             android:text="课程"/>
         <TextView
@@ -31,6 +31,7 @@
             android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/nliveo_white"
             android:gravity="center"
             android:text="类型"/>
         <TextView
@@ -38,6 +39,7 @@
             android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/nliveo_white"
             android:gravity="center"
             android:text="学时"/>
         <TextView
@@ -45,6 +47,7 @@
             android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/nliveo_white"
             android:gravity="center"
             android:text="学分"/>
         <TextView
@@ -52,6 +55,7 @@
             android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/nliveo_white"
             android:gravity="center"
             android:text="分数"/>
 

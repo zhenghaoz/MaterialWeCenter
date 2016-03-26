@@ -29,6 +29,7 @@
                 android:layout_alignParentStart="true"
                 android:scrollbars="vertical"/>
         </android.support.v4.widget.SwipeRefreshLayout>
+    <!--
     <com.github.clans.fab.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,5 +45,92 @@
         fab:fab_colorRipple="@color/nliveo_blue_colorPrimaryDark"
         app:fab_showAnimation="@anim/show_from_bottom"
         app:fab_hideAnimation="@anim/hide_to_bottom"/>
+        -->
+    <com.truizlop.fabreveallayout.FABRevealLayout
+        android:layout_alignParentBottom="true"
+        android:id="@+id/fab_reveal_layout"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        >
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_question_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/nliveo_blue_colorPrimary"
+            android:src="@drawable/ic_add"
+            app:elevation="4dp"
+            app:pressedTranslationZ="16dp"
+            app:borderWidth="0dp"
+            />
+
+        <RelativeLayout
+            android:background="#00000000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <View
+                android:layout_width="match_parent"
+                android:background="@android:color/darker_gray"
+                android:layout_height="1dp">
+            </View>
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:background="@color/nliveo_blue_colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_iconfont_biaoqing"/>
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_iconfont_aite"/>
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_iconfont_tupian"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/edit_content_answer"
+                        android:background="@drawable/edit_corners"
+                        android:layout_weight="0.2"
+                        android:layout_width="match_parent"
+                        android:textColor="@color/nliveo_blue_colorPrimaryDark"
+                        android:hint="请输入回答内容"
+                        android:textSize="14sp"
+                        android:layout_height="30dp" />
+                    <ImageButton
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_weight="0.8"
+                        android:src="@drawable/ic_send"
+                        android:id="@+id/imageButton_publishAnswer"
+                        android:background="#00000000" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.truizlop.fabreveallayout.FABRevealLayout>
 
 </RelativeLayout>

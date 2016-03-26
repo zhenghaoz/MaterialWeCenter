@@ -141,6 +141,7 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if(answer.getUser_thanks_status()==1){
                 headerViewHolder.thank.setImageResource(R.drawable.ic_red_heart);
             }
+
             headerViewHolder.thank.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

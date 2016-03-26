@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,7 +23,7 @@ import com.zjut.material_wecenter.models.Result;
 
 import java.util.ArrayList;
 
-public class AnswerActivity extends Activity implements View.OnClickListener{
+public class AnswerActivity extends AppCompatActivity implements View.OnClickListener{
 
     private int answerID;
     private Client client = Client.getInstance();

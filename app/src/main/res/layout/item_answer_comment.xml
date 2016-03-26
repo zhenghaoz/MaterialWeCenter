@@ -37,7 +37,7 @@
                 android:paddingTop="5dp"
                 android:text="name"
                 android:textColor="@color/nliveo_black"
-                android:textSize="@dimen/abc_text_size_small_material" />
+                android:textSize="12sp" />
             <TextView
                 android:id="@+id/textView_addTime_answer_comment"
                 android:layout_width="match_parent"
@@ -53,7 +53,7 @@
                 android:paddingTop="5dp"
                 android:text="message"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/abc_text_size_menu_material" />
+                android:textSize="14sp" />
         </LinearLayout>
 
     </LinearLayout>

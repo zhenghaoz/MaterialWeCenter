@@ -31,6 +31,7 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
     private SettingsFragment settingsFragment;
     private QueryFragment queryFragment;
 
+
     @Override
     public void onInt(Bundle bundle) {
 
@@ -49,15 +50,16 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
         mHelpLiveo = new HelpLiveo();
         mHelpLiveo.add(getString(R.string.dynamic), R.mipmap.ic_notifications_on_grey600_48dp);
         mHelpLiveo.add(getString(R.string.explore), R.mipmap.ic_explore_grey600_48dp);
-        mHelpLiveo.add(getString(R.string.query), R.drawable.ic_query_gray);
+        mHelpLiveo.add(getString(R.string.query), R.mipmap.ic_query_gray);
         mHelpLiveo.addSeparator();
         mHelpLiveo.add(getString(R.string.settings), R.mipmap.ic_settings_grey600_48dp);
-        with(this).startingPosition(0)
+        with(this).startingPosition(1)
                 .addAllHelpItem(mHelpLiveo.getHelp())
                 .colorNameSubHeader(R.color.nliveo_blue_colorPrimary)
                 .colorItemSelected(R.color.nliveo_blue_colorPrimary)
                 .setOnClickUser(onClickPhoto)
                 .build();
+
     }
 
     // 点击用户头像，查看用户信息

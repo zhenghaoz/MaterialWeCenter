@@ -9,37 +9,48 @@
     card_view:cardCornerRadius="10dp"
     tools:context=".controller.activity.AnswerActivity">
     <LinearLayout
+        android:padding="@dimen/card_content_padding"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:gravity="center_vertical"
+        android:layout_height="match_parent">
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView_answer"
             android:layout_gravity="top|center"
             android:layout_width="match_parent"
-            android:layout_height="400dp">
+            android:layout_height="390dp">
         </android.support.v7.widget.RecyclerView>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_gravity="bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="10">
-        <EditText
-            android:id="@+id/edit_content_answerComment"
+        <View
+            android:background="@color/material_grey_300"
+            android:layout_width="match_parent"
+            android:layout_height="1dp">
+        </View>
+        <LinearLayout
+            android:layout_gravity="bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:textColor="@color/nliveo_black"
-            android:hint="请输入评论内容"/>
-        <Button
-            android:layout_margin="2dp"
-            android:id="@+id/btn_add_answerComment"
-            android:text="评论"
-            android:layout_weight="7"
-            android:layout_gravity="center"
-            android:textColor="@android:color/white"
-            android:background="@color/nliveo_blue_colorPrimary"
-            android:layout_height="30dp"
-            android:layout_width="match_parent" />
+            android:orientation="horizontal"
+            android:weightSum="10">
+            <EditText
+                android:id="@+id/edit_content_answerComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textColor="@color/nliveo_black"
+                android:singleLine="true"
+                android:textSize="14sp"
+                android:hint="请输入评论内容"/>
+            <Button
+                android:layout_margin="2dp"
+                android:id="@+id/btn_add_answerComment"
+                android:text="评论"
+                android:layout_weight="7"
+                android:layout_gravity="center_vertical"
+                android:textColor="@android:color/white"
+                android:background="@drawable/stroker"
+                android:layout_height="30dp"
+                android:layout_width="match_parent" />
+        </LinearLayout>
     </LinearLayout>
+
 </android.support.v7.widget.CardView>

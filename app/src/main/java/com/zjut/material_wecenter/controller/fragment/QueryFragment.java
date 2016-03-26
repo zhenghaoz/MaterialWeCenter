@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -152,7 +153,7 @@ public class QueryFragment extends Fragment implements View.OnClickListener{
 
     private void getUserInfo(){
 
-        SharedPreferences preferences = getActivity().getSharedPreferences("userInfo", getActivity().MODE_PRIVATE);
+        SharedPreferences preferences = getActivity().getSharedPreferences("userInfo", getActivity().MODE_APPEND);
 
         username = preferences.getString("username", null);
         password = preferences.getString("password", null);

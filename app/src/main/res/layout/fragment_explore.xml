@@ -13,6 +13,7 @@
         android:layout_width="match_parent">
 
         <android.support.v7.widget.RecyclerView
+            android:background="#eeeeee"
             android:id="@+id/question_list"
             android:layout_height="match_parent"
             android:layout_width="match_parent"/>
@@ -27,7 +28,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="70dp"
         android:src="@mipmap/ic_edit"
         fab:fab_colorNormal="@color/nliveo_blue_colorPrimary"
         fab:fab_colorRipple="@color/nliveo_blue_colorPrimaryDark"

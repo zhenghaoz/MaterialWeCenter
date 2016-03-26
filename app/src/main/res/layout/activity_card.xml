@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.chf.administrator.myapplication.CardActivity">
     <android.support.v7.widget.Toolbar
@@ -14,6 +15,7 @@
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
     <android.support.v7.widget.CardView
         android:layout_gravity="center"
+        android:layout_marginTop="30dp"
         android:layout_width="300dp"
         android:layout_height="wrap_content">
         <LinearLayout
@@ -91,4 +93,4 @@
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
-</FrameLayout>
+</LinearLayout>

@@ -42,6 +42,8 @@
     <string name="title_activity_lauch">LauchActivity</string>
     <string name="title_activity_test">TestActivity</string>
 
+    <string name="item_footer">╮(╯3╰)╭再也找不到更多的了</string>
+
     <string-array name="spin_term">
         <item>1999/2000(1)</item>
         <item>1999/2000(2)</item>

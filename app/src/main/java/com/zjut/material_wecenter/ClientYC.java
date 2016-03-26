@@ -1,5 +1,6 @@
 package com.zjut.material_wecenter;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -37,6 +38,7 @@ public class ClientYC{
     public static String password;
 
     static {
+
         Log.e("static", "static");
         client=new AsyncHttpClient();
         client.setTimeout(10000);
@@ -48,6 +50,7 @@ public class ClientYC{
     }
 
     public static AsyncHttpClient getClient(){
+
         if(client==null){
             Log.e("static", "static");
             client=new AsyncHttpClient();

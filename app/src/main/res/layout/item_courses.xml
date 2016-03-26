@@ -6,6 +6,7 @@
     android:id="@+id/textView_courses"
     android:padding="5dp"
     android:textSize="10sp"
+    android:textColor="@color/nliveo_black"
     android:text="ABC">
 
 </TextView>

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:padding="15dp"
+    android:background="@color/nliveo_blue_colorPrimary"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textColor="@android:color/black"
+    android:textColor="@color/nliveo_white"
     android:gravity="center"
     android:text="New Text"
-    android:textSize="20sp" />
+    android:textSize="15sp" />
+

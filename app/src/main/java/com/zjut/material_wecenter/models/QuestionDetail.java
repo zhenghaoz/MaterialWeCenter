@@ -1,11 +1,13 @@
 package com.zjut.material_wecenter.models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/1/27.
  */
 public class QuestionDetail {
+
 
     private QuestionInfo question_info;
     private ArrayList<TopicInfo> question_topics;
@@ -266,7 +268,16 @@ public class QuestionDetail {
         private String publish_source;
         private int user_thanks_status;
         private int user_vote_status;
+        private int agree_status;
         private UserInfoEntity user_info;
+
+        public int getAgree_status() {
+            return agree_status;
+        }
+
+        public void setAgree_status(int agree_status) {
+            this.agree_status = agree_status;
+        }
 
         public int getAnswer_id() {
             return answer_id;
@@ -411,6 +422,5 @@ public class QuestionDetail {
             }
         }
     }
-
 
 }

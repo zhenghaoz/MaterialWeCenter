@@ -30,6 +30,8 @@ Material-WeCenter is an Android client with Material Design for [WeCenter](http:
 - [MaterialViewPager](https://github.com/florent37/MaterialViewPager)
 - [Navigation drawer](https://github.com/rudsonlive/NavigationDrawer-MaterialDesign)
 - [Picasso](https://github.com/square/picasso)
+- [ButterKnife](https://github.com/JakeWharton/butterknife)
+- [OkHttp](https://github.com/square/okhttp)
 
 ## License
     Copyright 2016 Jinghong Union of ZJUT

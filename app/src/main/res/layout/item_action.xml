@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:clickable="false"
             android:padding="8dp">
 
             <!--问题标题-->
@@ -29,13 +30,13 @@
                 android:textSize="@dimen/abc_text_size_subhead_material"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="标题"
+                android:clickable="false"
                 android:textColor="@android:color/black" />
 
             <!--回答-->
             <TextView
-                android:id="@+id/answer"
-                android:text="123"
+                android:id="@+id/detail"
+                android:clickable="false"
                 android:textColor="@android:color/tertiary_text_light"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -48,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="6dp"
                 android:textColor="@android:color/tertiary_text_light"
-                android:text="123" />
+                android:clickable="false" />
 
         </LinearLayout>
 

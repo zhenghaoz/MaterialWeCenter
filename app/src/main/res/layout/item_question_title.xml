@@ -12,7 +12,7 @@
         android:layout_gravity="left|top"
         android:layout_width="200dp"
         android:layout_height="60dp"
-        card_view:cardBackgroundColor="#50000000"
+        card_view:cardBackgroundColor="#50ffffff"
         card_view:cardElevation="0dp"
         card_view:cardCornerRadius="10dp">
         <LinearLayout
@@ -38,7 +38,7 @@
                     android:gravity="center_vertical"
                     android:paddingTop="5dp"
                     android:text="name"
-                    android:textColor="@android:color/white"
+                    android:textColor="@android:color/black"
                     android:textSize="@dimen/abc_text_size_subhead_material" />
                 <TextView
                     android:id="@+id/textView_signature_question"
@@ -46,7 +46,7 @@
                     android:layout_height="match_parent"
                     android:padding="2dp"
                     android:text="signature"
-                    android:textColor="@android:color/white"
+                    android:textColor="@android:color/black"
                     android:textSize="10sp" />
             </LinearLayout>
         </LinearLayout>
@@ -54,9 +54,11 @@
     <TextView
         android:id="@+id/textView_title_question"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/question_title_shape"
+        android:gravity="left|center"
         android:layout_gravity="left|top"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="120dp"
         android:ellipsize="end"
         android:maxLines="2"
         android:padding="5dp"

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,7 +23,7 @@ import com.zjut.material_wecenter.models.Result;
 
 import java.util.ArrayList;
 
-public class AnswerActivity extends Activity implements View.OnClickListener{
+public class AnswerActivity extends AppCompatActivity implements View.OnClickListener{
 
     private int answerID;
     private Client client = Client.getInstance();
@@ -98,7 +99,6 @@ public class AnswerActivity extends Activity implements View.OnClickListener{
             answerDetailAdapter=new AnswerDetailAdapter(AnswerActivity.this,answerDetail,answerComments);
             recyclerView.setAdapter(answerDetailAdapter);
             answerDetailAdapter.notifyDataSetChanged();
-
         }
     }
 
@@ -134,6 +134,7 @@ public class AnswerActivity extends Activity implements View.OnClickListener{
                 Snackbar.with(AnswerActivity.this).text("未知错误").show(AnswerActivity.this);
             else if (result.getErrno() == 1){ // 发布成功
                 new LoadAnswerDetail().execute();
+                content.setText("");
             }
 
             else                // 显示错误

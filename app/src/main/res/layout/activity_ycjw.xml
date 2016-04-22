@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="com.chf.administrator.myapplication.ReportActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_ycjw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/nliveo_blue_colorPrimary"
+        android:elevation="@dimen/appbar_elevation"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </WebView>
+</LinearLayout>

@@ -1,11 +1,13 @@
 package com.zjut.material_wecenter.controller.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -14,28 +16,38 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
+import com.nispok.snackbar.Snackbar;
+import com.truizlop.fabreveallayout.FABRevealLayout;
+import com.truizlop.fabreveallayout.OnRevealChangeListener;
 import com.zjut.material_wecenter.Client;
+import com.zjut.material_wecenter.Config;
 import com.zjut.material_wecenter.R;
 import com.zjut.material_wecenter.controller.adapter.QuestionDetailAdapter;
 import com.zjut.material_wecenter.models.QuestionDetail;
+import com.zjut.material_wecenter.models.Result;
 
 
-
-public class QuestionActivity extends AppCompatActivity implements View.OnClickListener{
+public class QuestionActivity extends AppCompatActivity {
 
     private boolean isFirstRefresh=true;
-    private final int ScrollOffset = 4;
+    private final int ScrollOffset = 0;
     private int resultCode=0;
+    private boolean isBtnClose;
     private int questionID;
     private QuestionDetail questionDetail;
     private QuestionDetailAdapter questionDetailAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
-    private FloatingActionButton floatingActionButton;
+    private FABRevealLayout floatingActionButton;
     private Client client = Client.getInstance();
+    private ImageButton publish;
+    private EditText answerContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +72,33 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         Intent mIntent=getIntent();
         questionID=mIntent.getIntExtra("questionID", -1);
 
+        answerContent=(EditText) findViewById(R.id.edit_content_answer);
+
+        publish=(ImageButton) findViewById(R.id.imageButton_publishAnswer);
+
+        publish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = answerContent.getText().toString();
+                if(!text.isEmpty()){
+                    new PublishTask().execute();
+                }
+            }
+        });
+
         //init fab
-        floatingActionButton=(FloatingActionButton) findViewById(R.id.fab_question_menu);
-        floatingActionButton.setOnClickListener(this);
+        floatingActionButton=(FABRevealLayout ) findViewById(R.id.fab_reveal_layout);
+        floatingActionButton.setOnRevealChangeListener(new OnRevealChangeListener() {
+            @Override
+            public void onMainViewAppeared(FABRevealLayout fabRevealLayout, View mainView) {
+                isBtnClose=true;
+            }
+
+            @Override
+            public void onSecondaryViewAppeared(FABRevealLayout fabRevealLayout, View secondaryView) {
+                isBtnClose=false;
+            }
+        });
 
         //init swipeRefreshLayout
         swipeRefreshLayout=(SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout_question);
@@ -87,17 +123,16 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         recyclerView=(RecyclerView) findViewById(R.id.recyclerView_answerList);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if (Math.abs(dy) > ScrollOffset) {
-                    if (dy > 0) {
-                        floatingActionButton.hide(true);
-                    } else {
-                        floatingActionButton.show(true);
-                    }
+                if(!isBtnClose){
+                    floatingActionButton.revealMainView();
+                    isBtnClose=true;
                 }
+
             }
         });
         swipeRefreshLayout.setRefreshing(true);
@@ -142,25 +177,6 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
            new LoadAnswers().execute();
     }
 
-    @Override
-    public void onClick(View v) {
-        Intent intent;
-        switch (v.getId()){
-
-            //启动menu
-            case R.id.fab_question_menu:
-                intent=new Intent(this,QuestionMenuActivity.class);
-                intent.putExtra("questionID",questionID);
-                intent.putExtra("questionTitle",questionDetail.getQuestion_info().getQuestion_content());
-                intent.putExtra("isFocus",questionDetail.getQuestion_info().getUser_question_focus());
-                intent.putExtra("isThanks",questionDetail.getQuestion_info().getUser_thanks());
-                intent.putExtra("isAllowToAnswer",questionDetail.getQuestion_info().getUser_answered());
-                startActivityForResult(intent,resultCode);
-            default:
-                break;
-        }
-    }
-
     //异步获取答案列表
     private class LoadAnswers extends AsyncTask<Integer,Integer,Integer> {
 
@@ -192,6 +208,44 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                 isFirstRefresh=false;
             }
             else Toast.makeText(QuestionActivity.this,"更新完成",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //异步发布答案
+    private class PublishTask extends AsyncTask<Void, Void, Void> {
+
+        String content;
+        Result result;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            content = answerContent.getText().toString() + Config.FIX;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            Client client = Client.getInstance();
+            result = client.publishAnswer(questionID, content);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            if (result == null) // 未知错误
+                Toast.makeText(QuestionActivity.this,"未知错误",Toast.LENGTH_SHORT).show();
+            else if (result.getErrno() == 1){ // 发布成功
+                Toast.makeText(QuestionActivity.this,"回答成功",Toast.LENGTH_SHORT).show();
+            }
+
+            else                // 显示错误
+                Toast.makeText(QuestionActivity.this, result.getErr(), Toast.LENGTH_SHORT).show();
+
+            floatingActionButton.revealMainView();
+            isBtnClose=true;
+            answerContent.setText("");
         }
     }
 

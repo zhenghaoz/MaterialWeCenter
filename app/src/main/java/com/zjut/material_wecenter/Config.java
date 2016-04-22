@@ -24,7 +24,7 @@ public class Config {
     // 网址
     public static String HOST_NAME = "http://bbs.zjut.edu.cn/";
     // 文本后缀
-    public static String FIX = "\"<br><br>————来自精弘论坛安卓客户端\"";
+    public static String FIX = "<br><br>\"————来自精弘论坛安卓客户端\"";
     // 每页问题数量
     public static int PER_PAGE = 20;
     // 设置网络超时时间

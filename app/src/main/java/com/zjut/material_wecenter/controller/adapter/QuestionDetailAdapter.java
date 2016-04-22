@@ -2,6 +2,7 @@ package com.zjut.material_wecenter.controller.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
@@ -10,13 +11,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.nispok.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
+import com.zjut.material_wecenter.Client;
+import com.zjut.material_wecenter.Config;
 import com.zjut.material_wecenter.R;
 import com.zjut.material_wecenter.controller.activity.AnswerActivity;
+import com.zjut.material_wecenter.controller.activity.QuestionActivity;
 import com.zjut.material_wecenter.controller.activity.UserActivity;
 import com.zjut.material_wecenter.models.QuestionDetail;
+import com.zjut.material_wecenter.models.Result;
 import com.zjut.material_wecenter.models.WebData;
 
 import org.jsoup.Jsoup;
@@ -40,6 +49,8 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private final int TYPE_ITEM = 3;
     private final int TYPE_FOOTER = 4;
     private final int TYPE_INFO=5;
+
+    private boolean isThank;
 
     private int detailIndex;
     private int itemIndex;
@@ -144,7 +155,6 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             else if(webData.getGravity()== WebData.Gravity.RIGHT)
                 textViewHolder.text.setGravity(Gravity.RIGHT);
             else textViewHolder.text.setGravity(Gravity.LEFT);
-            Log.e("webData",webDatas.get(position-detailIndex).getData());
             textViewHolder.text.setText(Html.fromHtml(webDatas.get(position - detailIndex).getData()));
             textViewHolder.text.setVisibility(View.VISIBLE);
         }
@@ -166,7 +176,29 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
             final QuestionDetail.QuestionInfo questionInfo=questionDetail.getQuestion_info();
             InfoViewHolder infoViewHolder=(InfoViewHolder) holder;
-            infoViewHolder.viewCount.setText(questionInfo.getView_count()+"");
+
+            if(questionInfo.getUser_question_focus()==1){
+                infoViewHolder.focus.setBackgroundResource(R.drawable.stroker);
+                infoViewHolder.focus.setText("取消关注");
+            }
+            else {
+                infoViewHolder.focus.setBackgroundResource(R.drawable.un_follow_shape);
+                infoViewHolder.focus.setText("关 注");
+            }
+
+            infoViewHolder.focus.setOnClickListener(new AcitonListener(DoAction.FOCUS,
+                    questionInfo.getQuestion_id(),0,null,infoViewHolder.focus));
+
+            if(questionInfo.getUser_thanks()==1) isThank=true;
+
+            if(questionInfo.getUser_thanks()==1){
+                infoViewHolder.thank.setImageResource(R.drawable.ic_red_heart);
+            }
+
+            infoViewHolder.thank.setOnClickListener(new AcitonListener(DoAction.THANKS,
+                    questionInfo.getQuestion_id(),questionInfo.getThanks_count(),
+                    infoViewHolder.thankCount,infoViewHolder.thank));
+
             infoViewHolder.answerCount.setText(questionInfo.getAnswer_count()+"");
             infoViewHolder.thankCount.setText(questionInfo.getThanks_count()+"");
             String time=getTime(questionInfo.getAdd_time());
@@ -188,8 +220,8 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             itemViewHolder.avatar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(mContext, UserActivity.class);
-                    intent.putExtra("uid",answerInfo.getUser_info().getUid()+"");
+                    Intent intent = new Intent(mContext, UserActivity.class);
+                    intent.putExtra("uid", answerInfo.getUser_info().getUid() + "");
                     mContext.startActivity(intent);
                 }
             });
@@ -197,6 +229,14 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             itemViewHolder.addTime.setText(addTime);
             itemViewHolder.userName.setText(answerInfo.getUser_info().getUser_name());
             itemViewHolder.agreeCount.setText(answerInfo.getAgree_count()+"");
+
+            if(answerInfo.getAgree_status()==1){
+                itemViewHolder.agree.setImageResource(R.drawable.ic_agree_red);
+            }
+
+            itemViewHolder.agree.setOnClickListener(new AgreeListener(itemViewHolder.agree
+                    ,answerInfo.getAgree_count(),answerInfo.getAgree_status(),itemViewHolder.agreeCount,
+                    answerInfo.getAnswer_id()));
 
             itemViewHolder.briefDetail.setText(Html.fromHtml(answerInfo.getAnswer_content()));
             itemViewHolder.briefDetail.setVisibility(View.VISIBLE);
@@ -262,6 +302,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         private TextView userName;
         private TextView addTime;
         private TextView briefDetail;
+        private ImageView agree;
         private TextView agreeCount;
 
         public ItemViewHolder(View view) {
@@ -271,20 +312,24 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             addTime=(TextView) view.findViewById(R.id.textView_addTime_answer);
             briefDetail=(TextView) view.findViewById(R.id.textView_briefDetail_answer);
             agreeCount=(TextView) view.findViewById(R.id.textView_agree_answer);
+            agree=(ImageView) view.findViewById(R.id.image_agree_answer);
         }
     }
     public class InfoViewHolder extends RecyclerView.ViewHolder{
 
         TextView addTime;
-        TextView viewCount;
+        Button focus;
         TextView answerCount;
         TextView thankCount;
+        ImageView thank;
+
         public InfoViewHolder(View view) {
             super(view);
             addTime=(TextView) view.findViewById(R.id.textView_addTime_question);
-            viewCount=(TextView) view.findViewById(R.id.textView_viewCount_question);
+            focus=(Button) view.findViewById(R.id.btn_focus_question);
             answerCount=(TextView) view.findViewById(R.id.textView_answerCount_question);
             thankCount=(TextView) view.findViewById(R.id.textView_thankCount_question);
+            thank=(ImageView) view.findViewById(R.id.imageView_thank_question);
         }
     }
 
@@ -352,6 +397,74 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
         else return sdf.format(longDate);
 
+    }
+
+    private class AgreeListener implements View.OnClickListener{
+
+        private ImageView agree;
+        private TextView count;
+        private int status;
+        private int num;
+        private int ID;
+
+        public AgreeListener(ImageView agree, int num, int status, TextView count, int ID) {
+            this.agree = agree;
+            this.count = count;
+            this.status = status;
+            this.ID = ID;
+            this.num = num;
+        }
+
+        @Override
+        public void onClick(View v) {
+
+            new AgreeTask(ID).execute();
+
+            if(status==0){
+                agree.setImageResource(R.drawable.ic_agree_red);
+                count.setText((++num)+"");
+                status=1;
+            }
+            else {
+                agree.setImageResource(R.drawable.ic_agree_gray);
+                count.setText((--num)+"");
+                status=0;
+            }
+        }
+    }
+
+    private class AgreeTask extends AsyncTask<Integer,Integer,Integer> {
+
+        private int answerID;
+        Result result;
+
+        public AgreeTask(int answerID){
+            this.answerID=answerID;
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Integer doInBackground(Integer... params) {
+            try {
+                Client client=Client.getInstance();
+                ArrayList<String> strs=new ArrayList<>();
+                strs.add(answerID+"");
+                strs.add("1");
+                result=client.postAction(Config.ActionType.ANSWER_VOTE,null,strs);
+
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+        }
     }
 
     //获取内容详情，过滤文本和图片
@@ -470,6 +583,138 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
 
         return list;
+    }
+
+    private class AcitonListener implements View.OnClickListener{
+
+        private int action;
+        private int questionID;
+        private int num;
+        private View count;
+        private View view;
+
+        public AcitonListener(int action, int questionID, int num, View count, View view) {
+            this.action = action;
+            this.questionID = questionID;
+            this.num = num;
+            this.count = count;
+            this.view = view;
+        }
+
+        @Override
+        public void onClick(View v) {
+            new DoAction(action,questionID,num,count,view).execute();
+        }
+    }
+
+    private class DoAction extends AsyncTask<Integer,Integer,Integer> {
+
+        private static final int FOCUS=0;
+        private static final int THANKS=1;
+        private int action;
+        private int questionID;
+        private int num;
+        Result result;
+        private View count;
+        private View view;
+
+        public DoAction(int action, int questionID, int num, View count, View view) {
+            this.action = action;
+            this.questionID = questionID;
+            this.num = num;
+            this.count = count;
+            this.view = view;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Integer doInBackground(Integer... params) {
+            try {
+                Client client=Client.getInstance();
+                ArrayList<String> strs=new ArrayList<>();
+                switch (action){
+                    case FOCUS:
+                        strs.add(questionID+"");
+                        result=client.postAction(Config.ActionType.QUESTION_FOCUS,Focus.class,strs);
+                        break;
+                    case THANKS:
+                        strs.add(questionID+"");
+                        result=client.postAction(Config.ActionType.QUESTION_THANKS,Thanks.class,strs);
+                        break;
+                    default:
+                        break;
+                }
+
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+            switch (action){
+                case FOCUS:
+                    Focus mFocus=(Focus)result.getRsm();
+                    if(mFocus.getType().equals("add")){
+                        ((Button)view).setText("取消关注");
+                        ((Button)view).setBackgroundResource(R.drawable.stroker);
+                    }
+                    else if(mFocus.getType().equals("remove")){
+                        ((Button)view).setText("关注");
+                        ((Button)view).setBackgroundResource(R.drawable.un_follow_shape);
+                    }
+                    break;
+                case THANKS:
+                    if(!isThank){
+                        ((ImageView)view).setImageResource(R.drawable.ic_red_heart);
+                        ((TextView)count).setText((++num) + "");
+                        isThank=true;
+                    }
+
+                    break;
+                default:
+                    break;
+            }
+            if (result == null)
+                Toast.makeText(mContext,"未知错误",Toast.LENGTH_SHORT).show();
+            if(result.getErrno()==1){
+                Toast.makeText(mContext, "操作成功",Toast.LENGTH_SHORT).show();
+            }
+            else                // 显示错误
+                Toast.makeText(mContext, result.getErr(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private static class Focus{
+
+        private String type;
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getType() {
+            return type;
+        }
+    }
+
+    private static class Thanks{
+
+        private String type;
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getType() {
+            return type;
+        }
     }
 
 }

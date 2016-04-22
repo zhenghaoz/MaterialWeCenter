@@ -1,26 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_marginBottom="@dimen/card_content_padding"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
-    <LinearLayout
-        android:padding="@dimen/card_content_padding"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:clickable="true"
+        android:background="@drawable/ripple"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        app:cardElevation="2dp"
+        android:layout_gravity="center"
+        android:layout_width="350dp"
         android:layout_height="wrap_content">
-
         <LinearLayout
+            android:padding="@dimen/card_content_padding"
+            android:background="@drawable/ripple"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_gravity="center"
+                android:layout_margin="6dp"
                 android:id="@+id/avatar_img"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/avatar_max_img"/>
+            <View
+                android:layout_gravity="center"
+                android:background="#bdbdbd"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:layout_width="1dp"
+                android:layout_height="match_parent">
+            </View>
 
             <LinearLayout
+                android:layout_margin="6dp"
                 android:paddingStart="@dimen/card_content_padding"
                 android:paddingLeft="@dimen/card_content_padding"
                 android:orientation="vertical"
@@ -28,6 +46,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:layout_margin="4dp"
                     android:id="@+id/question_title"
                     android:text="@string/abc_action_bar_home_description"
                     android:textColor="@android:color/black"
@@ -36,6 +55,7 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:layout_margin="4dp"
                     android:id="@+id/question_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -46,6 +66,7 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+    </android.support.v7.widget.CardView>
 
-</android.support.v7.widget.CardView>
+</LinearLayout>
+

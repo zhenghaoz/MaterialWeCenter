@@ -28,8 +28,8 @@
             android:label="@string/title_activity_user" />
         <activity
             android:name=".controller.activity.PostAnswerActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:label="PostAnswerActivity" />
+            android:label="PostAnswerActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".controller.activity.QuestionActivity"
             android:label="QuestionActivity" />
@@ -46,13 +46,18 @@
         <activity
             android:name=".controller.activity.AnswerActivity"
             android:label="查看答案"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/AnswerTheme"></activity>
-        <activity
-            android:name=".controller.activity.QuestionMenuActivity"
-            android:theme="@style/BottomMenuTheme"
-            >
-        </activity>
+            android:theme="@style/AnswerTheme"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".controller.activity.BindActivity" />
+        <activity android:name=".controller.activity.CoursesActivity" />
+        <activity android:name=".controller.activity.ScoreActivity" />
+        <activity android:name=".controller.activity.YCJWActivity" />
+        <activity android:name=".controller.activity.CardActivity"></activity>
+        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

@@ -14,14 +14,17 @@ import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.github.florent37.materialviewpager.adapter.RecyclerViewMaterialAdapter;
 import com.zjut.material_wecenter.Client;
 import com.zjut.material_wecenter.R;
-import com.zjut.material_wecenter.controller.adapter.ActionrViewAdapter;
+import com.zjut.material_wecenter.controller.adapter.ActionViewAdapter;
 import com.zjut.material_wecenter.models.Action;
 import com.zjut.material_wecenter.models.Result;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecyclerViewFragment extends Fragment {
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
+public class UserActonFragment extends Fragment {
 
     public static int PUBLISH = 101;
     public static int ANSWER = 201;
@@ -30,18 +33,16 @@ public class RecyclerViewFragment extends Fragment {
     private String uid;
     private int actions;
 
-    private RecyclerView mRecyclerView;
+    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-
     private List<Action> mContentItems = new ArrayList<>();
+    private int pageNum = 1;   // 当前页面的页码
 
-    private int page = 1;   // 当前页面的页码
-
-    public static RecyclerViewFragment newInstance(String uid, int actions) {
+    public static UserActonFragment newInstance(String uid, int actions) {
         Bundle args = new Bundle();
         args.putString("uid", uid);
         args.putInt("actions", actions);
-        RecyclerViewFragment fragment = new RecyclerViewFragment();
+        UserActonFragment fragment = new UserActonFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -61,11 +62,11 @@ public class RecyclerViewFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        ButterKnife.bind(this, view);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
-        mAdapter = new RecyclerViewMaterialAdapter(new ActionrViewAdapter(getActivity(), mContentItems, actions));
+        mAdapter = new RecyclerViewMaterialAdapter(new ActionViewAdapter(getActivity(), mContentItems, actions));
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -92,7 +93,7 @@ public class RecyclerViewFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-            result = Client.getInstance().getUserActions(uid, actions, page);
+            result = Client.getInstance().getUserActions(uid, actions, pageNum);
             return null;
         }
 
@@ -102,7 +103,7 @@ public class RecyclerViewFragment extends Fragment {
             if (result!=null && result.getErrno()==1) {
                 mContentItems.addAll((ArrayList<Action>) result.getRsm());
                 mAdapter.notifyDataSetChanged();
-                page++;
+                pageNum++;
                 loading = true;
             }
         }

@@ -1,9 +1,9 @@
 package com.zjut.material_wecenter.controller.activity;
 
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,25 +14,30 @@ import android.widget.TextView;
 import com.nispok.snackbar.Snackbar;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.zjut.material_wecenter.Client;
-import com.zjut.material_wecenter.Config;
 import com.zjut.material_wecenter.R;
 import com.zjut.material_wecenter.models.Result;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class PostActivity extends AppCompatActivity {
 
     private ArrayList<String> topics = new ArrayList<>();
-    private Button btnAddTopic;
-    private TextView textTopics;
-    private MaterialEditText editTitle, editContent, editTopic;
+    @Bind(R.id.toolbar) Toolbar toolbar;
+    @Bind(R.id.btn_add_topic) Button btnAddTopic;
+    @Bind(R.id.txt_topics) TextView textTopics;
+    @Bind(R.id.edit_title) MaterialEditText editTitle;
+    @Bind(R.id.edit_content) MaterialEditText editContent;
+    @Bind(R.id.edit_topic) MaterialEditText editTopic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+        ButterKnife.bind(this);
         // 初始化工具栏
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,11 +49,6 @@ public class PostActivity extends AppCompatActivity {
         if (ab != null)
             ab.setDisplayHomeAsUpEnabled(true);
         // 实例化控件
-        btnAddTopic = (Button) findViewById(R.id.btn_add_topic);
-        textTopics = (TextView) findViewById(R.id.txt_topics);
-        editTitle = (MaterialEditText) findViewById(R.id.edit_title);
-        editContent = (MaterialEditText) findViewById(R.id.edit_content);
-        editTopic = (MaterialEditText) findViewById(R.id.edit_topic);
         editTitle.validate("\\w{5,}", "标题长度不能少于5个字");
         // 添加话题
         btnAddTopic.setOnClickListener(new View.OnClickListener() {

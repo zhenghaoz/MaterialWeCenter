@@ -1,6 +1,5 @@
 package com.zjut.material_wecenter.controller.activity;
 
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,40 +7,41 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.squareup.picasso.Picasso;
 import com.zjut.material_wecenter.Client;
 import com.zjut.material_wecenter.R;
-import com.zjut.material_wecenter.controller.fragment.RecyclerViewFragment;
+import com.zjut.material_wecenter.controller.fragment.UserActonFragment;
 import com.zjut.material_wecenter.controller.fragment.UserInfoFragment;
 import com.zjut.material_wecenter.models.Result;
 import com.zjut.material_wecenter.models.UserInfo;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserActivity extends AppCompatActivity {
 
-    private MaterialViewPager mViewPager;
-
-    private Toolbar toolbar;
-    private CircleImageView logo;
+    @Bind(R.id.view_pager) MaterialViewPager mViewPager;
+    @Bind(R.id.logo_white) CircleImageView imgAvatar;
+    private Menu menu;
     private String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+        ButterKnife.bind(this);
         // 获取用户ID
         uid = getIntent().getStringExtra("uid");
         setTitle("");
-        // 实例化控件
-        mViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager);
         // 初始化工具栏
-        toolbar = mViewPager.getToolbar();
+        Toolbar toolbar = mViewPager.getToolbar();
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -69,9 +69,9 @@ public class UserActivity extends AppCompatActivity {
                     case 0:
                         return UserInfoFragment.newInstance(uid);
                     case 1:
-                        return RecyclerViewFragment.newInstance(uid, RecyclerViewFragment.PUBLISH);
+                        return UserActonFragment.newInstance(uid, UserActonFragment.PUBLISH);
                     default:
-                        return RecyclerViewFragment.newInstance(uid, RecyclerViewFragment.ANSWER);
+                        return UserActonFragment.newInstance(uid, UserActonFragment.ANSWER);
                 }
             }
 
@@ -106,9 +106,27 @@ public class UserActivity extends AppCompatActivity {
         mViewPager.getViewPager().setOffscreenPageLimit(mViewPager.getViewPager().getAdapter().getCount());
         mViewPager.getPagerTitleStrip().setViewPager(mViewPager.getViewPager());
 
-        logo = (CircleImageView) findViewById(R.id.logo_white);
-
         new LoadUserInfo().execute();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_user, menu);
+        this.menu = menu;
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_focus) {   // 点击关注
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -130,7 +148,13 @@ public class UserActivity extends AppCompatActivity {
                 // 显示用户个人信息
                 UserInfo info = (UserInfo) result.getRsm();
                 setTitle(info.getUser_name() + "的主页");
-                Picasso.with(UserActivity.this).load(info.getAvatar_file()).into(logo);
+                Picasso.with(UserActivity.this).load(info.getAvatar_file()).into(imgAvatar);
+                MenuItem item = menu.findItem(R.id.action_focus);
+                if (info.getHas_focus() == 1) {
+                    item.setTitle("取消关注");
+                } else {
+                    item.setTitle("关注");
+                }
             }
         }
     }

@@ -17,3 +17,22 @@
 #}
 
 -keep public class com.zjut.material_wecenter.models.**
+-keep class butterknife.** { *; }
+-dontwarn butterknife.internal.**
+-keep class **$$ViewBinder { *; }
+-keepclasseswithmembernames class * {
+    @butterknife.* <fields>;
+}
+-keepclasseswithmembernames class * {
+    @butterknife.* <methods>;
+}
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep class com.squareup.okhttp.** { *; }
+-keep interface com.squareup.okhttp.** { *; }
+-dontwarn com.squareup.okhttp.**
+-keep public class org.codehaus.**
+-keep public class java.nio.**
+-dontwarn rx.**
+-dontwarn okio.**
+-dontwarn com.squareup.okhttp.**

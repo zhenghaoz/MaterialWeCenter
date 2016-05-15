@@ -86,4 +86,7 @@
         <item>2018/2019(1)</item>
         <item>2018/2019(2)</item>
     </string-array>
+
+    <string name="auto_update">自动更新</string>
+    <string name="latest">应用已经是最新版本</string>
 </resources>

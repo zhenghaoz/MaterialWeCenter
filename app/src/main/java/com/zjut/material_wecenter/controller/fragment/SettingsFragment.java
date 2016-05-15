@@ -18,15 +18,30 @@ package com.zjut.material_wecenter.controller.fragment;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.speech.tts.Voice;
+import android.util.Log;
 import android.view.View;
 
 import com.zjut.material_wecenter.BuildConfig;
 import com.zjut.material_wecenter.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 public class SettingsFragment extends PreferenceFragment {
+
+    private static String UPDATE_SOURCE = "https://api.github.com/repos/ZhangZhenghao/Material-WeCenter/releases/latest";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,5 +69,60 @@ public class SettingsFragment extends PreferenceFragment {
                 return false;
             }
         });
+        // 检查更新
+        new CheckForUpdate().execute();
+    }
+
+    // 检查更新
+    class CheckForUpdate extends AsyncTask<Void, Void, Void> {
+        String result;
+        @Override
+        protected Void doInBackground(Void... voids) {
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .header("Accept", "application/vnd.github.v3+json")
+                    .url(UPDATE_SOURCE)
+                    .build();
+            try {
+                Response response = client.newCall(request).execute();
+                result = response.body().string();
+            } catch (IOException e) {
+                result = "error";
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Preference checkForUpdate = findPreference("update");
+            if (result.equals("error")) {
+                checkForUpdate.setTitle("检查更新出错");
+            } else {
+                Log.v("UPDATE", result);
+                try {
+                    JSONObject object = new JSONObject(result);
+                    JSONArray assets = object.getJSONArray("assets");
+                    final String link = assets.getJSONObject(0).getString("browser_download_url");
+                    String version = object.getString("tag_name");
+                    String body = object.getString("body");
+                    if (version.compareTo(BuildConfig.VERSION_NAME) > 0) {
+                        checkForUpdate.setTitle("发现新版本:" + version);
+                        checkForUpdate.setSummary(body);
+                        checkForUpdate.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                            @Override
+                            public boolean onPreferenceClick(Preference preference) {
+                                Intent intent = new Intent(Intent.ACTION_VIEW);
+                                intent.setData(Uri.parse(link));
+                                startActivity(intent);
+                                return false;
+                            }
+                        });
+                    }
+                } catch (JSONException e) {
+                    checkForUpdate.setTitle("检查更新出错");
+                }
+            }
+        }
     }
 }

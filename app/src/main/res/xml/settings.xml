@@ -2,22 +2,11 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory
-        android:key="check_update"
-        android:title="@string/auto_update">
-        <Preference
-            android:key="update"
-            android:title="@string/latest"/>
-    </PreferenceCategory>
-    <PreferenceCategory
         android:key="about"
         android:title="@string/about">
         <Preference
             android:key="version"
             android:title="@string/version"/>
-        <Preference
-            android:key="contributor"
-            android:summary="@string/contributors"
-            android:title="@string/contributor"/>
         <Preference
             android:key="github"
             android:summary="@string/github_url"

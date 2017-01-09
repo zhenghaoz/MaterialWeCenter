@@ -89,4 +89,5 @@
 
     <string name="auto_update">自动更新</string>
     <string name="latest">应用已经是最新版本</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
 </resources>

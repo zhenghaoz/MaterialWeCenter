@@ -22,7 +22,7 @@ public class Config {
      */
 
     // 网址
-    public static String HOST_NAME = "http://bbs.zjut.edu.cn/";
+    public static String HOST_NAME = "http://115.29.99.187/";
     // 文本后缀
     public static String FIX = "<br><br>\"————来自精弘论坛安卓客户端\"";
     // 每页问题数量

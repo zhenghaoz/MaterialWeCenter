@@ -19,7 +19,7 @@
         <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
 
-    <style name="BottomMenuTheme" >
+    <style name="BottomMenuTheme">
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowAnimationStyle">@style/AnimBottom</item>
         <item name="android:windowFrame">@null</item>

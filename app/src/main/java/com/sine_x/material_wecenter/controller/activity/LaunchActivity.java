@@ -10,7 +10,7 @@ import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.models.Result;
 
-public class LauchActivity extends AppCompatActivity {
+public class LaunchActivity extends AppCompatActivity {
 
     private String uid;
     private String password;
@@ -37,11 +37,11 @@ public class LauchActivity extends AppCompatActivity {
             Result result = Client.getInstance().loginProcess(uid, password);
             // 验证失败，要求用户重新输入登录信息
             if (result == null || result.getErrno() != 1) {
-                Intent intent = new Intent(LauchActivity.this, LoginActivity.class);
+                Intent intent = new Intent(LaunchActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             } else {    // 验证成功，进入应用程序
-                Intent intent = new Intent(LauchActivity.this, MainActivity.class);
+                Intent intent = new Intent(LaunchActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }

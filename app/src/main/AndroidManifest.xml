@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zjut.material_wecenter">
+    package="com.sine_x.material_wecenter">
 
     <uses-sdk xmlns:tools="http://schemas.android.com/tools"
         tools:overrideLibrary="android.support.v14.preference" />
@@ -14,27 +14,27 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".controller.activity.MainActivity"
+            android:name="com.sine_x.material_wecenter.controller.activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/nLiveoDrawer" />
         <activity
-            android:name=".controller.activity.LoginActivity"
+            android:name="com.sine_x.material_wecenter.controller.activity.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
-            android:name=".controller.activity.PostActivity"
+            android:name="com.sine_x.material_wecenter.controller.activity.PostActivity"
             android:label="@string/title_activity_post" />
         <activity
-            android:name=".controller.activity.UserActivity"
+            android:name="com.sine_x.material_wecenter.controller.activity.UserActivity"
             android:label="@string/title_activity_user" />
         <activity
-            android:name=".controller.activity.PostAnswerActivity"
+            android:name="com.sine_x.material_wecenter.controller.activity.PostAnswerActivity"
             android:label="PostAnswerActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".controller.activity.QuestionActivity"
+            android:name="com.sine_x.material_wecenter.controller.activity.QuestionActivity"
             android:label="QuestionActivity" />
         <activity
-            android:name=".controller.activity.LauchActivity"
+            android:name="com.sine_x.material_wecenter.controller.activity.LauchActivity"
             android:label="@string/app_name"
             android:theme="@style/LaunchTheme">
             <intent-filter>
@@ -44,15 +44,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".controller.activity.AnswerActivity"
+            android:name="com.sine_x.material_wecenter.controller.activity.AnswerActivity"
             android:label="查看答案"
             android:theme="@style/AnswerTheme"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".controller.activity.BindActivity" />
-        <activity android:name=".controller.activity.CoursesActivity" />
-        <activity android:name=".controller.activity.ScoreActivity" />
-        <activity android:name=".controller.activity.YCJWActivity" />
-        <activity android:name=".controller.activity.CardActivity"></activity>
+        <activity android:name="com.sine_x.material_wecenter.controller.activity.BindActivity" />
+        <activity android:name="com.sine_x.material_wecenter.controller.activity.CoursesActivity" />
+        <activity android:name="com.sine_x.material_wecenter.controller.activity.ScoreActivity" />
+        <activity android:name="com.sine_x.material_wecenter.controller.activity.YCJWActivity" />
+        <activity android:name="com.sine_x.material_wecenter.controller.activity.CardActivity"></activity>
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
              App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data

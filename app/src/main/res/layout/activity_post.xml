@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.zjut.material_wecenter.controller.activity.PostActivity">
+    tools:context="com.sine_x.material_wecenter.controller.activity.PostActivity">
 
     <android.support.v7.widget.Toolbar
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"

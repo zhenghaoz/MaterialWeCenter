@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.zjut.material_wecenter.controller.activity.QuestionActivity">
+    tools:context="com.sine_x.material_wecenter.controller.activity.QuestionActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_questionDetail"
         android:layout_width="match_parent"

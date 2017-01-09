@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.zjut.material_wecenter.controller.activity.UserActivity">
+    tools:context="com.sine_x.material_wecenter.controller.activity.UserActivity">
     <item android:id="@+id/action_focus"
         android:icon="@drawable/ic_white_heart"
         app:showAsAction="ifRoom" />

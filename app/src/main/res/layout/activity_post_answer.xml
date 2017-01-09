@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.zjut.material_wecenter.controller.activity.PostAnswerActivity"
+    tools:context="com.sine_x.material_wecenter.controller.activity.PostAnswerActivity"
     android:weightSum="1">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_publishAnswer"

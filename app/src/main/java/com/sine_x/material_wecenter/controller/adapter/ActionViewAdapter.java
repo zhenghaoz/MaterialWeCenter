@@ -68,7 +68,7 @@ public class ActionViewAdapter extends RecyclerView.Adapter<ActionViewAdapter.Ac
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, QuestionActivity.class);
-                intent.putExtra("questionID", contents.get(position).getQuestion_info().getQuestion_id());
+                intent.putExtra("question_id", contents.get(position).getQuestion_info().getQuestion_id());
                 context.startActivity(intent);
             }
         });

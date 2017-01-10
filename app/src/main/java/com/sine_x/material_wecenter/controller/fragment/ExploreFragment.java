@@ -20,7 +20,8 @@ import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.activity.PostActivity;
 import com.sine_x.material_wecenter.controller.adapter.QuestionViewAdapter;
 import com.sine_x.material_wecenter.models.Question;
-import com.sine_x.material_wecenter.models.Result;
+import com.sine_x.material_wecenter.models.Responses;
+import com.sine_x.material_wecenter.models.Result2;
 
 import java.util.ArrayList;
 
@@ -142,15 +143,15 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
      */
     private class LoadQuestionList extends AsyncTask<Void, Integer, Integer> {
 
-        private Result result;
+        private Responses<Question> result2;
 
         @Override
         protected Integer doInBackground(Void... params) {
-            result = Client.getInstance().explore(page);
-            if (result != null && result.getErrno() == 1)
+            result2 = Client.getInstance().explore(page);
+            if (result2.getErrno() == 1)
                 if (page == 1)  // 首页
                     mList.clear();
-                mList.addAll((ArrayList<Question>) result.getRsm());
+                mList.addAll(result2.getRsm());
             return null;
         }
 

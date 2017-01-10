@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sine_x.material_wecenter.models.Result2;
 import com.squareup.picasso.Picasso;
 import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.Config;
@@ -21,7 +22,6 @@ import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.activity.AnswerActivity;
 import com.sine_x.material_wecenter.controller.activity.UserActivity;
 import com.sine_x.material_wecenter.models.QuestionDetail;
-import com.sine_x.material_wecenter.models.Result;
 import com.sine_x.material_wecenter.models.WebData;
 
 import org.jsoup.Jsoup;
@@ -34,9 +34,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * Created by Administrator on 2016/1/27.
- */
 public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private final int TYPE_TITLE=0;
@@ -432,7 +429,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private class AgreeTask extends AsyncTask<Integer,Integer,Integer> {
 
         private int answerID;
-        Result result;
+        Result2 result2;
 
         public AgreeTask(int answerID){
             this.answerID=answerID;
@@ -449,7 +446,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 ArrayList<String> strs=new ArrayList<>();
                 strs.add(answerID+"");
                 strs.add("1");
-                result=client.postAction(Config.ActionType.ANSWER_VOTE,null,strs);
+                result2 =client.postAction(Config.ActionType.ANSWER_VOTE,null,strs);
 
             }catch (Exception e) {
                 e.printStackTrace();
@@ -610,7 +607,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         private int action;
         private int questionID;
         private int num;
-        Result result;
+        Result2 result2;
         private View count;
         private View view;
 
@@ -635,11 +632,11 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 switch (action){
                     case FOCUS:
                         strs.add(questionID+"");
-                        result=client.postAction(Config.ActionType.QUESTION_FOCUS,Focus.class,strs);
+                        result2 =client.postAction(Config.ActionType.QUESTION_FOCUS,Focus.class,strs);
                         break;
                     case THANKS:
                         strs.add(questionID+"");
-                        result=client.postAction(Config.ActionType.QUESTION_THANKS,Thanks.class,strs);
+                        result2 =client.postAction(Config.ActionType.QUESTION_THANKS,Thanks.class,strs);
                         break;
                     default:
                         break;
@@ -656,7 +653,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             super.onPostExecute(integer);
             switch (action){
                 case FOCUS:
-                    Focus mFocus=(Focus)result.getRsm();
+                    Focus mFocus=(Focus) result2.getRsm();
                     if(mFocus.getType().equals("add")){
                         ((Button)view).setText("取消关注");
                         ((Button)view).setBackgroundResource(R.drawable.stroker);
@@ -677,13 +674,13 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 default:
                     break;
             }
-            if (result == null)
+            if (result2 == null)
                 Toast.makeText(mContext,"未知错误",Toast.LENGTH_SHORT).show();
-            if(result.getErrno()==1){
+            if(result2.getErrno()==1){
                 Toast.makeText(mContext, "操作成功",Toast.LENGTH_SHORT).show();
             }
             else                // 显示错误
-                Toast.makeText(mContext, result.getErr(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, result2.getErr(), Toast.LENGTH_SHORT).show();
         }
     }
 

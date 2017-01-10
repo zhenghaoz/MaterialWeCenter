@@ -11,7 +11,8 @@ import android.widget.EditText;
 
 import com.nispok.snackbar.Snackbar;
 import com.sine_x.material_wecenter.Client;
-import com.sine_x.material_wecenter.models.Result;
+import com.sine_x.material_wecenter.models.Response;
+import com.sine_x.material_wecenter.models.Result2;
 import com.sine_x.material_wecenter.models.LoginProcess;
 import com.sine_x.material_wecenter.R;
 
@@ -41,13 +42,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    /**
-     * 用户登录验证异步任务
-     */
+    // 用户登录验证异步任务
     private class UserLoginTask extends AsyncTask<Void, Void, Void> {
         private String user_name;
         private String password;
-        private Result response;
+        private Response<LoginProcess> response;
         // 获取用户输入的用户名和密码
         @Override
         protected void onPreExecute() {
@@ -60,14 +59,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         @Override
         protected Void doInBackground(Void... params) {
             response = Client.getInstance().loginProcess(user_name, password);
-            if (response != null && response.getErrno() == 1) {
+            if (response.getErrno() == 1) {
                 // 保存用户名和密码
                 SharedPreferences preferences = getSharedPreferences("account", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("uid", user_name);
                 editor.putString("password", password);
-                editor.putString("user_name", ((LoginProcess)response.getRsm()).getUser_name());
-                editor.putString("avatar_file", ((LoginProcess) response.getRsm()).getAvatar_file());
+                editor.putString("user_name", response.getRsm().getUser_name());
+                editor.putString("avatar_file", response.getRsm().getAvatar_file());
                 editor.apply();
                 // 加载主页
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);

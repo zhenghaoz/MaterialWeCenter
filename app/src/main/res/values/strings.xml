@@ -1,7 +1,7 @@
 <resources>
 
     <!--Application Basic-->
-    <string name="app_name">精弘论坛</string>
+    <string name="app_name">Material WeCenter</string>
     <string name="postfix">————来自精弘论坛安卓客户端</string>
 
     <string name="hello_world">Hello world!</string>
@@ -34,7 +34,7 @@
     <string name="version">版本号</string>
     <string name="contributor">贡献者</string>
     <string name="contributors">ZhangZhenghao\nwindness97\nDartick</string>
-    <string name="github">GitHub项目地址</string>
+    <string name="github_repo">GitHub项目地址</string>
     <string name="github_url">https://github.com/ZhangZhenghao/Material-WeCenter</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -90,4 +90,9 @@
     <string name="auto_update">自动更新</string>
     <string name="latest">应用已经是最新版本</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
+
+    <string name="login">登录</string>
+    <string name="sign_up">注册</string>
+    <string name="input_username">输入用户名或邮箱</string>
+    <string name="input_password">输入密码</string>
 </resources>

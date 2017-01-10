@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:text="@string/app_name"
+        android:text="@string/login"
         android:paddingTop="64dp"
         android:paddingBottom="32dp"
         android:gravity="center_horizontal"
@@ -42,9 +42,9 @@
                 <EditText
                     android:id="@+id/edit_username"
                     android:layout_marginTop="@dimen/card_content_padding"
-                    android:hint="@string/edit_username"
+                    android:hint="@string/input_username"
                     android:textColor="@android:color/black"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -56,14 +56,14 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
                     android:layout_gravity="center_vertical"
                     android:src="@mipmap/ic_security_grey600_48dp"/>
 
                 <EditText
                     android:id="@+id/edit_password"
-                    android:hint="@string/edit_password"
+                    android:hint="@string/input_password"
                     android:textColor="@android:color/black"
                     android:inputType="textPassword"
                     android:layout_width="match_parent"
@@ -71,15 +71,32 @@
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/button_login"
-                android:text="@string/button_login"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/abc_text_size_button_material"
-                android:background="@color/nliveo_blue_colorPrimary"
-                android:layout_marginTop="16dp"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/button_login"
+                    android:text="@string/login"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/abc_text_size_button_material"
+                    android:background="@color/nliveo_blue_colorPrimary"
+                    android:layout_marginTop="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/button_signup"
+                    android:text="@string/sign_up"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/abc_text_size_button_material"
+                    android:background="@color/nliveo_blue_colorPrimary"
+                    android:layout_marginTop="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -13,12 +13,13 @@ import android.view.View;
 
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
+import com.sine_x.material_wecenter.models.Response;
 import com.squareup.picasso.Picasso;
 import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.fragment.UserActonFragment;
 import com.sine_x.material_wecenter.controller.fragment.UserInfoFragment;
-import com.sine_x.material_wecenter.models.Result;
+import com.sine_x.material_wecenter.models.Result2;
 import com.sine_x.material_wecenter.models.UserInfo;
 
 import butterknife.Bind;
@@ -133,20 +134,22 @@ public class UserActivity extends AppCompatActivity {
      * 获取用户信息的异步任务
      */
     class LoadUserInfo extends AsyncTask<Void, Void, Void> {
-        Result result;
+
+        Response<UserInfo> response;
+
         @Override
         protected Void doInBackground(Void... params) {
             Client client = Client.getInstance();
-            result = client.getUserInfo(uid);
+            response = client.getUserInfo(uid);
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            if (result != null && result.getRsm() != null) {
+            if (response.getRsm() != null) {
                 // 显示用户个人信息
-                UserInfo info = (UserInfo) result.getRsm();
+                UserInfo info = response.getRsm();
                 setTitle(info.getUser_name() + "的主页");
                 Picasso.with(UserActivity.this).load(info.getAvatar_file()).into(imgAvatar);
                 MenuItem item = menu.findItem(R.id.action_focus);

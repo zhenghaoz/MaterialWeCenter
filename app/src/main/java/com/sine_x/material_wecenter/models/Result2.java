@@ -3,7 +3,7 @@ package com.sine_x.material_wecenter.models;
 
 import java.lang.Object;
 
-public class Result {
+public class Result2 {
 
     private Object rsm;
     private int errno;

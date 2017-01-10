@@ -6,12 +6,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
-import com.squareup.picasso.Picasso;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.fragment.ExploreFragment;
 import com.sine_x.material_wecenter.controller.fragment.HomeFragment;
-import com.sine_x.material_wecenter.controller.fragment.QueryFragment;
 import com.sine_x.material_wecenter.controller.fragment.SettingsFragment;
+import com.squareup.picasso.Picasso;
 
 import br.liveo.Model.HelpLiveo;
 import br.liveo.interfaces.OnItemClickListener;

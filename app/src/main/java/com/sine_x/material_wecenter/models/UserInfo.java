@@ -1,42 +1,6 @@
 package com.sine_x.material_wecenter.models;
 
-/**
- * Copyright (C) 2015 Jinghong Union of ZJUT
- * <p/>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p/>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p/>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 public class UserInfo {
-
-    /**
-     * uid : 201426811427
-     * user_name : sin_x
-     * avatar_file : http://bbs.zjut.edu.cn/uploads/avatar/2014/2681/14/27_avatar_max.jpg?time=201601261716
-     * sex : 1
-     * province : 浙江省
-     * city : 杭州市
-     * fans_count : 3
-     * friend_count : 12
-     * article_count : 0
-     * question_count : 6
-     * answer_count : 76
-     * topic_focus_count : 8
-     * agree_count : 27
-     * thanks_count : 0
-     * views_count : 536
-     * signature : http://sine-x.com
-     * answer_favorite_count : 0
-     * has_focus : 0
-     */
 
     private long uid;
     private String user_name;

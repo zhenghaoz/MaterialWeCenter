@@ -15,7 +15,7 @@ import com.nispok.snackbar.Snackbar;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.R;
-import com.sine_x.material_wecenter.models.Result;
+import com.sine_x.material_wecenter.models.Result2;
 
 import java.util.ArrayList;
 
@@ -93,7 +93,7 @@ public class PostActivity extends AppCompatActivity {
     class PublishTask extends AsyncTask<Void, Void, Void> {
 
         private String title, content;
-        private Result result;
+        private Result2 result2;
 
         @Override
         protected void onPreExecute() {
@@ -104,19 +104,19 @@ public class PostActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... params) {
-            result = Client.getInstance().publishQuestion(title, content, topics);
+            result2 = Client.getInstance().publishQuestion(title, content, topics);
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            if (result == null) // 未知错误
+            if (result2 == null) // 未知错误
                 Snackbar.with(PostActivity.this).text("未知错误").show(PostActivity.this);
-            else if (result.getErrno() == 1)    // 发布成功
+            else if (result2.getErrno() == 1)    // 发布成功
                 PostActivity.this.finish();
             else                // 显示错误
-                Snackbar.with(PostActivity.this).text(result.getErr()).show(PostActivity.this);
+                Snackbar.with(PostActivity.this).text(result2.getErr()).show(PostActivity.this);
         }
     }
 }

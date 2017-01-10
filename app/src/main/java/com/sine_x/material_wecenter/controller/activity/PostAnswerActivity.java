@@ -14,7 +14,7 @@ import com.nispok.snackbar.Snackbar;
 import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
-import com.sine_x.material_wecenter.models.Result;
+import com.sine_x.material_wecenter.models.Result2;
 
 public class PostAnswerActivity extends AppCompatActivity {
 
@@ -67,7 +67,7 @@ public class PostAnswerActivity extends AppCompatActivity {
     private class PublishTask extends AsyncTask<Void, Void, Void> {
 
         String content;
-        Result result;
+        Result2 result2;
 
         @Override
         protected void onPreExecute() {
@@ -78,22 +78,22 @@ public class PostAnswerActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             Client client = Client.getInstance();
-            result = client.publishAnswer(questionID, content);
+            result2 = client.publishAnswer(questionID, content);
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            if (result == null) // 未知错误
+            if (result2 == null) // 未知错误
                 Snackbar.with(PostAnswerActivity.this).text("未知错误").show(PostAnswerActivity.this);
-            else if (result.getErrno() == 1){ // 发布成功
+            else if (result2.getErrno() == 1){ // 发布成功
                 PostAnswerActivity.this.setResult(resultCode);//设置activity结束返回值
                 PostAnswerActivity.this.finish();
             }
 
             else                // 显示错误
-                Snackbar.with(PostAnswerActivity.this).text(result.getErr()).show(PostAnswerActivity.this);
+                Snackbar.with(PostAnswerActivity.this).text(result2.getErr()).show(PostAnswerActivity.this);
         }
     }
 }

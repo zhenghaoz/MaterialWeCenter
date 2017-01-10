@@ -16,7 +16,9 @@ import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.adapter.ActionViewAdapter;
 import com.sine_x.material_wecenter.models.Action;
-import com.sine_x.material_wecenter.models.Result;
+import com.sine_x.material_wecenter.models.Response;
+import com.sine_x.material_wecenter.models.Responses;
+import com.sine_x.material_wecenter.models.Result2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,19 +91,19 @@ public class UserActonFragment extends Fragment {
 
     class LoadActions extends AsyncTask<Void, Void, Void> {
 
-        private Result result;
+        private Responses<Action> response;
 
         @Override
         protected Void doInBackground(Void... params) {
-            result = Client.getInstance().getUserActions(uid, actions, pageNum);
+            response = Client.getInstance().getUserActions(uid, actions, pageNum);
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            if (result!=null && result.getErrno()==1) {
-                mContentItems.addAll((ArrayList<Action>) result.getRsm());
+            if (response.getErrno()==1) {
+                mContentItems.addAll(response.getRsm());
                 mAdapter.notifyDataSetChanged();
                 pageNum++;
                 loading = true;

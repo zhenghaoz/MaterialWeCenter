@@ -18,7 +18,7 @@ import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.adapter.AnswerDetailAdapter;
 import com.sine_x.material_wecenter.models.AnswerComment;
 import com.sine_x.material_wecenter.models.AnswerDetail;
-import com.sine_x.material_wecenter.models.Result;
+import com.sine_x.material_wecenter.models.Result2;
 
 import java.util.ArrayList;
 
@@ -106,7 +106,7 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
     private  class PublishTask extends AsyncTask<Void, Void, Void> {
 
         String mContent;
-        Result result;
+        Result2 result2;
 
         @Override
         protected void onPreExecute() {
@@ -120,7 +120,7 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
             ArrayList<String> strs=new ArrayList<>();
             strs.add(answerID+"");
             strs.add(mContent);
-            result = client.postAction(Config.ActionType.PUSHLISH_ANSWER_COMMENT,PublishAnswerComment.class,strs);
+            result2 = client.postAction(Config.ActionType.PUSHLISH_ANSWER_COMMENT,PublishAnswerComment.class,strs);
             return null;
         }
 
@@ -129,15 +129,15 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
             super.onPostExecute(aVoid);
 
             answerDetailAdapter.notifyDataSetChanged();
-            if (result == null) // 未知错误
+            if (result2 == null) // 未知错误
                 Snackbar.with(AnswerActivity.this).text("未知错误").show(AnswerActivity.this);
-            else if (result.getErrno() == 1){ // 发布成功
+            else if (result2.getErrno() == 1){ // 发布成功
                 new LoadAnswerDetail().execute();
                 content.setText("");
             }
 
             else                // 显示错误
-                Snackbar.with(AnswerActivity.this).text(result.getErr()).show(AnswerActivity.this);
+                Snackbar.with(AnswerActivity.this).text(result2.getErr()).show(AnswerActivity.this);
         }
     }
 

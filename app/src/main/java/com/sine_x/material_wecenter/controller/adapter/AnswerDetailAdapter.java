@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sine_x.material_wecenter.models.Result2;
 import com.squareup.picasso.Picasso;
 import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.Config;
@@ -20,7 +21,6 @@ import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.activity.UserActivity;
 import com.sine_x.material_wecenter.models.AnswerComment;
 import com.sine_x.material_wecenter.models.AnswerDetail;
-import com.sine_x.material_wecenter.models.Result;
 import com.sine_x.material_wecenter.models.WebData;
 
 import java.net.URL;
@@ -346,7 +346,7 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         private static final int THANKS=1;
         private int answerID;
         private int action;
-        Result result;
+        Result2 result2;
 
         public DoAction(int action,int answerID){
             this.action=action;
@@ -366,12 +366,12 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     case AGREE:
                         strs.add(answerID+"");
                         strs.add(1+"");
-                        result=client.postAction(Config.ActionType.ANSWER_VOTE,null,strs);
+                        result2 =client.postAction(Config.ActionType.ANSWER_VOTE,null,strs);
                         break;
                     case THANKS:
                         strs.add("thanks");
                         strs.add(answerID+"");
-                        result=client.postAction(Config.ActionType.ANSWER_RATE,null,strs);
+                        result2 =client.postAction(Config.ActionType.ANSWER_RATE,null,strs);
                         break;
                     default:
                         break;

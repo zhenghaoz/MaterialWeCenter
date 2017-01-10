@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.sine_x.material_wecenter.models.Result2;
 import com.truizlop.fabreveallayout.FABRevealLayout;
 import com.truizlop.fabreveallayout.OnRevealChangeListener;
 import com.sine_x.material_wecenter.Client;
@@ -26,7 +27,6 @@ import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.adapter.QuestionDetailAdapter;
 import com.sine_x.material_wecenter.models.QuestionDetail;
-import com.sine_x.material_wecenter.models.Result;
 
 
 public class QuestionActivity extends AppCompatActivity {
@@ -211,7 +211,7 @@ public class QuestionActivity extends AppCompatActivity {
     private class PublishTask extends AsyncTask<Void, Void, Void> {
 
         String content;
-        Result result;
+        Result2 result2;
 
         @Override
         protected void onPreExecute() {
@@ -222,7 +222,7 @@ public class QuestionActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             Client client = Client.getInstance();
-            result = client.publishAnswer(questionID, content);
+            result2 = client.publishAnswer(questionID, content);
             return null;
         }
 
@@ -230,14 +230,14 @@ public class QuestionActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-            if (result == null) // 未知错误
+            if (result2 == null) // 未知错误
                 Toast.makeText(QuestionActivity.this,"未知错误",Toast.LENGTH_SHORT).show();
-            else if (result.getErrno() == 1){ // 发布成功
+            else if (result2.getErrno() == 1){ // 发布成功
                 Toast.makeText(QuestionActivity.this,"回答成功",Toast.LENGTH_SHORT).show();
             }
 
             else                // 显示错误
-                Toast.makeText(QuestionActivity.this, result.getErr(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(QuestionActivity.this, result2.getErr(), Toast.LENGTH_SHORT).show();
 
             floatingActionButton.revealMainView();
             isBtnClose=true;

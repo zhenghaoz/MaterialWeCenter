@@ -13,7 +13,8 @@ import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.R;
-import com.sine_x.material_wecenter.models.Result;
+import com.sine_x.material_wecenter.models.Response;
+import com.sine_x.material_wecenter.models.Result2;
 import com.sine_x.material_wecenter.models.UserInfo;
 
 /**
@@ -75,20 +76,22 @@ public class UserInfoFragment extends Fragment {
      * 获取用户信息的异步任务
      */
     class LoadUserInfo extends AsyncTask<Void, Void, Void> {
-        Result result;
+
+        Response<UserInfo> response;
+
         @Override
         protected Void doInBackground(Void... params) {
             Client client = Client.getInstance();
-            result = client.getUserInfo(uid);
+            response = client.getUserInfo(uid);
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            if (result != null && result.getRsm() != null) {
+            if (response.getRsm() != null) {
                 // 显示用户个人信息
-                UserInfo info = (UserInfo) result.getRsm();
+                UserInfo info = response.getRsm();
                 fans.setText(String.valueOf(info.getFans_count()));
                 agree.setText(String.valueOf(info.getAgree_count()));
                 thanks.setText(String.valueOf(info.getThanks_count()));

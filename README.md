@@ -15,7 +15,7 @@ Material-WeCenter is an Android client with Material Design for [WeCenter](http:
 [WeCenterMobile-Api](https://github.com/ifLab/WeCenterMobile-Api)
 ## Document (Simplified Chinese)
 - Document for [introduction](https://github.com/ZhangZhenghao/Material-WeCenter/wiki)
-- Document for [quickstart](https://github.com/ZhangZhenghao/Material-WeCenter/wiki/0-Quickstart)
+- [部署指南](https://github.com/ZhangZhenghao/Material-WeCenter/wiki/%E9%83%A8%E7%BD%B2%E6%8C%87%E5%8D%97)
 - Document for [development](https://github.com/ZhangZhenghao/Material-WeCenter/wiki/1-Architecture)
 
 ## External libraries used

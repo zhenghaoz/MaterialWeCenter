@@ -16,6 +16,7 @@ import com.sine_x.material_wecenter.controller.activity.UserActivity;
 import com.sine_x.material_wecenter.models.Dynamic;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -97,10 +98,10 @@ public class DynamicViewAdapter extends RecyclerView.Adapter<DynamicViewAdapter.
     }
 
 
-    private ArrayList<Dynamic> mList;
+    private List<Dynamic> mList;
     private Context mContext;
 
-    public DynamicViewAdapter(Context context, ArrayList<Dynamic> list) {
+    public DynamicViewAdapter(Context context, List<Dynamic> list) {
         this.mContext = context;
         this.mList = list;
     }

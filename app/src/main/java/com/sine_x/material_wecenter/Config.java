@@ -33,6 +33,8 @@ public class Config {
     static String APICAT_PEOPLE = "people";
     static String API_USER_ACTIONS = "user_actions";
 
+    static String API_HOME = "home";
+
     public static String GET_USER_ACTIONS = HOST_NAME + "?/api/people/user_actions/";
     public static String FOLLOW_PEOPLE = HOST_NAME + "?/follow/ajax/follow_people/";
     public static String PUSHLISH_QUESTION = HOST_NAME + "?/api/publish/publish_question/";
@@ -47,7 +49,6 @@ public class Config {
     public static String ANSWER_RATE=HOST_NAME+"question/ajax/question_answer_rate/";
     public static String ANSWER_VOTE=HOST_NAME+"question/ajax/answer_vote/";
     public static String AVATAR_DIR = HOST_NAME + "uploads/avatar/";
-    public static String HOME_DYNAMIC = HOST_NAME + "?/api/home/";
 
     //操作枚举
     public enum ActionType{

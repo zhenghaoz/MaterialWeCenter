@@ -239,10 +239,11 @@ public class Client {
      * getDynamic 首页动态（home）页面
      * @return Result对象
      */
-    public Result2 getDynamic(int page) {
-        String url = Config.HOME_DYNAMIC + "?page=" + String.valueOf(page) + "&per_page=" + String.valueOf(Config.PER_PAGE);
-        String json = doGet(url);
-        return getResults(json, Dynamic.class);
+    public Responses<Dynamic> getDynamic(int page) {
+        Map<String, String> params = new HashMap<>();
+        params.put("page", String.valueOf(page));
+        String json = doGet(Config.API_HOME, "", params);
+        return parseResponses(json, Dynamic.class);
     }
 
 

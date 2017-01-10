@@ -17,14 +17,16 @@ import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.adapter.DynamicViewAdapter;
 import com.sine_x.material_wecenter.models.Dynamic;
+import com.sine_x.material_wecenter.models.Responses;
 import com.sine_x.material_wecenter.models.Result2;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class HomeFragment extends Fragment {
 
-    private ArrayList<Dynamic> mList;
+    private List<Dynamic> mList;
     private DynamicViewAdapter mAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
@@ -94,13 +96,13 @@ public class HomeFragment extends Fragment {
 
     private class LoadDynamicList extends AsyncTask<Void, Void, Void> {
 
-        private Result2 result2;
+        private Responses<Dynamic> responses;
 
         @Override
         protected Void doInBackground(Void... voids) {
-            result2 = client.getDynamic(page);
-            if (result2 != null && result2.getErrno() == 1) {
-                ArrayList<Dynamic> rsm = (ArrayList<Dynamic>) result2.getRsm();
+            responses = client.getDynamic(page);
+            if (responses.getErrno() == 1) {
+                List<Dynamic> rsm = responses.getRsm();
                 if (rsm.size() == 0) {
                     // TODO: 2016/1/29 add toasts or something else to tell users that "there is no more dynamics".
                     Log.d("homefragment", "no more dynamics");

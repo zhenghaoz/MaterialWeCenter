@@ -119,7 +119,7 @@ public class Client {
 
     public String getSign(String apis) {
         if (Config.KEEP_SECRET) {
-            String text = apis + Config.APP_SCRET;
+            String text = apis + Config.APP_SECRET;
             try {
                 MessageDigest md = MessageDigest.getInstance("MD5");
                 String cipher = byteArrayToHex(md.digest(text.getBytes()));
@@ -196,43 +196,47 @@ public class Client {
      * @return Result对象
      */
     public Responses<Question> explore(int page) {
-        String json = doGet(Config.API_EXPLORE, "", new HashMap<String, String>());
+        Map<String, String> params = new HashMap<>();
+        params.put("page", String.valueOf(page));
+        params.put("per_page", String.valueOf(Config.ITEM_PER_PAGE));
+        String json = doGet(Config.API_EXPLORE, params);
         return parseResponses(json, Question.class);
     }
 
     /**
      * getQuestion 获取问题详情
-     * @param questionID 问题的编号
+     * @param id 问题的编号
      * @return Result对象
      */
-
-    public Result2 getQuestion(int questionID){
-        String url = Config.QUESTION + questionID;
-        String json = doGet(url);
-        return getResult(json, QuestionDetail.class);
+    public Response<QuestionDetail> getQuestion(int id){
+        Map<String, String> params = new HashMap<>();
+        params.put("id", String.valueOf(id));
+        String json = doGet(Config.APICAT_QUESTION, "", params);
+        return parseResponse(json, QuestionDetail.class);
     }
 
     /**
      * getAnswer 获取答案详情
-     * @param answerID 答案的编号
+     * @param answer_id 答案的编号
      * @return Result对象
      */
-    public Result2 getAnswer(int answerID){
-        String url = Config.ANSWER + answerID;
-        String json = doGet(url);
-        return getResult(json, AnswerDetail.class);
+    public Response<AnswerDetail> getAnswer(int answer_id){
+        Map<String, String> params = new HashMap<>();
+        params.put("answer_id", String.valueOf(answer_id));
+        String json = doGet(Config.APICAT_QUESTION, Config.API_ANSWER, params);
+        return parseResponse(json, AnswerDetail.class);
     }
 
     /**
      * getAnswer 获取答案评论列表
-     * @param answerID 答案的编号
+     * @param answer_id 答案的编号
      * @return Result对象
      */
-
-    public Result2 getAnswerComments(int answerID){
-        String url = Config.ANSWER_COMMENT + answerID;
-        String json = doGet(url);
-        return getResultArray(json, AnswerComment.class);
+    public Responses<AnswerComment> getAnswerComments(int answer_id){
+        Map<String, String> params = new HashMap<>();
+        params.put("answer_id", String.valueOf(answer_id));
+        String json = doGet(Config.APICAT_QUESTION, Config.API_ANSWER_COMMENTS, params);
+        return parseResponses(json, AnswerComment.class);
     }
 
     /**
@@ -246,8 +250,6 @@ public class Client {
         return parseResponses(json, Dynamic.class);
     }
 
-
-
     /**
      * publishQuestion 发起问题
      * @param content 问题的标题
@@ -255,7 +257,7 @@ public class Client {
      * @param topics 问题的话题
      * @return 包含PublishQuestion对象的Result对象
      */
-    public Result2 publishQuestion(String content, String detail, ArrayList<String> topics) {
+    public Response<PublishQuestion> publishQuestion(String content, String detail, ArrayList<String> topics) {
         Map<String, String> params = new HashMap<>();
         params.put("question_content", content);
         params.put("question_detail", detail);
@@ -268,7 +270,7 @@ public class Client {
         }
         params.put("topics", topics.toString());
         String json = doPost(Config.PUSHLISH_QUESTION, params);
-        return getResult(json, PublishQuestion.class);
+        return parseResponse(json, PublishQuestion.class);
     }
 
     /**
@@ -278,12 +280,12 @@ public class Client {
      * @return 包含PublishAnswer对象的Result对象
      */
 
-    public Result2 publishAnswer(int questionID, String content){
+    public Response<PublishAnswer> publishAnswer(int questionID, String content){
         Map<String, String> params = new HashMap<>();
         params.put("question_id", questionID+"");
         params.put("answer_content", content);
         String json = doPost(Config.PUSHLISH_ANSWER, params);
-        return getResult(json, PublishAnswer.class);
+        return parseResponse(json, PublishAnswer.class);
     }
 
 
@@ -295,187 +297,49 @@ public class Client {
      * @return Result2（如果有错误，返回NULL）
      */
 
-    public Result2 postAction(Config.ActionType type, @NonNull Class<? extends Object> classType, ArrayList<String> strs){
-
+    public <T> Response<T> postAction(Config.ActionType type, @NonNull Class<T> classType, ArrayList<String> strs){
         Map<String, String> params = new HashMap<>();
         String json;
         if(type==Config.ActionType.QUESTION_FOCUS){
             params.put("question_id",strs.get(0));
             json=doPost(Config.QUESTION_FOCUS,params);
-            return getResult(json,classType);
+            return parseResponse(json,classType);
         }
         else if(type==Config.ActionType.QUESTION_THANKS){
             params.put("question_id",strs.get(0));
             json=doPost(Config.QUESTION_THANKS,params);
-            return getResult(json,classType);
+            return parseResponse(json,classType);
         }
         else if(type==Config.ActionType.PUSHLISH_ANSWER_COMMENT){
             params.put("answer_id",strs.get(0));
             params.put("message",strs.get(1));
             json=doPost(Config.PUSHLISH_ANSWER_COMMENT,params);
-            return getResult(json,classType);
+            return parseResponse(json,classType);
         }
         else if(type== Config.ActionType.ANSWER_VOTE){
             params.put("answer_id",strs.get(0));
             params.put("value",strs.get(1));
             json=doPost(Config.ANSWER_VOTE,params);
-            return getResult(json,classType);
+            return parseResponse(json,classType);
         }
         else if(type== Config.ActionType.ANSWER_RATE){
             params.put("type",strs.get(0));
             params.put("answer_id",strs.get(1));
             json=doPost(Config.ANSWER_RATE,params);
-            return getResult(json,classType);
+            return parseResponse(json,classType);
         }
         return null;
     }
 
-    /**
-     * getResult 将返回的JSON对象转换为Result类
-     * @param json JSON字符串
-     * @param classType 类类型
-     * @return Result2（如果有错误，返回NULL）
-     */
-    private Result2 getResult(String json, @NonNull Class<? extends Object> classType) {
-        try {
-            JSONObject jsonObject = new JSONObject(json);
-            Result2 resualt = new Result2();
-            resualt.setErr(jsonObject.getString("err"));
-            resualt.setErrno(jsonObject.getInt("errno"));
-            if (resualt.getErrno() == 1) {
-                Gson gson = new Gson();
-                resualt.setRsm(gson.fromJson(jsonObject.getJSONObject("rsm").toString(), classType));
-            } else
-                resualt.setRsm(null);
-            return resualt;
-        } catch (Exception e) {
-            return null;
-        }
+    private String doPost(String apiCat, Map<String, String> params) {
+        return doPost(apiCat, params);
     }
 
-    /**
-     * getResultArray 将返回的JSON数组转换为Result类
-     * @param json JSON字符串
-     * @param classType 类型
-     * @return Result对象
-     */
-
-    private Result2 getResultArray(String json, @NonNull Class<? extends Object> classType){
-        try {
-
-            JSONObject jsonObject = new JSONObject(json);
-            Result2 result2 = new Result2();
-            result2.setErr(jsonObject.getString("err"));
-            result2.setErrno(jsonObject.getInt("errno"));
-            if (result2.getErrno() == 1) {
-                ArrayList<Object> list = new ArrayList<>();
-                JSONArray array = jsonObject.getJSONArray("rsm");
-                int size=array.length();
-                Gson gson = new Gson();
-                for (int i=0;i<size;i++) {
-                    JSONObject item = array.getJSONObject(i);
-                    list.add(gson.fromJson(item.toString(), classType));
-                }
-                result2.setRsm(list);
-            } else
-                result2.setRsm(null);
-            return result2;
-        } catch (JSONException e) {
-            return null;
-        }
-    }
-    /**
-     * getResults 将返回的JSON数组转换为Result类
-     * @param json JSON字符串
-     * @param classType 类型
-     * @return Result对象
-     */
-    private Result2 getResults(String json, @NonNull Class<? extends Object> classType) {
-        try {
-            JSONObject jsonObject = new JSONObject(json);
-            Result2 result2 = new Result2();
-            result2.setErr(jsonObject.getString("err"));
-            result2.setErrno(jsonObject.getInt("errno"));
-            if (result2.getErrno() == 1) {
-                ArrayList<Object> list = new ArrayList<>();
-                JSONObject rsm = jsonObject.getJSONObject("rsm");
-                JSONArray array = rsm.getJSONArray("rows");
-                int total_rows = rsm.getInt("total_rows");
-                Gson gson = new Gson();
-                for (int i = 0; i < total_rows; i++) {
-                    JSONObject item = array.getJSONObject(i);
-                    list.add(gson.fromJson(item.toString(), classType));
-                }
-                result2.setRsm(list);
-            } else
-                result2.setRsm(null);
-            return result2;
-        } catch (JSONException e) {
-            return null;
-        }
-    }
-
-    /**
-     * doPost 发送POST请求
-     * @param URL 请求的URL
-     * @param params 请求中的参数
-     * @return 字符串（如果发生错误，那么返回NULL）
-     */
-    private String doPost(String URL, Map<String, String> params) {
-        // 建立请求内容
-        StringBuilder builder = new StringBuilder();
-        for (Map.Entry<String, String> entry : params.entrySet()) {
-            builder.append(entry.getKey())
-                    .append("=")
-                    .append(URLEncoder.encode(entry.getValue()))
-                    .append("&");
-        }
-        builder.deleteCharAt(builder.length() - 1);
-        byte[] data = builder.toString().getBytes();
-        // 发出请求
-        try {
-            URL url = new URL(URL);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setConnectTimeout(Config.TIME_OUT);
-            connection.setDoInput(true);
-            connection.setDoOutput(true);
-            connection.setRequestMethod("POST");
-            connection.setUseCaches(false);
-            // 附上Cookie
-            connection.setRequestProperty("Cookie", cooike);
-            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            connection.setRequestProperty("Content-Length", String.valueOf(data.length));
-            // 发送请求内容
-            OutputStream output = connection.getOutputStream();
-            output.write(data);
-            // 接收返回信息
-            int response = connection.getResponseCode();
-            if (response == HttpURLConnection.HTTP_OK) {
-                // 保存Cookie
-                Map<String, List<String>> header = connection.getHeaderFields();
-                List<String> cookies = header.get("Set-Cookie");
-                if (cookies.size() == 3)
-                    cooike = cookies.get(2);
-                // 处理返回的字符串流
-                InputStream input = connection.getInputStream();
-                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                byte[] buffer = new byte[Config.MAX_LINE_BUFFER];
-                int len = 0;
-                while ((len = input.read(buffer)) != -1)
-                    byteArrayOutputStream.write(buffer, 0, len);
-                return new String(byteArrayOutputStream.toByteArray());
-            }
-        } catch (IOException e) {
-            return null;
-        }
-        return null;
-    }
-
-    private String doPost(String apicat, String api, Map<String, String> params) {
+    private String doPost(String apiCat, String api, Map<String, String> params) {
         // 组合链接
-        String apiUrl = Config.API_ROOT + apicat + '/' + api + '/';
+        String apiUrl = Config.API_ROOT + apiCat + '/' + api + '/';
         if (Config.KEEP_SECRET) {
-            apiUrl += "&mobile_sign=" + getSign(apicat);
+            apiUrl += "&mobile_sign=" + getSign(apiCat);
         }
         Log.d("POST", apiUrl);
         // 建立请求内容
@@ -527,27 +391,9 @@ public class Client {
         return null;
     }
 
-    /**
-     * doGet 发送GET请求
-     * @param URL 请求的URL地址
-     * @return 字符串（如果发生错误，那么返回NULL）
-     */
-    private String doGet(String URL) {
-        try {
-            URL url = new URL(URL);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            // 附上Cookie
-            connection.setRequestProperty("Cookie", cooike);
-            InputStreamReader input = new InputStreamReader(connection.getInputStream());
-            BufferedReader reader = new BufferedReader(input);
-            StringBuilder builder = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null)
-                builder.append(line);
-            return builder.toString();
-        } catch (IOException e) {
-            return null;
-        }
+
+    private String doGet(String apiCat, Map<String, String> params) {
+        return doGet(apiCat, "", params);
     }
 
     private String doGet(String apiCat, String api, Map<String, String> params) {

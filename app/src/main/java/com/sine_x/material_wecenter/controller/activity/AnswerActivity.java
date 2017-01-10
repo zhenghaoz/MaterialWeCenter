@@ -18,6 +18,7 @@ import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.adapter.AnswerDetailAdapter;
 import com.sine_x.material_wecenter.models.AnswerComment;
 import com.sine_x.material_wecenter.models.AnswerDetail;
+import com.sine_x.material_wecenter.models.Response;
 import com.sine_x.material_wecenter.models.Result2;
 
 import java.util.ArrayList;
@@ -106,7 +107,7 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
     private  class PublishTask extends AsyncTask<Void, Void, Void> {
 
         String mContent;
-        Result2 result2;
+        Response<PublishAnswerComment> result2;
 
         @Override
         protected void onPreExecute() {

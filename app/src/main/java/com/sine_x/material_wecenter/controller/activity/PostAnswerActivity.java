@@ -14,6 +14,8 @@ import com.nispok.snackbar.Snackbar;
 import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
+import com.sine_x.material_wecenter.models.PublishAnswer;
+import com.sine_x.material_wecenter.models.Response;
 import com.sine_x.material_wecenter.models.Result2;
 
 public class PostAnswerActivity extends AppCompatActivity {
@@ -67,12 +69,12 @@ public class PostAnswerActivity extends AppCompatActivity {
     private class PublishTask extends AsyncTask<Void, Void, Void> {
 
         String content;
-        Result2 result2;
+        Response<PublishAnswer> result2;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            content = editContent.getText().toString() + Config.FIX;
+            content = editContent.getText().toString();
         }
 
         @Override

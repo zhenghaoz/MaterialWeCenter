@@ -19,6 +19,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.sine_x.material_wecenter.models.PublishAnswer;
+import com.sine_x.material_wecenter.models.Response;
 import com.sine_x.material_wecenter.models.Result2;
 import com.truizlop.fabreveallayout.FABRevealLayout;
 import com.truizlop.fabreveallayout.OnRevealChangeListener;
@@ -211,12 +213,12 @@ public class QuestionActivity extends AppCompatActivity {
     private class PublishTask extends AsyncTask<Void, Void, Void> {
 
         String content;
-        Result2 result2;
+        Response<PublishAnswer> result2;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            content = answerContent.getText().toString() + Config.FIX;
+            content = answerContent.getText().toString();
         }
 
         @Override

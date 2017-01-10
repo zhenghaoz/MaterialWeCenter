@@ -15,6 +15,8 @@ import com.nispok.snackbar.Snackbar;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.R;
+import com.sine_x.material_wecenter.models.PublishQuestion;
+import com.sine_x.material_wecenter.models.Response;
 import com.sine_x.material_wecenter.models.Result2;
 
 import java.util.ArrayList;
@@ -93,7 +95,7 @@ public class PostActivity extends AppCompatActivity {
     class PublishTask extends AsyncTask<Void, Void, Void> {
 
         private String title, content;
-        private Result2 result2;
+        private Response<PublishQuestion> result2;
 
         @Override
         protected void onPreExecute() {

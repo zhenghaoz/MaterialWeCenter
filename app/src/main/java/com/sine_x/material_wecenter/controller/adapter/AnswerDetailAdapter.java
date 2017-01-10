@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sine_x.material_wecenter.models.Response;
 import com.sine_x.material_wecenter.models.Result2;
 import com.squareup.picasso.Picasso;
 import com.sine_x.material_wecenter.Client;
@@ -346,7 +347,7 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         private static final int THANKS=1;
         private int answerID;
         private int action;
-        Result2 result2;
+        Response<Object> result2;
 
         public DoAction(int action,int answerID){
             this.action=action;

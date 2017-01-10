@@ -2,9 +2,6 @@ package com.sine_x.material_wecenter.models;
 
 import java.util.ArrayList;
 
-/**
- * Created by Administrator on 2016/1/27.
- */
 public class QuestionDetail {
 
 

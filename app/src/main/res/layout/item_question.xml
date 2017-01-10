@@ -28,14 +28,6 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/avatar_max_img"/>
-            <View
-                android:layout_gravity="center"
-                android:background="#bdbdbd"
-                android:layout_marginTop="6dp"
-                android:layout_marginBottom="6dp"
-                android:layout_width="1dp"
-                android:layout_height="match_parent">
-            </View>
 
             <LinearLayout
                 android:layout_margin="6dp"

@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sine_x.material_wecenter.models.Response;
 import com.sine_x.material_wecenter.models.Result2;
 import com.squareup.picasso.Picasso;
 import com.sine_x.material_wecenter.Client;
@@ -429,7 +430,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private class AgreeTask extends AsyncTask<Integer,Integer,Integer> {
 
         private int answerID;
-        Result2 result2;
+        Response<Object> result2;
 
         public AgreeTask(int answerID){
             this.answerID=answerID;
@@ -607,7 +608,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         private int action;
         private int questionID;
         private int num;
-        Result2 result2;
+        Response<Object> result2;
         private View count;
         private View view;
 
@@ -632,11 +633,11 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 switch (action){
                     case FOCUS:
                         strs.add(questionID+"");
-                        result2 =client.postAction(Config.ActionType.QUESTION_FOCUS,Focus.class,strs);
+                        result2 = client.postAction(Config.ActionType.QUESTION_FOCUS,null,strs);
                         break;
                     case THANKS:
                         strs.add(questionID+"");
-                        result2 =client.postAction(Config.ActionType.QUESTION_THANKS,Thanks.class,strs);
+                        result2 = client.postAction(Config.ActionType.QUESTION_THANKS,null,strs);
                         break;
                     default:
                         break;

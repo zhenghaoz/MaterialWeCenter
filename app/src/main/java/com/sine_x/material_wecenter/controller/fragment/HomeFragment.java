@@ -26,7 +26,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    private List<Dynamic> mList;
+    private List<Dynamic> mList = new ArrayList<>();
     private DynamicViewAdapter mAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
@@ -35,7 +35,7 @@ public class HomeFragment extends Fragment {
     //初始化一定处于刷新状态
     private boolean loading = true;
     //记录当前已经加载的页数
-    private int page = 0;
+    private int page = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,6 +49,7 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // 实例化刷新布局
+        mAdapter = new DynamicViewAdapter(getActivity(), mList);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light,
                 android.R.color.holo_red_light,
@@ -61,13 +62,14 @@ public class HomeFragment extends Fragment {
             @Override
             public void onRefresh() {
                 // 下拉刷新
-                page = 0;
+                page = 1;
                 new LoadDynamicList().execute();
             }
         });
         mSwipeRefreshLayout.setRefreshing(true);
         // 实例化RecyclerView
         mRecyclerView = (RecyclerView) view.findViewById(R.id.dynamic_list);
+        mRecyclerView.setAdapter(mAdapter);
         final LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -103,14 +105,9 @@ public class HomeFragment extends Fragment {
             responses = client.getDynamic(page);
             if (responses.getErrno() == 1) {
                 List<Dynamic> rsm = responses.getRsm();
-                if (rsm.size() == 0) {
-                    // TODO: 2016/1/29 add toasts or something else to tell users that "there is no more dynamics".
-                    Log.d("homefragment", "no more dynamics");
-                } else if (page == 0) {
-                    mList = rsm;
-                } else {
-                    mList.addAll(rsm);
-                }
+                if (page == 1)
+                    mList.clear();
+                mList.addAll(rsm);
             }
             return null;
         }
@@ -119,12 +116,7 @@ public class HomeFragment extends Fragment {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             mSwipeRefreshLayout.setRefreshing(false);
-            if (page == 0) {
-                mAdapter = new DynamicViewAdapter(getActivity(), mList);
-                mRecyclerView.setAdapter(mAdapter);
-            } else
-                mAdapter.notifyDataSetChanged();
-
+            mAdapter.notifyDataSetChanged();
             //加载完成，更新flag
             page ++;
             loading = false;

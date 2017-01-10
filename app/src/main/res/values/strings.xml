@@ -1,8 +1,7 @@
 <resources>
 
-    <!--Application Basic-->
+    <!-- 应用名称 -->
     <string name="app_name">Material WeCenter</string>
-    <string name="postfix">————来自精弘论坛安卓客户端</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>

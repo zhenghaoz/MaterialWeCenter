@@ -332,7 +332,7 @@ public class Client {
     }
 
     private String doPost(String apiCat, Map<String, String> params) {
-        return doPost(apiCat, params);
+        return doPost(apiCat, "",params);
     }
 
     private String doPost(String apiCat, String api, Map<String, String> params) {

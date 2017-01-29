@@ -16,9 +16,7 @@ import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.adapter.ActionViewAdapter;
 import com.sine_x.material_wecenter.models.Action;
-import com.sine_x.material_wecenter.models.Response;
 import com.sine_x.material_wecenter.models.Responses;
-import com.sine_x.material_wecenter.models.Result2;
 
 import java.util.ArrayList;
 import java.util.List;

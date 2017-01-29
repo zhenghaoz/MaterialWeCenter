@@ -30,8 +30,8 @@ dependencies {
     compile('com.github.florent37:materialviewpager:1.1.2@aar') {
         transitive = true
     }
-    compile files('libs/gson-2.4.jar')
-    compile files('libs/jsoup-1.8.3.jar')
+    compile group: 'org.jsoup', name: 'jsoup', version: '1.10.2'
+    compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'com.loopj.android:android-async-http:1.4.9'
     compile 'com.android.support:appcompat-v7:25.1.0'

@@ -19,7 +19,6 @@ import com.sine_x.material_wecenter.controller.adapter.AnswerDetailAdapter;
 import com.sine_x.material_wecenter.models.AnswerComment;
 import com.sine_x.material_wecenter.models.AnswerDetail;
 import com.sine_x.material_wecenter.models.Response;
-import com.sine_x.material_wecenter.models.Result2;
 
 import java.util.ArrayList;
 
@@ -121,7 +120,7 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
             ArrayList<String> strs=new ArrayList<>();
             strs.add(answerID+"");
             strs.add(mContent);
-            result2 = client.postAction(Config.ActionType.PUSHLISH_ANSWER_COMMENT,PublishAnswerComment.class,strs);
+            result2 = client.postAction(Config.ActionType.PUBLISH_ANSWER_COMMENT,PublishAnswerComment.class,strs);
             return null;
         }
 

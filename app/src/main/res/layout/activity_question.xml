@@ -29,23 +29,7 @@
                 android:layout_alignParentStart="true"
                 android:scrollbars="vertical"/>
         </android.support.v4.widget.SwipeRefreshLayout>
-    <!--
-    <com.github.clans.fab.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/fab_question_menu"
-        android:src="@mipmap/ic_menu"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
-        fab:fab_colorNormal="@color/nliveo_blue_colorPrimary"
-        fab:fab_colorRipple="@color/nliveo_blue_colorPrimaryDark"
-        app:fab_showAnimation="@anim/show_from_bottom"
-        app:fab_hideAnimation="@anim/hide_to_bottom"/>
-        -->
+
     <com.truizlop.fabreveallayout.FABRevealLayout
         android:layout_alignParentBottom="true"
         android:id="@+id/fab_reveal_layout"

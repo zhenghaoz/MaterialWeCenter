@@ -15,7 +15,6 @@ import com.sine_x.material_wecenter.models.Question;
 import com.sine_x.material_wecenter.models.QuestionDetail;
 import com.sine_x.material_wecenter.models.Response;
 import com.sine_x.material_wecenter.models.Responses;
-import com.sine_x.material_wecenter.models.Result2;
 import com.sine_x.material_wecenter.models.UserInfo;
 
 import org.json.JSONArray;
@@ -40,13 +39,13 @@ import java.util.Map;
 
 /**
  * Copyright (C) 2016 Jinghong Union of ZJUT
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -62,6 +61,7 @@ public class Client {
 
     /**
      * 获得一个实例
+     *
      * @return Client对象
      */
     public static Client getInstance() {
@@ -151,33 +151,36 @@ public class Client {
 
     /**
      * loginProcess 用户登录
+     *
      * @param user_name 用户名
-     * @param password 用户密码
+     * @param password  用户密码
      * @return 包含LoginProcess的Result对象
      */
     public Response<LoginProcess> loginProcess(@NonNull String user_name, @NonNull String password) {
         Map<String, String> params = new HashMap<>();
         params.put("user_name", user_name);
         params.put("password", password);
-        String json = doPost(Config.APICAT_ACCOUNT, Config.API_LOGIN_PROCESS, params);
+        String json = apiPost(Config.API_CAT_ACCOUNT, Config.API_LOGIN_PROCESS, params);
         return parseResponse(json, LoginProcess.class);
     }
 
     /**
      * getUserInfo 获取用户信息
+     *
      * @param uid 用户ID
      * @return 包含UserInfo的Result对象
      */
     public Response<UserInfo> getUserInfo(String uid) {
         Map<String, String> params = new HashMap<>();
         params.put("uid", uid);
-        String json = doGet(Config.APICAT_ACCOUNT, Config.API_GET_USERINFO, params);
+        String json = doGet(Config.API_CAT_ACCOUNT, Config.API_GET_USERINFO, params);
         return parseResponse(json, UserInfo.class);
     }
 
     /**
      * getUserActions获取用户回答或提问记录
-     * @param uid 用户ID
+     *
+     * @param uid     用户ID
      * @param actions 101-获取用户提问列表 201-获取用户回答列表
      * @return 包含Action对象数组的Result对象
      */
@@ -186,12 +189,13 @@ public class Client {
         params.put("uid", uid);
         params.put("actions", String.valueOf(actions));
         params.put("page", String.valueOf(page));
-        String json = doGet(Config.APICAT_PEOPLE, Config.API_USER_ACTIONS, params);
+        String json = doGet(Config.API_CAT_PEOPLE, Config.API_USER_ACTIONS, params);
         return parseResponses(json, Action.class);
     }
 
     /**
      * explore 发现页面
+     *
      * @param page 页数
      * @return Result对象
      */
@@ -199,62 +203,67 @@ public class Client {
         Map<String, String> params = new HashMap<>();
         params.put("page", String.valueOf(page));
         params.put("per_page", String.valueOf(Config.ITEM_PER_PAGE));
-        String json = doGet(Config.API_EXPLORE, params);
+        String json = doGet(Config.API_CAT_EXPLORE, params);
         return parseResponses(json, Question.class);
     }
 
     /**
      * getQuestion 获取问题详情
+     *
      * @param id 问题的编号
      * @return Result对象
      */
-    public Response<QuestionDetail> getQuestion(int id){
+    public Response<QuestionDetail> getQuestion(int id) {
         Map<String, String> params = new HashMap<>();
         params.put("id", String.valueOf(id));
-        String json = doGet(Config.APICAT_QUESTION, "", params);
+        String json = doGet(Config.API_CAT_QUESTION, "", params);
         return parseResponse(json, QuestionDetail.class);
     }
 
     /**
      * getAnswer 获取答案详情
+     *
      * @param answer_id 答案的编号
      * @return Result对象
      */
-    public Response<AnswerDetail> getAnswer(int answer_id){
+    public Response<AnswerDetail> getAnswer(int answer_id) {
         Map<String, String> params = new HashMap<>();
         params.put("answer_id", String.valueOf(answer_id));
-        String json = doGet(Config.APICAT_QUESTION, Config.API_ANSWER, params);
+        String json = doGet(Config.API_CAT_QUESTION, Config.API_ANSWER, params);
         return parseResponse(json, AnswerDetail.class);
     }
 
     /**
      * getAnswer 获取答案评论列表
+     *
      * @param answer_id 答案的编号
      * @return Result对象
      */
-    public Responses<AnswerComment> getAnswerComments(int answer_id){
+    public Responses<AnswerComment> getAnswerComments(int answer_id) {
         Map<String, String> params = new HashMap<>();
         params.put("answer_id", String.valueOf(answer_id));
-        String json = doGet(Config.APICAT_QUESTION, Config.API_ANSWER_COMMENTS, params);
+        String json = doGet(Config.API_CAT_QUESTION, Config.API_ANSWER_COMMENTS, params);
         return parseResponses(json, AnswerComment.class);
     }
 
     /**
      * getDynamic 首页动态（home）页面
+     *
      * @return Result对象
      */
     public Responses<Dynamic> getDynamic(int page) {
         Map<String, String> params = new HashMap<>();
         params.put("page", String.valueOf(page));
-        String json = doGet(Config.API_HOME, "", params);
+        String json = doGet(Config.API_CAT_HOME, "", params);
         return parseResponses(json, Dynamic.class);
     }
 
     /**
      * publishQuestion 发起问题
+     *
      * @param content 问题的标题
-     * @param detail 问题的内容
-     * @param topics 问题的话题
+     * @param detail  问题的内容
+     * @param topics  问题的话题
      * @return 包含PublishQuestion对象的Result对象
      */
     public Response<PublishQuestion> publishQuestion(String content, String detail, ArrayList<String> topics) {
@@ -269,79 +278,85 @@ public class Client {
                 topic.append(',').append(topics.get(i));
         }
         params.put("topics", topics.toString());
-        String json = doPost(Config.PUSHLISH_QUESTION, params);
+        String json = apiPost(Config.API_CAT_PUBLISH, Config.API_PUBLISH_QUESTION, params);
         return parseResponse(json, PublishQuestion.class);
     }
 
     /**
      * publishAnswer 添加问题答案
+     *
      * @param questionID 问题编号
-     * @param content 答案的内容
+     * @param content    答案的内容
      * @return 包含PublishAnswer对象的Result对象
      */
 
-    public Response<PublishAnswer> publishAnswer(int questionID, String content){
+    public Response<PublishAnswer> publishAnswer(int questionID, String content) {
         Map<String, String> params = new HashMap<>();
-        params.put("question_id", questionID+"");
+        params.put("question_id", questionID + "");
         params.put("answer_content", content);
-        String json = doPost(Config.PUSHLISH_ANSWER, params);
+        String json = apiPost(Config.API_CAT_PUBLISH, Config.API_PUBLISH_ANSWER, params);
         return parseResponse(json, PublishAnswer.class);
     }
 
 
     /**
      * postAction 对问题或答案进行感谢、点赞等动作
-     * @param type 动作的类型
+     *
+     * @param type      动作的类型
      * @param classType 类类型
-     * @param strs 动作所需参的数列表
+     * @param strs      动作所需参的数列表
      * @return Result2（如果有错误，返回NULL）
      */
 
-    public <T> Response<T> postAction(Config.ActionType type, @NonNull Class<T> classType, ArrayList<String> strs){
+    public <T> Response<T> postAction(Config.ActionType type, @NonNull Class<T> classType, ArrayList<String> strs) {
         Map<String, String> params = new HashMap<>();
         String json;
-        if(type==Config.ActionType.QUESTION_FOCUS){
-            params.put("question_id",strs.get(0));
-            json=doPost(Config.QUESTION_FOCUS,params);
-            return parseResponse(json,classType);
-        }
-        else if(type==Config.ActionType.QUESTION_THANKS){
-            params.put("question_id",strs.get(0));
-            json=doPost(Config.QUESTION_THANKS,params);
-            return parseResponse(json,classType);
-        }
-        else if(type==Config.ActionType.PUSHLISH_ANSWER_COMMENT){
-            params.put("answer_id",strs.get(0));
-            params.put("message",strs.get(1));
-            json=doPost(Config.PUSHLISH_ANSWER_COMMENT,params);
-            return parseResponse(json,classType);
-        }
-        else if(type== Config.ActionType.ANSWER_VOTE){
-            params.put("answer_id",strs.get(0));
-            params.put("value",strs.get(1));
-            json=doPost(Config.ANSWER_VOTE,params);
-            return parseResponse(json,classType);
-        }
-        else if(type== Config.ActionType.ANSWER_RATE){
-            params.put("type",strs.get(0));
-            params.put("answer_id",strs.get(1));
-            json=doPost(Config.ANSWER_RATE,params);
-            return parseResponse(json,classType);
+        if (type == Config.ActionType.QUESTION_FOCUS) {
+            params.put("question_id", strs.get(0));
+            json = ajax(Config.AJAX_QUESTION_FOCUS, params);
+            return parseResponse(json, classType);
+        } else if (type == Config.ActionType.QUESTION_THANKS) {
+            params.put("question_id", strs.get(0));
+            json = ajax(Config.AJAX_QUESTION_THANKS, params);
+            return parseResponse(json, classType);
+        } else if (type == Config.ActionType.PUBLISH_ANSWER_COMMENT) {
+            params.put("answer_id", strs.get(0));
+            params.put("message", strs.get(1));
+            json = apiPost(Config.API_CAT_QUESTION, Config.API_PUBLISH_ANSWER_COMMENT, params);
+            return parseResponse(json, classType);
+        } else if (type == Config.ActionType.ANSWER_VOTE) {
+            params.put("answer_id", strs.get(0));
+            params.put("value", strs.get(1));
+            json = ajax(Config.AJAX_ANSWER_VOTE, params);
+            return parseResponse(json, classType);
+        } else if (type == Config.ActionType.ANSWER_RATE) {
+            params.put("type", strs.get(0));
+            params.put("answer_id", strs.get(1));
+            json = ajax(Config.AJAX_ANSWER_RATE, params);
+            return parseResponse(json, classType);
         }
         return null;
     }
 
-    private String doPost(String apiCat, Map<String, String> params) {
-        return doPost(apiCat, "",params);
+    private String ajax(String url, Map<String, String> params) {
+        return doPost(Config.HOST_NAME + url, params);
     }
 
-    private String doPost(String apiCat, String api, Map<String, String> params) {
+    private String apiPost(String apiCat, Map<String, String> params) {
+        return apiPost(apiCat, "", params);
+    }
+
+    private String apiPost(String apiCat, String api, Map<String, String> params) {
         // 组合链接
         String apiUrl = Config.API_ROOT + apiCat + '/' + api + '/';
         if (Config.KEEP_SECRET) {
-            apiUrl += "&mobile_sign=" + getSign(apiCat);
+            apiUrl += "?mobile_sign=" + getSign(apiCat);
         }
-        Log.d("POST", apiUrl);
+        return doPost(apiUrl, params);
+    }
+
+    private String doPost(String apiUrl, Map<String, String> params) {
+        Log.d("POST REQUEST", apiUrl);
         // 建立请求内容
         StringBuilder builder = new StringBuilder();
         for (Map.Entry<String, String> entry : params.entrySet()) {
@@ -383,7 +398,9 @@ public class Client {
                 int len = 0;
                 while ((len = input.read(buffer)) != -1)
                     byteArrayOutputStream.write(buffer, 0, len);
-                return new String(byteArrayOutputStream.toByteArray());
+                String str = new String(byteArrayOutputStream.toByteArray());
+                Log.d("POST RESPONSE", str);
+                return str;
             }
         } catch (IOException e) {
             return null;

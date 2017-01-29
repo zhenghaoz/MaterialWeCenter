@@ -11,7 +11,7 @@ import com.sine_x.material_wecenter.models.Dynamic;
 import com.sine_x.material_wecenter.models.LoginProcess;
 import com.sine_x.material_wecenter.models.PublishAnswer;
 import com.sine_x.material_wecenter.models.PublishQuestion;
-import com.sine_x.material_wecenter.models.Question;
+import com.sine_x.material_wecenter.models.ExploreItem;
 import com.sine_x.material_wecenter.models.QuestionDetail;
 import com.sine_x.material_wecenter.models.Response;
 import com.sine_x.material_wecenter.models.Responses;
@@ -199,12 +199,12 @@ public class Client {
      * @param page 页数
      * @return Result对象
      */
-    public Responses<Question> explore(int page) {
+    public Responses<ExploreItem> explore(int page) {
         Map<String, String> params = new HashMap<>();
         params.put("page", String.valueOf(page));
         params.put("per_page", String.valueOf(Config.ITEM_PER_PAGE));
         String json = doGet(Config.API_CAT_EXPLORE, params);
-        return parseResponses(json, Question.class);
+        return parseResponses(json, ExploreItem.class);
     }
 
     /**
@@ -432,7 +432,7 @@ public class Client {
                         .append("&");
             }
             builder.deleteCharAt(builder.length() - 1);
-            Log.d("GET", builder.toString());
+            Log.d("GET REQUEST", builder.toString());
             URL url = new URL(builder.toString());
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             // 附上Cookie

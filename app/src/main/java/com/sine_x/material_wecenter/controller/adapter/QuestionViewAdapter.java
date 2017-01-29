@@ -8,11 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.sine_x.material_wecenter.models.ExploreItem;
 import com.squareup.picasso.Picasso;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.activity.QuestionActivity;
 import com.sine_x.material_wecenter.controller.activity.UserActivity;
-import com.sine_x.material_wecenter.models.Question;
 
 import java.util.ArrayList;
 
@@ -20,43 +20,66 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class QuestionViewAdapter extends RecyclerView.Adapter<QuestionViewAdapter.ViewHolder> {
 
-    private ArrayList<Question> mList;
+    private ArrayList<ExploreItem> mList;
     private Context mContext;
 
-    public QuestionViewAdapter(Context context, ArrayList<Question> list) {
+    public QuestionViewAdapter(Context context, ArrayList<ExploreItem> list) {
         this.mContext = context;
         this.mList = list;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final Question question = mList.get(position);
+        final ExploreItem exploreItem = mList.get(position);
         // Load avatar
-        String avatarFile = question.getUser_info().getAvatar_file();
+        String avatarFile = exploreItem.getUser_info().getAvatar_file();
         if (!avatarFile.isEmpty())
             Picasso.with(mContext)
                     .load(avatarFile)
                     .into(holder.avatarImg);
-        holder.questionTitle.setText(question.getQuestion_content());
-        holder.questionInfo.setText(String.valueOf(question.getFocus_count()) + "人关注 • "
-                + String.valueOf(question.getAnswer_count()) + "个回答 • "
-                + String.valueOf(question.getView_count()) + "次浏览");
-        holder.questionTitle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, QuestionActivity.class);
-                intent.putExtra("questionID", question.getQuestion_id());
-                mContext.startActivity(intent);
-            }
-        });
-        holder.avatarImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, UserActivity.class);
-                intent.putExtra("uid", String.valueOf(question.getUser_info().getUid()));
-                mContext.startActivity(intent);
-            }
-        });
+        // 加载内容
+        if (exploreItem.getPost_type().equals(ExploreItem.POST_TYPE_QUESTION)) {
+            holder.questionTitle.setText(exploreItem.getQuestion_content());
+            holder.questionInfo.setText(String.valueOf(exploreItem.getFocus_count()) + "人关注 • "
+                    + String.valueOf(exploreItem.getAnswer_count()) + "个回答 • "
+                    + String.valueOf(exploreItem.getView_count()) + "次浏览");
+            holder.questionTitle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, QuestionActivity.class);
+                    intent.putExtra("questionID", exploreItem.getQuestion_id());
+                    mContext.startActivity(intent);
+                }
+            });
+            holder.avatarImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, UserActivity.class);
+                    intent.putExtra("uid", String.valueOf(exploreItem.getUser_info().getUid()));
+                    mContext.startActivity(intent);
+                }
+            });
+        } else {
+            holder.questionTitle.setText(exploreItem.getTitle());
+            holder.questionInfo.setText(String.valueOf(exploreItem.getVotes()) + "人赞同 • "
+                    + String.valueOf(exploreItem.getViews()) + "次浏览");
+/*            holder.questionTitle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, QuestionActivity.class);
+                    intent.putExtra("questionID", exploreItem.getQuestion_id());
+                    mContext.startActivity(intent);
+                }
+            });*/
+            holder.avatarImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, UserActivity.class);
+                    intent.putExtra("uid", String.valueOf(exploreItem.getUser_info().getUid()));
+                    mContext.startActivity(intent);
+                }
+            });
+        }
     }
 
     @Override

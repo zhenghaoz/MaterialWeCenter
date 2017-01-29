@@ -19,9 +19,8 @@ import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.activity.PostActivity;
 import com.sine_x.material_wecenter.controller.adapter.QuestionViewAdapter;
-import com.sine_x.material_wecenter.models.Question;
+import com.sine_x.material_wecenter.models.ExploreItem;
 import com.sine_x.material_wecenter.models.Responses;
-import com.sine_x.material_wecenter.models.Result2;
 
 import java.util.ArrayList;
 
@@ -29,7 +28,7 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
 
     private final int ScrollOffset = 4;
     private boolean loading = true;
-    private ArrayList<Question> mList = new ArrayList<>();
+    private ArrayList<ExploreItem> mList = new ArrayList<>();
     private QuestionViewAdapter mAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
@@ -128,7 +127,7 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
      */
     private class LoadQuestionList extends AsyncTask<Void, Integer, Integer> {
 
-        private Responses<Question> result2;
+        private Responses<ExploreItem> result2;
 
         @Override
         protected Integer doInBackground(Void... params) {

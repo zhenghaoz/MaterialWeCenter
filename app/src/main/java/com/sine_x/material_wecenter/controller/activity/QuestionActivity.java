@@ -2,10 +2,10 @@ package com.sine_x.material_wecenter.controller.activity;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,16 +19,15 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.sine_x.material_wecenter.models.PublishAnswer;
-import com.sine_x.material_wecenter.models.Response;
-import com.sine_x.material_wecenter.models.Result2;
-import com.truizlop.fabreveallayout.FABRevealLayout;
-import com.truizlop.fabreveallayout.OnRevealChangeListener;
 import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.adapter.QuestionDetailAdapter;
+import com.sine_x.material_wecenter.models.PublishAnswer;
 import com.sine_x.material_wecenter.models.QuestionDetail;
+import com.sine_x.material_wecenter.models.Response;
+import com.truizlop.fabreveallayout.FABRevealLayout;
+import com.truizlop.fabreveallayout.OnRevealChangeListener;
 
 
 public class QuestionActivity extends AppCompatActivity {
@@ -68,7 +67,7 @@ public class QuestionActivity extends AppCompatActivity {
 
         //get intent
         Intent mIntent=getIntent();
-        questionID=mIntent.getIntExtra("questionID", -1);
+        questionID=mIntent.getIntExtra(Config.INT_QUESTION_ID, -1);
 
         answerContent=(EditText) findViewById(R.id.edit_content_answer);
 

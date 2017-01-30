@@ -30,7 +30,7 @@ public class UserActonFragment extends Fragment {
     public static int ANSWER = 201;
     private boolean loading = true;
 
-    private String uid;
+    private long uid;
     private int actions;
 
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
@@ -38,9 +38,9 @@ public class UserActonFragment extends Fragment {
     private List<Action> mContentItems = new ArrayList<>();
     private int pageNum = 1;   // 当前页面的页码
 
-    public static UserActonFragment newInstance(String uid, int actions) {
+    public static UserActonFragment newInstance(long uid, int actions) {
         Bundle args = new Bundle();
-        args.putString("uid", uid);
+        args.putLong("uid", uid);
         args.putInt("actions", actions);
         UserActonFragment fragment = new UserActonFragment();
         fragment.setArguments(args);
@@ -50,7 +50,7 @@ public class UserActonFragment extends Fragment {
     @Override
     public void setArguments(Bundle args) {
         super.setArguments(args);
-        uid = args.getString("uid");
+        uid = args.getLong("uid");
         actions = args.getInt("actions");
     }
 

@@ -17,7 +17,6 @@ import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.models.PublishQuestion;
 import com.sine_x.material_wecenter.models.Response;
-import com.sine_x.material_wecenter.models.Result2;
 
 import java.util.ArrayList;
 

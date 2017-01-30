@@ -24,6 +24,7 @@
     <string name="query">查询</string>
     <string name="topic">话题</string>
     <string name="settings">设置</string>
+    <string name="sign_out">注销</string>
     <string name="title_activity_user">UserActivity</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_post">发布问题</string>
@@ -43,51 +44,6 @@
 
     <string name="item_footer">╮(╯3╰)╭再也找不到更多的了</string>
 
-    <string-array name="spin_term">
-        <item>1999/2000(1)</item>
-        <item>1999/2000(2)</item>
-        <item>2000/2001(1)</item>
-        <item>2000/2001(2)</item>
-        <item>2001/2002(1)</item>
-        <item>2001/2002(2)</item>
-        <item>2002/2003(1)</item>
-        <item>2002/2003(2)</item>
-        <item>2003/2004(1)</item>
-        <item>2003/2004(2)</item>
-        <item>2004/2005(1)</item>
-        <item>2004/2005(2)</item>
-        <item>2005/2006(1)</item>
-        <item>2005/2006(2)</item>
-        <item>2006/2007(1)</item>
-        <item>2006/2007(2)</item>
-        <item>2007/2008(1)</item>
-        <item>2007/2008(2)</item>
-        <item>2008/2009(1)</item>
-        <item>2008/2009(2)</item>
-        <item>2009/2010(1)</item>
-        <item>2009/2010(2)</item>
-        <item>2010/2011(1)</item>
-        <item>2010/2011(2)</item>
-        <item>2011/2012(1)</item>
-        <item>2011/2012(2)</item>
-        <item>2012/2013(1)</item>
-        <item>2012/2013(2)</item>
-        <item>2013/2014(1)</item>
-        <item>2013/2014(2)</item>
-        <item>2014/2015(1)</item>
-        <item>2014/2015(2)</item>
-        <item>2015/2016(1)</item>
-        <item>2015/2016(2)</item>
-        <item>2016/2017(1)</item>
-        <item>2016/2017(2)</item>
-        <item>2017/2018(1)</item>
-        <item>2017/2018(2)</item>
-        <item>2018/2019(1)</item>
-        <item>2018/2019(2)</item>
-    </string-array>
-
-    <string name="auto_update">自动更新</string>
-    <string name="latest">应用已经是最新版本</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
 
     <string name="login">登录</string>

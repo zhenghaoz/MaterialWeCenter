@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.activity.QuestionActivity;
 import com.sine_x.material_wecenter.controller.fragment.UserActonFragment;
@@ -68,7 +69,7 @@ public class ActionViewAdapter extends RecyclerView.Adapter<ActionViewAdapter.Ac
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, QuestionActivity.class);
-                intent.putExtra("question_id", contents.get(position).getQuestion_info().getQuestion_id());
+                intent.putExtra(Config.INT_QUESTION_ID, contents.get(position).getQuestion_info().getQuestion_id());
                 context.startActivity(intent);
             }
         });

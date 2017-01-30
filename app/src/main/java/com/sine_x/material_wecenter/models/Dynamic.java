@@ -1,9 +1,33 @@
 package com.sine_x.material_wecenter.models;
 
-/**
- * Created by windness on 2016/1/27.
- */
 public class Dynamic {
+
+    public static final int ADD_QUESTION = 101;         // 添加问题
+    public static final int MOD_QUESTON_TITLE = 102;    // 修改问题标题
+    public static final int MOD_QUESTION_DESCRI = 103;  // 修改问题描述
+    public static final int ADD_REQUESTION_FOCUS = 105; // 添加问题关注
+    public static final int REDIRECT_QUESTION = 107;    // 问题重定向
+    public static final int MOD_QUESTION_CATEGORY = 108;// 修改问题分类
+    public static final int MOD_QUESTION_ATTACH = 109;  // 修改问题附件
+    public static final int DEL_REDIRECT_QUESTION = 110;// 删除问题重定向
+
+    public static final int ANSWER_QUESTION = 201;      // 回复问题
+    public static final int ADD_AGREE = 204;            // 赞同答案
+    public static final int ADD_USEFUL = 206;           // 感谢作者
+    public static final int ADD_UNUSEFUL = 207;         // 问题没有帮助
+
+    public static final int ADD_TOPIC = 401;            // 创建话题
+    public static final int MOD_TOPIC = 402;            // 修改话题
+    public static final int MOD_TOPIC_DESCRI = 403;     // 修改话题描述
+    public static final int MOD_TOPIC_PIC = 404;        // 修改话题图片
+    public static final int DELETE_TOPIC = 405;         // 删除话题
+    public static final int ADD_TOPIC_FOCUS = 406;      // 添加话题关注
+    public static final int ADD_RELATED_TOPIC = 410;    // 添加相关话题
+    public static final int DELETE_RELATED_TOPIC = 411; // 删除相关话题
+
+    public static final int ADD_ARTICLE = 501;          // 添加文章
+    public static final int ADD_AGREE_ARTICLE = 502;    // 赞同文章
+    public static final int ADD_COMMENT_ARTICLE = 503;  // 评论文章
 
 
     /**
@@ -30,7 +54,7 @@ public class Dynamic {
     /**
      * answer_id : 13612
      * answer_content : 王老菊
-
+     * <p>
      * add_time : 1453863313
      * against_count : 0
      * agree_count : 0

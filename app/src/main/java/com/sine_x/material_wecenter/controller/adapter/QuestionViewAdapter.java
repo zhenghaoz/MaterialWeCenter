@@ -55,7 +55,7 @@ public class QuestionViewAdapter extends RecyclerView.Adapter<QuestionViewAdapte
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(mContext, UserActivity.class);
-                    intent.putExtra("uid", String.valueOf(exploreItem.getUser_info().getUid()));
+                    intent.putExtra("uid", exploreItem.getUser_info().getUid());
                     mContext.startActivity(intent);
                 }
             });
@@ -75,7 +75,7 @@ public class QuestionViewAdapter extends RecyclerView.Adapter<QuestionViewAdapte
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(mContext, UserActivity.class);
-                    intent.putExtra("uid", String.valueOf(exploreItem.getUser_info().getUid()));
+                    intent.putExtra("uid", exploreItem.getUser_info().getUid());
                     mContext.startActivity(intent);
                 }
             });

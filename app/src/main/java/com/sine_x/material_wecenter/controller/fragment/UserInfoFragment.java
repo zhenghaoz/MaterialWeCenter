@@ -14,35 +14,19 @@ import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.models.Response;
-import com.sine_x.material_wecenter.models.Result2;
 import com.sine_x.material_wecenter.models.UserInfo;
 
-/**
- * Copyright (C) 2016 Jinghong Union of ZJUT
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 public class UserInfoFragment extends Fragment {
 
     private ObservableScrollView mScrollView;
 
     private TextView fans, agree, thanks, signature, city;
 
-    private String uid;
+    private long uid;
 
-    public static UserInfoFragment newInstance(String uid) {
+    public static UserInfoFragment newInstance(long uid) {
         Bundle args = new Bundle();
-        args.putString("uid", uid);
+        args.putLong("uid", uid);
         UserInfoFragment fragment = new UserInfoFragment();
         fragment.setArguments(args);
         return fragment;
@@ -51,7 +35,7 @@ public class UserInfoFragment extends Fragment {
     @Override
     public void setArguments(Bundle args) {
         super.setArguments(args);
-        uid = args.getString("uid");
+        uid = args.getLong("uid");
     }
 
     @Override

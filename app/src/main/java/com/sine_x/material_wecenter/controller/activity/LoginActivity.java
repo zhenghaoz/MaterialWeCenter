@@ -11,10 +11,10 @@ import android.widget.EditText;
 
 import com.nispok.snackbar.Snackbar;
 import com.sine_x.material_wecenter.Client;
-import com.sine_x.material_wecenter.models.Response;
-import com.sine_x.material_wecenter.models.Result2;
-import com.sine_x.material_wecenter.models.LoginProcess;
+import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
+import com.sine_x.material_wecenter.models.LoginProcess;
+import com.sine_x.material_wecenter.models.Response;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -63,10 +63,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 // 保存用户名和密码
                 SharedPreferences preferences = getSharedPreferences("account", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("uid", user_name);
-                editor.putString("password", password);
-                editor.putString("user_name", response.getRsm().getUser_name());
-                editor.putString("avatar_file", response.getRsm().getAvatar_file());
+                editor.putLong(Config.PRE_UID, response.getRsm().getUid());
+                editor.putString(Config.PRE_PASSWORD, password);
+                editor.putString(Config.PRE_USER_NAME, response.getRsm().getUser_name());
+                editor.putString(Config.PRE_AVATAR_FILE, response.getRsm().getAvatar_file());
                 editor.apply();
                 // 加载主页
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);

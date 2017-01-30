@@ -19,9 +19,10 @@ public class Config {
 
     // 警告！ 修改下面内容可能会导致应用无法使用
 
-    public static String API_ROOT = HOST_NAME + "?/api/";
+    static String API_ROOT = HOST_NAME + "?/api/";
 
-    // API请求URL
+    // API请求地址
+
     static String API_CAT_ACCOUNT = "account";
     static String API_LOGIN_PROCESS = "login_process";
     static String API_GET_USERINFO = "get_userinfo";
@@ -40,6 +41,8 @@ public class Config {
     static String API_ANSWER_COMMENTS = "answer_comments";
     static String API_PUBLISH_ANSWER_COMMENT = "save_answer_comment";
 
+    // AJAX请求地址
+
     static String AJAX_ANSWER_RATE = "question/ajax/question_answer_rate/";
     static String AJAX_ANSWER_VOTE = "question/ajax/answer_vote/";
     static String AJAX_QUESTION_FOCUS = "question/ajax/focus/";
@@ -55,4 +58,12 @@ public class Config {
         ANSWER_RATE,
         ANSWER_VOTE
     }
+
+    public static final String PRE_ACCOUNT = "account";
+    public static final String PRE_UID = "uid";
+    public static final String PRE_PASSWORD = "password";
+    public static final String PRE_USER_NAME = "user_name";
+    public static final String PRE_AVATAR_FILE = "avatar_file";
+
+    public static final String INT_QUESTION_ID = "questionID";
 }

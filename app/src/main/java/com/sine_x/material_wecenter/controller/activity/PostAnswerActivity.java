@@ -2,9 +2,9 @@ package com.sine_x.material_wecenter.controller.activity;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
@@ -12,11 +12,9 @@ import android.widget.ImageButton;
 
 import com.nispok.snackbar.Snackbar;
 import com.sine_x.material_wecenter.Client;
-import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.models.PublishAnswer;
 import com.sine_x.material_wecenter.models.Response;
-import com.sine_x.material_wecenter.models.Result2;
 
 public class PostAnswerActivity extends AppCompatActivity {
 

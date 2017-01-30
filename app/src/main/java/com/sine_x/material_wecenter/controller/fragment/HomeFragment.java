@@ -7,7 +7,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,6 @@ import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.adapter.DynamicViewAdapter;
 import com.sine_x.material_wecenter.models.Dynamic;
 import com.sine_x.material_wecenter.models.Responses;
-import com.sine_x.material_wecenter.models.Result2;
 
 import java.util.ArrayList;
 import java.util.List;

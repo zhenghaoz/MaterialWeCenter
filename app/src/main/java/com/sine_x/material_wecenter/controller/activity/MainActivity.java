@@ -4,8 +4,10 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
+import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.fragment.ExploreFragment;
 import com.sine_x.material_wecenter.controller.fragment.HomeFragment;
@@ -20,7 +22,7 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
 
     private HelpLiveo mHelpLiveo;
 
-    private String uid;
+    private long uid;
     private String user_name;
     private String avatar_file;
 
@@ -35,13 +37,12 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
 
         // 验证用户保存的登录信息
         SharedPreferences preferences = getSharedPreferences("account", MODE_PRIVATE);
-        uid = preferences.getString("uid", "");
-        user_name = preferences.getString("user_name", "");
-        avatar_file = preferences.getString("avatar_file", "");
+        uid = preferences.getLong(Config.PRE_UID, -1);
+        user_name = preferences.getString(Config.PRE_USER_NAME, "");
+        avatar_file = preferences.getString(Config.PRE_AVATAR_FILE, "");
 
         // 创建主菜单
         this.userName.setText(user_name);
-        this.userEmail.setText(uid);
         this.userBackground.setImageResource(R.drawable.background);
         if (!avatar_file.isEmpty())
             Picasso.with(this).load(avatar_file).into(this.userPhoto);
@@ -50,6 +51,7 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
         mHelpLiveo.add(getString(R.string.explore), R.mipmap.ic_explore_grey600_48dp);
         mHelpLiveo.addSeparator();
         mHelpLiveo.add(getString(R.string.settings), R.mipmap.ic_settings_grey600_48dp);
+        mHelpLiveo.add(getString(R.string.sign_out), R.drawable.ic_exit_to_app_grey600_48dp);
         with(this).startingPosition(1)
                 .addAllHelpItem(mHelpLiveo.getHelp())
                 .colorNameSubHeader(R.color.nliveo_blue_colorPrimary)
@@ -86,25 +88,42 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
                 if (homeFragment == null) {
                     homeFragment = new HomeFragment();
                     transaction.add(R.id.container, homeFragment);
-                } else
+                } else {
                     transaction.show(homeFragment);
+                }
                 setTitle(R.string.dynamic);
                 break;
             case 1:     // 发现
                 if (exploreFragment == null) {
                     exploreFragment = new ExploreFragment();
                     transaction.add(R.id.container, exploreFragment);
-                } else
+                } else {
                     transaction.show(exploreFragment);
+                }
                 setTitle(R.string.explore);
                 break;
             case 3:
                 if (settingsFragment == null) {
                     settingsFragment = new SettingsFragment();
                     transaction.add(R.id.container, settingsFragment);
-                } else
+                } else {
                     transaction.show(settingsFragment);
-                setTitle("设置");
+                }
+                setTitle(getString(R.string.settings));
+                break;
+            case 4:
+                // 删除用户信息
+                SharedPreferences preferences = getSharedPreferences("account", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putLong(Config.PRE_UID, -1);
+                editor.putString(Config.PRE_USER_NAME, "");
+                editor.putString(Config.PRE_PASSWORD, "");
+                editor.putString(Config.PRE_AVATAR_FILE, "");
+                editor.apply();
+                // 退出主页
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                finish();
         }
         transaction.commit();
     }

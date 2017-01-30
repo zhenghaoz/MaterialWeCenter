@@ -13,16 +13,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sine_x.material_wecenter.models.Response;
-import com.sine_x.material_wecenter.models.Result2;
-import com.squareup.picasso.Picasso;
 import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.activity.UserActivity;
 import com.sine_x.material_wecenter.models.AnswerComment;
 import com.sine_x.material_wecenter.models.AnswerDetail;
+import com.sine_x.material_wecenter.models.Response;
 import com.sine_x.material_wecenter.models.WebData;
+import com.squareup.picasso.Picasso;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -31,9 +30,6 @@ import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * Created by Administrator on 2016/2/1.
- */
 public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Html.ImageGetter{
 
     private final int TYPE_HEADER=0;
@@ -115,7 +111,7 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, UserActivity.class);
-                    intent.putExtra("uid", answer.getUser_info().getUid() + "");
+                    intent.putExtra("uid", answer.getUser_info().getUid());
                     mContext.startActivity(intent);
                 }
             });
@@ -188,7 +184,7 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 @Override
                 public void onClick(View v) {
                     Intent intent=new Intent(mContext, UserActivity.class);
-                    intent.putExtra("uid",answerComment.getUser_info().getUid()+"");
+                    intent.putExtra("uid",answerComment.getUser_info().getUid());
                     mContext.startActivity(intent);
                 }
             });

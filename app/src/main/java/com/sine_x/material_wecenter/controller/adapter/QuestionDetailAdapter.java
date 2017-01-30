@@ -19,6 +19,7 @@ import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.activity.AnswerActivity;
 import com.sine_x.material_wecenter.controller.activity.UserActivity;
+import com.sine_x.material_wecenter.models.Ajax;
 import com.sine_x.material_wecenter.models.QuestionDetail;
 import com.sine_x.material_wecenter.models.Response;
 import com.sine_x.material_wecenter.models.WebData;
@@ -133,7 +134,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 @Override
                 public void onClick(View v) {
                     Intent intent=new Intent(mContext, UserActivity.class);
-                    intent.putExtra("uid",questionInfo.getUser_info().getUid()+"");
+                    intent.putExtra("uid",questionInfo.getUser_info().getUid());
                     mContext.startActivity(intent);
                 }
             });
@@ -215,7 +216,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, UserActivity.class);
-                    intent.putExtra("uid", answerInfo.getUser_info().getUid() + "");
+                    intent.putExtra("uid", answerInfo.getUser_info().getUid());
                     mContext.startActivity(intent);
                 }
             });
@@ -608,7 +609,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         private int action;
         private int questionID;
         private int num;
-        Response<Object> result2;
+        Response<Ajax> result2;
         private View count;
         private View view;
 
@@ -632,12 +633,10 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 ArrayList<String> strs=new ArrayList<>();
                 switch (action){
                     case FOCUS:
-                        strs.add(questionID+"");
-                        result2 = client.postAction(Config.ActionType.QUESTION_FOCUS,null,strs);
+                        result2 = client.focus(questionID);
                         break;
                     case THANKS:
-                        strs.add(questionID+"");
-                        result2 = client.postAction(Config.ActionType.QUESTION_THANKS,null,strs);
+                        result2 = client.thanks(questionID);
                         break;
                     default:
                         break;
@@ -654,12 +653,12 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             super.onPostExecute(integer);
             switch (action){
                 case FOCUS:
-                    Focus mFocus=(Focus) result2.getRsm();
-                    if(mFocus.getType().equals("add")){
+                    Ajax mAjax =(Ajax) result2.getRsm();
+                    if(mAjax.getType().equals("add")){
                         ((Button)view).setText("取消关注");
                         ((Button)view).setBackgroundResource(R.drawable.stroker);
                     }
-                    else if(mFocus.getType().equals("remove")){
+                    else if(mAjax.getType().equals("remove")){
                         ((Button)view).setText("关注");
                         ((Button)view).setBackgroundResource(R.drawable.un_follow_shape);
                     }
@@ -684,32 +683,5 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 Toast.makeText(mContext, result2.getErr(), Toast.LENGTH_SHORT).show();
         }
     }
-
-    private static class Focus{
-
-        private String type;
-
-        public void setType(String type) {
-            this.type = type;
-        }
-
-        public String getType() {
-            return type;
-        }
-    }
-
-    private static class Thanks{
-
-        private String type;
-
-        public void setType(String type) {
-            this.type = type;
-        }
-
-        public String getType() {
-            return type;
-        }
-    }
-
 }
 

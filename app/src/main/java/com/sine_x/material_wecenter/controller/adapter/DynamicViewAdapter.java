@@ -20,79 +20,59 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * Created by windness on 2016/1/27.
- */
 public class DynamicViewAdapter extends RecyclerView.Adapter<DynamicViewAdapter.ViewHolder> {
 
-    /**
-     * associate_action 列表
-     * 参考链接：
-     * http://wecenter.api.hihwei.com/doku.php?id=other:associate_action_%E5%88%97%E8%A1%A8
-     */
-    private static final int ADD_QUESTION=101;//添加问题
-    private static final int MOD_QUESTON_TITLE=102;//修改问题标题
-    private static final int MOD_QUESTION_DESCRI=103;//修改问题描述
-    private static final int ADD_REQUESTION_FOCUS=105;//添加问题关注
-    private static final int REDIRECT_QUESTION=107;//问题重定向
-    private static final int MOD_QUESTION_CATEGORY=108;//修改问题分类
-    private static final int MOD_QUESTION_ATTACH=109;//修改问题附件
-    private static final int DEL_REDIRECT_QUESTION=110;//删除问题重定向
+    private boolean questionOnly(int n) {
+        return n >= Dynamic.ADD_QUESTION && n <= Dynamic.DEL_REDIRECT_QUESTION;
+    }
 
-    private static final int ANSWER_QUESTION=201;//回复问题
-    private static final int ADD_AGREE=204;//赞同答案
-    private static final int ADD_USEFUL=206;//感谢作者
-    private static final int ADD_UNUSEFUL=207;//问题没有帮助
+    private boolean questionAndAnswer(int n) {
+        return n >= Dynamic.ANSWER_QUESTION && n <= Dynamic.ADD_UNUSEFUL;
+    }
 
-    private static final int ADD_TOPIC=401;//创建话题
-    private static final int MOD_TOPIC=402;//修改话题
-    private static final int MOD_TOPIC_DESCRI=403;//修改话题描述
-    private static final int MOD_TOPIC_PIC=404;//修改话题图片
-    private static final int DELETE_TOPIC=405;//删除话题
-    private static final int ADD_TOPIC_FOCUS=406;//添加话题关注
-    private static final int ADD_RELATED_TOPIC=410;//添加相关话题
-    private static final int DELETE_RELATED_TOPIC=411;//删除相关话题
+    private boolean topic(int n) {
+        return n >= Dynamic.ADD_TOPIC && n <= Dynamic.DELETE_RELATED_TOPIC;
+    }
 
-    private static final int ADD_ARTICLE=501;//添加文章
-    private static final int ADD_AGREE_ARTICLE=502;//赞同文章
-    private static final int ADD_COMMENT_ARTICLE=503;//评论文章
+    private boolean articleOnly(int n) {
+        return n >= Dynamic.ADD_ARTICLE && n <= Dynamic.ADD_AGREE;
+    }
 
-    private boolean questionOnly(int n) {return n >= ADD_QUESTION && n <= DEL_REDIRECT_QUESTION;}
-    private boolean questionAndAnswer(int n) {return n >= ANSWER_QUESTION && n <= ADD_UNUSEFUL;}
-    private boolean topic(int n) {return n >= ADD_TOPIC && n <= DELETE_RELATED_TOPIC;}
-    private boolean articleOnly(int n) {return n >= ADD_ARTICLE && n <= ADD_AGREE;}
-    private boolean articleAndComment(int n) {return n == ADD_COMMENT_ARTICLE;}
+    private boolean articleAndComment(int n) {
+        return n == Dynamic.ADD_COMMENT_ARTICLE;
+    }
 
     private static SparseArray<String> action;
+
     static {
         action = new SparseArray<String>() {
             {
-                put(ADD_QUESTION, "发起了问题");
-                put(MOD_QUESTON_TITLE, "修改了问题标题");
-                put(MOD_QUESTION_DESCRI, "修改了问题描述");
-                put(ADD_REQUESTION_FOCUS, "关注了该问题");
-                put(REDIRECT_QUESTION, "设置了问题重定向");
-                put(MOD_QUESTION_CATEGORY, "修改了问题分类");
-                put(MOD_QUESTION_ATTACH, "修改了问题附件");
-                put(DEL_REDIRECT_QUESTION, "删除了问题重定向");
+                put(Dynamic.ADD_QUESTION, "发起了问题");
+                put(Dynamic.MOD_QUESTON_TITLE, "修改了问题标题");
+                put(Dynamic.MOD_QUESTION_DESCRI, "修改了问题描述");
+                put(Dynamic.ADD_REQUESTION_FOCUS, "关注了该问题");
+                put(Dynamic.REDIRECT_QUESTION, "设置了问题重定向");
+                put(Dynamic.MOD_QUESTION_CATEGORY, "修改了问题分类");
+                put(Dynamic.MOD_QUESTION_ATTACH, "修改了问题附件");
+                put(Dynamic.DEL_REDIRECT_QUESTION, "删除了问题重定向");
 
-                put(ANSWER_QUESTION, "回答了问题");
-                put(ADD_AGREE, "赞同了回答");
-                put(ADD_USEFUL, "感谢了作者");
-                put(ADD_UNUSEFUL, "认为问题没有帮助");
+                put(Dynamic.ANSWER_QUESTION, "回答了问题");
+                put(Dynamic.ADD_AGREE, "赞同了回答");
+                put(Dynamic.ADD_USEFUL, "感谢了作者");
+                put(Dynamic.ADD_UNUSEFUL, "认为问题没有帮助");
 
-                put(ADD_TOPIC, "创建了话题");
-                put(MOD_TOPIC, "修改了话题");
-                put(MOD_TOPIC_DESCRI, "修改了话题描述");
-                put(MOD_TOPIC_PIC, "修改了话题图片");
-                put(DELETE_TOPIC, "删除了话题");
-                put(ADD_TOPIC_FOCUS, "添加了话题关注");
-                put(ADD_RELATED_TOPIC, "添加了相关话题");
-                put(DELETE_RELATED_TOPIC, "删除了相关话题");
+                put(Dynamic.ADD_TOPIC, "创建了话题");
+                put(Dynamic.MOD_TOPIC, "修改了话题");
+                put(Dynamic.MOD_TOPIC_DESCRI, "修改了话题描述");
+                put(Dynamic.MOD_TOPIC_PIC, "修改了话题图片");
+                put(Dynamic.DELETE_TOPIC, "删除了话题");
+                put(Dynamic.ADD_TOPIC_FOCUS, "添加了话题关注");
+                put(Dynamic.ADD_RELATED_TOPIC, "添加了相关话题");
+                put(Dynamic.DELETE_RELATED_TOPIC, "删除了相关话题");
 
-                put(ADD_ARTICLE, "添加了文章");
-                put(ADD_AGREE_ARTICLE, "赞同了文章");
-                put(ADD_COMMENT_ARTICLE, "评论了文章");
+                put(Dynamic.ADD_ARTICLE, "添加了文章");
+                put(Dynamic.ADD_AGREE_ARTICLE, "赞同了文章");
+                put(Dynamic.ADD_COMMENT_ARTICLE, "评论了文章");
             }
         };
     }
@@ -133,7 +113,7 @@ public class DynamicViewAdapter extends RecyclerView.Adapter<DynamicViewAdapter.
 
     @Override
     public int getItemCount() {
-        return mList==null?0:mList.size();
+        return mList == null ? 0 : mList.size();
     }
 
     //101 - 110
@@ -154,7 +134,7 @@ public class DynamicViewAdapter extends RecyclerView.Adapter<DynamicViewAdapter.
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, UserActivity.class);
-                intent.putExtra("uid", String.valueOf(dynamic.getUser_info().getUid()));
+                intent.putExtra("uid", dynamic.getUser_info().getUid());
                 mContext.startActivity(intent);
             }
         });
@@ -178,7 +158,7 @@ public class DynamicViewAdapter extends RecyclerView.Adapter<DynamicViewAdapter.
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, UserActivity.class);
-                intent.putExtra("uid", String.valueOf(dynamic.getUser_info().getUid()));
+                intent.putExtra("uid", dynamic.getUser_info().getUid());
                 mContext.startActivity(intent);
             }
         });

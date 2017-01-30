@@ -13,14 +13,13 @@ import android.view.View;
 
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
-import com.sine_x.material_wecenter.models.Response;
-import com.squareup.picasso.Picasso;
 import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.fragment.UserActonFragment;
 import com.sine_x.material_wecenter.controller.fragment.UserInfoFragment;
-import com.sine_x.material_wecenter.models.Result2;
+import com.sine_x.material_wecenter.models.Response;
 import com.sine_x.material_wecenter.models.UserInfo;
+import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,7 +30,7 @@ public class UserActivity extends AppCompatActivity {
     @Bind(R.id.view_pager) MaterialViewPager mViewPager;
     @Bind(R.id.logo_white) CircleImageView imgAvatar;
     private Menu menu;
-    private String uid;
+    private long uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,7 @@ public class UserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user);
         ButterKnife.bind(this);
         // 获取用户ID
-        uid = getIntent().getStringExtra("uid");
+        uid = getIntent().getLongExtra("uid", -1);
         setTitle("");
         // 初始化工具栏
         Toolbar toolbar = mViewPager.getToolbar();

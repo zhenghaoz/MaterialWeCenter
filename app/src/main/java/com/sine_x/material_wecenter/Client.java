@@ -8,6 +8,7 @@ import com.sine_x.material_wecenter.models.Action;
 import com.sine_x.material_wecenter.models.AnswerComment;
 import com.sine_x.material_wecenter.models.AnswerDetail;
 import com.sine_x.material_wecenter.models.Dynamic;
+import com.sine_x.material_wecenter.models.Ajax;
 import com.sine_x.material_wecenter.models.LoginProcess;
 import com.sine_x.material_wecenter.models.PublishAnswer;
 import com.sine_x.material_wecenter.models.PublishQuestion;
@@ -37,21 +38,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Copyright (C) 2016 Jinghong Union of ZJUT
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 public class Client {
 
     public static int PUBLISH = 101;
@@ -170,9 +156,9 @@ public class Client {
      * @param uid 用户ID
      * @return 包含UserInfo的Result对象
      */
-    public Response<UserInfo> getUserInfo(String uid) {
+    public Response<UserInfo> getUserInfo(long uid) {
         Map<String, String> params = new HashMap<>();
-        params.put("uid", uid);
+        params.put("uid", String.valueOf(uid));
         String json = doGet(Config.API_CAT_ACCOUNT, Config.API_GET_USERINFO, params);
         return parseResponse(json, UserInfo.class);
     }
@@ -184,9 +170,9 @@ public class Client {
      * @param actions 101-获取用户提问列表 201-获取用户回答列表
      * @return 包含Action对象数组的Result对象
      */
-    public Responses<Action> getUserActions(String uid, int actions, int page) {
+    public Responses<Action> getUserActions(long uid, int actions, int page) {
         Map<String, String> params = new HashMap<>();
-        params.put("uid", uid);
+        params.put("uid", String.valueOf(uid));
         params.put("actions", String.valueOf(actions));
         params.put("page", String.valueOf(page));
         String json = doGet(Config.API_CAT_PEOPLE, Config.API_USER_ACTIONS, params);
@@ -338,6 +324,20 @@ public class Client {
         return null;
     }
 
+    public Response<Ajax> focus(long questionID) {
+        Map<String, String> params = new HashMap<>();
+        params.put("question_id", String.valueOf(questionID));
+        String json = ajax(Config.AJAX_QUESTION_FOCUS, params);
+        return parseResponse(json, Ajax.class);
+    }
+
+    public Response<Ajax> thanks(long questionID) {
+        Map<String, String> params = new HashMap<>();
+        params.put("question_id", String.valueOf(questionID));
+        String json = ajax(Config.AJAX_QUESTION_THANKS, params);
+        return parseResponse(json, Ajax.class);
+    }
+
     private String ajax(String url, Map<String, String> params) {
         return doPost(Config.HOST_NAME + url, params);
     }
@@ -443,7 +443,9 @@ public class Client {
             String line;
             while ((line = reader.readLine()) != null)
                 builder.append(line);
-            return builder.toString();
+            String str = builder.toString();
+            Log.d("GET RESPONSE", str);
+            return str;
         } catch (IOException e) {
             return null;
         }

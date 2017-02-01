@@ -58,7 +58,9 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         this.mContext = context;
         this.questionDetail=questionDetail;
-        webDatas=getData(questionDetail.getQuestion_info().getQuestion_detail());
+        if (questionDetail != null) {
+            webDatas = getData(questionDetail.getQuestion_info().getQuestion_detail());
+        }
     }
 
     @Override
@@ -249,7 +251,9 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public int getItemCount() {
-        if(webDatas==null&&questionDetail.getAnswers()==null){
+        if (questionDetail == null)
+            return 0;
+        if(webDatas==null && questionDetail.getAnswers()==null){
             detailIndex=1;
             infoIndex=detailIndex;
             itemIndex=infoIndex;

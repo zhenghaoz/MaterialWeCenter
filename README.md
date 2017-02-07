@@ -10,11 +10,7 @@ Material-WeCenter是一个第三方的[WeCenter](http://www.wecenter.com/)安卓
 ## Document
 - [部署指南](https://github.com/ZhangZhenghao/Material-WeCenter/wiki/%E9%83%A8%E7%BD%B2%E6%8C%87%E5%8D%97)
 - [开发指南](https://github.com/ZhangZhenghao/Material-WeCenter/wiki/%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97)
-
-## TODO
-
-- [ ] 注册
-- [ ] 搜索
+- [功能列表](https://github.com/ZhangZhenghao/Material-WeCenter/wiki/%E5%8A%9F%E8%83%BD%E5%88%97%E8%A1%A8)
 
 ## Support
 

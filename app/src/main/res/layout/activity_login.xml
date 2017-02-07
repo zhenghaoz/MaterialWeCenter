@@ -42,7 +42,7 @@
                 <EditText
                     android:id="@+id/edit_username"
                     android:layout_marginTop="@dimen/card_content_padding"
-                    android:hint="@string/input_username"
+                    android:hint="@string/input_username_or_email"
                     android:textColor="@android:color/black"
                     android:inputType="text"
                     android:layout_width="match_parent"
@@ -76,6 +76,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <TextView
+                    android:id="@+id/button_sign_up"
+                    android:text="@string/sign_up"
+                    android:textColor="@color/nliveo_blue_colorPrimary"
+                    android:textSize="@dimen/abc_text_size_button_material"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp" />
+
                 <Button
                     android:id="@+id/button_login"
                     android:text="@string/login"
@@ -83,18 +95,11 @@
                     android:textSize="@dimen/abc_text_size_button_material"
                     android:background="@color/nliveo_blue_colorPrimary"
                     android:layout_marginTop="16dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp" />
 
-                <Button
-                    android:id="@+id/button_signup"
-                    android:text="@string/sign_up"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/abc_text_size_button_material"
-                    android:background="@color/nliveo_blue_colorPrimary"
-                    android:layout_marginTop="16dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+
 
             </LinearLayout>
 

@@ -10,7 +10,7 @@
     <string name="edit_username">请输入精弘通行证</string>
     <string name="edit_password">请输入密码</string>
     <string name="button_login">登录</string>
-    <string name="loginning">登录中。。。</string>
+    <string name="logining">登录中。。。</string>
 
     <!--Post activity-->
     <string name="edit_tile">标题</string>
@@ -48,6 +48,8 @@
 
     <string name="login">登录</string>
     <string name="sign_up">注册</string>
-    <string name="input_username">输入用户名或邮箱</string>
+    <string name="input_username_or_email">输入用户名或邮箱</string>
+    <string name="input_username">输入用户名</string>
+    <string name="input_email">输入邮箱</string>
     <string name="input_password">输入密码</string>
 </resources>

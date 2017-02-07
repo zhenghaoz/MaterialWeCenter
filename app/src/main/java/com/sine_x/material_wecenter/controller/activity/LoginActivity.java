@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.nispok.snackbar.Snackbar;
 import com.sine_x.material_wecenter.Client;
@@ -16,30 +17,35 @@ import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.models.LoginProcess;
 import com.sine_x.material_wecenter.models.Response;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-    private EditText editUsername;
-    private EditText editPassword;
-    private Button btnLogin;
+public class LoginActivity extends AppCompatActivity {
+
+    @Bind(R.id.edit_username) EditText editUsername;
+    @Bind(R.id.edit_password) EditText editPassword;
+    @Bind(R.id.button_login) Button btnLogin;
+    @Bind(R.id.button_sign_up) TextView btnSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        // 实例化控件
-        editUsername = (EditText) findViewById(R.id.edit_username);
-        editPassword = (EditText) findViewById(R.id.edit_password);
-        btnLogin = (Button) findViewById(R.id.button_login);
-        btnLogin.setOnClickListener(this);
+        ButterKnife.bind(this);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            // 点击用户登录按钮
-            case R.id.button_login:
-                new UserLoginTask().execute();
-        }
+    @OnClick(R.id.button_login)
+    void login() {
+        // 点击用户登录按钮
+        new UserLoginTask().execute();
+    }
+
+    @OnClick(R.id.button_sign_up)
+    void signUp() {
+        Intent intent = new Intent(this, SignUpActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     // 用户登录验证异步任务

@@ -20,7 +20,7 @@ public class LaunchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lauch);
+        setContentView(R.layout.activity_launch);
 
         // 验证用户保存的登录信息
         SharedPreferences preferences = getSharedPreferences("account", MODE_PRIVATE);
@@ -41,6 +41,10 @@ public class LaunchActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             } else {                        // 验证成功，进入应用程序
+                SharedPreferences preferences = getSharedPreferences("account", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString(Config.PRE_AVATAR_FILE, response.getRsm().getAvatar_file());
+                editor.apply();
                 Intent intent = new Intent(LaunchActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();

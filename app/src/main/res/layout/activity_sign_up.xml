@@ -1,34 +1,133 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/nliveo_blue_colorPrimary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="com.sine_x.material_wecenter.controller.activity.SignUpActivity">
+    android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
+    <TextView
+        android:text="@string/sign_up"
+        android:paddingTop="64dp"
+        android:paddingBottom="32dp"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/abc_text_size_display_2_material"
+        android:textColor="@android:color/white"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="wrap_content" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+    <android.support.v7.widget.CardView
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:padding="16dp"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_height="wrap_content">
 
-    </android.support.design.widget.AppBarLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    <include layout="@layout/content_sign_up" />
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/ic_perm_identity_grey600_48dp"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+                <EditText
+                    android:id="@+id/edit_username"
+                    android:layout_marginTop="@dimen/card_content_padding"
+                    android:hint="@string/input_username"
+                    android:textColor="@android:color/black"
+                    android:inputType="text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-</android.support.design.widget.CoordinatorLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_email"/>
+
+                <EditText
+                    android:id="@+id/edit_email"
+                    android:layout_marginTop="@dimen/card_content_padding"
+                    android:hint="@string/input_email"
+                    android:textColor="@android:color/black"
+                    android:inputType="textEmailAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/ic_security_grey600_48dp"/>
+
+                <EditText
+                    android:id="@+id/edit_password"
+                    android:layout_marginTop="@dimen/card_content_padding"
+                    android:hint="@string/input_password"
+                    android:textColor="@android:color/black"
+                    android:inputType="textPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/button_login"
+                    android:text="@string/login"
+                    android:textColor="@color/nliveo_blue_colorPrimary"
+                    android:textSize="@dimen/abc_text_size_button_material"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp" />
+
+                <Button
+                    android:id="@+id/button_sign_up"
+                    android:text="@string/sign_up"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/abc_text_size_button_material"
+                    android:background="@color/nliveo_blue_colorPrimary"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp" />
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

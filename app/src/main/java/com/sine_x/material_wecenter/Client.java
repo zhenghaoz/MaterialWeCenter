@@ -142,11 +142,21 @@ public class Client {
      * @param password  用户密码
      * @return 包含LoginProcess的Result对象
      */
-    public Response<LoginProcess> loginProcess(@NonNull String user_name, @NonNull String password) {
+    public @NonNull Response<LoginProcess> loginProcess(@NonNull String user_name, @NonNull String password) {
         Map<String, String> params = new HashMap<>();
         params.put("user_name", user_name);
         params.put("password", password);
         String json = apiPost(Config.API_CAT_ACCOUNT, Config.API_LOGIN_PROCESS, params);
+        return parseResponse(json, LoginProcess.class);
+    }
+
+    public @NonNull Response<LoginProcess> registerProcess(@NonNull String userName, @NonNull String password, @NonNull String email, @NonNull String iCode) {
+        Map<String, String> params = new HashMap<>();
+        params.put("user_name", userName);
+        params.put("password", password);
+        params.put("email", email);
+        params.put("icode", iCode);
+        String json = apiPost(Config.API_CAT_ACCOUNT, Config.API_REGISTER_PROCESS, params);
         return parseResponse(json, LoginProcess.class);
     }
 

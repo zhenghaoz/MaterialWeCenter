@@ -231,15 +231,38 @@ public class Client {
 
     /**
      * getAnswer 获取答案评论列表
-     *
      * @param answer_id 答案的编号
      * @return Result对象
      */
     public Responses<AnswerComment> getAnswerComments(int answer_id) {
+        // 请求
         Map<String, String> params = new HashMap<>();
         params.put("answer_id", String.valueOf(answer_id));
         String json = doGet(Config.API_CAT_QUESTION, Config.API_ANSWER_COMMENTS, params);
-        return parseResponses(json, AnswerComment.class);
+        // 解析
+        Responses<AnswerComment> responses = new Responses<>();
+        try {
+            JSONObject jsonObject = new JSONObject(json);
+            responses.setErrno(jsonObject.getInt("errno"));
+            responses.setErr(jsonObject.getString("err"));
+            if (responses.getErrno() == 1) {
+                ArrayList<AnswerComment> list = new ArrayList<>();
+                JSONArray array = jsonObject.getJSONArray("rsm");
+                Gson gson = new Gson();
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject item = array.getJSONObject(i);
+                    list.add(gson.fromJson(item.toString(), AnswerComment.class));
+                }
+                responses.setRsm(list);
+            } else {
+                responses.setRsm(null);
+            }
+        } catch (JSONException e) {
+            responses.setRsm(null);
+            responses.setErrno(-1);
+            responses.setErr("未知错误");
+        }
+        return responses;
     }
 
     /**

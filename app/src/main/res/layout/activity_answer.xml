@@ -6,7 +6,6 @@
     android:layout_width="350dp"
     android:layout_height="450dp"
     card_view:cardElevation="0dp"
-    card_view:cardCornerRadius="10dp"
     tools:context=".controller.activity.AnswerActivity">
     <LinearLayout
         android:padding="@dimen/card_content_padding"

@@ -21,13 +21,14 @@ import com.sine_x.material_wecenter.models.AnswerDetail;
 import com.sine_x.material_wecenter.models.Response;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AnswerActivity extends AppCompatActivity implements View.OnClickListener{
 
     private int answerID;
     private Client client = Client.getInstance();
     private AnswerDetail answerDetail;
-    private ArrayList<AnswerComment> answerComments;
+    private List<AnswerComment> answerComments;
     private RecyclerView recyclerView;
     private AnswerDetailAdapter answerDetailAdapter;
     private EditText content;
@@ -82,10 +83,8 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
         @Override
         protected Integer doInBackground(Integer... params) {
             try {
-                Log.e("LoadAnswer", "load has started");
-                answerDetail=(AnswerDetail) client.getAnswer(answerID).getRsm();
-                answerComments=(ArrayList<AnswerComment>) client.getAnswerComments(answerID).getRsm();
-
+                answerDetail = client.getAnswer(answerID).getRsm();
+                answerComments = client.getAnswerComments(answerID).getRsm();
             }catch (Exception e) {
                 e.printStackTrace();
             }
@@ -95,7 +94,7 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
         @Override
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
-            answerDetailAdapter=new AnswerDetailAdapter(AnswerActivity.this,answerDetail,answerComments);
+            answerDetailAdapter = new AnswerDetailAdapter(AnswerActivity.this,answerDetail,answerComments);
             recyclerView.setAdapter(answerDetailAdapter);
             answerDetailAdapter.notifyDataSetChanged();
         }
@@ -103,7 +102,7 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
 
     //异步进行评论
 
-    private  class PublishTask extends AsyncTask<Void, Void, Void> {
+    private class PublishTask extends AsyncTask<Void, Void, Void> {
 
         String mContent;
         Response<PublishAnswerComment> result2;

@@ -1,8 +1,5 @@
 package com.sine_x.material_wecenter.models;
 
-/**
- * Created by Administrator on 2016/2/1.
- */
 public class AnswerComment {
 
     private int id;

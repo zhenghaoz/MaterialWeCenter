@@ -1,67 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@drawable/background"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/example"/>
-    <android.support.v7.widget.CardView
-        android:layout_marginTop="20dp"
-        android:layout_gravity="left|top"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        card_view:cardBackgroundColor="#50ffffff"
-        card_view:cardElevation="0dp"
-        card_view:cardCornerRadius="10dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="1">
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/avatar_img_question"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="5dp"
-                android:src="@drawable/avatar_max_img" />
+    android:layout_height="240dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/textView_userName_question"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:paddingTop="5dp"
-                    android:text="name"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/abc_text_size_subhead_material" />
-                <TextView
-                    android:id="@+id/textView_signature_question"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="2dp"
-                    android:text="signature"
-                    android:textColor="@android:color/black"
-                    android:textSize="10sp" />
-            </LinearLayout>
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/avatar_img_question"
+        android:layout_width="81dp"
+        android:layout_height="81dp"
+        android:layout_margin="32dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/avatar_max_img" />
+
     <TextView
         android:id="@+id/textView_title_question"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@drawable/question_title_shape"
-        android:gravity="left|center"
-        android:layout_gravity="left|top"
-        android:layout_marginTop="120dp"
-        android:ellipsize="end"
-        android:maxLines="2"
-        android:padding="5dp"
+        android:layout_height="90dp"
+        android:gravity="center_vertical"
+        android:padding="10dp"
         android:textSize="@dimen/abc_text_size_medium_material"
         android:textColor="@android:color/white" />
-</FrameLayout>
+
+</LinearLayout>

@@ -22,14 +22,8 @@ import com.sine_x.material_wecenter.controller.activity.UserActivity;
 import com.sine_x.material_wecenter.models.Ajax;
 import com.sine_x.material_wecenter.models.QuestionDetail;
 import com.sine_x.material_wecenter.models.Response;
-import com.sine_x.material_wecenter.models.WebData;
 import com.squareup.picasso.Picasso;
 import com.zzhoujay.richtext.RichText;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

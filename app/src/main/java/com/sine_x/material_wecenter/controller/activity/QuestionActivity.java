@@ -16,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.sine_x.material_wecenter.Client;
@@ -28,6 +27,10 @@ import com.sine_x.material_wecenter.models.QuestionDetail;
 import com.sine_x.material_wecenter.models.Response;
 import com.truizlop.fabreveallayout.FABRevealLayout;
 import com.truizlop.fabreveallayout.OnRevealChangeListener;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class QuestionActivity extends AppCompatActivity {
@@ -41,13 +44,21 @@ public class QuestionActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private FABRevealLayout floatingActionButton;
     private Client client = Client.getInstance();
-    private ImageButton publish;
-    private EditText answerContent;
+    @Bind(R.id.edit_content_answer) EditText answerContent;
+
+    @OnClick(R.id.imageButton_publishAnswer)
+    void answer() {
+        String text = answerContent.getText().toString();
+        if (!text.isEmpty()){
+            new PublishTask().execute();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
+        ButterKnife.bind(this);
 
         //init toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_questionDetail);
@@ -66,20 +77,6 @@ public class QuestionActivity extends AppCompatActivity {
         //get intent
         Intent mIntent=getIntent();
         questionID=mIntent.getIntExtra(Config.INT_QUESTION_ID, -1);
-
-        answerContent=(EditText) findViewById(R.id.edit_content_answer);
-
-        publish=(ImageButton) findViewById(R.id.imageButton_publishAnswer);
-
-        publish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String text = answerContent.getText().toString();
-                if(!text.isEmpty()){
-                    new PublishTask().execute();
-                }
-            }
-        });
 
         //init fab
         floatingActionButton=(FABRevealLayout ) findViewById(R.id.fab_reveal_layout);
@@ -210,7 +207,7 @@ public class QuestionActivity extends AppCompatActivity {
     private class PublishTask extends AsyncTask<Void, Void, Void> {
 
         String content;
-        Response<PublishAnswer> result2;
+        Response<PublishAnswer> response;
 
         @Override
         protected void onPreExecute() {
@@ -221,7 +218,7 @@ public class QuestionActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             Client client = Client.getInstance();
-            result2 = client.publishAnswer(questionID, content);
+            response = client.publishAnswer(questionID, content);
             return null;
         }
 
@@ -229,14 +226,15 @@ public class QuestionActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-            if (result2 == null) // 未知错误
+            if (response == null) // 未知错误
                 Toast.makeText(QuestionActivity.this,"未知错误",Toast.LENGTH_SHORT).show();
-            else if (result2.getErrno() == 1){ // 发布成功
+            else if (response.getErrno() == 1){ // 发布成功
                 Toast.makeText(QuestionActivity.this,"回答成功",Toast.LENGTH_SHORT).show();
+                new LoadAnswers().execute();
             }
 
             else                // 显示错误
-                Toast.makeText(QuestionActivity.this, result2.getErr(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(QuestionActivity.this, response.getErr(), Toast.LENGTH_SHORT).show();
 
             floatingActionButton.revealMainView();
             isBtnClose=true;

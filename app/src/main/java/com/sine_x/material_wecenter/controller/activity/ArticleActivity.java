@@ -24,7 +24,6 @@ import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.adapter.ArticleAdapter;
 import com.sine_x.material_wecenter.models.Article;
-import com.sine_x.material_wecenter.models.PublishAnswer;
 import com.sine_x.material_wecenter.models.Response;
 import com.truizlop.fabreveallayout.FABRevealLayout;
 import com.truizlop.fabreveallayout.OnRevealChangeListener;
@@ -110,7 +109,7 @@ public class ArticleActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 // 下拉刷新
-                new LoadAnswers().execute();
+                new LoadArticle().execute();
             }
         });
 
@@ -131,7 +130,7 @@ public class ArticleActivity extends AppCompatActivity {
             }
         });
         swipeRefreshLayout.setRefreshing(true);
-        new LoadAnswers().execute();
+        new LoadArticle().execute();
     }
 
     @Override
@@ -156,7 +155,7 @@ public class ArticleActivity extends AppCompatActivity {
             //刷新
             case R.id.action_refresh:
                 swipeRefreshLayout.setRefreshing(true);
-                new LoadAnswers().execute();
+                new LoadArticle().execute();
             default:
                 break;
         }
@@ -169,11 +168,11 @@ public class ArticleActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         //发布答案成功后刷新
         if(resultCode==1)
-            new LoadAnswers().execute();
+            new LoadArticle().execute();
     }
 
     //异步获取答案列表
-    private class LoadAnswers extends AsyncTask<Integer,Integer,Integer> {
+    private class LoadArticle extends AsyncTask<Integer,Integer,Integer> {
 
         @Override
         protected void onPreExecute() {
@@ -232,6 +231,7 @@ public class ArticleActivity extends AppCompatActivity {
                 Toast.makeText(ArticleActivity.this,"未知错误",Toast.LENGTH_SHORT).show();
             else if (response.getErrno() == 1){ // 发布成功
                 Toast.makeText(ArticleActivity.this,"回答成功",Toast.LENGTH_SHORT).show();
+                new LoadArticle().execute();
             }
 
             else                // 显示错误

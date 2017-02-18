@@ -45,6 +45,7 @@ public class Config {
     static final String API_PUBLISH_ANSWER_COMMENT = "save_answer_comment";
 
     static final String API_CAT_ARTICLE = "article";
+    static final String API_SAVE_COMMENT = "save_comment";
 
     // AJAX请求地址
 

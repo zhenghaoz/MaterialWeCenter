@@ -224,6 +224,14 @@ public class Client {
         return parseResponse(json, Article.class);
     }
 
+    public Response<Object> saveComment(int article_id, String message) {
+        Map<String, String> params = new HashMap<>();
+        params.put("article_id", String.valueOf(article_id));
+        params.put("message", message);
+        String json = apiPost(Config.API_CAT_ARTICLE, Config.API_SAVE_COMMENT, params);
+        return parseResponse(json, Object.class);
+    }
+
     /**
      * getAnswer 获取答案详情
      *

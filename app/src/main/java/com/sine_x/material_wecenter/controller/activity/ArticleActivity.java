@@ -23,10 +23,8 @@ import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.adapter.ArticleAdapter;
-import com.sine_x.material_wecenter.controller.adapter.QuestionDetailAdapter;
 import com.sine_x.material_wecenter.models.Article;
 import com.sine_x.material_wecenter.models.PublishAnswer;
-import com.sine_x.material_wecenter.models.QuestionDetail;
 import com.sine_x.material_wecenter.models.Response;
 import com.truizlop.fabreveallayout.FABRevealLayout;
 import com.truizlop.fabreveallayout.OnRevealChangeListener;
@@ -78,7 +76,7 @@ public class ArticleActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String text = answerContent.getText().toString();
                 if(!text.isEmpty()){
-                    new PublishTask().execute();
+                    new CommentTask().execute();
                 }
             }
         });
@@ -208,10 +206,10 @@ public class ArticleActivity extends AppCompatActivity {
     }
 
     //异步发布答案
-    private class PublishTask extends AsyncTask<Void, Void, Void> {
+    private class CommentTask extends AsyncTask<Void, Void, Void> {
 
         String content;
-        Response<PublishAnswer> result2;
+        Response<Object> response;
 
         @Override
         protected void onPreExecute() {
@@ -222,7 +220,7 @@ public class ArticleActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             Client client = Client.getInstance();
-            result2 = client.publishAnswer(articleID, content);
+            response = client.saveComment(articleID, content);
             return null;
         }
 
@@ -230,14 +228,14 @@ public class ArticleActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-            if (result2 == null) // 未知错误
+            if (response == null) // 未知错误
                 Toast.makeText(ArticleActivity.this,"未知错误",Toast.LENGTH_SHORT).show();
-            else if (result2.getErrno() == 1){ // 发布成功
+            else if (response.getErrno() == 1){ // 发布成功
                 Toast.makeText(ArticleActivity.this,"回答成功",Toast.LENGTH_SHORT).show();
             }
 
             else                // 显示错误
-                Toast.makeText(ArticleActivity.this, result2.getErr(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ArticleActivity.this, response.getErr(), Toast.LENGTH_SHORT).show();
 
             floatingActionButton.revealMainView();
             isBtnClose=true;

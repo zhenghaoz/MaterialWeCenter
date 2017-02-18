@@ -44,6 +44,8 @@ public class Config {
     static final String API_ANSWER_COMMENTS = "answer_comments";
     static final String API_PUBLISH_ANSWER_COMMENT = "save_answer_comment";
 
+    static final String API_CAT_ARTICLE = "article";
+
     // AJAX请求地址
 
     static final String AJAX_ANSWER_RATE = "question/ajax/question_answer_rate/";
@@ -69,4 +71,5 @@ public class Config {
     public static final String PRE_AVATAR_FILE = "avatar_file";
 
     public static final String INT_QUESTION_ID = "questionID";
+    public static final String INT_ARTICLE_ID = "articleID";
 }

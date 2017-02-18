@@ -33,8 +33,6 @@ import com.truizlop.fabreveallayout.OnRevealChangeListener;
 public class QuestionActivity extends AppCompatActivity {
 
     private boolean isFirstRefresh=true;
-    private final int ScrollOffset = 0;
-    private int resultCode=0;
     private boolean isBtnClose;
     private int questionID;
     private QuestionDetail questionDetail;

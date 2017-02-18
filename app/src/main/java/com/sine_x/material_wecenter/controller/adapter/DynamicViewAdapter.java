@@ -9,15 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.sine_x.material_wecenter.Config;
+import com.sine_x.material_wecenter.controller.activity.ArticleActivity;
 import com.squareup.picasso.Picasso;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.activity.QuestionActivity;
 import com.sine_x.material_wecenter.controller.activity.UserActivity;
 import com.sine_x.material_wecenter.models.Dynamic;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DynamicViewAdapter extends RecyclerView.Adapter<DynamicViewAdapter.ViewHolder> {
@@ -35,7 +38,7 @@ public class DynamicViewAdapter extends RecyclerView.Adapter<DynamicViewAdapter.
     }
 
     private boolean articleOnly(int n) {
-        return n >= Dynamic.ADD_ARTICLE && n <= Dynamic.ADD_AGREE;
+        return n >= Dynamic.ADD_ARTICLE && n <= Dynamic.ADD_AGREE_ARTICLE;
     }
 
     private boolean articleAndComment(int n) {
@@ -102,13 +105,18 @@ public class DynamicViewAdapter extends RecyclerView.Adapter<DynamicViewAdapter.
                     .load(avatarFile)
                     .into(holder.avatarImg);
         final int associateActionType = dynamic.getAssociate_action();
-        holder.dynamicUserInfo.setText(dynamic.getUser_info().getUser_name() + " " + action.get(associateActionType));
+        holder.dynamicUserName.setText(dynamic.getUser_info().getUser_name() + " " + action.get(associateActionType));
 
-        if (questionOnly(associateActionType)) setQuestionView(holder, dynamic);
-        else if (questionAndAnswer(associateActionType)) setQuestionAndAnswerView(holder, dynamic);
-        else if (topic(associateActionType)) setTopicView(holder, dynamic);
-        else if (articleOnly(associateActionType)) setArticleView(holder, dynamic);
-        else if (articleAndComment(associateActionType)) setArticleAndCommentView(holder, dynamic);
+        if (questionOnly(associateActionType))
+            setQuestionView(holder, dynamic);
+        else if (questionAndAnswer(associateActionType))
+            setQuestionAndAnswerView(holder, dynamic);
+        else if (topic(associateActionType))
+            setTopicView(holder, dynamic);
+        else if (articleOnly(associateActionType))
+            setArticleView(holder, dynamic);
+        else if (articleAndComment(associateActionType))
+            setArticleAndCommentView(holder, dynamic);
     }
 
     @Override
@@ -170,35 +178,47 @@ public class DynamicViewAdapter extends RecyclerView.Adapter<DynamicViewAdapter.
     }
 
     //501 - 502
-    private void setArticleView(ViewHolder holder, Dynamic dynamic) {
+    private void setArticleView(ViewHolder holder, final Dynamic dynamic) {
         holder.dynamicTitle.setText(dynamic.getArticle_info().getTitle());
         holder.dynamicContent.setText(dynamic.getArticle_info().getMessage());
         holder.dynamicInfo.setText(dynamic.getArticle_info().getViews() + "次浏览 • "
                 + dynamic.getArticle_info().getComments() + "次回复");
+        holder.dynamicTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, ArticleActivity.class);
+                intent.putExtra(Config.INT_ARTICLE_ID, dynamic.getArticle_info().getId());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     //503
-    private void setArticleAndCommentView(ViewHolder holder, Dynamic dynamic) {
+    private void setArticleAndCommentView(ViewHolder holder, final Dynamic dynamic) {
         holder.dynamicTitle.setText("文章： " + dynamic.getArticle_info().getTitle());
         holder.dynamicContent.setText(dynamic.getComment_info().getMessage());
         holder.dynamicInfo.setText(dynamic.getComment_info().getVotes() + "个赞");
+        holder.dynamicTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, ArticleActivity.class);
+                intent.putExtra(Config.INT_ARTICLE_ID, dynamic.getArticle_info().getId());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private CircleImageView avatarImg;
-        private TextView dynamicUserInfo;
-        private TextView dynamicTitle;
-        private TextView dynamicContent;
-        private TextView dynamicInfo;
+        @Bind(R.id.avatar_img) CircleImageView avatarImg;
+        @Bind(R.id.dynamic_user_name) TextView dynamicUserName;
+        @Bind(R.id.dynamic_title) TextView dynamicTitle;
+        @Bind(R.id.dynamic_content) TextView dynamicContent;
+        @Bind(R.id.dynamic_info) TextView dynamicInfo;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            avatarImg = (CircleImageView) itemView.findViewById(R.id.avatar_img);
-            dynamicUserInfo = (TextView) itemView.findViewById(R.id.dynamic_user_info);
-            dynamicTitle = (TextView) itemView.findViewById(R.id.dynamic_title);
-            dynamicContent = (TextView) itemView.findViewById(R.id.dynamic_content);
-            dynamicInfo = (TextView) itemView.findViewById(R.id.dynamic_info);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

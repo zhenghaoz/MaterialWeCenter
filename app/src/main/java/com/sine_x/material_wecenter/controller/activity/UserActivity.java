@@ -30,7 +30,7 @@ public class UserActivity extends AppCompatActivity {
     @Bind(R.id.view_pager) MaterialViewPager mViewPager;
     @Bind(R.id.logo_white) CircleImageView imgAvatar;
     private Menu menu;
-    private long uid;
+    private int uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class UserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user);
         ButterKnife.bind(this);
         // 获取用户ID
-        uid = getIntent().getLongExtra("uid", -1);
+        uid = getIntent().getIntExtra("uid", -1);
         setTitle("");
         // 初始化工具栏
         Toolbar toolbar = mViewPager.getToolbar();

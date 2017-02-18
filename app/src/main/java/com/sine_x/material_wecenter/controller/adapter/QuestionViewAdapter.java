@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.sine_x.material_wecenter.Config;
+import com.sine_x.material_wecenter.controller.activity.ArticleActivity;
 import com.sine_x.material_wecenter.models.ExploreItem;
 import com.squareup.picasso.Picasso;
 import com.sine_x.material_wecenter.R;
@@ -63,14 +65,14 @@ public class QuestionViewAdapter extends RecyclerView.Adapter<QuestionViewAdapte
             holder.questionTitle.setText(exploreItem.getTitle());
             holder.questionInfo.setText(String.valueOf(exploreItem.getVotes()) + "人赞同 • "
                     + String.valueOf(exploreItem.getViews()) + "次浏览");
-/*            holder.questionTitle.setOnClickListener(new View.OnClickListener() {
+            holder.questionTitle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext, QuestionActivity.class);
-                    intent.putExtra("questionID", exploreItem.getQuestion_id());
+                    Intent intent = new Intent(mContext, ArticleActivity.class);
+                    intent.putExtra(Config.INT_ARTICLE_ID, exploreItem.getId());
                     mContext.startActivity(intent);
                 }
-            });*/
+            });
             holder.avatarImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -33,7 +33,7 @@ public class HomeFragment extends Fragment {
     //初始化一定处于刷新状态
     private boolean loading = true;
     //记录当前已经加载的页数
-    private int page = 1;
+    private int page = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,7 +60,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onRefresh() {
                 // 下拉刷新
-                page = 1;
+                page = 0;
                 new LoadDynamicList().execute();
             }
         });
@@ -103,7 +103,7 @@ public class HomeFragment extends Fragment {
             responses = client.getDynamic(page);
             if (responses.getErrno() == 1) {
                 List<Dynamic> rsm = responses.getRsm();
-                if (page == 1)
+                if (page == 0)
                     mList.clear();
                 mList.addAll(rsm);
             }

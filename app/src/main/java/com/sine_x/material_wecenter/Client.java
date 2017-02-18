@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.sine_x.material_wecenter.models.Action;
 import com.sine_x.material_wecenter.models.AnswerComment;
 import com.sine_x.material_wecenter.models.AnswerDetail;
+import com.sine_x.material_wecenter.models.Article;
 import com.sine_x.material_wecenter.models.Dynamic;
 import com.sine_x.material_wecenter.models.Ajax;
 import com.sine_x.material_wecenter.models.LoginProcess;
@@ -214,6 +215,13 @@ public class Client {
         params.put("id", String.valueOf(id));
         String json = doGet(Config.API_CAT_QUESTION, "", params);
         return parseResponse(json, QuestionDetail.class);
+    }
+
+    public Response<Article> getArticle(int id) {
+        Map<String, String> params = new HashMap<>();
+        params.put("id", String.valueOf(id));
+        String json = doGet(Config.API_CAT_ARTICLE, params);
+        return parseResponse(json, Article.class);
     }
 
     /**

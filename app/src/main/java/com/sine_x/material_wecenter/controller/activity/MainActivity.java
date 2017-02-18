@@ -22,7 +22,7 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
 
     private HelpLiveo mHelpLiveo;
 
-    private long uid;
+    private int uid;
     private String user_name;
     private String avatar_file;
 
@@ -37,7 +37,7 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
 
         // 验证用户保存的登录信息
         SharedPreferences preferences = getSharedPreferences("account", MODE_PRIVATE);
-        uid = preferences.getLong(Config.PRE_UID, -1);
+        uid = preferences.getInt(Config.PRE_UID, -1);
         user_name = preferences.getString(Config.PRE_USER_NAME, "");
         avatar_file = preferences.getString(Config.PRE_AVATAR_FILE, "");
 

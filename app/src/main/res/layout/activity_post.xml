@@ -15,81 +15,184 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <android.support.v7.widget.CardView
-        android:layout_margin="8dp"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_below="@id/toolbar"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <!--问题标题-->
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/edit_title"
-                app:met_errorColor="#ddaa00"
-                app:met_baseColor="@color/nliveo_blue_colorPrimaryDark"
-                app:met_floatingLabel="highlight"
-                app:met_floatingLabelText="@string/edit_tile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/edit_tile"/>
-
-            <!--问题描述-->
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/edit_content"
-                app:met_baseColor="@color/nliveo_blue_colorPrimaryDark"
-                app:met_floatingLabel="highlight"
-                app:met_floatingLabelText="@string/edit_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/edit_content"/>
-
-            <!--添加标题-->
-            <LinearLayout
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:orientation="horizontal"
+            <android.support.v7.widget.CardView
+                android:layout_margin="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/edit_topic"
-                    app:met_singleLineEllipsis="true"
-                    app:met_baseColor="@color/nliveo_blue_colorPrimaryDark"
-                    app:met_floatingLabel="highlight"
-                    app:met_floatingLabelText="@string/edit_topic"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/edit_topic"
-                    android:layout_width="match_parent" />
-
-                <Button
-                    android:id="@+id/btn_add_topic"
+                <LinearLayout
+                    android:layout_below="@id/toolbar"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                    android:text="@string/add_topic"
-                    android:textColor="@android:color/white"
-                    android:background="@color/nliveo_blue_colorPrimary"
-                    android:layout_weight="2"
-                    android:layout_height="36dp"
-                    android:layout_width="match_parent" />
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            </LinearLayout>
+                    <!--问题标题-->
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/edit_title"
+                        app:met_errorColor="#ddaa00"
+                        app:met_baseColor="@color/nliveo_blue_colorPrimaryDark"
+                        app:met_floatingLabel="highlight"
+                        app:met_floatingLabelText="@string/edit_tile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/edit_tile"/>
 
-            <!--话题-->
-            <TextView
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:id="@+id/txt_topics"
+                    <!--添加标题-->
+                    <LinearLayout
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/edit_topic"
+                            app:met_singleLineEllipsis="true"
+                            app:met_baseColor="@color/nliveo_blue_colorPrimaryDark"
+                            app:met_floatingLabel="highlight"
+                            app:met_floatingLabelText="@string/edit_topic"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/edit_topic"
+                            android:layout_width="match_parent" />
+
+                        <Button
+                            android:id="@+id/btn_add_topic"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:text="@string/add_topic"
+                            android:textColor="@android:color/white"
+                            android:background="@color/nliveo_blue_colorPrimary"
+                            android:layout_weight="2"
+                            android:layout_height="36dp"
+                            android:layout_width="match_parent" />
+
+                    </LinearLayout>
+
+                    <!--话题-->
+                    <TextView
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:id="@+id/txt_topics"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_margin="4dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_below="@id/toolbar"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            >
+
+                            <ImageButton
+                                android:id="@+id/action_undo"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:background="@null"
+                                android:contentDescription="@null"
+                                android:src="@drawable/ic_undo_32dp"
+                                />
+
+                            <ImageButton
+                                android:layout_marginLeft="8dp"
+                                android:id="@+id/action_redo"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:background="@null"
+                                android:contentDescription="@null"
+                                android:src="@drawable/ic_redo_32dp"
+                                />
+
+                            <ImageButton
+                                android:layout_marginLeft="8dp"
+                                android:id="@+id/action_bold"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:background="@null"
+                                android:contentDescription="@null"
+                                android:src="@drawable/ic_bold_32dp"
+                                />
+
+                            <ImageButton
+                                android:layout_marginLeft="8dp"
+                                android:id="@+id/action_italic"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:background="@null"
+                                android:contentDescription="@null"
+                                android:src="@drawable/ic_italic_32dp"
+                                />
+
+                            <ImageButton
+                                android:layout_marginLeft="8dp"
+                                android:id="@+id/action_underline"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:background="@null"
+                                android:contentDescription="@null"
+                                android:src="@drawable/ic_underline_32dp"
+                                />
+
+                            <ImageButton
+                                android:layout_marginLeft="8dp"
+                                android:id="@+id/action_quote"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:background="@null"
+                                android:contentDescription="@null"
+                                android:src="@drawable/ic_quote_32dp"
+                                />
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                    <!--问题描述-->
+                    <io.github.mthli.knife.KnifeText
+                        android:layout_marginTop="@dimen/activity_horizontal_margin"
+                        android:id="@+id/edit_content"
+                        android:textColor="@android:color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
 
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </ScrollView>
 
 </LinearLayout>

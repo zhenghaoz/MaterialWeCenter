@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import io.github.mthli.knife.KnifeText;
 
 public class PostActivity extends AppCompatActivity {
 
@@ -30,8 +33,39 @@ public class PostActivity extends AppCompatActivity {
     @Bind(R.id.btn_add_topic) Button btnAddTopic;
     @Bind(R.id.txt_topics) TextView textTopics;
     @Bind(R.id.edit_title) MaterialEditText editTitle;
-    @Bind(R.id.edit_content) MaterialEditText editContent;
+    @Bind(R.id.edit_content) KnifeText editContent;
     @Bind(R.id.edit_topic) MaterialEditText editTopic;
+
+    // 编辑器
+    @OnClick(R.id.action_undo)
+    void undo() {
+        editContent.undo();
+    }
+
+    @OnClick(R.id.action_redo)
+    void redo() {
+        editContent.redo();
+    }
+
+    @OnClick(R.id.action_bold)
+    void setBold() {
+        editContent.bold(!editContent.contains(KnifeText.FORMAT_BOLD));
+    }
+
+    @OnClick(R.id.action_italic)
+    void setItalic() {
+        editContent.italic(!editContent.contains(KnifeText.FORMAT_ITALIC));
+    }
+
+    @OnClick(R.id.action_underline)
+    void setUnderline() {
+        editContent.underline(!editContent.contains(KnifeText.FORMAT_UNDERLINED));
+    }
+
+    @OnClick(R.id.action_quote)
+    void setQuote() {
+        editContent.quote(!editContent.contains(KnifeText.FORMAT_QUOTE));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +133,10 @@ public class PostActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            content = editContent.getText().toString();
+            content = editContent.toHtml();
+            content = content.replace("<", "[");
+            content = content.replace(">", "]");
+            Log.d("CONTENT", content);
             title = editTitle.getText().toString();
         }
 

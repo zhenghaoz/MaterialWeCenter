@@ -59,11 +59,11 @@ public class AnswerComment {
     }
 
     public static class UserInfoEntity {
-        private long uid;
+        private int uid;
         private String user_name;
         private String avatar_file;
 
-        public void setUid(long uid) {
+        public void setUid(int uid) {
             this.uid = uid;
         }
 
@@ -75,7 +75,7 @@ public class AnswerComment {
             this.avatar_file = avatar_file;
         }
 
-        public long getUid() {
+        public int getUid() {
             return uid;
         }
 

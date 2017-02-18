@@ -2,7 +2,7 @@ package com.sine_x.material_wecenter.models;
 
 public class UserInfo {
 
-    private long uid;
+    private int uid;
     private String user_name;
     private String avatar_file;
     private int sex;
@@ -21,7 +21,7 @@ public class UserInfo {
     private int answer_favorite_count;
     private int has_focus;
 
-    public void setUid(long uid) {
+    public void setUid(int uid) {
         this.uid = uid;
     }
 
@@ -93,7 +93,7 @@ public class UserInfo {
         this.has_focus = has_focus;
     }
 
-    public long getUid() {
+    public int getUid() {
         return uid;
     }
 

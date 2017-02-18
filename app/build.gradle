@@ -25,6 +25,10 @@ android {
     }
 }
 
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile('com.github.florent37:materialviewpager:1.1.2@aar') {
@@ -50,4 +54,5 @@ dependencies {
     compile 'com.truizlop.fabreveallayout:library:1.0.0'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.zzhoujay.richtext:richtext:2.3.7'
+    compile 'com.github.mthli:Knife:v1.1'
 }

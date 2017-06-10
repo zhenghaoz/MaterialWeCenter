@@ -66,33 +66,33 @@ public class ArticleActivity extends AppCompatActivity {
         Intent mIntent=getIntent();
         articleID =mIntent.getIntExtra(Config.INT_ARTICLE_ID, -1);
 
-        answerContent=(EditText) findViewById(R.id.edit_content_answer);
+        // answerContent=(EditText) findViewById(R.id.edit_content_answer);
 
-        publish=(ImageButton) findViewById(R.id.imageButton_publishAnswer);
-
-        publish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String text = answerContent.getText().toString();
-                if(!text.isEmpty()){
-                    new CommentTask().execute();
-                }
-            }
-        });
+//        publish=(ImageButton) findViewById(R.id.imageButton_publishAnswer);
+//
+//        publish.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String text = answerContent.getText().toString();
+//                if(!text.isEmpty()){
+//                    new CommentTask().execute();
+//                }
+//            }
+//        });
 
         //init fab
-        floatingActionButton=(FABRevealLayout ) findViewById(R.id.fab_reveal_layout);
-        floatingActionButton.setOnRevealChangeListener(new OnRevealChangeListener() {
-            @Override
-            public void onMainViewAppeared(FABRevealLayout fabRevealLayout, View mainView) {
-                isBtnClose=true;
-            }
-
-            @Override
-            public void onSecondaryViewAppeared(FABRevealLayout fabRevealLayout, View secondaryView) {
-                isBtnClose=false;
-            }
-        });
+        // floatingActionButton=(FABRevealLayout ) findViewById(R.id.fab_reveal_layout);
+//        floatingActionButton.setOnRevealChangeListener(new OnRevealChangeListener() {
+//            @Override
+//            public void onMainViewAppeared(FABRevealLayout fabRevealLayout, View mainView) {
+//                isBtnClose=true;
+//            }
+//
+//            @Override
+//            public void onSecondaryViewAppeared(FABRevealLayout fabRevealLayout, View secondaryView) {
+//                isBtnClose=false;
+//            }
+//        });
 
         //init swipeRefreshLayout
         swipeRefreshLayout=(SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout_question);
@@ -123,7 +123,7 @@ public class ArticleActivity extends AppCompatActivity {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if(!isBtnClose){
-                    floatingActionButton.revealMainView();
+                    // floatingActionButton.revealMainView();
                     isBtnClose=true;
                 }
 

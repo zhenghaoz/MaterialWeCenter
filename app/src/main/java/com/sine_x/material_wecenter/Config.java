@@ -5,7 +5,7 @@ public class Config {
     // 应用配置
 
     // 网站目录
-    static String HOST_NAME = "http://wecenter.dev.hihwei.com/";
+    static String HOST_NAME = "http://zsyovo.net:8000/";
     // 每页问题数量
     public static final int ITEM_PER_PAGE = 20;
     // 设置网络超时时间
@@ -15,7 +15,7 @@ public class Config {
     // API密钥
     static final String APP_SECRET = "12884789df747d7affbcd6a7cadd9359";
     // API密钥开关
-    static final boolean KEEP_SECRET = true;
+    static final boolean KEEP_SECRET = false;
     // 默认头像
     public static final String DEFAULT_AVATAR = HOST_NAME + "static/common/avatar-max-img.png";
 
@@ -49,10 +49,10 @@ public class Config {
 
     // AJAX请求地址
 
-    static final String AJAX_ANSWER_RATE = "question/ajax/question_answer_rate/";
-    static final String AJAX_ANSWER_VOTE = "question/ajax/answer_vote/";
-    static final String AJAX_QUESTION_FOCUS = "question/ajax/focus/";
-    static final String AJAX_QUESTION_THANKS = "question/ajax/question_thanks/";
+    static final String AJAX_ANSWER_RATE = "?/question/ajax/question_answer_rate/";
+    static final String AJAX_ANSWER_VOTE = "?/question/ajax/answer_vote/";
+    static final String AJAX_QUESTION_FOCUS = "?/question/ajax/focus/";
+    static final String AJAX_QUESTION_THANKS = "?/question/ajax/question_thanks/";
 
     static final String API_CAT_EXPLORE = "explore";
 
@@ -72,5 +72,6 @@ public class Config {
     public static final String PRE_AVATAR_FILE = "avatar_file";
 
     public static final String INT_QUESTION_ID = "questionID";
+    public static final String INT_QUESTION_TITLE = "questionTitle";
     public static final String INT_ARTICLE_ID = "articleID";
 }

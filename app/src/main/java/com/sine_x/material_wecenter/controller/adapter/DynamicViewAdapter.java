@@ -3,6 +3,7 @@ package com.sine_x.material_wecenter.controller.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -151,17 +152,19 @@ public class DynamicViewAdapter extends RecyclerView.Adapter<DynamicViewAdapter.
     //201 - 207
     private void setQuestionAndAnswerView(ViewHolder holder, final Dynamic dynamic) {
         holder.dynamicTitle.setText(dynamic.getQuestion_info().getQuestion_content());
-        holder.dynamicContent.setText(dynamic.getAnswer_info().getAnswer_content());
+        holder.dynamicContent.setText(Html.fromHtml(dynamic.getAnswer_info().getAnswer_content()));
         holder.dynamicInfo.setText(dynamic.getAnswer_info().getAgree_count() + "次赞同 • "
                 + dynamic.getAnswer_info().getAgainst_count() + "次反对");
-        holder.dynamicTitle.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, QuestionActivity.class);
                 intent.putExtra("questionID", dynamic.getQuestion_info().getQuestion_id());
                 mContext.startActivity(intent);
             }
-        });
+        };
+        holder.dynamicTitle.setOnClickListener(clickListener);
+        holder.dynamicContent.setOnClickListener(clickListener);
         holder.avatarImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

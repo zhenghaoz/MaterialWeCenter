@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.github.clans.fab.FloatingActionButton;
 import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
@@ -35,23 +36,28 @@ import butterknife.OnClick;
 
 public class QuestionActivity extends AppCompatActivity {
 
+    private final int ScrollOffset = 4;
     private boolean isFirstRefresh=true;
-    private boolean isBtnClose;
     private int questionID;
     private QuestionDetail questionDetail;
     private QuestionDetailAdapter questionDetailAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
-    private FABRevealLayout floatingActionButton;
+    @Bind(R.id.button_publish) FloatingActionButton btnPublish;
     private Client client = Client.getInstance();
-    @Bind(R.id.edit_content_answer) EditText answerContent;
 
-    @OnClick(R.id.imageButton_publishAnswer)
+    private static final int POST_ANSWER = 2;
+
+    @OnClick(R.id.button_publish)
     void answer() {
-        String text = answerContent.getText().toString();
-        if (!text.isEmpty()){
-            new PublishTask().execute();
-        }
+        Intent intent = new Intent(this, PostAnswerActivity.class);
+        intent.putExtra(Config.INT_QUESTION_ID, questionID);
+        intent.putExtra(Config.INT_QUESTION_TITLE, questionDetail.getQuestion_info().getQuestion_content());
+        startActivityForResult(intent, POST_ANSWER);
+//        String text = answerContent.getText().toString();
+//        if (!text.isEmpty()){
+//            new PublishTask().execute();
+//        }
     }
 
     @Override
@@ -77,20 +83,6 @@ public class QuestionActivity extends AppCompatActivity {
         //get intent
         Intent mIntent=getIntent();
         questionID=mIntent.getIntExtra(Config.INT_QUESTION_ID, -1);
-
-        //init fab
-        floatingActionButton=(FABRevealLayout ) findViewById(R.id.fab_reveal_layout);
-        floatingActionButton.setOnRevealChangeListener(new OnRevealChangeListener() {
-            @Override
-            public void onMainViewAppeared(FABRevealLayout fabRevealLayout, View mainView) {
-                isBtnClose=true;
-            }
-
-            @Override
-            public void onSecondaryViewAppeared(FABRevealLayout fabRevealLayout, View secondaryView) {
-                isBtnClose=false;
-            }
-        });
 
         //init swipeRefreshLayout
         swipeRefreshLayout=(SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout_question);
@@ -120,11 +112,12 @@ public class QuestionActivity extends AppCompatActivity {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if(!isBtnClose){
-                    floatingActionButton.revealMainView();
-                    isBtnClose=true;
-                }
-
+                // 自动隐藏发布按钮
+                if (Math.abs(dy) > ScrollOffset)
+                    if (dy > 0)
+                        btnPublish.hide(true);
+                    else
+                        btnPublish.show(true);
             }
         });
         swipeRefreshLayout.setRefreshing(true);
@@ -133,23 +126,18 @@ public class QuestionActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         getMenuInflater().inflate(R.menu.menu_question, menu);
-
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         int id=item.getItemId();
         switch (id){
-
             //返回顶部
             case R.id.action_toTop:
                 recyclerView.smoothScrollToPosition(0);
                 break;
-
             //刷新
             case R.id.action_refresh:
                 swipeRefreshLayout.setRefreshing(true);
@@ -157,7 +145,6 @@ public class QuestionActivity extends AppCompatActivity {
             default:
                 break;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -165,7 +152,7 @@ public class QuestionActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //发布答案成功后刷新
-        if(resultCode==1)
+        if (requestCode == POST_ANSWER && resultCode == PostAnswerActivity.POST_ANSWER_POS)
            new LoadAnswers().execute();
     }
 
@@ -200,45 +187,6 @@ public class QuestionActivity extends AppCompatActivity {
                 isFirstRefresh=false;
             }
             else Toast.makeText(QuestionActivity.this,"更新完成",Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    //异步发布答案
-    private class PublishTask extends AsyncTask<Void, Void, Void> {
-
-        String content;
-        Response<PublishAnswer> response;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            content = answerContent.getText().toString();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            Client client = Client.getInstance();
-            response = client.publishAnswer(questionID, content);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-
-            if (response == null) // 未知错误
-                Toast.makeText(QuestionActivity.this,"未知错误",Toast.LENGTH_SHORT).show();
-            else if (response.getErrno() == 1){ // 发布成功
-                Toast.makeText(QuestionActivity.this,"回答成功",Toast.LENGTH_SHORT).show();
-                new LoadAnswers().execute();
-            }
-
-            else                // 显示错误
-                Toast.makeText(QuestionActivity.this, response.getErr(), Toast.LENGTH_SHORT).show();
-
-            floatingActionButton.revealMainView();
-            isBtnClose=true;
-            answerContent.setText("");
         }
     }
 

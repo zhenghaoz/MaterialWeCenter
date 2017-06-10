@@ -27,7 +27,8 @@
     <string name="sign_out">注销</string>
     <string name="title_activity_user">UserActivity</string>
     <string name="title_activity_login">LoginActivity</string>
-    <string name="title_activity_post">发布问题</string>
+    <string name="title_activity_post"/>
+    <string name="title_activity_post_answer"/>
 
     <!--Settings-->
     <string name="about">关于</string>

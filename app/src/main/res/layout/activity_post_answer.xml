@@ -15,7 +15,7 @@
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
     </android.support.v7.widget.Toolbar>
 
-    <EditText
+    <io.github.mthli.knife.KnifeText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
@@ -26,19 +26,35 @@
         android:layout_weight="1"
         android:textColor="@android:color/widget_edittext_dark"
         android:textSize="@dimen/abc_text_size_medium_material" />
-    <LinearLayout
+
+    <RelativeLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="right"
-        android:background="@color/nliveo_blue_colorAccent">
+        android:background="@color/nliveo_blue_colorPrimary">
+
+        <TextView
+            android:id="@+id/question_title"
+            android:textColor="@color/nliveo_white"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/imageButton_publishAnswer"
+            android:layout_toStartOf="@+id/imageButton_publishAnswer"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content" />
 
         <ImageButton
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:src="@drawable/ic_send"
             android:id="@+id/imageButton_publishAnswer"
             android:background="#00000000" />
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

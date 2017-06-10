@@ -24,7 +24,11 @@ import com.sine_x.material_wecenter.models.Responses;
 
 import java.util.ArrayList;
 
-public class ExploreFragment extends Fragment implements View.OnClickListener {
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+public class ExploreFragment extends Fragment {
 
     private final int ScrollOffset = 4;
     private boolean loading = true;
@@ -32,7 +36,7 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
     private QuestionViewAdapter mAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
-    private FloatingActionButton btnPublish;
+    @Bind(R.id.button_publish) FloatingActionButton btnPublish;
 
     private static int POST_ACTIVITY = 1;
 
@@ -48,9 +52,7 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // 实例化发布问题按钮
-        btnPublish = (FloatingActionButton)view.findViewById(R.id.button_publish);
-        btnPublish.setOnClickListener(this);
+        ButterKnife.bind(this, view);
         // 实例化刷新布局
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light,
@@ -102,14 +104,11 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
         new LoadQuestionList().execute();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            // 点击发起问题按钮
-            case R.id.button_publish:
-                Intent intent = new Intent(getActivity(), PostActivity.class);
-                startActivityForResult(intent, POST_ACTIVITY);
-        }
+    @OnClick(R.id.button_publish)
+    public void publish() {
+        // 点击发起问题按钮
+        Intent intent = new Intent(getActivity(), PostActivity.class);
+        startActivityForResult(intent, POST_ACTIVITY);
     }
 
     @Override

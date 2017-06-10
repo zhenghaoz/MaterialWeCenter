@@ -106,82 +106,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <HorizontalScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        >
-
-                        <LinearLayout
-                            android:orientation="horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            >
-
-                            <ImageButton
-                                android:id="@+id/action_undo"
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
-                                android:background="@null"
-                                android:contentDescription="@null"
-                                android:src="@drawable/ic_undo_32dp"
-                                />
-
-                            <ImageButton
-                                android:layout_marginLeft="8dp"
-                                android:id="@+id/action_redo"
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
-                                android:background="@null"
-                                android:contentDescription="@null"
-                                android:src="@drawable/ic_redo_32dp"
-                                />
-
-                            <ImageButton
-                                android:layout_marginLeft="8dp"
-                                android:id="@+id/action_bold"
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
-                                android:background="@null"
-                                android:contentDescription="@null"
-                                android:src="@drawable/ic_bold_32dp"
-                                />
-
-                            <ImageButton
-                                android:layout_marginLeft="8dp"
-                                android:id="@+id/action_italic"
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
-                                android:background="@null"
-                                android:contentDescription="@null"
-                                android:src="@drawable/ic_italic_32dp"
-                                />
-
-                            <ImageButton
-                                android:layout_marginLeft="8dp"
-                                android:id="@+id/action_underline"
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
-                                android:background="@null"
-                                android:contentDescription="@null"
-                                android:src="@drawable/ic_underline_32dp"
-                                />
-
-                            <ImageButton
-                                android:layout_marginLeft="8dp"
-                                android:id="@+id/action_quote"
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
-                                android:background="@null"
-                                android:contentDescription="@null"
-                                android:src="@drawable/ic_quote_32dp"
-                                />
-
-                        </LinearLayout>
-                    </HorizontalScrollView>
-
                     <!--问题描述-->
                     <io.github.mthli.knife.KnifeText
-                        android:layout_marginTop="@dimen/activity_horizontal_margin"
                         android:id="@+id/edit_content"
                         android:textColor="@android:color/black"
                         android:layout_width="match_parent"

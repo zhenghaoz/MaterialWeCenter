@@ -1,7 +1,38 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.sine_x.material_wecenter.controller.activity.PostAnswerActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+    tools:context="com.sine_x.material_wecenter.controller.activity.PostActivity">
+    <item android:id="@+id/action_undo"
+        android:title="撤销"
+        android:icon="@drawable/ic_undo_white_24dp"
+        app:showAsAction="always"/>
+    <item android:id="@+id/action_redo"
+        android:title="重做"
+        android:icon="@drawable/ic_redo_white_24dp"
+        app:showAsAction="always"/>
+    <item android:id="@+id/action_bold"
+        android:title="加粗"
+        android:icon="@drawable/ic_format_bold_white_24dp"
+        app:showAsAction="always"/>
+    <item android:id="@+id/action_italic"
+        android:title="斜体"
+        android:icon="@drawable/ic_format_italic_white_24dp"
+        app:showAsAction="always"/>
+    <item android:id="@+id/action_quote"
+        android:title="引用"
+        android:icon="@drawable/ic_format_quote_24dp"
+        app:showAsAction="always"/>
+    <item android:id="@+id/action_list_bulleted"
+        android:title="列表"
+        android:icon="@drawable/ic_format_list_bulleted_24dp"
+        app:showAsAction="always"/>
+    <item android:id="@+id/action_insert_link"
+        android:title="插入链接"
+        android:icon="@drawable/ic_insert_link_24dp"
+        app:showAsAction="always"/>
+    <!--<item android:id="@+id/action_list_numbered"-->
+    <!--android:title="有序列表"-->
+    <!--android:icon="@drawable/ic_format_list_numbered_24dp"-->
+    <!--app:showAsAction="ifRoom"/>-->
+
 </menu>

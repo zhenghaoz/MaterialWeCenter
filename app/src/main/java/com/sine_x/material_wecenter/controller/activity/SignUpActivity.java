@@ -71,7 +71,7 @@ public class SignUpActivity extends AppCompatActivity {
                 // 保存用户名和密码
                 SharedPreferences preferences = getSharedPreferences("account", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
-                editor.putLong(Config.PRE_UID, response.getRsm().getUid());
+                editor.putInt(Config.PRE_UID, response.getRsm().getUid());
                 editor.putString(Config.PRE_PASSWORD, password);
                 editor.putString(Config.PRE_USER_NAME, response.getRsm().getUser_name());
                 editor.putString(Config.PRE_AVATAR_FILE, Config.DEFAULT_AVATAR);

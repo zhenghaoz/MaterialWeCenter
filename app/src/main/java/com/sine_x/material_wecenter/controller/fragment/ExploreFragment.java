@@ -131,10 +131,11 @@ public class ExploreFragment extends Fragment {
         @Override
         protected Integer doInBackground(Void... params) {
             result2 = Client.getInstance().explore(page);
-            if (result2.getErrno() == 1)
+            if (result2.getErrno() == 1) {
                 if (page == 1)  // 首页
                     mList.clear();
                 mList.addAll(result2.getRsm());
+            }
             return null;
         }
 

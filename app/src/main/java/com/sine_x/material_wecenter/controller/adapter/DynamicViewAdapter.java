@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.Spanned;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,19 +28,19 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class DynamicViewAdapter extends RecyclerView.Adapter<DynamicViewAdapter.ViewHolder> {
 
     private boolean questionOnly(int n) {
-        return n >= Dynamic.ADD_QUESTION && n <= Dynamic.DEL_REDIRECT_QUESTION;
+        return Dynamic.ADD_QUESTION <= n && n <= Dynamic.DEL_REDIRECT_QUESTION;
     }
 
     private boolean questionAndAnswer(int n) {
-        return n >= Dynamic.ANSWER_QUESTION && n <= Dynamic.ADD_UNUSEFUL;
+        return Dynamic.ANSWER_QUESTION <= n && n <= Dynamic.ADD_UNUSEFUL;
     }
 
     private boolean topic(int n) {
-        return n >= Dynamic.ADD_TOPIC && n <= Dynamic.DELETE_RELATED_TOPIC;
+        return Dynamic.ADD_TOPIC <= n && n <= Dynamic.DELETE_RELATED_TOPIC;
     }
 
     private boolean articleOnly(int n) {
-        return n >= Dynamic.ADD_ARTICLE && n <= Dynamic.ADD_AGREE_ARTICLE;
+        return Dynamic.ADD_ARTICLE <= n && n <= Dynamic.ADD_AGREE_ARTICLE;
     }
 
     private boolean articleAndComment(int n) {
@@ -152,7 +153,13 @@ public class DynamicViewAdapter extends RecyclerView.Adapter<DynamicViewAdapter.
     //201 - 207
     private void setQuestionAndAnswerView(ViewHolder holder, final Dynamic dynamic) {
         holder.dynamicTitle.setText(dynamic.getQuestion_info().getQuestion_content());
-        holder.dynamicContent.setText(Html.fromHtml(dynamic.getAnswer_info().getAnswer_content()));
+        CharSequence message = Html.fromHtml(dynamic.getAnswer_info().getAnswer_content());
+        if (message.length() > Config.MAX_LENGTH) {
+            message = message.subSequence(0, Config.MAX_LENGTH);
+            message = message + "...";
+        }
+        holder.dynamicContent.setVisibility(View.VISIBLE);
+        holder.dynamicContent.setText(message);
         holder.dynamicInfo.setText(dynamic.getAnswer_info().getAgree_count() + "次赞同 • "
                 + dynamic.getAnswer_info().getAgainst_count() + "次反对");
         View.OnClickListener clickListener = new View.OnClickListener() {
@@ -183,22 +190,31 @@ public class DynamicViewAdapter extends RecyclerView.Adapter<DynamicViewAdapter.
     //501 - 502
     private void setArticleView(ViewHolder holder, final Dynamic dynamic) {
         holder.dynamicTitle.setText(dynamic.getArticle_info().getTitle());
-        holder.dynamicContent.setText(dynamic.getArticle_info().getMessage());
+        CharSequence message = Html.fromHtml(dynamic.getArticle_info().getMessage());
+        if (message.length() > Config.MAX_LENGTH) {
+            message = message.subSequence(0, Config.MAX_LENGTH);
+            message = message + "...";
+        }
+        holder.dynamicContent.setVisibility(View.VISIBLE);
+        holder.dynamicContent.setText(message);
         holder.dynamicInfo.setText(dynamic.getArticle_info().getViews() + "次浏览 • "
                 + dynamic.getArticle_info().getComments() + "次回复");
-        holder.dynamicTitle.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, ArticleActivity.class);
                 intent.putExtra(Config.INT_ARTICLE_ID, dynamic.getArticle_info().getId());
                 mContext.startActivity(intent);
             }
-        });
+        };
+        holder.dynamicTitle.setOnClickListener(clickListener);
+        holder.dynamicContent.setOnClickListener(clickListener);
     }
 
     //503
     private void setArticleAndCommentView(ViewHolder holder, final Dynamic dynamic) {
         holder.dynamicTitle.setText("文章： " + dynamic.getArticle_info().getTitle());
+        holder.dynamicContent.setVisibility(View.VISIBLE);
         holder.dynamicContent.setText(dynamic.getComment_info().getMessage());
         holder.dynamicInfo.setText(dynamic.getComment_info().getVotes() + "个赞");
         holder.dynamicTitle.setOnClickListener(new View.OnClickListener() {

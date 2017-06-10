@@ -19,6 +19,8 @@ public class Config {
     // 默认头像
     public static final String DEFAULT_AVATAR = HOST_NAME + "static/common/avatar-max-img.png";
 
+    public static final int MAX_LENGTH = 100;
+
     // 警告！ 修改下面内容可能会导致应用无法使用
 
     static final String API_ROOT = HOST_NAME + "?/api/";

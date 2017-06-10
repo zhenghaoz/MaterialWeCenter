@@ -25,11 +25,11 @@
     <item android:id="@+id/action_list_bulleted"
         android:title="列表"
         android:icon="@drawable/ic_format_list_bulleted_24dp"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
     <item android:id="@+id/action_insert_link"
         android:title="插入链接"
         android:icon="@drawable/ic_insert_link_24dp"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
     <!--<item android:id="@+id/action_list_numbered"-->
     <!--android:title="有序列表"-->
     <!--android:icon="@drawable/ic_format_list_numbered_24dp"-->

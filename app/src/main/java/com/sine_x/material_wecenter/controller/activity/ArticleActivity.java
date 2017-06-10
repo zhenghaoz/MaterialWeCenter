@@ -156,6 +156,14 @@ public class ArticleActivity extends AppCompatActivity {
             case R.id.action_refresh:
                 swipeRefreshLayout.setRefreshing(true);
                 new LoadArticle().execute();
+                break;
+            case R.id.action_share:
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, Config.HOST_NAME + "?/article/" + articleID);
+                sendIntent.setType("text/html");
+                startActivity(sendIntent);
+                break;
             default:
                 break;
         }

@@ -5,7 +5,7 @@ public class Config {
     // 应用配置
 
     // 网站目录
-    static String HOST_NAME = "http://zsyovo.net:8000/";
+    public static String HOST_NAME = "http://zsyovo.net:8000/";
     // 每页问题数量
     public static final int ITEM_PER_PAGE = 20;
     // 设置网络超时时间

@@ -142,6 +142,14 @@ public class QuestionActivity extends AppCompatActivity {
             case R.id.action_refresh:
                 swipeRefreshLayout.setRefreshing(true);
                 new LoadAnswers().execute();
+                break;
+            case R.id.action_share:
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, Config.HOST_NAME + "?/question/" + questionID);
+                sendIntent.setType("text/html");
+                startActivity(sendIntent);
+                break;
             default:
                 break;
         }

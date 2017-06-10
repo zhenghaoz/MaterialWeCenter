@@ -344,12 +344,12 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         @Override
         public void onClick(View v) {
             new DoAction(DoAction.AGREE, answerID).execute();
-            if(status==0){
+            if (status == 0) {
                 image.setImageResource(R.drawable.ic_agree_red);
                 text.setText((++num)+"");
                 status=1;
             }
-            else if(status==1){
+            else if (status==1) {
                 image.setImageResource(R.drawable.ic_agree);
                 text.setText((--num)+"");
                 status=0;

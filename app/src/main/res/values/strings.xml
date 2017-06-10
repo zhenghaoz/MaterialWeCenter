@@ -3,26 +3,16 @@
     <!-- 应用名称 -->
     <string name="app_name">Material WeCenter</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-
     <!--Login Action-->
-    <string name="edit_username">请输入精弘通行证</string>
-    <string name="edit_password">请输入密码</string>
-    <string name="button_login">登录</string>
-    <string name="logining">登录中。。。</string>
 
     <!--Post activity-->
     <string name="edit_tile">标题</string>
-    <string name="edit_content">内容</string>
     <string name="edit_topic">话题</string>
     <string name="add_topic">添加话题</string>
 
     <!--Main drawer-->
     <string name="dynamic">动态</string>
     <string name="explore">发现</string>
-    <string name="query">查询</string>
-    <string name="topic">话题</string>
     <string name="settings">设置</string>
     <string name="sign_out">注销</string>
     <string name="title_activity_user">UserActivity</string>
@@ -33,15 +23,10 @@
     <!--Settings-->
     <string name="about">关于</string>
     <string name="version">版本号</string>
-    <string name="contributor">贡献者</string>
-    <string name="contributors">ZhangZhenghao\nwindness97\nDartick</string>
     <string name="github_repo">GitHub项目地址</string>
     <string name="github_url">https://github.com/ZhangZhenghao/Material-WeCenter</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_lauch">LauchActivity</string>
-    <string name="title_activity_test">TestActivity</string>
 
     <string name="item_footer">╮(╯3╰)╭再也找不到更多的了</string>
 

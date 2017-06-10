@@ -12,7 +12,6 @@
         android:src="@drawable/avatar_max_img" />
 
     <LinearLayout
-        android:id="@+id/layout_answer"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,7 +37,6 @@
             android:textSize="18dp" />
 
         <ImageView
-            android:id="@+id/imageView_commentCount_answer"
             android:src="@drawable/ic_answers"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"

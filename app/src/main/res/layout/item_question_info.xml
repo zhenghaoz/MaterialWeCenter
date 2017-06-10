@@ -25,7 +25,6 @@
 
         <ImageView
             android:layout_marginLeft="5dp"
-            android:id="@+id/imageView_answerCount_question"
             android:src="@drawable/ic_answers"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"

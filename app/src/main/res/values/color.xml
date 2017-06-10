@@ -1,7 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="dynamic_item_background" >#33b5e5</color>
-    <color name="dynamic_item_info_text" >#aaaaaa</color>
-    <color name="dynamic_sub_card" >#ecfcff</color>
-    <color name="translucent_background">#80000000</color>
-</resources>
+<resources></resources>

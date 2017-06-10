@@ -10,7 +10,6 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@android:color/darker_gray"
         android:gravity="center"
-        android:text="@string/item_footer"
-        android:id="@+id/textView" />
+        android:text="@string/item_footer" />
 
 </LinearLayout>

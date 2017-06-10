@@ -114,7 +114,7 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
                 // 删除用户信息
                 SharedPreferences preferences = getSharedPreferences("account", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
-                editor.putLong(Config.PRE_UID, -1);
+                editor.putInt(Config.PRE_UID, -1);
                 editor.putString(Config.PRE_USER_NAME, "");
                 editor.putString(Config.PRE_PASSWORD, "");
                 editor.putString(Config.PRE_AVATAR_FILE, "");

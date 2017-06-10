@@ -15,7 +15,6 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
@@ -23,11 +22,7 @@ import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.adapter.QuestionDetailAdapter;
-import com.sine_x.material_wecenter.models.PublishAnswer;
 import com.sine_x.material_wecenter.models.QuestionDetail;
-import com.sine_x.material_wecenter.models.Response;
-import com.truizlop.fabreveallayout.FABRevealLayout;
-import com.truizlop.fabreveallayout.OnRevealChangeListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

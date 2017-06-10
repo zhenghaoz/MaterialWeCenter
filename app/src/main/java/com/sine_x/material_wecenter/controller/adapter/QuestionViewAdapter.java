@@ -9,12 +9,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sine_x.material_wecenter.Config;
-import com.sine_x.material_wecenter.controller.activity.ArticleActivity;
-import com.sine_x.material_wecenter.models.ExploreItem;
-import com.squareup.picasso.Picasso;
 import com.sine_x.material_wecenter.R;
+import com.sine_x.material_wecenter.controller.activity.ArticleActivity;
 import com.sine_x.material_wecenter.controller.activity.QuestionActivity;
 import com.sine_x.material_wecenter.controller.activity.UserActivity;
+import com.sine_x.material_wecenter.models.ExploreItem;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 

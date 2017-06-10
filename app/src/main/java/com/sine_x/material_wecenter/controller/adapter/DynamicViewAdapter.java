@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.text.Spanned;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +11,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sine_x.material_wecenter.Config;
-import com.sine_x.material_wecenter.controller.activity.ArticleActivity;
-import com.squareup.picasso.Picasso;
 import com.sine_x.material_wecenter.R;
+import com.sine_x.material_wecenter.controller.activity.ArticleActivity;
 import com.sine_x.material_wecenter.controller.activity.QuestionActivity;
 import com.sine_x.material_wecenter.controller.activity.UserActivity;
 import com.sine_x.material_wecenter.models.Dynamic;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 

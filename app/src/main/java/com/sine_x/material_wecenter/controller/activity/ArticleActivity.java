@@ -25,8 +25,6 @@ import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.adapter.ArticleAdapter;
 import com.sine_x.material_wecenter.models.Article;
 import com.sine_x.material_wecenter.models.Response;
-import com.truizlop.fabreveallayout.FABRevealLayout;
-import com.truizlop.fabreveallayout.OnRevealChangeListener;
 
 public class ArticleActivity extends AppCompatActivity {
 
@@ -38,7 +36,6 @@ public class ArticleActivity extends AppCompatActivity {
     private ArticleAdapter articleAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
-    private FABRevealLayout floatingActionButton;
     private Client client = Client.getInstance();
     private ImageButton publish;
     private EditText answerContent;
@@ -245,7 +242,6 @@ public class ArticleActivity extends AppCompatActivity {
             else                // 显示错误
                 Toast.makeText(ArticleActivity.this, response.getErr(), Toast.LENGTH_SHORT).show();
 
-            floatingActionButton.revealMainView();
             isBtnClose=true;
             answerContent.setText("");
         }

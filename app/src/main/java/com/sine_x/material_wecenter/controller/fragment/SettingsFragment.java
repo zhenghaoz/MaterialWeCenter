@@ -2,25 +2,13 @@ package com.sine_x.material_wecenter.controller.fragment;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.util.Log;
 import android.view.View;
 
 import com.sine_x.material_wecenter.BuildConfig;
 import com.sine_x.material_wecenter.R;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class SettingsFragment extends PreferenceFragment {
 

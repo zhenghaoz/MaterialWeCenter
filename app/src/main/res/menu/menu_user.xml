@@ -3,6 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.sine_x.material_wecenter.controller.activity.UserActivity">
     <item android:id="@+id/action_focus"
-        android:icon="@drawable/ic_white_heart"
+        android:icon="@drawable/ic_favorite_border_white_24dp"
         app:showAsAction="ifRoom" />
 </menu>

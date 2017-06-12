@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
@@ -17,6 +18,7 @@ import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.fragment.UserActonFragment;
 import com.sine_x.material_wecenter.controller.fragment.UserInfoFragment;
+import com.sine_x.material_wecenter.models.Ajax;
 import com.sine_x.material_wecenter.models.Response;
 import com.sine_x.material_wecenter.models.UserInfo;
 import com.squareup.picasso.Picasso;
@@ -123,7 +125,7 @@ public class UserActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_focus) {   // 点击关注
-
+            new FollowTask().execute();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -153,10 +155,40 @@ public class UserActivity extends AppCompatActivity {
                 Picasso.with(UserActivity.this).load(info.getAvatar_file()).into(imgAvatar);
                 MenuItem item = menu.findItem(R.id.action_focus);
                 if (info.getHas_focus() == 1) {
-                    item.setTitle("取消关注");
+                    item.setIcon(R.drawable.ic_favorite_white_24dp);
                 } else {
-                    item.setTitle("关注");
+                    item.setIcon(R.drawable.ic_favorite_border_white_24dp);
                 }
+            }
+        }
+    }
+
+    class FollowTask extends AsyncTask<Void, Void, Void> {
+
+        Response<Ajax> response;
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            response = Client.getInstance().follow(uid);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            if (response.getErrno() == 1) {
+                MenuItem item = menu.findItem(R.id.action_focus);
+                if (response.getRsm().getType().equals("add")) {
+                    item.setIcon(R.drawable.ic_favorite_white_24dp);
+                    Toast.makeText(UserActivity.this, "关注成功", Toast.LENGTH_SHORT).show();
+                }  else if (response.getRsm().getType().equals("remove")) {
+                    item.setIcon(R.drawable.ic_favorite_border_white_24dp);
+                    Toast.makeText(UserActivity.this, "取消关注成功", Toast.LENGTH_SHORT).show();
+                }
+            } else if (response.getErr() != null) {
+                Toast.makeText(UserActivity.this, "操作失败: " + response.getErr(), Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(UserActivity.this, "操作失败", Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -333,6 +333,12 @@ public class Client {
         return parseResponse(json, PublishAnswer.class);
     }
 
+    public Response<Ajax> follow(int uid) {
+        Map<String, String> params = new HashMap<>();
+        params.put("uid", String.valueOf(uid));
+        String json = ajax(Config.AJAX_FOLLOW_PEOPLE, params);
+        return parseResponse(json, Ajax.class);
+    }
 
     /**
      * postAction 对问题或答案进行感谢、点赞等动作

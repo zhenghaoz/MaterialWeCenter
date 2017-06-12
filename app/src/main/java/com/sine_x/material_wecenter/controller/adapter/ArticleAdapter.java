@@ -172,7 +172,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             itemViewHolder.userName.setText(commentsBean.getUser_info().getUser_name());
             itemViewHolder.agreeCount.setText(String.valueOf(commentsBean.getVotes()));
 
-//            if (commentsBean.getAgree_status() == 1) {
+//            if (commentsBean.getVote_info(). == 1) {
 //                itemViewHolder.agree.setImageResource(R.drawable.ic_agree_red);
 //            }
 

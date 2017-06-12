@@ -57,6 +57,7 @@ public class Config {
     static final String AJAX_QUESTION_THANKS = "?/question/ajax/question_thanks/";
     static final String AJAX_ARTICLE_VOTE = "?/article/ajax/article_vote/";
     static final String AJAX_SAVE_COMMENT = "?/article/ajax/save_comment/";
+    static final String AJAX_FOLLOW_PEOPLE = "?/follow/ajax/follow_people/";
 
     static final String API_CAT_EXPLORE = "explore";
 

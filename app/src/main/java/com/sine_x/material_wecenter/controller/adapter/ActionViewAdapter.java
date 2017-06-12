@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,8 +56,16 @@ public class ActionViewAdapter extends RecyclerView.Adapter<ActionViewAdapter.Ac
             holder.detail.setVisibility(View.GONE);
             builder.append(String.valueOf(action.getQuestion_info().getAnswer_count()))
                     .append("个回答");
-        } else {                                        // 回答问题
-            holder.detail.setText(Html.fromHtml(Html.fromHtml(contents.get(position).getAnswer_info().getAnswer_content()).toString()));
+        } else {
+            // 回答问题
+            String message = contents.get(position).getAnswer_info().getAnswer_content();
+            message = message.replace("\n", "");
+            message = message.replaceAll("\\[.*?\\]", "");
+            if (message.length() > Config.MAX_LENGTH) {
+                message = message.substring(0, Config.MAX_LENGTH);
+                message = message + "...";
+            }
+            holder.detail.setText(message);
             builder.append(String.valueOf(action.getAnswer_info().getAgree_count()))
                     .append("个赞同 • ")
                     .append(String.valueOf(action.getAnswer_info().getAgainst_count()))

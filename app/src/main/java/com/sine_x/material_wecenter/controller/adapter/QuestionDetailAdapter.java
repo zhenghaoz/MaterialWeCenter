@@ -28,15 +28,18 @@ import com.zzhoujay.richtext.RichText;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
+import me.gujun.android.taggroup.TagGroup;
 
 public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final int TYPE_TITLE = 0;
     private final int TYPE_DETAIL = 1;
+    private final int TYPE_TOPICS = 2;
     private final int TYPE_ITEM = 3;
     private final int TYPE_FOOTER = 4;
     private final int TYPE_INFO = 5;
@@ -56,8 +59,10 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             case 0:
                 return TYPE_TITLE;
             case 1:
-                return TYPE_DETAIL;
+                return TYPE_TOPICS;
             case 2:
+                return TYPE_DETAIL;
+            case 3:
                 return TYPE_INFO;
             default:
                 if (position == getItemCount()-1)
@@ -74,6 +79,10 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 view = LayoutInflater.from(mContext)
                         .inflate(R.layout.item_question_title, parent, false);
                 return new TitleViewHolder(view);
+            case TYPE_TOPICS:
+                view = LayoutInflater.from(mContext)
+                        .inflate(R.layout.item_tags, parent, false);
+                return new TopicViewHolder(view);
             case TYPE_DETAIL:
                 view = LayoutInflater.from(mContext)
                         .inflate(R.layout.item_rich_text, parent, false);
@@ -89,7 +98,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             default:
                 view = LayoutInflater.from(mContext)
                         .inflate(R.layout.item_answer, parent, false);
-                return new ItemViewHolder(view);
+                return new CommentViewHolder(view);
         }
     }
 
@@ -117,6 +126,12 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             TextViewHolder textViewHolder = (TextViewHolder) holder;
             RichText.from(questionDetail.getQuestion_info().getQuestion_detail())
                     .into(textViewHolder.text);
+        } else if (holder instanceof TopicViewHolder) {
+            TopicViewHolder topicViewHolder = (TopicViewHolder) holder;
+            List<String> topics = new ArrayList<>();
+            for (QuestionDetail.TopicInfo info : questionDetail.getQuestion_topics())
+                topics.add(info.getTopic_title());
+            topicViewHolder.tagGroup.setTags(topics);
         } else if (holder instanceof InfoViewHolder) {
             final QuestionDetail.QuestionInfo questionInfo = questionDetail.getQuestion_info();
             InfoViewHolder infoViewHolder = (InfoViewHolder) holder;
@@ -139,18 +154,18 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             String time = getTime(questionInfo.getAdd_time());
             infoViewHolder.addTime.setGravity(Gravity.RIGHT);
             infoViewHolder.addTime.setText("发布于  " + time);
-        } else if (holder instanceof ItemViewHolder) {
+        } else if (holder instanceof CommentViewHolder) {
 
-            ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
-            final QuestionDetail.AnswerInfo answerInfo = questionDetail.getAnswers().get(position - 3);
+            CommentViewHolder commentViewHolder = (CommentViewHolder) holder;
+            final QuestionDetail.AnswerInfo answerInfo = questionDetail.getAnswers().get(position - 4);
             String avatarFile = answerInfo.getUser_info().getAvatar_file();
             //Log.e("avatarFile",avatarFile);
             if (!avatarFile.isEmpty())
                 Picasso.with(mContext)
                         .load(avatarFile)
-                        .into(itemViewHolder.avatar);
+                        .into(commentViewHolder.avatar);
 
-            itemViewHolder.avatar.setOnClickListener(new View.OnClickListener() {
+            commentViewHolder.avatar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, UserActivity.class);
@@ -159,21 +174,21 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 }
             });
             String addTime = getTime(answerInfo.getAdd_time());
-            itemViewHolder.addTime.setText(addTime);
-            itemViewHolder.userName.setText(answerInfo.getUser_info().getUser_name());
-            itemViewHolder.agreeCount.setText(answerInfo.getAgree_count() + "");
+            commentViewHolder.addTime.setText(addTime);
+            commentViewHolder.userName.setText(answerInfo.getUser_info().getUser_name());
+            commentViewHolder.agreeCount.setText(answerInfo.getAgree_count() + "");
 
             if (answerInfo.getAgree_status() == 1) {
-                itemViewHolder.agree.setImageResource(R.drawable.ic_agree_red);
+                commentViewHolder.agree.setImageResource(R.drawable.ic_agree_red);
             }
 
-            itemViewHolder.agree.setOnClickListener(new AgreeListener(itemViewHolder.agree
-                    , answerInfo.getAgree_count(), answerInfo.getAgree_status(), itemViewHolder.agreeCount,
+            commentViewHolder.agree.setOnClickListener(new AgreeListener(commentViewHolder.agree
+                    , answerInfo.getAgree_count(), answerInfo.getAgree_status(), commentViewHolder.agreeCount,
                     answerInfo.getAnswer_id()));
 
-            itemViewHolder.briefDetail.setText(Html.fromHtml(answerInfo.getAnswer_content()));
-            itemViewHolder.briefDetail.setVisibility(View.VISIBLE);
-            itemViewHolder.briefDetail.setOnClickListener(new View.OnClickListener() {
+            commentViewHolder.briefDetail.setText(Html.fromHtml(answerInfo.getAnswer_content()));
+            commentViewHolder.briefDetail.setVisibility(View.VISIBLE);
+            commentViewHolder.briefDetail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, AnswerActivity.class);
@@ -189,7 +204,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public int getItemCount() {
         if (questionDetail == null)
             return 1;
-        return 4 + (questionDetail.getAnswers() == null ? 0 : questionDetail.getAnswers().size());
+        return 5 + (questionDetail.getAnswers() == null ? 0 : questionDetail.getAnswers().size());
     }
 
     public class TitleViewHolder extends RecyclerView.ViewHolder {
@@ -203,7 +218,15 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
     }
 
-    public class ItemViewHolder extends RecyclerView.ViewHolder {
+    public class TopicViewHolder extends RecyclerView.ViewHolder {
+        @Bind(R.id.tag_group) TagGroup tagGroup;
+        public TopicViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+        }
+    }
+
+    public class CommentViewHolder extends RecyclerView.ViewHolder {
 
         private CircleImageView avatar;
         private TextView userName;
@@ -212,7 +235,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         private ImageView agree;
         private TextView agreeCount;
 
-        public ItemViewHolder(View view) {
+        public CommentViewHolder(View view) {
             super(view);
             avatar = (CircleImageView) view.findViewById(R.id.avatar_img_answer);
             userName = (TextView) view.findViewById(R.id.textView_userName_answer);

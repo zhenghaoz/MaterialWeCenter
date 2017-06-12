@@ -81,9 +81,13 @@
                     </LinearLayout>
 
                     <!--话题-->
-                    <TextView
-                        android:layout_marginTop="@dimen/activity_vertical_margin"
-                        android:id="@+id/txt_topics"
+                    <me.gujun.android.taggroup.TagGroup
+                        style="@style/TagGroup"
+                        app:atg_pressedBackgroundColor="@color/nliveo_blue_colorPrimaryDark"
+                        app:atg_backgroundColor="@color/nliveo_blue_colorPrimary"
+                        app:atg_borderColor="@color/nliveo_blue_colorPrimary"
+                        app:atg_textColor="@android:color/white"
+                        android:id="@+id/tag_group"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 

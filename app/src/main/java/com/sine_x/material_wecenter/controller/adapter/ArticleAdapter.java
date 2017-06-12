@@ -21,6 +21,7 @@ import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.activity.UserActivity;
 import com.sine_x.material_wecenter.models.Ajax;
 import com.sine_x.material_wecenter.models.Article;
+import com.sine_x.material_wecenter.models.QuestionDetail;
 import com.sine_x.material_wecenter.models.Response;
 import com.squareup.picasso.Picasso;
 import com.zzhoujay.richtext.RichText;
@@ -28,15 +29,18 @@ import com.zzhoujay.richtext.RichText;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
+import me.gujun.android.taggroup.TagGroup;
 
 public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final int TYPE_TITLE = 0;
     private final int TYPE_DETAIL = 1;
+    private final int TYPE_TOPICS = 2;
     private final int TYPE_ITEM = 3;
     private final int TYPE_FOOTER = 4;
     private final int TYPE_INFO = 5;
@@ -56,8 +60,10 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             case 0:
                 return TYPE_TITLE;
             case 1:
-                return TYPE_DETAIL;
+                return TYPE_TOPICS;
             case 2:
+                return TYPE_DETAIL;
+            case 3:
                 return TYPE_INFO;
             default:
                 if (position == getItemCount()-1)
@@ -74,6 +80,10 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 view = LayoutInflater.from(mContext)
                         .inflate(R.layout.item_question_title, parent, false);
                 return new TitleViewHolder(view);
+            case TYPE_TOPICS:
+                view = LayoutInflater.from(mContext)
+                        .inflate(R.layout.item_tags, parent, false);
+                return new TopicViewHolder(view);
             case TYPE_DETAIL:
                 view = LayoutInflater.from(mContext)
                         .inflate(R.layout.item_rich_text, parent, false);
@@ -114,6 +124,12 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             });
             Log.d("UID", String.valueOf(articleInfo.getUser_info().getUid()));
             titleViewHolder.title.setText(articleInfo.getTitle());
+        } else if (holder instanceof TopicViewHolder) {
+            TopicViewHolder topicViewHolder = (TopicViewHolder) holder;
+            List<String> topics = new ArrayList<>();
+            for (Article.ArticleTopicsBean info : article.getArticle_topics())
+                topics.add(info.getTopic_title());
+            topicViewHolder.tagGroup.setTags(topics);
         } else if (holder instanceof TextViewHolder) {
             TextViewHolder textViewHolder = (TextViewHolder) holder;
             RichText.from(article.getArticle_info().getMessage())
@@ -126,10 +142,16 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             String time = getTime(questionInfo.getAdd_time());
             infoViewHolder.addTime.setGravity(Gravity.RIGHT);
             infoViewHolder.addTime.setText("发布于  " + time);
+            infoViewHolder.thank.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         } else if (holder instanceof ItemViewHolder) {
 
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
-            final Article.CommentsBean commentsBean = article.getComments().get(position - 3);
+            final Article.CommentsBean commentsBean = article.getComments().get(position - 4);
             String avatarFile = commentsBean.getUser_info().getAvatar_file();
             //Log.e("avatarFile",avatarFile);
             if (!avatarFile.isEmpty())
@@ -160,14 +182,6 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
             itemViewHolder.briefDetail.setText(Html.fromHtml(commentsBean.getMessage()));
             itemViewHolder.briefDetail.setVisibility(View.VISIBLE);
-            itemViewHolder.briefDetail.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-//                    Intent intent = new Intent(mContext, AnswerActivity.class);
-//                    intent.putExtra("answerID", commentsBean.getAnswer_id());
-//                    mContext.startActivity(intent);
-                }
-            });
         }
 
     }
@@ -176,7 +190,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public int getItemCount() {
         if (article == null)
             return 1;
-        return 4 + (article.getComments() == null ? 0 : article.getComments().size());
+        return 5 + (article.getComments() == null ? 0 : article.getComments().size());
     }
 
     public class TitleViewHolder extends RecyclerView.ViewHolder {
@@ -222,6 +236,15 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             super(view);
             ButterKnife.bind(this, view);
             focus.setVisibility(View.GONE);
+        }
+    }
+
+    public class TopicViewHolder extends RecyclerView.ViewHolder {
+        @Bind(R.id.tag_group)
+        TagGroup tagGroup;
+        public TopicViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
         }
     }
 
@@ -370,15 +393,15 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         private static final int FOCUS = 0;
         private static final int THANKS = 1;
         private int action;
-        private int questionID;
+        private int articleID;
         private int num;
         Response<Ajax> result2;
         private View count;
         private View view;
 
-        public DoAction(int action, int questionID, int num, View count, View view) {
+        public DoAction(int action, int articleID, int num, View count, View view) {
             this.action = action;
-            this.questionID = questionID;
+            this.articleID = articleID;
             this.num = num;
             this.count = count;
             this.view = view;
@@ -396,10 +419,10 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 ArrayList<String> strs = new ArrayList<>();
                 switch (action) {
                     case FOCUS:
-                        result2 = client.focus(questionID);
+                        result2 = client.focus(articleID);
                         break;
                     case THANKS:
-                        result2 = client.thanks(questionID);
+                        result2 = client.thanks(articleID);
                         break;
                     default:
                         break;

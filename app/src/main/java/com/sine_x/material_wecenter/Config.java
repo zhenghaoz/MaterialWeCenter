@@ -55,6 +55,8 @@ public class Config {
     static final String AJAX_ANSWER_VOTE = "?/question/ajax/answer_vote/";
     static final String AJAX_QUESTION_FOCUS = "?/question/ajax/focus/";
     static final String AJAX_QUESTION_THANKS = "?/question/ajax/question_thanks/";
+    static final String AJAX_ARTICLE_VOTE = "?/article/ajax/article_vote/";
+    static final String AJAX_SAVE_COMMENT = "?/article/ajax/save_comment/";
 
     static final String API_CAT_EXPLORE = "explore";
 
@@ -64,7 +66,8 @@ public class Config {
         QUESTION_THANKS,
         PUBLISH_ANSWER_COMMENT,
         ANSWER_RATE,
-        ANSWER_VOTE
+        ANSWER_VOTE,
+        ARTICLE_VOTE
     }
 
     public static final String PRE_ACCOUNT = "account";

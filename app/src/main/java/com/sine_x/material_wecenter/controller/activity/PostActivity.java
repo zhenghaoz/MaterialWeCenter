@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.nispok.snackbar.Snackbar;
@@ -25,14 +27,15 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.github.mthli.knife.KnifeText;
+import me.gujun.android.taggroup.TagGroup;
 
 public class PostActivity extends AppCompatActivity {
 
     private ArrayList<String> topics = new ArrayList<>();
     @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.btn_add_topic) Button btnAddTopic;
-    @Bind(R.id.txt_topics) TextView textTopics;
+    @Bind(R.id.tag_group) TagGroup tagGroup;
     @Bind(R.id.edit_title) MaterialEditText editTitle;
     @Bind(R.id.edit_content) KnifeText editContent;
     @Bind(R.id.edit_topic) MaterialEditText editTopic;
@@ -55,20 +58,20 @@ public class PostActivity extends AppCompatActivity {
             ab.setDisplayHomeAsUpEnabled(true);
         // 实例化控件
         editTitle.validate("\\w{5,}", "标题长度不能少于5个字");
-        // 添加话题
-        btnAddTopic.setOnClickListener(new View.OnClickListener() {
+        tagGroup.setOnTagClickListener(new TagGroup.OnTagClickListener() {
             @Override
-            public void onClick(View v) {
-                String text = editTopic.getText().toString();
-                if (!text.isEmpty()) {
-                    topics.add(text);
-                    String old = textTopics.getText().toString();
-                    old += text + "   ";
-                    textTopics.setText(old);
-                    editTopic.getText().clear();
-                }
+            public void onTagClick(String tag) {
+                topics.remove(tag);
+                tagGroup.setTags(topics);
             }
         });
+    }
+
+    @OnClick(R.id.btn_add_topic)
+    void addTopic() {
+            topics.add(editTopic.getText().toString());
+            tagGroup.setTags(topics);
+            editTopic.setText("");
     }
 
     @Override

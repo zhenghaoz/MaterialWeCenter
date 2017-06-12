@@ -312,7 +312,7 @@ public class Client {
             for (int i = 1; i < topics.size(); i++)
                 topic.append(',').append(topics.get(i));
         }
-        params.put("topics", topics.toString());
+        params.put("topics", topic.toString());
         String json = apiPost(Config.API_CAT_PUBLISH, Config.API_PUBLISH_QUESTION, params);
         return parseResponse(json, PublishQuestion.class);
     }
@@ -368,6 +368,12 @@ public class Client {
             params.put("type", strs.get(0));
             params.put("answer_id", strs.get(1));
             json = ajax(Config.AJAX_ANSWER_RATE, params);
+            return parseResponse(json, classType);
+        } else if (type == Config.ActionType.ARTICLE_VOTE) {
+            params.put("type", strs.get(0));
+            params.put("item_id", strs.get(1));
+            params.put("rating", strs.get(2));
+            json = ajax(Config.AJAX_ARTICLE_VOTE, params);
             return parseResponse(json, classType);
         }
         return null;

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <me.gujun.android.taggroup.TagGroup
+        style="@style/TagGroup"
+        android:paddingTop="@dimen/cardMarginVertical"
+        android:paddingStart="@dimen/cardMarginHorizontal"
+        android:paddingEnd="@dimen/cardMarginHorizontal"
+        app:atg_pressedBackgroundColor="@color/nliveo_blue_colorPrimaryDark"
+        app:atg_backgroundColor="@color/nliveo_blue_colorPrimary"
+        app:atg_borderColor="@color/nliveo_blue_colorPrimary"
+        app:atg_textColor="@android:color/white"
+        android:id="@+id/tag_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</FrameLayout>

@@ -4,7 +4,7 @@
 
 Material-WeCenter是一个第三方的[WeCenter](http://www.wecenter.com/)安卓客户端，最初为作者们为大学官方论坛开发。本客户端依赖由[ifLab](http://iflab.org/)维护的[WeCenterMobile-Api](https://github.com/ifLab/WeCenterMobile-Api/)。
 
-![](https://travis-ci.org/ZhangZhenghao/MaterialWeCenter.svg?branch=master)
+[![Build Status](https://travis-ci.org/ZhangZhenghao/MaterialWeCenter.svg?branch=master)](https://travis-ci.org/ZhangZhenghao/MaterialWeCenter)
 
 ## Screenshot
 

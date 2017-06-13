@@ -5,19 +5,19 @@
 Material-WeCenter是一个第三方的[WeCenter](http://www.wecenter.com/)安卓客户端，最初为作者们为大学官方论坛开发。本客户端依赖由[ifLab](http://iflab.org/)维护的[WeCenterMobile-Api](https://github.com/ifLab/WeCenterMobile-Api/)。
 
 ## Screenshot
-<img src="https://raw.githubusercontent.com/ZhangZhenghao/Material-WeCenter/master/screenshot/Screenshot_20170209-131555.png" width="30%" height="30%"> <img src="https://raw.githubusercontent.com/ZhangZhenghao/Material-WeCenter/master/screenshot/Screenshot_20170209-131440.png" width="30%" height="30%">  <img src="https://raw.githubusercontent.com/ZhangZhenghao/Material-WeCenter/master/screenshot/Screenshot_20170209-131533.png" width="30%" height="30%">
-<img src="https://raw.githubusercontent.com/ZhangZhenghao/Material-WeCenter/master/screenshot/Screenshot_20170209-131543.png" width="30%" height="30%">    <img src="https://raw.githubusercontent.com/ZhangZhenghao/Material-WeCenter/master/screenshot/Screenshot_2016-01-13-21-15-18.png" width="30%" height="30%">    <img src="https://raw.githubusercontent.com/ZhangZhenghao/Material-WeCenter/master/screenshot/Screenshot_2016-02-15-11-42-01.png" width="30%" height="30%">
+
+<img src="https://github.com/ZhangZhenghao/MaterialWeCenter/raw/master/screenshot/Screenshot_20170613-111048.png?raw=true" height="400px"><img src="https://github.com/ZhangZhenghao/MaterialWeCenter/raw/master/screenshot/Screenshot_20170613-111055.png?raw=true" height="400px">
+<img src="https://github.com/ZhangZhenghao/MaterialWeCenter/raw/master/screenshot/Screenshot_20170613-111432.png?raw=true" height="400px">
 
 ## Demo
+
 [Releases](https://github.com/ZhangZhenghao/Material-WeCenter/releases)
 
 ## Usage
 
-项目最新代码可能包含大量的“半成品”功能，如需使用本客户端，建议获取版本号tag对应的代码。如果觉得本项目不错的话，记得给作者star哦\_(:з」∠)\_。
-
-- [部署指南](https://github.com/ZhangZhenghao/Material-WeCenter/wiki/%E9%83%A8%E7%BD%B2%E6%8C%87%E5%8D%97)
-- [开发指南](https://github.com/ZhangZhenghao/Material-WeCenter/wiki/%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97)
-- [功能列表](https://github.com/ZhangZhenghao/Material-WeCenter/wiki/%E5%8A%9F%E8%83%BD%E5%88%97%E8%A1%A8)
+- [使用方法](https://github.com/ZhangZhenghao/MaterialWeCenter/wiki/%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95)
+- [功能介绍](https://github.com/ZhangZhenghao/MaterialWeCenter/wiki/%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D)
+- [实现介绍](https://github.com/ZhangZhenghao/MaterialWeCenter/wiki/%E5%AE%9E%E7%8E%B0%E4%BB%8B%E7%BB%8D)
 
 ## Support
 

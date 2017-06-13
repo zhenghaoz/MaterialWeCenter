@@ -11,6 +11,11 @@ android {
         versionCode 1
         versionName "0.1.6"
     }
+    
+    lintOptions {
+        abortOnError false
+    }
+    
     buildTypes {
         release {
             minifyEnabled false

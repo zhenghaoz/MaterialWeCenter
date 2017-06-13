@@ -114,7 +114,7 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     answer.getAnswer_id(),answer.getAgree_count()));
 
             if(answer.getUser_thanks_status()==1){
-                headerViewHolder.thank.setImageResource(R.drawable.ic_red_heart);
+                headerViewHolder.thank.setImageResource(R.drawable.ic_favorite_blue_36dp);
             }
 
             headerViewHolder.thank.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +122,7 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 public void onClick(View v) {
                     if(answer.getUser_thanks_status()!=1){
                         new DoAction(DoAction.THANKS, answer.getAnswer_id()).execute();
-                        ((ImageView)v).setImageResource(R.drawable.ic_red_heart);
+                        ((ImageView)v).setImageResource(R.drawable.ic_favorite_blue_36dp);
                     }
                 }
             });
@@ -344,12 +344,12 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public void onClick(View v) {
             new DoAction(DoAction.AGREE, answerID).execute();
             if (status == 0) {
-                image.setImageResource(R.drawable.ic_agree_red);
+                image.setImageResource(R.drawable.ic_thumb_up_blue_36dp);
                 text.setText((++num)+"");
                 status=1;
             }
             else if (status==1) {
-                image.setImageResource(R.drawable.ic_agree);
+                image.setImageResource(R.drawable.ic_thumb_up_grey_36dp);
                 text.setText((--num)+"");
                 status=0;
             }

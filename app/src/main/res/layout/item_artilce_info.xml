@@ -42,8 +42,9 @@
             android:textSize="18dp" />
 
         <ImageView
+            android:clickable="true"
             android:id="@+id/imageView_thumb_up"
-            android:src="@drawable/ic_favorite_grey_36dp"
+            android:src="@drawable/ic_thumb_up_grey_36dp"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -59,21 +60,13 @@
             android:textColor="@android:color/darker_gray"
             android:textSize="18dp" />
 
-        <LinearLayout
-            android:layout_marginRight="20dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="right">
-
-            <Button
-                android:layout_gravity="center_vertical"
-                android:id="@+id/btn_focus_question"
-                android:background="@color/nliveo_blue_colorAccent"
-                android:layout_width="90dp"
-                android:layout_height="35dp" />
-        </LinearLayout>
-
+        <ImageView
+            android:clickable="true"
+            android:id="@+id/imageView_thumb_down"
+            android:src="@drawable/ic_thumb_down_grey_36dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

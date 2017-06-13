@@ -63,13 +63,14 @@ public class Client {
             JSONObject jsonObject = new JSONObject(json);
             response.setErrno(jsonObject.getInt("errno"));
             response.setErr(jsonObject.getString("err"));
-            if (response.getErrno() == 1) {
+            if (response.getErrno() == 1 && !jsonObject.isNull("rsm")) {
                 Gson gson = new Gson();
                 response.setRsm(gson.fromJson(jsonObject.getJSONObject("rsm").toString(), type));
             } else {
                 response.setRsm(null);
             }
         } catch (Exception e) {
+            e.printStackTrace();
             response.setErr("未知错误");
             response.setErrno(-1);
         }
@@ -170,7 +171,7 @@ public class Client {
     public Response<UserInfo> getUserInfo(long uid) {
         Map<String, String> params = new HashMap<>();
         params.put("uid", String.valueOf(uid));
-        String json = doGet(Config.API_CAT_ACCOUNT, Config.API_GET_USERINFO, params);
+        String json = apiGet(Config.API_CAT_ACCOUNT, Config.API_GET_USERINFO, params);
         return parseResponse(json, UserInfo.class);
     }
 
@@ -186,7 +187,7 @@ public class Client {
         params.put("uid", String.valueOf(uid));
         params.put("actions", String.valueOf(actions));
         params.put("page", String.valueOf(page));
-        String json = doGet(Config.API_CAT_PEOPLE, Config.API_USER_ACTIONS, params);
+        String json = apiGet(Config.API_CAT_PEOPLE, Config.API_USER_ACTIONS, params);
         return parseResponses(json, Action.class);
     }
 
@@ -200,7 +201,7 @@ public class Client {
         Map<String, String> params = new HashMap<>();
         params.put("page", String.valueOf(page));
         params.put("per_page", String.valueOf(Config.ITEM_PER_PAGE));
-        String json = doGet(Config.API_CAT_EXPLORE, params);
+        String json = apiGet(Config.API_CAT_EXPLORE, params);
         return parseResponses(json, ExploreItem.class);
     }
 
@@ -213,14 +214,14 @@ public class Client {
     public Response<QuestionDetail> getQuestion(int id) {
         Map<String, String> params = new HashMap<>();
         params.put("id", String.valueOf(id));
-        String json = doGet(Config.API_CAT_QUESTION, "", params);
+        String json = apiGet(Config.API_CAT_QUESTION, "", params);
         return parseResponse(json, QuestionDetail.class);
     }
 
     public Response<Article> getArticle(int id) {
         Map<String, String> params = new HashMap<>();
         params.put("id", String.valueOf(id));
-        String json = doGet(Config.API_CAT_ARTICLE, params);
+        String json = apiGet(Config.API_CAT_ARTICLE, params);
         return parseResponse(json, Article.class);
     }
 
@@ -241,7 +242,7 @@ public class Client {
     public Response<AnswerDetail> getAnswer(int answer_id) {
         Map<String, String> params = new HashMap<>();
         params.put("answer_id", String.valueOf(answer_id));
-        String json = doGet(Config.API_CAT_QUESTION, Config.API_ANSWER, params);
+        String json = apiGet(Config.API_CAT_QUESTION, Config.API_ANSWER, params);
         return parseResponse(json, AnswerDetail.class);
     }
 
@@ -254,7 +255,7 @@ public class Client {
         // 请求
         Map<String, String> params = new HashMap<>();
         params.put("answer_id", String.valueOf(answer_id));
-        String json = doGet(Config.API_CAT_QUESTION, Config.API_ANSWER_COMMENTS, params);
+        String json = apiGet(Config.API_CAT_QUESTION, Config.API_ANSWER_COMMENTS, params);
         // 解析
         Responses<AnswerComment> responses = new Responses<>();
         try {
@@ -289,7 +290,7 @@ public class Client {
     public Responses<Dynamic> getDynamic(int page) {
         Map<String, String> params = new HashMap<>();
         params.put("page", String.valueOf(page));
-        String json = doGet(Config.API_CAT_HOME, "", params);
+        String json = apiGet(Config.API_CAT_HOME, "", params);
         return parseResponses(json, Dynamic.class);
     }
 
@@ -399,6 +400,32 @@ public class Client {
         return parseResponse(json, Ajax.class);
     }
 
+    public Response<Ajax> articleVote(int id, int rating) {
+        Map<String, String> params = new HashMap<>();
+        params.put("type", "article");
+        params.put("item_id", String.valueOf(id));
+        params.put("rating", String.valueOf(rating));
+        String json = ajax(Config.AJAX_ARTICLE_VOTE, params);
+        return parseResponse(json, Ajax.class);
+    }
+
+    public Response<Ajax> articleCommentVote(int id, int rating) {
+        Map<String, String> params = new HashMap<>();
+        params.put("type", "comment");
+        params.put("item_id", String.valueOf(id));
+        params.put("rating", String.valueOf(rating));
+        String json = ajax(Config.AJAX_ARTICLE_VOTE, params);
+        return parseResponse(json, Ajax.class);
+    }
+
+    public Response<Ajax> articleSaveComment(int id, String message) {
+        Map<String, String> params = new HashMap<>();
+        params.put("article_id", String.valueOf(id));
+        params.put("message", message);
+        String json = apiPost(Config.API_CAT_ARTICLE, Config.API_SAVE_COMMENT, params);
+        return parseResponse(json, Ajax.class);
+    }
+
     private String ajax(String url, Map<String, String> params) {
         return doPost(Config.HOST_NAME + url, params);
     }
@@ -470,12 +497,11 @@ public class Client {
     }
 
 
-    private String doGet(String apiCat, Map<String, String> params) {
-        return doGet(apiCat, "", params);
+    private String apiGet(String apiCat, Map<String, String> params) {
+        return apiGet(apiCat, "", params);
     }
 
-    private String doGet(String apiCat, String api, Map<String, String> params) {
-        try {
+    private String apiGet(String apiCat, String api, Map<String, String> params) {
             // 组合链接
             StringBuilder builder = new StringBuilder();
             builder.append(Config.API_ROOT);
@@ -493,14 +519,20 @@ public class Client {
                         .append("&");
             }
             builder.deleteCharAt(builder.length() - 1);
-            Log.d("GET REQUEST", builder.toString());
-            URL url = new URL(builder.toString());
+            return doGet(builder.toString());
+    }
+
+    private String doGet(String apiUrl) {
+        try {
+            // 组合链接
+            Log.d("GET REQUEST", apiUrl);
+            URL url = new URL(apiUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             // 附上Cookie
             connection.setRequestProperty("Cookie", cooike);
             InputStreamReader input = new InputStreamReader(connection.getInputStream());
             BufferedReader reader = new BufferedReader(input);
-            builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null)
                 builder.append(line);
@@ -511,4 +543,5 @@ public class Client {
             return null;
         }
     }
+
 }

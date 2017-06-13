@@ -80,4 +80,5 @@ public class Config {
     public static final String INT_QUESTION_ID = "questionID";
     public static final String INT_QUESTION_TITLE = "questionTitle";
     public static final String INT_ARTICLE_ID = "articleID";
+    public static final String INT_ARTICLE_TITLE = "articleTitle";
 }

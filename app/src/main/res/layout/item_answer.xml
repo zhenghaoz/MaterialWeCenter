@@ -60,7 +60,7 @@
                         android:id="@+id/image_agree_answer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_agree_gray"/>
+                        android:src="@drawable/ic_thumb_up_grey_36dp"/>
                     <TextView
                         android:id="@+id/textView_agree_answer"
                         android:layout_width="40dp"

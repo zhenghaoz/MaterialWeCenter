@@ -22,6 +22,8 @@ import com.sine_x.material_wecenter.models.Response;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
+
 public class AnswerActivity extends AppCompatActivity implements View.OnClickListener{
 
     private int answerID;
@@ -37,6 +39,7 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer);
+        ButterKnife.bind(this);
 
         //获取intent
         Intent mIntent=getIntent();

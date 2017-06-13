@@ -44,6 +44,8 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private final int TYPE_FOOTER = 4;
     private final int TYPE_INFO = 5;
 
+    private int rating = 0;
+    private int vote = 0;
     private boolean isThank;
     private Context mContext;
     private Article article;
@@ -93,7 +95,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 return new FooterViewHolder(view);
             case TYPE_INFO:
                 view = LayoutInflater.from(mContext)
-                        .inflate(R.layout.item_question_info, parent, false);
+                        .inflate(R.layout.item_artilce_info, parent, false);
                 return new InfoViewHolder(view);
             default:
                 view = LayoutInflater.from(mContext)
@@ -135,21 +137,43 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     .into(textViewHolder.text);
         } else if (holder instanceof InfoViewHolder) {
             final Article.ArticleInfo questionInfo = article.getArticle_info();
-            InfoViewHolder infoViewHolder = (InfoViewHolder) holder;
+            final InfoViewHolder infoViewHolder = (InfoViewHolder) holder;
+            // 设置投票状态
+            Article.ArticleInfo.VoteInfoBean voteInfoBean = article.getArticle_info().getVote_info();
+            if (voteInfoBean != null) {
+                rating = voteInfoBean.getRating();
+            }
+            if (rating == 1)
+                infoViewHolder.thumbUp.setImageResource(R.drawable.ic_thumb_up_blue_36dp);
+            else if (rating == -1)
+                infoViewHolder.thumbDown.setImageResource(R.drawable.ic_thumb_down_blue_36dp);
             infoViewHolder.answerCount.setText(String.valueOf(questionInfo.getComments()));
-            infoViewHolder.thankCount.setText(String.valueOf(questionInfo.getVotes()));
+            vote = questionInfo.getVotes();
+            infoViewHolder.thankCount.setText(String.valueOf(vote));
             String time = getTime(questionInfo.getAdd_time());
             infoViewHolder.addTime.setGravity(Gravity.RIGHT);
             infoViewHolder.addTime.setText("发布于  " + time);
-            infoViewHolder.thank.setOnClickListener(new View.OnClickListener() {
+            infoViewHolder.thumbUp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    if (rating == 1)
+                        new ArticleVoteTask(infoViewHolder, 0).execute();
+                    else
+                        new ArticleVoteTask(infoViewHolder, 1).execute();
+                }
+            });
+            infoViewHolder.thumbDown.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (rating == -1)
+                        new ArticleVoteTask(infoViewHolder, 0).execute();
+                    else
+                        new ArticleVoteTask(infoViewHolder, -1).execute();
                 }
             });
         } else if (holder instanceof ItemViewHolder) {
 
-            ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
+            final ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
             final Article.CommentsBean commentsBean = article.getComments().get(position - 4);
             String avatarFile = commentsBean.getUser_info().getAvatar_file();
             //Log.e("avatarFile",avatarFile);
@@ -170,6 +194,18 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             itemViewHolder.addTime.setText(addTime);
             itemViewHolder.userName.setText(commentsBean.getUser_info().getUser_name());
             itemViewHolder.agreeCount.setText(String.valueOf(commentsBean.getVotes()));
+
+            // 设置点赞状态
+            if (commentsBean.getVote_info() != null) {
+                itemViewHolder.agree.setImageResource(R.drawable.ic_thumb_up_blue_36dp);
+            }
+
+            itemViewHolder.agree.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new CommentVoteTask(itemViewHolder, commentsBean).execute();
+                }
+            });
 
 //            if (commentsBean.getVote_info(). == 1) {
 //                itemViewHolder.agree.setImageResource(R.drawable.ic_agree_red);
@@ -226,15 +262,14 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public class InfoViewHolder extends RecyclerView.ViewHolder {
 
         @Bind(R.id.textView_addTime_question) TextView addTime;
-        @Bind(R.id.btn_focus_question) Button focus;
         @Bind(R.id.textView_answerCount_question) TextView answerCount;
         @Bind(R.id.textView_thankCount_question) TextView thankCount;
-        @Bind(R.id.imageView_thank_question) ImageView thank;
+        @Bind(R.id.imageView_thumb_up) ImageView thumbUp;
+        @Bind(R.id.imageView_thumb_down) ImageView thumbDown;
 
         public InfoViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
-            focus.setVisibility(View.GONE);
         }
     }
 
@@ -464,6 +499,86 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 Toast.makeText(mContext, "操作成功", Toast.LENGTH_SHORT).show();
             } else                // 显示错误
                 Toast.makeText(mContext, result2.getErr(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // 文章投票
+
+    class ArticleVoteTask extends AsyncTask<Void, Void, Void> {
+        InfoViewHolder holder;
+        int nRating;
+        Response<Ajax> response;
+        ArticleVoteTask(InfoViewHolder holder, int nRating) {
+            this.nRating = nRating;
+            this.holder = holder;
+        }
+        @Override
+        protected Void doInBackground(Void... params) {
+            Log.d("THUMB", "HI");
+            response = Client.getInstance().articleVote(article.getArticle_info().getId(), nRating);
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            if (response.getErrno() == 1) {
+                if (rating != 1 && nRating == 1)
+                    vote++;
+                else if (rating == 1 && nRating != 1)
+                    vote--;
+                holder.thankCount.setText(String.valueOf(vote));
+                rating = nRating;
+                holder.thumbUp.setImageResource(R.drawable.ic_thumb_up_grey_36dp);
+                holder.thumbDown.setImageResource(R.drawable.ic_thumb_down_grey_36dp);
+                if (rating == 1)
+                    holder.thumbUp.setImageResource(R.drawable.ic_thumb_up_blue_36dp);
+                else if (rating == -1)
+                    holder.thumbDown.setImageResource(R.drawable.ic_thumb_down_blue_36dp);
+                Toast.makeText(mContext, "投票成功", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(mContext, "投票失败: " + response.getErr(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    // 评论点赞
+
+    class CommentVoteTask extends AsyncTask<Void, Void, Void> {
+        ItemViewHolder holder;
+        Article.CommentsBean commentsBean;
+        Response<Ajax> response;
+        int nRating;
+        CommentVoteTask(ItemViewHolder holder, Article.CommentsBean commentsBean) {
+            this.holder = holder;
+            this.commentsBean = commentsBean;
+            if (commentsBean.getVote_info() == null)
+                nRating = 1;
+            else
+                nRating = 0;
+        }
+        @Override
+        protected Void doInBackground(Void... params) {
+            response = Client.getInstance().articleCommentVote(commentsBean.getId(), nRating);
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            if (response.getErrno() == 1) {
+                if (nRating == 1) {
+                    commentsBean.setVote_info(new Object());
+                    commentsBean.setVotes(commentsBean.getVotes()+1);
+                    holder.agree.setImageResource(R.drawable.ic_thumb_up_blue_36dp);
+                } else {
+                    commentsBean.setVote_info(null);
+                    commentsBean.setVotes(commentsBean.getVotes()-1);
+                    holder.agree.setImageResource(R.drawable.ic_thumb_up_grey_36dp);
+                }
+                holder.agreeCount.setText(String.valueOf(commentsBean.getVotes()));
+                Toast.makeText(mContext, "投票成功", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(mContext, "投票失败: " + response.getErr(), Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

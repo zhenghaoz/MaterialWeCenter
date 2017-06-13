@@ -169,9 +169,7 @@ public class PostAnswerActivity extends AppCompatActivity {
             else if (result2.getErrno() == 1){ // 发布成功
                 PostAnswerActivity.this.setResult(POST_ANSWER_POS);
                 PostAnswerActivity.this.finish();
-            }
-
-            else                // 显示错误
+            } else                // 显示错误
                 Snackbar.with(PostAnswerActivity.this).text(result2.getErr()).show(PostAnswerActivity.this);
         }
     }

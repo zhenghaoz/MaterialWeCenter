@@ -21,7 +21,7 @@
         <ImageView
             android:id="@+id/imageView_agreeCount_answer"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_agree"
+            android:src="@drawable/ic_thumb_up_grey_36dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -37,7 +37,7 @@
             android:textSize="18dp" />
 
         <ImageView
-            android:src="@drawable/ic_answers"
+            android:src="@drawable/ic_comment_grey_36dp"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -55,7 +55,7 @@
 
         <ImageView
             android:id="@+id/imageView_thankCount_answer"
-            android:src="@drawable/ic_blue_heart"
+            android:src="@drawable/ic_favorite_grey_36dp"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

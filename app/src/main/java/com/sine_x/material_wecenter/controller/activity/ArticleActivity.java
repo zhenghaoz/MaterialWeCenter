@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.github.clans.fab.FloatingActionButton;
 import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
@@ -26,9 +27,15 @@ import com.sine_x.material_wecenter.controller.adapter.ArticleAdapter;
 import com.sine_x.material_wecenter.models.Article;
 import com.sine_x.material_wecenter.models.Response;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class ArticleActivity extends AppCompatActivity {
 
+    private static final int REQUEST_COMMENT = 1;
 
+    private final int ScrollOffset = 4;
     private boolean isFirstRefresh=true;
     private boolean isBtnClose;
     private int articleID;
@@ -39,11 +46,13 @@ public class ArticleActivity extends AppCompatActivity {
     private Client client = Client.getInstance();
     private ImageButton publish;
     private EditText answerContent;
+    @Bind(R.id.button_publish) FloatingActionButton btnPublish;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
+        ButterKnife.bind(this);
 
         //init toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_questionDetail);
@@ -119,15 +128,24 @@ public class ArticleActivity extends AppCompatActivity {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if(!isBtnClose){
-                    // floatingActionButton.revealMainView();
-                    isBtnClose=true;
-                }
-
+                // 自动隐藏发布按钮
+                if (Math.abs(dy) > ScrollOffset)
+                    if (dy > 0)
+                        btnPublish.hide(true);
+                    else
+                        btnPublish.show(true);
             }
         });
         swipeRefreshLayout.setRefreshing(true);
         new LoadArticle().execute();
+    }
+
+    @OnClick(R.id.button_publish)
+    void comment() {
+        Intent intent = new Intent(ArticleActivity.this, PostCommentActivity.class);
+        intent.putExtra(Config.INT_ARTICLE_ID, articleID);
+        intent.putExtra(Config.INT_ARTICLE_TITLE, article.getArticle_info().getTitle());
+        startActivityForResult(intent, REQUEST_COMMENT);
     }
 
     @Override
@@ -172,7 +190,6 @@ public class ArticleActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //发布答案成功后刷新
-        if(resultCode==1)
             new LoadArticle().execute();
     }
 

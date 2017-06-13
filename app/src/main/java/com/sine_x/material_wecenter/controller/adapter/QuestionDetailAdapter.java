@@ -144,7 +144,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     questionInfo.getQuestion_id(), 0, null, infoViewHolder.focus));
             if (questionInfo.getUser_thanks() == 1) isThank = true;
             if (questionInfo.getUser_thanks() == 1) {
-                infoViewHolder.thank.setImageResource(R.drawable.ic_red_heart);
+                infoViewHolder.thank.setImageResource(R.drawable.ic_favorite_blue_36dp);
             }
             infoViewHolder.thank.setOnClickListener(new AcitonListener(DoAction.THANKS,
                     questionInfo.getQuestion_id(), questionInfo.getThanks_count(),
@@ -179,7 +179,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             commentViewHolder.agreeCount.setText(answerInfo.getAgree_count() + "");
 
             if (answerInfo.getAgree_status() == 1) {
-                commentViewHolder.agree.setImageResource(R.drawable.ic_agree_red);
+                commentViewHolder.agree.setImageResource(R.drawable.ic_thumb_up_blue_36dp);
             }
 
             commentViewHolder.agree.setOnClickListener(new AgreeListener(commentViewHolder.agree
@@ -252,7 +252,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         @Bind(R.id.btn_focus_question) Button focus;
         @Bind(R.id.textView_answerCount_question) TextView answerCount;
         @Bind(R.id.textView_thankCount_question) TextView thankCount;
-        @Bind(R.id.imageView_thank_question) ImageView thank;
+        @Bind(R.id.imageView_thumb_up) ImageView thank;
 
         public InfoViewHolder(View view) {
             super(view);
@@ -332,11 +332,11 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             new AgreeTask(ID).execute();
 
             if (status == 0) {
-                agree.setImageResource(R.drawable.ic_agree_red);
+                agree.setImageResource(R.drawable.ic_thumb_up_blue_36dp);
                 count.setText((++num) + "");
                 status = 1;
             } else {
-                agree.setImageResource(R.drawable.ic_agree_gray);
+                agree.setImageResource(R.drawable.ic_thumb_up_grey_36dp);
                 count.setText((--num) + "");
                 status = 0;
             }
@@ -462,7 +462,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     break;
                 case THANKS:
                     if (!isThank) {
-                        ((ImageView) view).setImageResource(R.drawable.ic_red_heart);
+                        ((ImageView) view).setImageResource(R.drawable.ic_favorite_blue_36dp);
                         ((TextView) count).setText((++num) + "");
                         isThank = true;
                     }

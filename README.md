@@ -13,7 +13,8 @@ Material-WeCenter是一个第三方的[WeCenter](http://www.wecenter.com/)安卓
 
 ## Demo
 
-[Releases](https://github.com/ZhangZhenghao/Material-WeCenter/releases)
+- [测试站点](https://vps.sine-x.com/wecenter/)
+- [测试客户端](https://github.com/ZhangZhenghao/Material-WeCenter/releases)
 
 ## Usage
 

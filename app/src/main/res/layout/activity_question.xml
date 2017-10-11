@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/nliveo_blue_colorPrimary"
-        android:elevation="@dimen/appbar_elevation"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh_layout_question"

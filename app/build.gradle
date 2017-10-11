@@ -60,5 +60,6 @@ dependencies {
     compile 'com.afollestad.material-dialogs:core:0.9.4.5'
     compile 'org.apache.commons:commons-lang3:3.5'
     compile 'me.gujun.android.taggroup:library:1.4@aar'
+    compile 'com.miguelcatalan:materialsearchview:1.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }

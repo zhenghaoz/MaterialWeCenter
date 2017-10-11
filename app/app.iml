@@ -121,6 +121,7 @@
     <orderEntry type="library" name="markdown-1.0.2" level="project" />
     <orderEntry type="library" name="library-1.1.0" level="project" />
     <orderEntry type="library" name="richtext-2.3.7" level="project" />
+    <orderEntry type="library" name="materialsearchview-1.4.0" level="project" />
     <orderEntry type="library" name="support-fragment-25.4.0" level="project" />
     <orderEntry type="library" name="support-core-utils-25.4.0" level="project" />
     <orderEntry type="library" name="butterknife-annotations-8.8.1" level="project" />
@@ -134,6 +135,7 @@
     <orderEntry type="library" name="preference-v14-25.4.0" level="project" />
     <orderEntry type="library" name="okio-1.11.0" level="project" />
     <orderEntry type="library" name="circleimageview-2.0.0" level="project" />
+    <orderEntry type="library" name="design-23.1.1" level="project" />
     <orderEntry type="library" name="library-1.4" level="project" />
     <orderEntry type="library" name="support-v4-25.4.0" level="project" />
     <orderEntry type="library" name="support-media-compat-25.4.0" level="project" />
@@ -145,7 +147,6 @@
     <orderEntry type="library" name="support-vector-drawable-25.4.0" level="project" />
     <orderEntry type="library" name="support-compat-25.4.0" level="project" />
     <orderEntry type="library" name="animated-vector-drawable-25.4.0" level="project" />
-    <orderEntry type="library" name="design-22.2.0" level="project" />
     <orderEntry type="library" name="butterknife-8.8.1" level="project" />
   </component>
 </module>

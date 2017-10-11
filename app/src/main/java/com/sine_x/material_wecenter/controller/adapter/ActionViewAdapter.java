@@ -17,7 +17,7 @@ import com.sine_x.material_wecenter.models.Action;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -84,10 +84,10 @@ public class ActionViewAdapter extends RecyclerView.Adapter<ActionViewAdapter.Ac
 
     public static class ActionViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.title) TextView title;
-        @Bind(R.id.info) TextView info;
-        @Bind(R.id.detail) TextView detail;
-        @Bind(R.id.card_view) CardView card;
+        @BindView(R.id.title) TextView title;
+        @BindView(R.id.info) TextView info;
+        @BindView(R.id.detail) TextView detail;
+        @BindView(R.id.card_view) CardView card;
 
         public ActionViewHolder(View item) {
             super(item);

@@ -22,7 +22,7 @@ import com.sine_x.material_wecenter.models.Response;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.mthli.knife.KnifeText;
 
@@ -35,8 +35,8 @@ public class PostAnswerActivity extends AppCompatActivity {
     private String questionTitle;
     private ImageButton publish;
     private final int resultCode=1;
-    @Bind(R.id.question_title) TextView title;
-    @Bind(R.id.editText_answerContent) KnifeText editContent;
+    @BindView(R.id.question_title) TextView title;
+    @BindView(R.id.editText_answerContent) KnifeText editContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

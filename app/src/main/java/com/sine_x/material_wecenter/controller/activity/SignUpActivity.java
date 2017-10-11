@@ -15,17 +15,17 @@ import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.models.LoginProcess;
 import com.sine_x.material_wecenter.models.Response;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    @Bind(R.id.edit_username) EditText editUsername;
-    @Bind(R.id.edit_email) EditText editEmail;
-    @Bind(R.id.edit_password) EditText editPassword;
-    @Bind(R.id.button_login) TextView buttonLogin;
-    @Bind(R.id.button_sign_up) Button buttonSignUp;
+    @BindView(R.id.edit_username) EditText editUsername;
+    @BindView(R.id.edit_email) EditText editEmail;
+    @BindView(R.id.edit_password) EditText editPassword;
+    @BindView(R.id.button_login) TextView buttonLogin;
+    @BindView(R.id.button_sign_up) Button buttonSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

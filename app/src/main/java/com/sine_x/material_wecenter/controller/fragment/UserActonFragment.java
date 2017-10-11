@@ -21,7 +21,7 @@ import com.sine_x.material_wecenter.models.Responses;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class UserActonFragment extends Fragment {
@@ -33,7 +33,7 @@ public class UserActonFragment extends Fragment {
     private long uid;
     private int actions;
 
-    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
+    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private List<Action> mContentItems = new ArrayList<>();
     private int pageNum = 1;   // 当前页面的页码

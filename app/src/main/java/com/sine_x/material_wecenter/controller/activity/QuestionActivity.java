@@ -24,7 +24,7 @@ import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.adapter.QuestionDetailAdapter;
 import com.sine_x.material_wecenter.models.QuestionDetail;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -38,7 +38,7 @@ public class QuestionActivity extends AppCompatActivity {
     private QuestionDetailAdapter questionDetailAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
-    @Bind(R.id.button_publish) FloatingActionButton btnPublish;
+    @BindView(R.id.button_publish) FloatingActionButton btnPublish;
     private Client client = Client.getInstance();
 
     private static final int POST_ANSWER = 2;

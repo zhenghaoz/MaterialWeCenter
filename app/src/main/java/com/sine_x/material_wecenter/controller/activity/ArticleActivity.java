@@ -27,7 +27,7 @@ import com.sine_x.material_wecenter.controller.adapter.ArticleAdapter;
 import com.sine_x.material_wecenter.models.Article;
 import com.sine_x.material_wecenter.models.Response;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -46,7 +46,7 @@ public class ArticleActivity extends AppCompatActivity {
     private Client client = Client.getInstance();
     private ImageButton publish;
     private EditText answerContent;
-    @Bind(R.id.button_publish) FloatingActionButton btnPublish;
+    @BindView(R.id.button_publish) FloatingActionButton btnPublish;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -23,14 +23,14 @@ import com.sine_x.material_wecenter.models.Response;
 import com.sine_x.material_wecenter.models.UserInfo;
 import com.squareup.picasso.Picasso;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserActivity extends AppCompatActivity {
 
-    @Bind(R.id.view_pager) MaterialViewPager mViewPager;
-    @Bind(R.id.logo_white) CircleImageView imgAvatar;
+    @BindView(R.id.view_pager) MaterialViewPager mViewPager;
+    @BindView(R.id.logo_white) CircleImageView imgAvatar;
     private Menu menu;
     private int uid;
 

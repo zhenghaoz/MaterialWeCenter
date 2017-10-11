@@ -29,7 +29,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
@@ -38,6 +37,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class Client {
 
@@ -458,7 +459,7 @@ public class Client {
         // 发出请求
         try {
             URL url = new URL(apiUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             connection.setConnectTimeout(Config.TIME_OUT);
             connection.setDoInput(true);
             connection.setDoOutput(true);
@@ -473,7 +474,7 @@ public class Client {
             output.write(data);
             // 接收返回信息
             int response = connection.getResponseCode();
-            if (response == HttpURLConnection.HTTP_OK) {
+            if (response == HttpsURLConnection.HTTP_OK) {
                 // 保存Cookie
                 Map<String, List<String>> header = connection.getHeaderFields();
                 List<String> cookies = header.get("Set-Cookie");
@@ -527,7 +528,7 @@ public class Client {
             // 组合链接
             Log.d("GET REQUEST", apiUrl);
             URL url = new URL(apiUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             // 附上Cookie
             connection.setRequestProperty("Cookie", cooike);
             InputStreamReader input = new InputStreamReader(connection.getInputStream());

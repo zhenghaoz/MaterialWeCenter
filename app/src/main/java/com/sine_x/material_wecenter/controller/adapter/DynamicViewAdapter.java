@@ -20,7 +20,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -228,11 +228,11 @@ public class DynamicViewAdapter extends RecyclerView.Adapter<DynamicViewAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.avatar_img) CircleImageView avatarImg;
-        @Bind(R.id.dynamic_user_name) TextView dynamicUserName;
-        @Bind(R.id.dynamic_title) TextView dynamicTitle;
-        @Bind(R.id.dynamic_content) TextView dynamicContent;
-        @Bind(R.id.dynamic_info) TextView dynamicInfo;
+        @BindView(R.id.avatar_img) CircleImageView avatarImg;
+        @BindView(R.id.dynamic_user_name) TextView dynamicUserName;
+        @BindView(R.id.dynamic_title) TextView dynamicTitle;
+        @BindView(R.id.dynamic_content) TextView dynamicContent;
+        @BindView(R.id.dynamic_info) TextView dynamicInfo;
 
         public ViewHolder(View itemView) {
             super(itemView);

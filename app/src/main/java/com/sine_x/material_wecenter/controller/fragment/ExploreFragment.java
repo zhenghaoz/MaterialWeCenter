@@ -24,7 +24,7 @@ import com.sine_x.material_wecenter.models.Responses;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -36,7 +36,7 @@ public class ExploreFragment extends Fragment {
     private QuestionViewAdapter mAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
-    @Bind(R.id.button_publish) FloatingActionButton btnPublish;
+    @BindView(R.id.button_publish) FloatingActionButton btnPublish;
 
     private static int POST_ACTIVITY = 1;
 

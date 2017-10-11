@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import me.gujun.android.taggroup.TagGroup;
@@ -209,8 +209,8 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public class TitleViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.avatar_img_question) CircleImageView avatar;
-        @Bind(R.id.textView_title_question) TextView title;
+        @BindView(R.id.avatar_img_question) CircleImageView avatar;
+        @BindView(R.id.textView_title_question) TextView title;
 
         TitleViewHolder(View view) {
             super(view);
@@ -219,7 +219,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     public class TopicViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.tag_group) TagGroup tagGroup;
+        @BindView(R.id.tag_group) TagGroup tagGroup;
         public TopicViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
@@ -248,11 +248,11 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public class InfoViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.textView_addTime_question) TextView addTime;
-        @Bind(R.id.btn_focus_question) Button focus;
-        @Bind(R.id.textView_answerCount_question) TextView answerCount;
-        @Bind(R.id.textView_thankCount_question) TextView thankCount;
-        @Bind(R.id.imageView_thumb_up) ImageView thank;
+        @BindView(R.id.textView_addTime_question) TextView addTime;
+        @BindView(R.id.btn_focus_question) Button focus;
+        @BindView(R.id.textView_answerCount_question) TextView answerCount;
+        @BindView(R.id.textView_thankCount_question) TextView thankCount;
+        @BindView(R.id.imageView_thumb_up) ImageView thank;
 
         public InfoViewHolder(View view) {
             super(view);
@@ -270,7 +270,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public class TextViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.textView_detailText_question) TextView text;
+        @BindView(R.id.textView_detailText_question) TextView text;
 
         public TextViewHolder(View view) {
             super(view);

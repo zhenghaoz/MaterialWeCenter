@@ -17,7 +17,7 @@ import com.sine_x.material_wecenter.models.Response;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.github.mthli.knife.KnifeText;
@@ -30,8 +30,8 @@ public class PostCommentActivity extends AppCompatActivity {
     int articleID;
     String artiicleTitle;
 
-    @Bind(R.id.question_title) TextView title;
-    @Bind(R.id.editText_answerContent) KnifeText editContent;
+    @BindView(R.id.question_title) TextView title;
+    @BindView(R.id.editText_answerContent) KnifeText editContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

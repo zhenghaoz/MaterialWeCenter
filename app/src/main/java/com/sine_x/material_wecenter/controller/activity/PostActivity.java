@@ -21,7 +21,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.github.mthli.knife.KnifeText;
@@ -30,11 +30,11 @@ import me.gujun.android.taggroup.TagGroup;
 public class PostActivity extends AppCompatActivity {
 
     private ArrayList<String> topics = new ArrayList<>();
-    @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.tag_group) TagGroup tagGroup;
-    @Bind(R.id.edit_title) MaterialEditText editTitle;
-    @Bind(R.id.edit_content) KnifeText editContent;
-    @Bind(R.id.edit_topic) MaterialEditText editTopic;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.tag_group) TagGroup tagGroup;
+    @BindView(R.id.edit_title) MaterialEditText editTitle;
+    @BindView(R.id.edit_content) KnifeText editContent;
+    @BindView(R.id.edit_topic) MaterialEditText editTopic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

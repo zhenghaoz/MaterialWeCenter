@@ -9,30 +9,28 @@
         android:id="@+id/card"
         android:clickable="true"
         android:focusable="true"
-        android:background="@drawable/ripple"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        app:cardElevation="2dp"
         android:layout_gravity="center"
         android:layout_width="350dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardElevation="0dp">
         <LinearLayout
             android:padding="@dimen/card_content_padding"
-            android:background="@drawable/ripple"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <com.github.pavlospt.roundedletterview.RoundedLetterView
-                android:layout_margin="6dp"
+                android:layout_margin="8dp"
                 android:id="@+id/conversation_img"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
                 app:rlv_titleSize="24dp"
                 app:rlv_backgroundColorValue="@color/nliveo_blue_colorAccent"/>
 
             <LinearLayout
                 android:layout_margin="6dp"
+                android:layout_gravity="center_vertical"
                 android:paddingStart="@dimen/card_content_padding"
                 android:paddingLeft="@dimen/card_content_padding"
                 android:orientation="vertical"
@@ -43,7 +41,7 @@
                     android:id="@+id/conversation_user_name"
                     android:text="@string/abc_action_bar_home_description"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/abc_text_size_subhead_material"
+                    android:textSize="18sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -52,6 +50,7 @@
                     android:id="@+id/conversation_last_msg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="16sp"
                     android:textColor="@android:color/tertiary_text_light"
                     android:text="浏览"/>
 

@@ -52,6 +52,7 @@ public class ConversationViewAdapter extends RecyclerView.Adapter<ConversationVi
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, ChatActivity.class);
                 intent.putExtra(Config.INT_CHAT_USERNAME, conversation.getUser_name());
+                intent.putExtra(Config.INT_CHAT_ID, conversation.getId());
                 mContext.startActivity(intent);
             }
         });

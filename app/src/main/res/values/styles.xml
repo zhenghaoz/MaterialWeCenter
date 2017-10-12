@@ -45,4 +45,16 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+    <style name="ChatTheme">
+        <item name="backgroundColor">?android:colorBackground</item>
+        <item name="timestampTextColor">@color/text_black</item>
+        <item name="localBubbleBackground">@android:color/white</item>
+        <item name="localBubbleTextColor">@android:color/background_dark</item>
+        <item name="externalBubbleBackground">@color/nliveo_blue_colorAccent</item>
+        <item name="externalBubbleTextColor">@color/text_white</item>
+        <item name="snackbarBackground">@color/background_gray_darkest</item>
+        <item name="snackbarTitleColor">@color/text_black</item>
+        <item name="snackbarButtonColor">@color/text_blue</item>
+    </style>
+
 </resources>

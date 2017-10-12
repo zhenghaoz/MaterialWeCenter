@@ -17,6 +17,7 @@ import com.sine_x.material_wecenter.models.PublishQuestion;
 import com.sine_x.material_wecenter.models.QuestionDetail;
 import com.sine_x.material_wecenter.models.Response;
 import com.sine_x.material_wecenter.models.Responses;
+import com.sine_x.material_wecenter.models.Topic;
 import com.sine_x.material_wecenter.models.UserInfo;
 
 import org.json.JSONArray;
@@ -425,6 +426,12 @@ public class Client {
         params.put("message", message);
         String json = apiPost(Config.API_CAT_ARTICLE, Config.API_SAVE_COMMENT, params);
         return parseResponse(json, Ajax.class);
+    }
+
+    public Responses<Topic> hotTopics() {
+        Map<String, String> params = new HashMap<>();
+        String json = apiGet(Config.API_CAT_TOPIC, Config.API_HOT_TOPICS, params);
+        return parseResponses(json, Topic.class);
     }
 
     private String ajax(String url, Map<String, String> params) {

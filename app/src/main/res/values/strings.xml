@@ -13,6 +13,7 @@
     <!--Main drawer-->
     <string name="dynamic">动态</string>
     <string name="explore">发现</string>
+    <string name="topic">话题</string>
     <string name="settings">设置</string>
     <string name="sign_out">注销</string>
     <string name="title_activity_user">UserActivity</string>

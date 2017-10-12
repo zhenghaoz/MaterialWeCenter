@@ -49,6 +49,9 @@ public class Config {
     static final String API_CAT_ARTICLE = "article";
     static final String API_SAVE_COMMENT = "save_comment";
 
+    static final String API_CAT_TOPIC = "topic";
+    static final String API_HOT_TOPICS = "hot_topics";
+
     // AJAX请求地址
 
     static final String AJAX_ANSWER_RATE = "?/question/ajax/question_answer_rate/";

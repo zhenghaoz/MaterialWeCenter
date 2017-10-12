@@ -10,6 +10,7 @@ import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.fragment.ExploreFragment;
 import com.sine_x.material_wecenter.controller.fragment.HomeFragment;
+import com.sine_x.material_wecenter.controller.fragment.InboxFragment;
 import com.sine_x.material_wecenter.controller.fragment.SettingsFragment;
 import com.sine_x.material_wecenter.controller.fragment.TopicFragment;
 import com.squareup.picasso.Picasso;
@@ -30,6 +31,7 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
     private ExploreFragment exploreFragment;
     private HomeFragment homeFragment;
     private TopicFragment topicFragment;
+    private InboxFragment inboxFragment;
     private SettingsFragment settingsFragment;
 
 
@@ -51,6 +53,7 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
         mHelpLiveo.add(getString(R.string.dynamic), R.mipmap.ic_notifications_on_grey600_48dp);
         mHelpLiveo.add(getString(R.string.explore), R.mipmap.ic_explore_grey600_48dp);
         mHelpLiveo.add(getString(R.string.topic), R.drawable.ic_whatshot_grey600_48dp);
+        mHelpLiveo.add(getString(R.string.inbox), R.drawable.ic_chat_grey600_48dp);
         mHelpLiveo.addSeparator();
         mHelpLiveo.add(getString(R.string.settings), R.mipmap.ic_settings_grey600_48dp);
         mHelpLiveo.add(getString(R.string.sign_out), R.drawable.ic_exit_to_app_grey600_48dp);
@@ -84,6 +87,8 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
             transaction.hide(homeFragment);
         if (topicFragment != null)
             transaction.hide(topicFragment);
+        if (inboxFragment != null)
+            transaction.hide(inboxFragment);
         if (settingsFragment != null)
             transaction.hide(settingsFragment);
         // 显示被选中的Fragment
@@ -115,7 +120,16 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
                 }
                 setTitle(R.string.topic);
                 break;
-            case 4:
+            case 3:
+                if (inboxFragment == null) {
+                    inboxFragment = new InboxFragment();
+                    transaction.add(R.id.container, inboxFragment);
+                } else {
+                    transaction.show(inboxFragment);
+                }
+                setTitle(R.string.inbox);
+                break;
+            case 5:
                 if (settingsFragment == null) {
                     settingsFragment = new SettingsFragment();
                     transaction.add(R.id.container, settingsFragment);
@@ -124,7 +138,7 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
                 }
                 setTitle(getString(R.string.settings));
                 break;
-            case 5:
+            case 6:
                 // 删除用户信息
                 SharedPreferences preferences = getSharedPreferences("account", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();

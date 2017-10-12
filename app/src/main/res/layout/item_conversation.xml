@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@drawable/ripple"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        app:cardElevation="2dp"
+        android:layout_gravity="center"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:padding="@dimen/card_content_padding"
+            android:background="@drawable/ripple"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.github.pavlospt.roundedletterview.RoundedLetterView
+                android:layout_margin="6dp"
+                android:id="@+id/conversation_img"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:rlv_titleSize="24dp"
+                app:rlv_backgroundColorValue="@color/nliveo_blue_colorAccent"/>
+
+            <LinearLayout
+                android:layout_margin="6dp"
+                android:paddingStart="@dimen/card_content_padding"
+                android:paddingLeft="@dimen/card_content_padding"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/conversation_user_name"
+                    android:text="@string/abc_action_bar_home_description"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/abc_text_size_subhead_material"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_marginTop="4dp"
+                    android:id="@+id/conversation_last_msg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/tertiary_text_light"
+                    android:text="浏览"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
+

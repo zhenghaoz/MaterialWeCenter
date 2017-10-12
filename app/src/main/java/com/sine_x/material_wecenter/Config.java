@@ -52,6 +52,9 @@ public class Config {
     static final String API_CAT_TOPIC = "topic";
     static final String API_HOT_TOPICS = "hot_topics";
 
+    static final String API_CAT_INBOX = "inbox";
+    static final String API_READ = "read";
+
     // AJAX请求地址
 
     static final String AJAX_ANSWER_RATE = "?/question/ajax/question_answer_rate/";
@@ -84,4 +87,6 @@ public class Config {
     public static final String INT_QUESTION_TITLE = "questionTitle";
     public static final String INT_ARTICLE_ID = "articleID";
     public static final String INT_ARTICLE_TITLE = "articleTitle";
+    public static final String INT_CHAT_USERNAME = "chatUsername";
+    public static final String INT_CHAT_ID = "chatID";
 }

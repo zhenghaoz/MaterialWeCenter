@@ -9,6 +9,7 @@ import com.sine_x.material_wecenter.models.Ajax;
 import com.sine_x.material_wecenter.models.AnswerComment;
 import com.sine_x.material_wecenter.models.AnswerDetail;
 import com.sine_x.material_wecenter.models.Article;
+import com.sine_x.material_wecenter.models.Conversation;
 import com.sine_x.material_wecenter.models.Dynamic;
 import com.sine_x.material_wecenter.models.ExploreItem;
 import com.sine_x.material_wecenter.models.LoginProcess;
@@ -432,6 +433,12 @@ public class Client {
         Map<String, String> params = new HashMap<>();
         String json = apiGet(Config.API_CAT_TOPIC, Config.API_HOT_TOPICS, params);
         return parseResponses(json, Topic.class);
+    }
+
+    public Responses<Conversation> inbox() {
+        Map<String, String> params = new HashMap<>();
+        String json = apiGet(Config.API_CAT_INBOX, params);
+        return parseResponses(json, Conversation.class);
     }
 
     private String ajax(String url, Map<String, String> params) {

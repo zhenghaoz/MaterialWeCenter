@@ -60,9 +60,11 @@
             android:name=".controller.activity.ArticleActivity"
             android:label="@string/title_activity_article"
             android:theme="@style/AppTheme" />
-        <activity android:name=".controller.activity.PostCommentActivity"
+        <activity
+            android:name=".controller.activity.PostCommentActivity"
             android:label=" "
             android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".controller.activity.ChatActivity"></activity>
     </application>
 
 </manifest>

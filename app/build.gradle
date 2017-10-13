@@ -6,16 +6,16 @@ android {
 
     defaultConfig {
         applicationId "com.sine_x.material_wecenter"
-        minSdkVersion 15
+        minSdkVersion 21
         targetSdkVersion 25
         versionCode 1
         versionName "0.1.6"
     }
-    
+
     lintOptions {
         abortOnError false
     }
-    
+
     buildTypes {
         release {
             minifyEnabled false
@@ -31,11 +31,13 @@ android {
 }
 
 repositories {
-    maven { url 'https://jitpack.io' }
     jcenter()
+    maven { url "https://s3.amazonaws.com/repo.commonsware.com" }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile('com.github.florent37:materialviewpager:1.1.2@aar') {
         transitive = true
@@ -61,5 +63,8 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.5'
     compile 'me.gujun.android.taggroup:library:1.4@aar'
     compile 'com.miguelcatalan:materialsearchview:1.4.0'
+    compile 'com.github.pavlospt:roundedletterview:1.2'
+    compile 'com.github.Slyce-Inc:SlyceMessaging:1.1.2'
+    compile 'com.github.arimorty:floatingsearchview:2.1.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }

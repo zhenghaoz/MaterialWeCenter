@@ -4,11 +4,14 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.sine_x.material_wecenter.controller.fragment.SearchFragment;
 import com.sine_x.material_wecenter.models.Action;
 import com.sine_x.material_wecenter.models.Ajax;
 import com.sine_x.material_wecenter.models.AnswerComment;
 import com.sine_x.material_wecenter.models.AnswerDetail;
 import com.sine_x.material_wecenter.models.Article;
+import com.sine_x.material_wecenter.models.Chat;
+import com.sine_x.material_wecenter.models.Conversation;
 import com.sine_x.material_wecenter.models.Dynamic;
 import com.sine_x.material_wecenter.models.ExploreItem;
 import com.sine_x.material_wecenter.models.LoginProcess;
@@ -17,6 +20,8 @@ import com.sine_x.material_wecenter.models.PublishQuestion;
 import com.sine_x.material_wecenter.models.QuestionDetail;
 import com.sine_x.material_wecenter.models.Response;
 import com.sine_x.material_wecenter.models.Responses;
+import com.sine_x.material_wecenter.models.SearchResult;
+import com.sine_x.material_wecenter.models.Topic;
 import com.sine_x.material_wecenter.models.UserInfo;
 
 import org.json.JSONArray;
@@ -425,6 +430,40 @@ public class Client {
         params.put("message", message);
         String json = apiPost(Config.API_CAT_ARTICLE, Config.API_SAVE_COMMENT, params);
         return parseResponse(json, Ajax.class);
+    }
+
+    public Responses<Topic> hotTopics() {
+        Map<String, String> params = new HashMap<>();
+        String json = apiGet(Config.API_CAT_TOPIC, Config.API_HOT_TOPICS, params);
+        return parseResponses(json, Topic.class);
+    }
+
+    public Responses<Conversation> inbox() {
+        Map<String, String> params = new HashMap<>();
+        String json = apiGet(Config.API_CAT_INBOX, params);
+        return parseResponses(json, Conversation.class);
+    }
+
+    public Responses<Chat> read(int id) {
+        Map<String, String> params = new HashMap<>();
+        params.put("id", String.valueOf(id));
+        String json = apiGet(Config.API_CAT_INBOX, Config.API_READ, params);
+        return parseResponses(json, Chat.class);
+    }
+
+    public Responses<SearchResult> search(String q) {
+        Map<String, String> params = new HashMap<>();
+        params.put("q", q);
+        String json = apiGet(Config.API_CAT_SEARCH, params);
+        return parseResponses(json, SearchResult.class);
+    }
+
+    public Response<Object> send(String message, String recipient) {
+        Map<String, String> params = new HashMap<>();
+        params.put("message", message);
+        params.put("recipient", recipient);
+        String json = apiPost(Config.API_CAT_INBOX, Config.API_SEND, params);
+        return parseResponse(json, Object.class);
     }
 
     private String ajax(String url, Map<String, String> params) {

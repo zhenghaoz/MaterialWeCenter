@@ -15,9 +15,11 @@ public class Config {
     // API密钥
     static final String APP_SECRET = "12884789df747d7affbcd6a7cadd9359";
     // API密钥开关
-    static final boolean KEEP_SECRET = true;
+    static final boolean KEEP_SECRET = false;
     // 默认头像
     public static final String DEFAULT_AVATAR = HOST_NAME + "static/common/avatar-max-img.png";
+    // 消息刷新周期
+    public static final long INBOX_REFRESH_PERIOD = 10000L;
 
     public static final int MAX_LENGTH = 100;
 
@@ -48,6 +50,15 @@ public class Config {
 
     static final String API_CAT_ARTICLE = "article";
     static final String API_SAVE_COMMENT = "save_comment";
+
+    static final String API_CAT_TOPIC = "topic";
+    static final String API_HOT_TOPICS = "hot_topics";
+
+    static final String API_CAT_INBOX = "inbox";
+    static final String API_READ = "read";
+    static final String API_SEND = "send";
+
+    static final String API_CAT_SEARCH = "search";
 
     // AJAX请求地址
 
@@ -81,4 +92,6 @@ public class Config {
     public static final String INT_QUESTION_TITLE = "questionTitle";
     public static final String INT_ARTICLE_ID = "articleID";
     public static final String INT_ARTICLE_TITLE = "articleTitle";
+    public static final String INT_CHAT_USERNAME = "chatUsername";
+    public static final String INT_CHAT_ID = "chatID";
 }

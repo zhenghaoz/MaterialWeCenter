@@ -65,5 +65,6 @@ dependencies {
     compile 'com.miguelcatalan:materialsearchview:1.4.0'
     compile 'com.github.pavlospt:roundedletterview:1.2'
     compile 'com.github.Slyce-Inc:SlyceMessaging:1.1.2'
+    compile 'com.github.arimorty:floatingsearchview:2.1.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }

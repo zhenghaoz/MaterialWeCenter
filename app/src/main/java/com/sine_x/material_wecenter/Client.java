@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.sine_x.material_wecenter.controller.fragment.SearchFragment;
 import com.sine_x.material_wecenter.models.Action;
 import com.sine_x.material_wecenter.models.Ajax;
 import com.sine_x.material_wecenter.models.AnswerComment;
@@ -19,6 +20,7 @@ import com.sine_x.material_wecenter.models.PublishQuestion;
 import com.sine_x.material_wecenter.models.QuestionDetail;
 import com.sine_x.material_wecenter.models.Response;
 import com.sine_x.material_wecenter.models.Responses;
+import com.sine_x.material_wecenter.models.SearchResult;
 import com.sine_x.material_wecenter.models.Topic;
 import com.sine_x.material_wecenter.models.UserInfo;
 
@@ -447,6 +449,13 @@ public class Client {
         params.put("id", String.valueOf(id));
         String json = apiGet(Config.API_CAT_INBOX, Config.API_READ, params);
         return parseResponses(json, Chat.class);
+    }
+
+    public Responses<SearchResult> search(String q) {
+        Map<String, String> params = new HashMap<>();
+        params.put("q", q);
+        String json = apiGet(Config.API_CAT_SEARCH, params);
+        return parseResponses(json, SearchResult.class);
     }
 
     private String ajax(String url, Map<String, String> params) {

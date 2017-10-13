@@ -15,7 +15,7 @@ public class Config {
     // API密钥
     static final String APP_SECRET = "12884789df747d7affbcd6a7cadd9359";
     // API密钥开关
-    static final boolean KEEP_SECRET = true;
+    static final boolean KEEP_SECRET = false;
     // 默认头像
     public static final String DEFAULT_AVATAR = HOST_NAME + "static/common/avatar-max-img.png";
 
@@ -54,6 +54,8 @@ public class Config {
 
     static final String API_CAT_INBOX = "inbox";
     static final String API_READ = "read";
+
+    static final String API_CAT_SEARCH = "search";
 
     // AJAX请求地址
 

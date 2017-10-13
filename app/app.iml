@@ -109,6 +109,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="cam2-0.6.2" level="project" />
     <orderEntry type="library" name="kenburnsview-1.0.6" level="project" />
+    <orderEntry type="library" name="transition-25.3.1" level="project" />
+    <orderEntry type="library" name="viewpropertyobjectanimator-1.2.0" level="project" />
     <orderEntry type="library" name="cardview-v7-25.4.0" level="project" />
     <orderEntry type="library" name="support-core-ui-25.4.0" level="project" />
     <orderEntry type="library" name="commons-lang3-3.5" level="project" />
@@ -130,10 +132,11 @@
     <orderEntry type="library" name="butterknife-8.8.1" level="project" />
     <orderEntry type="library" name="picasso-2.5.2" level="project" />
     <orderEntry type="library" name="gson-2.8.0" level="project" />
+    <orderEntry type="library" name="floatingsearchview-2.1.1" level="project" />
     <orderEntry type="library" name="navigationdrawer-material-2.3.3" level="project" />
     <orderEntry type="library" name="constraint-layout-1.0.2" level="project" />
     <orderEntry type="library" name="Knife-v1.1" level="project" />
-    <orderEntry type="library" name="design-24.1.1" level="project" />
+    <orderEntry type="library" name="design-25.3.1" level="project" />
     <orderEntry type="library" name="core-0.9.4.5" level="project" />
     <orderEntry type="library" name="library-1.4.1" level="project" />
     <orderEntry type="library" name="support-v13-25.3.1" level="project" />

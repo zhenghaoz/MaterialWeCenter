@@ -20,13 +20,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.github.pavlospt.roundedletterview.RoundedLetterView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_margin="8dp"
                 android:id="@+id/conversation_img"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
-                app:rlv_titleSize="24dp"
-                app:rlv_backgroundColorValue="@color/nliveo_blue_colorAccent"/>
+                app:rlv_titleSize="24dp"/>
 
             <LinearLayout
                 android:layout_margin="6dp"

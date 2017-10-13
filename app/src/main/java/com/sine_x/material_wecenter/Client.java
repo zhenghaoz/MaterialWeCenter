@@ -458,6 +458,14 @@ public class Client {
         return parseResponses(json, SearchResult.class);
     }
 
+    public Response<Object> send(String message, String recipient) {
+        Map<String, String> params = new HashMap<>();
+        params.put("message", message);
+        params.put("recipient", recipient);
+        String json = apiPost(Config.API_CAT_INBOX, Config.API_SEND, params);
+        return parseResponse(json, Object.class);
+    }
+
     private String ajax(String url, Map<String, String> params) {
         return doPost(Config.HOST_NAME + url, params);
     }

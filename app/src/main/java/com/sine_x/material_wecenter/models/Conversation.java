@@ -22,6 +22,7 @@ public class Conversation {
     private String last_message;
     private int update_time;
     private int id;
+    private String avatar_file;
 
     public String getUser_name() {
         return user_name;
@@ -85,5 +86,9 @@ public class Conversation {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getAvatar_file() {
+        return avatar_file;
     }
 }

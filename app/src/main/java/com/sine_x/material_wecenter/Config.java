@@ -18,6 +18,8 @@ public class Config {
     static final boolean KEEP_SECRET = false;
     // 默认头像
     public static final String DEFAULT_AVATAR = HOST_NAME + "static/common/avatar-max-img.png";
+    // 消息刷新周期
+    public static final long INBOX_REFRESH_PERIOD = 10000L;
 
     public static final int MAX_LENGTH = 100;
 
@@ -54,6 +56,7 @@ public class Config {
 
     static final String API_CAT_INBOX = "inbox";
     static final String API_READ = "read";
+    static final String API_SEND = "send";
 
     static final String API_CAT_SEARCH = "search";
 

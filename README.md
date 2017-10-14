@@ -17,6 +17,8 @@ Material-WeCenter是一个第三方的[WeCenter](http://www.wecenter.com/)安卓
 - [测试站点](https://vps.sine-x.com/wecenter/)
 - [测试客户端](https://github.com/ZhangZhenghao/Material-WeCenter/releases)
 
+[![](https://okl2aaa54.qnssl.com/download-apk.png)](http://7xsnwb.com1.z0.glb.clouddn.com/app-debug.apk)
+
 ## Usage
 
 - [使用方法](https://github.com/ZhangZhenghao/MaterialWeCenter/wiki/%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95)

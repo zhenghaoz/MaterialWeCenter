@@ -11,6 +11,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
         app:cardElevation="2dp"
+        android:id="@+id/card_view"
         android:layout_gravity="center"
         android:layout_width="350dp"
         android:layout_height="wrap_content">

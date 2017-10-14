@@ -1,6 +1,8 @@
 package com.sine_x.material_wecenter.controller.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
+import com.sine_x.material_wecenter.controller.activity.TopicActivity;
 import com.sine_x.material_wecenter.models.Topic;
 import com.squareup.picasso.Picasso;
 
@@ -34,6 +38,15 @@ public class TopicViewAdapter extends RecyclerView.Adapter<TopicViewAdapter.View
             Picasso.with(mContext).load(topic.getTopic_pic()).into(holder.topicImg);
         holder.topicTitle.setText(topic.getTopic_title());
         holder.topicDescription.setText(topic.getTopic_description());
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, TopicActivity.class);
+                intent.putExtra(Config.INT_TOPIC_NAME, topic.getTopic_title());
+                intent.putExtra(Config.INT_TOPIC_ID, topic.getTopic_id());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -49,6 +62,7 @@ public class TopicViewAdapter extends RecyclerView.Adapter<TopicViewAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.card_view) CardView cardView;
         @BindView(R.id.topic_img) ImageView topicImg;
         @BindView(R.id.topic_title) TextView topicTitle;
         @BindView(R.id.topic_description) TextView topicDescription;

@@ -466,6 +466,13 @@ public class Client {
         return parseResponse(json, Object.class);
     }
 
+    public Responses<ExploreItem> posts(int topicID) {
+        Map<String, String> params = new HashMap<>();
+        params.put("id", String.valueOf(topicID));
+        String json = apiGet(Config.API_CAT_TOPIC, Config.API_POSTS, params);
+        return parseResponses(json, ExploreItem.class);
+    }
+
     private String ajax(String url, Map<String, String> params) {
         return doPost(Config.HOST_NAME + url, params);
     }

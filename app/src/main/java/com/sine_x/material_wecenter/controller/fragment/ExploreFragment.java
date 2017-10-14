@@ -18,11 +18,12 @@ import com.github.clans.fab.FloatingActionButton;
 import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.activity.PostActivity;
-import com.sine_x.material_wecenter.controller.adapter.QuestionViewAdapter;
+import com.sine_x.material_wecenter.controller.adapter.ExploreViewAdapter;
 import com.sine_x.material_wecenter.models.ExploreItem;
 import com.sine_x.material_wecenter.models.Responses;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,11 +33,12 @@ public class ExploreFragment extends Fragment {
 
     private final int ScrollOffset = 4;
     private boolean loading = true;
-    private ArrayList<ExploreItem> mList = new ArrayList<>();
-    private QuestionViewAdapter mAdapter;
+    private List<ExploreItem> mList = new ArrayList<>();
+    private ExploreViewAdapter mAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
-    @BindView(R.id.button_publish) FloatingActionButton btnPublish;
+    @BindView(R.id.button_publish)
+    FloatingActionButton btnPublish;
 
     private static int POST_ACTIVITY = 1;
 
@@ -75,7 +77,7 @@ public class ExploreFragment extends Fragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.question_list);
         final LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new QuestionViewAdapter(getActivity(), mList);
+        mAdapter = new ExploreViewAdapter(getActivity(), mList);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {

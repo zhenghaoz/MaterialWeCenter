@@ -24,7 +24,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 
-public class AnswerActivity extends AppCompatActivity implements View.OnClickListener{
+public class AnswerActivity extends AppCompatActivity implements View.OnClickListener {
 
     private int answerID;
     private Client client = Client.getInstance();
@@ -42,17 +42,17 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
         ButterKnife.bind(this);
 
         //获取intent
-        Intent mIntent=getIntent();
-        answerID=mIntent.getIntExtra("answerID", -1);
+        Intent mIntent = getIntent();
+        answerID = mIntent.getIntExtra("answerID", -1);
 
         //实例化recyclerView
-        recyclerView=(RecyclerView) findViewById(R.id.recyclerView_answer);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView_answer);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         //实例化EdiText和发布按钮
-        content=(EditText) findViewById(R.id.edit_content_answerComment);
-        publish=(Button) findViewById(R.id.btn_add_answerComment);
+        content = (EditText) findViewById(R.id.edit_content_answerComment);
+        publish = (Button) findViewById(R.id.btn_add_answerComment);
         publish.setOnClickListener(this);
 
         new LoadAnswerDetail().execute();
@@ -60,11 +60,11 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        String mContent=content.getText().toString();
-        switch (v.getId()){
+        String mContent = content.getText().toString();
+        switch (v.getId()) {
             //发布评论
             case R.id.btn_add_answerComment:
-                if(!mContent.isEmpty()){
+                if (!mContent.isEmpty()) {
                     new PublishTask().execute();
                 }
                 break;
@@ -75,7 +75,7 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
 
     //异步获取回答详细信息
 
-    private class LoadAnswerDetail extends AsyncTask<Integer,Integer,Integer> {
+    private class LoadAnswerDetail extends AsyncTask<Integer, Integer, Integer> {
 
         @Override
         protected void onPreExecute() {
@@ -87,7 +87,7 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
             try {
                 answerDetail = client.getAnswer(answerID).getRsm();
                 answerComments = client.getAnswerComments(answerID).getRsm();
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return null;
@@ -96,7 +96,7 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
         @Override
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
-            answerDetailAdapter = new AnswerDetailAdapter(AnswerActivity.this,answerDetail,answerComments);
+            answerDetailAdapter = new AnswerDetailAdapter(AnswerActivity.this, answerDetail, answerComments);
             recyclerView.setAdapter(answerDetailAdapter);
             answerDetailAdapter.notifyDataSetChanged();
         }
@@ -118,10 +118,10 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
         @Override
         protected Void doInBackground(Void... params) {
             Client client = Client.getInstance();
-            ArrayList<String> strs=new ArrayList<>();
-            strs.add(answerID+"");
+            ArrayList<String> strs = new ArrayList<>();
+            strs.add(answerID + "");
             strs.add(mContent);
-            result2 = client.postAction(Config.ActionType.PUBLISH_ANSWER_COMMENT,PublishAnswerComment.class,strs);
+            result2 = client.postAction(Config.ActionType.PUBLISH_ANSWER_COMMENT, PublishAnswerComment.class, strs);
             return null;
         }
 
@@ -132,19 +132,17 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
             answerDetailAdapter.notifyDataSetChanged();
             if (result2 == null) // 未知错误
                 Snackbar.with(AnswerActivity.this).text("未知错误").show(AnswerActivity.this);
-            else if (result2.getErrno() == 1){ // 发布成功
+            else if (result2.getErrno() == 1) { // 发布成功
                 new LoadAnswerDetail().execute();
                 content.setText("");
-            }
-
-            else                // 显示错误
+            } else                // 显示错误
                 Snackbar.with(AnswerActivity.this).text(result2.getErr()).show(AnswerActivity.this);
         }
     }
 
     //评论成功返回的json对象
 
-    public static class PublishAnswerComment{
+    public static class PublishAnswerComment {
 
         private int item_id;
         private String type_name;

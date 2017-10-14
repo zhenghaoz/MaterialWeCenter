@@ -228,11 +228,16 @@ public class DynamicViewAdapter extends RecyclerView.Adapter<DynamicViewAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.avatar_img) CircleImageView avatarImg;
-        @BindView(R.id.dynamic_user_name) TextView dynamicUserName;
-        @BindView(R.id.dynamic_title) TextView dynamicTitle;
-        @BindView(R.id.dynamic_content) TextView dynamicContent;
-        @BindView(R.id.dynamic_info) TextView dynamicInfo;
+        @BindView(R.id.avatar_img)
+        CircleImageView avatarImg;
+        @BindView(R.id.dynamic_user_name)
+        TextView dynamicUserName;
+        @BindView(R.id.dynamic_title)
+        TextView dynamicTitle;
+        @BindView(R.id.dynamic_content)
+        TextView dynamicContent;
+        @BindView(R.id.dynamic_info)
+        TextView dynamicInfo;
 
         public ViewHolder(View itemView) {
             super(itemView);

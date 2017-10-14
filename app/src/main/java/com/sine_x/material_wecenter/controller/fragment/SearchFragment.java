@@ -1,9 +1,9 @@
 package com.sine_x.material_wecenter.controller.fragment;
 
 
+import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,8 +34,10 @@ public class SearchFragment extends Fragment {
     private SearchViewAdapter mAdapter;
     private String q;
 
-    @BindView(R.id.floating_search_view) FloatingSearchView searchView;
-    @BindView(R.id.search_list) RecyclerView mRecyclerView;
+    @BindView(R.id.floating_search_view)
+    FloatingSearchView searchView;
+    @BindView(R.id.search_list)
+    RecyclerView mRecyclerView;
 
     public SearchFragment() {
         // Required empty public constructor

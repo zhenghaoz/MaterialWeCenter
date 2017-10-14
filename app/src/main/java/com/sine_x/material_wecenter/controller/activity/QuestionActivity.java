@@ -21,7 +21,7 @@ import com.github.clans.fab.FloatingActionButton;
 import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
-import com.sine_x.material_wecenter.controller.adapter.QuestionDetailAdapter;
+import com.sine_x.material_wecenter.controller.adapter.QuestionAdapter;
 import com.sine_x.material_wecenter.models.QuestionDetail;
 
 import butterknife.BindView;
@@ -32,13 +32,14 @@ import butterknife.OnClick;
 public class QuestionActivity extends AppCompatActivity {
 
     private final int ScrollOffset = 4;
-    private boolean isFirstRefresh=true;
+    private boolean isFirstRefresh = true;
     private int questionID;
     private QuestionDetail questionDetail;
-    private QuestionDetailAdapter questionDetailAdapter;
+    private QuestionAdapter questionDetailAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
-    @BindView(R.id.button_publish) FloatingActionButton btnPublish;
+    @BindView(R.id.button_publish)
+    FloatingActionButton btnPublish;
     private Client client = Client.getInstance();
 
     private static final int POST_ANSWER = 2;
@@ -76,11 +77,11 @@ public class QuestionActivity extends AppCompatActivity {
             ab.setDisplayHomeAsUpEnabled(true);
 
         //get intent
-        Intent mIntent=getIntent();
-        questionID=mIntent.getIntExtra(Config.INT_QUESTION_ID, -1);
+        Intent mIntent = getIntent();
+        questionID = mIntent.getIntExtra(Config.INT_QUESTION_ID, -1);
 
         //init swipeRefreshLayout
-        swipeRefreshLayout=(SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout_question);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout_question);
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light,
                 android.R.color.holo_red_light,
                 android.R.color.holo_green_light,
@@ -99,8 +100,8 @@ public class QuestionActivity extends AppCompatActivity {
         });
 
         //init recyclerView
-        recyclerView=(RecyclerView) findViewById(R.id.recyclerView_answerList);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView_answerList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -127,8 +128,8 @@ public class QuestionActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id=item.getItemId();
-        switch (id){
+        int id = item.getItemId();
+        switch (id) {
             //返回顶部
             case R.id.action_toTop:
                 recyclerView.smoothScrollToPosition(0);
@@ -156,11 +157,11 @@ public class QuestionActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         //发布答案成功后刷新
         if (requestCode == POST_ANSWER && resultCode == PostAnswerActivity.POST_ANSWER_POS)
-           new LoadAnswers().execute();
+            new LoadAnswers().execute();
     }
 
     //异步获取答案列表
-    private class LoadAnswers extends AsyncTask<Integer,Integer,Integer> {
+    private class LoadAnswers extends AsyncTask<Integer, Integer, Integer> {
 
         @Override
         protected void onPreExecute() {
@@ -171,8 +172,8 @@ public class QuestionActivity extends AppCompatActivity {
         protected Integer doInBackground(Integer... params) {
             try {
                 Log.e("Load", "load has started");
-                questionDetail=(QuestionDetail) client.getQuestion(questionID).getRsm();
-            }catch (Exception e) {
+                questionDetail = (QuestionDetail) client.getQuestion(questionID).getRsm();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return null;
@@ -181,15 +182,14 @@ public class QuestionActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
-            questionDetailAdapter=new QuestionDetailAdapter
-                    (QuestionActivity.this,questionDetail);
+            questionDetailAdapter = new QuestionAdapter
+                    (QuestionActivity.this, questionDetail);
             recyclerView.setAdapter(questionDetailAdapter);
             questionDetailAdapter.notifyDataSetChanged();
             swipeRefreshLayout.setRefreshing(false);
-            if(isFirstRefresh){
-                isFirstRefresh=false;
-            }
-            else Toast.makeText(QuestionActivity.this,"更新完成",Toast.LENGTH_SHORT).show();
+            if (isFirstRefresh) {
+                isFirstRefresh = false;
+            } else Toast.makeText(QuestionActivity.this, "更新完成", Toast.LENGTH_SHORT).show();
         }
     }
 

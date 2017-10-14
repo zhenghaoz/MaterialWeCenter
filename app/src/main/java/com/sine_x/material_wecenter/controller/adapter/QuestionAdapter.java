@@ -18,6 +18,7 @@ import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.activity.AnswerActivity;
+import com.sine_x.material_wecenter.controller.activity.TopicActivity;
 import com.sine_x.material_wecenter.controller.activity.UserActivity;
 import com.sine_x.material_wecenter.models.Ajax;
 import com.sine_x.material_wecenter.models.QuestionDetail;
@@ -28,14 +29,16 @@ import com.zzhoujay.richtext.RichText;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import me.gujun.android.taggroup.TagGroup;
 
-public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final int TYPE_TITLE = 0;
     private final int TYPE_DETAIL = 1;
@@ -47,8 +50,9 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private boolean isThank;
     private Context mContext;
     private QuestionDetail questionDetail;
+    private Map<String, Integer> reverseIndex = new HashMap<>();
 
-    public QuestionDetailAdapter(Context context, QuestionDetail questionDetail) {
+    public QuestionAdapter(Context context, QuestionDetail questionDetail) {
         this.mContext = context;
         this.questionDetail = questionDetail;
     }
@@ -65,7 +69,7 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             case 3:
                 return TYPE_INFO;
             default:
-                if (position == getItemCount()-1)
+                if (position == getItemCount() - 1)
                     return TYPE_FOOTER;
                 return TYPE_ITEM;
         }
@@ -129,8 +133,11 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         } else if (holder instanceof TopicViewHolder) {
             TopicViewHolder topicViewHolder = (TopicViewHolder) holder;
             List<String> topics = new ArrayList<>();
-            for (QuestionDetail.TopicInfo info : questionDetail.getQuestion_topics())
+            reverseIndex.clear();
+            for (QuestionDetail.TopicInfo info : questionDetail.getQuestion_topics()) {
                 topics.add(info.getTopic_title());
+                reverseIndex.put(info.getTopic_title(), info.getTopic_id());
+            }
             topicViewHolder.tagGroup.setTags(topics);
         } else if (holder instanceof InfoViewHolder) {
             final QuestionDetail.QuestionInfo questionInfo = questionDetail.getQuestion_info();
@@ -209,8 +216,10 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public class TitleViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.avatar_img_question) CircleImageView avatar;
-        @BindView(R.id.textView_title_question) TextView title;
+        @BindView(R.id.avatar_img_question)
+        CircleImageView avatar;
+        @BindView(R.id.textView_title_question)
+        TextView title;
 
         TitleViewHolder(View view) {
             super(view);
@@ -219,10 +228,21 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     public class TopicViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tag_group) TagGroup tagGroup;
+        @BindView(R.id.tag_group)
+        TagGroup tagGroup;
+
         public TopicViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+            tagGroup.setOnTagClickListener(new TagGroup.OnTagClickListener() {
+                @Override
+                public void onTagClick(String tag) {
+                    Intent intent = new Intent(mContext, TopicActivity.class);
+                    intent.putExtra(Config.INT_TOPIC_NAME, tag);
+                    intent.putExtra(Config.INT_TOPIC_ID, reverseIndex.get(tag));
+                    mContext.startActivity(intent);
+                }
+            });
         }
     }
 
@@ -248,11 +268,16 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public class InfoViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.textView_addTime_question) TextView addTime;
-        @BindView(R.id.btn_focus_question) Button focus;
-        @BindView(R.id.textView_answerCount_question) TextView answerCount;
-        @BindView(R.id.textView_thankCount_question) TextView thankCount;
-        @BindView(R.id.imageView_thumb_up) ImageView thank;
+        @BindView(R.id.textView_addTime_question)
+        TextView addTime;
+        @BindView(R.id.btn_focus_question)
+        Button focus;
+        @BindView(R.id.textView_answerCount_question)
+        TextView answerCount;
+        @BindView(R.id.textView_thankCount_question)
+        TextView thankCount;
+        @BindView(R.id.imageView_thumb_up)
+        ImageView thank;
 
         public InfoViewHolder(View view) {
             super(view);
@@ -270,7 +295,8 @@ public class QuestionDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public class TextViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.textView_detailText_question) TextView text;
+        @BindView(R.id.textView_detailText_question)
+        TextView text;
 
         public TextViewHolder(View view) {
             super(view);

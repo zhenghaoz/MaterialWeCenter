@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,12 +17,9 @@ import android.view.ViewGroup;
 import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
-import com.sine_x.material_wecenter.controller.activity.ChatActivity;
 import com.sine_x.material_wecenter.controller.adapter.ConversationViewAdapter;
-import com.sine_x.material_wecenter.controller.adapter.TopicViewAdapter;
 import com.sine_x.material_wecenter.models.Conversation;
 import com.sine_x.material_wecenter.models.Responses;
-import com.sine_x.material_wecenter.models.Topic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +33,8 @@ public class InboxFragment extends Fragment {
 
     private List<Conversation> mList = new ArrayList<>();
     private ConversationViewAdapter mAdapter;
-    @BindView(R.id.dynamic_list) RecyclerView mRecyclerView;
+    @BindView(R.id.dynamic_list)
+    RecyclerView mRecyclerView;
 
     private static int POST_ACTIVITY = 1;
 
@@ -93,7 +90,7 @@ public class InboxFragment extends Fragment {
             responses = Client.getInstance().inbox();
             mList.clear();
             mList.addAll(responses.getRsm());
-            Log.d("Topics",String.valueOf(mList.size()));
+            Log.d("Topics", String.valueOf(mList.size()));
             return null;
         }
 

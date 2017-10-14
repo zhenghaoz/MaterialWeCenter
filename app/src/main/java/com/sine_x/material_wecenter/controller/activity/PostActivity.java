@@ -30,11 +30,16 @@ import me.gujun.android.taggroup.TagGroup;
 public class PostActivity extends AppCompatActivity {
 
     private ArrayList<String> topics = new ArrayList<>();
-    @BindView(R.id.toolbar) Toolbar toolbar;
-    @BindView(R.id.tag_group) TagGroup tagGroup;
-    @BindView(R.id.edit_title) MaterialEditText editTitle;
-    @BindView(R.id.edit_content) KnifeText editContent;
-    @BindView(R.id.edit_topic) MaterialEditText editTopic;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.tag_group)
+    TagGroup tagGroup;
+    @BindView(R.id.edit_title)
+    MaterialEditText editTitle;
+    @BindView(R.id.edit_content)
+    KnifeText editContent;
+    @BindView(R.id.edit_topic)
+    MaterialEditText editTopic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +70,9 @@ public class PostActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_add_topic)
     void addTopic() {
-            topics.add(editTopic.getText().toString());
-            tagGroup.setTags(topics);
-            editTopic.setText("");
+        topics.add(editTopic.getText().toString());
+        tagGroup.setTags(topics);
+        editTopic.setText("");
     }
 
     @Override

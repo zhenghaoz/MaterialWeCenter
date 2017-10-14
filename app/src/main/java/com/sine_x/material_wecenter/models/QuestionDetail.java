@@ -230,7 +230,7 @@ public class QuestionDetail {
         }
     }
 
-    public static class TopicInfo{
+    public static class TopicInfo {
         private int topic_id;
         private String topic_title;
 

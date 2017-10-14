@@ -53,6 +53,7 @@ public class Config {
 
     static final String API_CAT_TOPIC = "topic";
     static final String API_HOT_TOPICS = "hot_topics";
+    static final String API_POSTS = "posts";
 
     static final String API_CAT_INBOX = "inbox";
     static final String API_READ = "read";
@@ -73,7 +74,7 @@ public class Config {
     static final String API_CAT_EXPLORE = "explore";
 
     //操作枚举
-    public enum ActionType{
+    public enum ActionType {
         QUESTION_FOCUS,
         QUESTION_THANKS,
         PUBLISH_ANSWER_COMMENT,
@@ -94,4 +95,6 @@ public class Config {
     public static final String INT_ARTICLE_TITLE = "articleTitle";
     public static final String INT_CHAT_USERNAME = "chatUsername";
     public static final String INT_CHAT_ID = "chatID";
+    public static final String INT_TOPIC_NAME = "topicName";
+    public static final String INT_TOPIC_ID = "topicID";
 }

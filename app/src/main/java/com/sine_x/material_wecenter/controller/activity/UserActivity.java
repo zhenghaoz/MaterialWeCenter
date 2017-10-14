@@ -29,8 +29,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserActivity extends AppCompatActivity {
 
-    @BindView(R.id.view_pager) MaterialViewPager mViewPager;
-    @BindView(R.id.logo_white) CircleImageView imgAvatar;
+    @BindView(R.id.view_pager)
+    MaterialViewPager mViewPager;
+    @BindView(R.id.logo_white)
+    CircleImageView imgAvatar;
     private Menu menu;
     private int uid;
 
@@ -181,7 +183,7 @@ public class UserActivity extends AppCompatActivity {
                 if (response.getRsm().getType().equals("add")) {
                     item.setIcon(R.drawable.ic_favorite_white_24dp);
                     Toast.makeText(UserActivity.this, "关注成功", Toast.LENGTH_SHORT).show();
-                }  else if (response.getRsm().getType().equals("remove")) {
+                } else if (response.getRsm().getType().equals("remove")) {
                     item.setIcon(R.drawable.ic_favorite_border_white_24dp);
                     Toast.makeText(UserActivity.this, "取消关注成功", Toast.LENGTH_SHORT).show();
                 }

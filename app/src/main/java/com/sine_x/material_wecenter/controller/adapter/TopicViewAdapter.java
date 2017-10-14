@@ -62,10 +62,14 @@ public class TopicViewAdapter extends RecyclerView.Adapter<TopicViewAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.card_view) CardView cardView;
-        @BindView(R.id.topic_img) ImageView topicImg;
-        @BindView(R.id.topic_title) TextView topicTitle;
-        @BindView(R.id.topic_description) TextView topicDescription;
+        @BindView(R.id.card_view)
+        CardView cardView;
+        @BindView(R.id.topic_img)
+        ImageView topicImg;
+        @BindView(R.id.topic_title)
+        TextView topicTitle;
+        @BindView(R.id.topic_description)
+        TextView topicDescription;
 
         public ViewHolder(View itemView) {
             super(itemView);

@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.sine_x.material_wecenter.controller.fragment.SearchFragment;
 import com.sine_x.material_wecenter.models.Action;
 import com.sine_x.material_wecenter.models.Ajax;
 import com.sine_x.material_wecenter.models.AnswerComment;
@@ -63,7 +62,8 @@ public class Client {
         return client;
     }
 
-    public @NonNull <T> Response<T> parseResponse(String json, Class<T> type) {
+    public @NonNull
+    <T> Response<T> parseResponse(String json, Class<T> type) {
         Response<T> response = new Response<>();
         try {
             JSONObject jsonObject = new JSONObject(json);
@@ -150,7 +150,8 @@ public class Client {
      * @param password  用户密码
      * @return 包含LoginProcess的Result对象
      */
-    public @NonNull Response<LoginProcess> loginProcess(@NonNull String user_name, @NonNull String password) {
+    public @NonNull
+    Response<LoginProcess> loginProcess(@NonNull String user_name, @NonNull String password) {
         Map<String, String> params = new HashMap<>();
         params.put("user_name", user_name);
         params.put("password", password);
@@ -158,7 +159,8 @@ public class Client {
         return parseResponse(json, LoginProcess.class);
     }
 
-    public @NonNull Response<LoginProcess> registerProcess(@NonNull String userName, @NonNull String password, @NonNull String email, @NonNull String iCode) {
+    public @NonNull
+    Response<LoginProcess> registerProcess(@NonNull String userName, @NonNull String password, @NonNull String email, @NonNull String iCode) {
         Map<String, String> params = new HashMap<>();
         params.put("user_name", userName);
         params.put("password", password);
@@ -254,6 +256,7 @@ public class Client {
 
     /**
      * getAnswer 获取答案评论列表
+     *
      * @param answer_id 答案的编号
      * @return Result对象
      */
@@ -549,24 +552,24 @@ public class Client {
     }
 
     private String apiGet(String apiCat, String api, Map<String, String> params) {
-            // 组合链接
-            StringBuilder builder = new StringBuilder();
-            builder.append(Config.API_ROOT);
-            builder.append(apiCat);
-            builder.append('/');
-            builder.append(api);
-            builder.append("/?");
-            if (Config.KEEP_SECRET) {
-                params.put("mobile_sign", getSign(apiCat));
-            }
-            for (Map.Entry<String, String> entry : params.entrySet()) {
-                builder.append(entry.getKey())
-                        .append("=")
-                        .append(URLEncoder.encode(entry.getValue()))
-                        .append("&");
-            }
-            builder.deleteCharAt(builder.length() - 1);
-            return doGet(builder.toString());
+        // 组合链接
+        StringBuilder builder = new StringBuilder();
+        builder.append(Config.API_ROOT);
+        builder.append(apiCat);
+        builder.append('/');
+        builder.append(api);
+        builder.append("/?");
+        if (Config.KEEP_SECRET) {
+            params.put("mobile_sign", getSign(apiCat));
+        }
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            builder.append(entry.getKey())
+                    .append("=")
+                    .append(URLEncoder.encode(entry.getValue()))
+                    .append("&");
+        }
+        builder.deleteCharAt(builder.length() - 1);
+        return doGet(builder.toString());
     }
 
     private String doGet(String apiUrl) {

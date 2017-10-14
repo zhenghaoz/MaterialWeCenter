@@ -7,13 +7,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.activity.ArticleActivity;
 import com.sine_x.material_wecenter.controller.activity.QuestionActivity;
+import com.sine_x.material_wecenter.controller.activity.TopicActivity;
 import com.sine_x.material_wecenter.controller.activity.UserActivity;
 import com.sine_x.material_wecenter.models.SearchResult;
 import com.squareup.picasso.Picasso;
@@ -59,6 +59,15 @@ public class SearchViewAdapter extends RecyclerView.Adapter<SearchViewAdapter.Vi
                 Picasso.with(mContext).load(result.getDetail().getTopic_pic()).into(holder.avatarImg);
                 holder.avatarImg.setDisableCircularTransformation(true);
                 holder.description.setText(result.getDetail().getTopic_description());
+                holder.cardView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(mContext, TopicActivity.class);
+                        intent.putExtra(Config.INT_TOPIC_ID, result.getSearch_id());
+                        intent.putExtra(Config.INT_TOPIC_NAME, result.getName());
+                        mContext.startActivity(intent);
+                    }
+                });
                 break;
             case "questions":
                 holder.avatarImg.setVisibility(View.GONE);
@@ -104,10 +113,14 @@ public class SearchViewAdapter extends RecyclerView.Adapter<SearchViewAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.card) CardView cardView;
-        @BindView(R.id.avatar_img) CircleImageView avatarImg;
-        @BindView(R.id.title) TextView title;
-        @BindView(R.id.description) TextView description;
+        @BindView(R.id.card)
+        CardView cardView;
+        @BindView(R.id.avatar_img)
+        CircleImageView avatarImg;
+        @BindView(R.id.title)
+        TextView title;
+        @BindView(R.id.description)
+        TextView description;
 
         public ViewHolder(View view) {
             super(view);

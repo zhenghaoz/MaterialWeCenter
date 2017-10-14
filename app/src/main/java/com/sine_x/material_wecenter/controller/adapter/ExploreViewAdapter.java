@@ -16,7 +16,6 @@ import com.sine_x.material_wecenter.controller.activity.UserActivity;
 import com.sine_x.material_wecenter.models.ExploreItem;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;

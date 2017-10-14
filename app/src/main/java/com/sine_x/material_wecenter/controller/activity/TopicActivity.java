@@ -3,8 +3,6 @@ package com.sine_x.material_wecenter.controller.activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -18,7 +16,6 @@ import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.adapter.ExploreViewAdapter;
 import com.sine_x.material_wecenter.models.ExploreItem;
-import com.sine_x.material_wecenter.models.Response;
 import com.sine_x.material_wecenter.models.Responses;
 
 import java.util.ArrayList;
@@ -31,7 +28,8 @@ public class TopicActivity extends AppCompatActivity {
 
     List<ExploreItem> mList = new ArrayList<>();
     ExploreViewAdapter mAdapter;
-    @BindView(R.id.post_list) RecyclerView mRecyclerView;
+    @BindView(R.id.post_list)
+    RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

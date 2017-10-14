@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
+import com.sine_x.material_wecenter.controller.activity.TopicActivity;
 import com.sine_x.material_wecenter.controller.activity.UserActivity;
 import com.sine_x.material_wecenter.models.Ajax;
 import com.sine_x.material_wecenter.models.Article;
@@ -28,7 +29,9 @@ import com.zzhoujay.richtext.RichText;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,6 +52,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private boolean isThank;
     private Context mContext;
     private Article article;
+    private Map<String, Integer> reverseIndex = new HashMap<>();
 
     public ArticleAdapter(Context context, Article article) {
         this.mContext = context;
@@ -67,7 +71,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             case 3:
                 return TYPE_INFO;
             default:
-                if (position == getItemCount()-1)
+                if (position == getItemCount() - 1)
                     return TYPE_FOOTER;
                 return TYPE_ITEM;
         }
@@ -128,8 +132,11 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         } else if (holder instanceof TopicViewHolder) {
             TopicViewHolder topicViewHolder = (TopicViewHolder) holder;
             List<String> topics = new ArrayList<>();
-            for (Article.ArticleTopicsBean info : article.getArticle_topics())
+            reverseIndex.clear();
+            for (Article.ArticleTopicsBean info : article.getArticle_topics()) {
                 topics.add(info.getTopic_title());
+                reverseIndex.put(info.getTopic_title(), info.getTopic_id());
+            }
             topicViewHolder.tagGroup.setTags(topics);
         } else if (holder instanceof TextViewHolder) {
             TextViewHolder textViewHolder = (TextViewHolder) holder;
@@ -230,8 +237,10 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public class TitleViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.avatar_img_question) CircleImageView avatar;
-        @BindView(R.id.textView_title_question) TextView title;
+        @BindView(R.id.avatar_img_question)
+        CircleImageView avatar;
+        @BindView(R.id.textView_title_question)
+        TextView title;
 
         TitleViewHolder(View view) {
             super(view);
@@ -261,11 +270,16 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public class InfoViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.textView_addTime_question) TextView addTime;
-        @BindView(R.id.textView_answerCount_question) TextView answerCount;
-        @BindView(R.id.textView_thankCount_question) TextView thankCount;
-        @BindView(R.id.imageView_thumb_up) ImageView thumbUp;
-        @BindView(R.id.imageView_thumb_down) ImageView thumbDown;
+        @BindView(R.id.textView_addTime_question)
+        TextView addTime;
+        @BindView(R.id.textView_answerCount_question)
+        TextView answerCount;
+        @BindView(R.id.textView_thankCount_question)
+        TextView thankCount;
+        @BindView(R.id.imageView_thumb_up)
+        ImageView thumbUp;
+        @BindView(R.id.imageView_thumb_down)
+        ImageView thumbDown;
 
         public InfoViewHolder(View view) {
             super(view);
@@ -276,9 +290,19 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public class TopicViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tag_group)
         TagGroup tagGroup;
+
         public TopicViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+            tagGroup.setOnTagClickListener(new TagGroup.OnTagClickListener() {
+                @Override
+                public void onTagClick(String tag) {
+                    Intent intent = new Intent(mContext, TopicActivity.class);
+                    intent.putExtra(Config.INT_TOPIC_ID, reverseIndex.get(tag));
+                    intent.putExtra(Config.INT_TOPIC_NAME, tag);
+                    mContext.startActivity(intent);
+                }
+            });
         }
     }
 
@@ -292,7 +316,8 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public class TextViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.textView_detailText_question) TextView text;
+        @BindView(R.id.textView_detailText_question)
+        TextView text;
 
         public TextViewHolder(View view) {
             super(view);
@@ -508,16 +533,19 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         InfoViewHolder holder;
         int nRating;
         Response<Ajax> response;
+
         ArticleVoteTask(InfoViewHolder holder, int nRating) {
             this.nRating = nRating;
             this.holder = holder;
         }
+
         @Override
         protected Void doInBackground(Void... params) {
             Log.d("THUMB", "HI");
             response = Client.getInstance().articleVote(article.getArticle_info().getId(), nRating);
             return null;
         }
+
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
@@ -548,6 +576,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         Article.CommentsBean commentsBean;
         Response<Ajax> response;
         int nRating;
+
         CommentVoteTask(ItemViewHolder holder, Article.CommentsBean commentsBean) {
             this.holder = holder;
             this.commentsBean = commentsBean;
@@ -556,22 +585,24 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             else
                 nRating = 0;
         }
+
         @Override
         protected Void doInBackground(Void... params) {
             response = Client.getInstance().articleCommentVote(commentsBean.getId(), nRating);
             return null;
         }
+
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             if (response.getErrno() == 1) {
                 if (nRating == 1) {
                     commentsBean.setVote_info(new Object());
-                    commentsBean.setVotes(commentsBean.getVotes()+1);
+                    commentsBean.setVotes(commentsBean.getVotes() + 1);
                     holder.agree.setImageResource(R.drawable.ic_thumb_up_blue_36dp);
                 } else {
                     commentsBean.setVote_info(null);
-                    commentsBean.setVotes(commentsBean.getVotes()-1);
+                    commentsBean.setVotes(commentsBean.getVotes() - 1);
                     holder.agree.setImageResource(R.drawable.ic_thumb_up_grey_36dp);
                 }
                 holder.agreeCount.setText(String.valueOf(commentsBean.getVotes()));

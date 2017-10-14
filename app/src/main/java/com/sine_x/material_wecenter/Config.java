@@ -74,7 +74,7 @@ public class Config {
     static final String API_CAT_EXPLORE = "explore";
 
     //操作枚举
-    public enum ActionType{
+    public enum ActionType {
         QUESTION_FOCUS,
         QUESTION_THANKS,
         PUBLISH_ANSWER_COMMENT,

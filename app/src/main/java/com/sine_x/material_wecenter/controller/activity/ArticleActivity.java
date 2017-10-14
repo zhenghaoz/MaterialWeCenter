@@ -36,7 +36,7 @@ public class ArticleActivity extends AppCompatActivity {
     private static final int REQUEST_COMMENT = 1;
 
     private final int ScrollOffset = 4;
-    private boolean isFirstRefresh=true;
+    private boolean isFirstRefresh = true;
     private boolean isBtnClose;
     private int articleID;
     private Article article;
@@ -46,7 +46,9 @@ public class ArticleActivity extends AppCompatActivity {
     private Client client = Client.getInstance();
     private ImageButton publish;
     private EditText answerContent;
-    @BindView(R.id.button_publish) FloatingActionButton btnPublish;
+    @BindView(R.id.button_publish)
+    FloatingActionButton btnPublish;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +71,8 @@ public class ArticleActivity extends AppCompatActivity {
             ab.setDisplayHomeAsUpEnabled(true);
 
         //get intent
-        Intent mIntent=getIntent();
-        articleID =mIntent.getIntExtra(Config.INT_ARTICLE_ID, -1);
+        Intent mIntent = getIntent();
+        articleID = mIntent.getIntExtra(Config.INT_ARTICLE_ID, -1);
 
         // answerContent=(EditText) findViewById(R.id.edit_content_answer);
 
@@ -101,7 +103,7 @@ public class ArticleActivity extends AppCompatActivity {
 //        });
 
         //init swipeRefreshLayout
-        swipeRefreshLayout=(SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout_question);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout_question);
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light,
                 android.R.color.holo_red_light,
                 android.R.color.holo_green_light,
@@ -120,8 +122,8 @@ public class ArticleActivity extends AppCompatActivity {
         });
 
         //init recyclerView
-        recyclerView=(RecyclerView) findViewById(R.id.recyclerView_answerList);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView_answerList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -159,8 +161,8 @@ public class ArticleActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        int id=item.getItemId();
-        switch (id){
+        int id = item.getItemId();
+        switch (id) {
 
             //返回顶部
             case R.id.action_toTop:
@@ -190,11 +192,11 @@ public class ArticleActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //发布答案成功后刷新
-            new LoadArticle().execute();
+        new LoadArticle().execute();
     }
 
     //异步获取答案列表
-    private class LoadArticle extends AsyncTask<Integer,Integer,Integer> {
+    private class LoadArticle extends AsyncTask<Integer, Integer, Integer> {
 
         @Override
         protected void onPreExecute() {
@@ -206,7 +208,7 @@ public class ArticleActivity extends AppCompatActivity {
             try {
                 Log.e("Load", "load has started");
                 article = client.getArticle(articleID).getRsm();
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return null;
@@ -219,10 +221,9 @@ public class ArticleActivity extends AppCompatActivity {
             recyclerView.setAdapter(articleAdapter);
             articleAdapter.notifyDataSetChanged();
             swipeRefreshLayout.setRefreshing(false);
-            if(isFirstRefresh){
-                isFirstRefresh=false;
-            }
-            else Toast.makeText(ArticleActivity.this,"更新完成",Toast.LENGTH_SHORT).show();
+            if (isFirstRefresh) {
+                isFirstRefresh = false;
+            } else Toast.makeText(ArticleActivity.this, "更新完成", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -250,16 +251,14 @@ public class ArticleActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
 
             if (response == null) // 未知错误
-                Toast.makeText(ArticleActivity.this,"未知错误",Toast.LENGTH_SHORT).show();
-            else if (response.getErrno() == 1){ // 发布成功
-                Toast.makeText(ArticleActivity.this,"回答成功",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ArticleActivity.this, "未知错误", Toast.LENGTH_SHORT).show();
+            else if (response.getErrno() == 1) { // 发布成功
+                Toast.makeText(ArticleActivity.this, "回答成功", Toast.LENGTH_SHORT).show();
                 new LoadArticle().execute();
-            }
-
-            else                // 显示错误
+            } else                // 显示错误
                 Toast.makeText(ArticleActivity.this, response.getErr(), Toast.LENGTH_SHORT).show();
 
-            isBtnClose=true;
+            isBtnClose = true;
             answerContent.setText("");
         }
     }

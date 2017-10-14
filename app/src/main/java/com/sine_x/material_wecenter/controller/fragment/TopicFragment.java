@@ -1,7 +1,6 @@
 package com.sine_x.material_wecenter.controller.fragment;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,10 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.github.clans.fab.FloatingActionButton;
 import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.R;
-import com.sine_x.material_wecenter.controller.activity.PostActivity;
 import com.sine_x.material_wecenter.controller.adapter.TopicViewAdapter;
 import com.sine_x.material_wecenter.models.Responses;
 import com.sine_x.material_wecenter.models.Topic;
@@ -28,14 +25,14 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class TopicFragment extends Fragment {
 
     private List<Topic> mList = new ArrayList<>();
     private TopicViewAdapter mAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    @BindView(R.id.dynamic_list) RecyclerView mRecyclerView;
+    @BindView(R.id.dynamic_list)
+    RecyclerView mRecyclerView;
 
     private static int POST_ACTIVITY = 1;
 
@@ -89,7 +86,7 @@ public class TopicFragment extends Fragment {
             responses = Client.getInstance().hotTopics();
             mList.clear();
             mList.addAll(responses.getRsm());
-            Log.d("Topics",String.valueOf(mList.size()));
+            Log.d("Topics", String.valueOf(mList.size()));
             return null;
         }
 

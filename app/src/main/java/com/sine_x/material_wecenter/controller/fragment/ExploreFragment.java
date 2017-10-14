@@ -37,7 +37,8 @@ public class ExploreFragment extends Fragment {
     private ExploreViewAdapter mAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
-    @BindView(R.id.button_publish) FloatingActionButton btnPublish;
+    @BindView(R.id.button_publish)
+    FloatingActionButton btnPublish;
 
     private static int POST_ACTIVITY = 1;
 

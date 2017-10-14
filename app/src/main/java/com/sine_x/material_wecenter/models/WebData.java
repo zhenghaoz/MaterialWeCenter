@@ -9,7 +9,7 @@ public class WebData {
     private Gravity gravity;
 
     public WebData(Type type, String data, Gravity gravity) {
-        this.type=type;
+        this.type = type;
         this.gravity = gravity;
         this.data = data;
     }
@@ -38,12 +38,12 @@ public class WebData {
         this.type = type;
     }
 
-    public enum Type{
+    public enum Type {
         TEXT,
         IMAGE
     }
 
-    public enum Gravity{
+    public enum Gravity {
         LEFT,
         CENTER,
         RIGHT

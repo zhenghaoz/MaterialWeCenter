@@ -16,16 +16,16 @@ import com.sine_x.material_wecenter.controller.activity.UserActivity;
 import com.sine_x.material_wecenter.models.ExploreItem;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class QuestionViewAdapter extends RecyclerView.Adapter<QuestionViewAdapter.ViewHolder> {
+public class ExploreViewAdapter extends RecyclerView.Adapter<ExploreViewAdapter.ViewHolder> {
 
-    private ArrayList<ExploreItem> mList;
+    private List<ExploreItem> mList;
     private Context mContext;
 
-    public QuestionViewAdapter(Context context, ArrayList<ExploreItem> list) {
+    public ExploreViewAdapter(Context context, List<ExploreItem> list) {
         this.mContext = context;
         this.mList = list;
     }

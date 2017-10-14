@@ -34,9 +34,11 @@ public class PostAnswerActivity extends AppCompatActivity {
     private int questionID;
     private String questionTitle;
     private ImageButton publish;
-    private final int resultCode=1;
-    @BindView(R.id.question_title) TextView title;
-    @BindView(R.id.editText_answerContent) KnifeText editContent;
+    private final int resultCode = 1;
+    @BindView(R.id.question_title)
+    TextView title;
+    @BindView(R.id.editText_answerContent)
+    KnifeText editContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +47,14 @@ public class PostAnswerActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         //获取intent
-        Intent mIntent=getIntent();
+        Intent mIntent = getIntent();
         questionID = mIntent.getIntExtra(Config.INT_QUESTION_ID, -1);
         questionTitle = mIntent.getStringExtra(Config.INT_QUESTION_TITLE);
 
         //init toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_publishAnswer);
         setSupportActionBar(toolbar);
-        title.setText("评论 "+questionTitle);
+        title.setText("评论 " + questionTitle);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,12 +68,12 @@ public class PostAnswerActivity extends AppCompatActivity {
 
         //init editContent publish按钮
 
-        publish=(ImageButton) findViewById(R.id.imageButton_publishAnswer);
+        publish = (ImageButton) findViewById(R.id.imageButton_publishAnswer);
         publish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String text = editContent.getText().toString();
-                if(!text.isEmpty()){
+                if (!text.isEmpty()) {
                     new PublishTask().execute();
                 }
             }
@@ -166,7 +168,7 @@ public class PostAnswerActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
             if (result2 == null) // 未知错误
                 Snackbar.with(PostAnswerActivity.this).text("未知错误").show(PostAnswerActivity.this);
-            else if (result2.getErrno() == 1){ // 发布成功
+            else if (result2.getErrno() == 1) { // 发布成功
                 PostAnswerActivity.this.setResult(POST_ANSWER_POS);
                 PostAnswerActivity.this.finish();
             } else                // 显示错误

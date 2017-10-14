@@ -1,12 +1,5 @@
 <resources>
 
-    <style name="CourseDialog" parent="android:style/Theme.Dialog">
-        <item name="android:background">#00000000</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsFloating">true</item>
-    </style>
-
     <style name="AnswerTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowFrame">@null</item>
@@ -25,11 +18,6 @@
         <item name="colorPrimaryDark">@color/nliveo_blue_colorPrimaryDark</item>
         <item name="colorAccent">@color/nliveo_blue_colorPrimaryDark</item>
         <item name="android:textColorPrimary">@android:color/white</item>
-    </style>
-
-    <style name="AnimBottom" parent="@android:style/Animation">
-        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
-        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
     </style>
 
     <style name="LaunchTheme" parent="AppTheme">
@@ -57,17 +45,6 @@
         <item name="snackbarButtonColor">@color/text_blue</item>
     </style>
 
-    <style name="SearchView">
-        <item name="floatingSearch_backgroundColor">@android:color/transparent</item>
-        <!--<item name="floatingSearch_viewSearchInputTextColor"></item>-->
-        <!--<item name="floatingSearch_viewSuggestionItemTextColor"></item>-->
-        <!--<item name="floatingSearch_hintTextColor"></item>-->
-        <!--<item name="floatingSearch_dividerColor"></item>-->
-        <!--<item name="floatingSearch_clearBtnColor"></item>-->
-        <!--<item name="floatingSearch_leftActionColor"></item>-->
-        <!--<item name="floatingSearch_menuItemIconColor"></item>-->
-        <!--<item name="floatingSearch_suggestionRightIconColor"></item>-->
-        <!--<item name="floatingSearch_actionMenuOverflowColor"></item>-->
-    </style>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

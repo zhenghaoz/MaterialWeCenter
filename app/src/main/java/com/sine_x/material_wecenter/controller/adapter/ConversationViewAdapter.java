@@ -4,21 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.support.v7.preference.AndroidResources;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.github.pavlospt.roundedletterview.RoundedLetterView;
 import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
 import com.sine_x.material_wecenter.controller.activity.ChatActivity;
 import com.sine_x.material_wecenter.models.Conversation;
-import com.sine_x.material_wecenter.models.Topic;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -76,10 +72,14 @@ public class ConversationViewAdapter extends RecyclerView.Adapter<ConversationVi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.card) CardView card;
-        @BindView(R.id.conversation_img) CircleImageView conversationImage;
-        @BindView(R.id.conversation_user_name) TextView conversationUser;
-        @BindView(R.id.conversation_last_msg) TextView conversationLast;
+        @BindView(R.id.card)
+        CardView card;
+        @BindView(R.id.conversation_img)
+        CircleImageView conversationImage;
+        @BindView(R.id.conversation_user_name)
+        TextView conversationUser;
+        @BindView(R.id.conversation_last_msg)
+        TextView conversationLast;
 
         public ViewHolder(View itemView) {
             super(itemView);

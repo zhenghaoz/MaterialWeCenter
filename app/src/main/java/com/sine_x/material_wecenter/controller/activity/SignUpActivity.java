@@ -21,11 +21,16 @@ import butterknife.OnClick;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    @BindView(R.id.edit_username) EditText editUsername;
-    @BindView(R.id.edit_email) EditText editEmail;
-    @BindView(R.id.edit_password) EditText editPassword;
-    @BindView(R.id.button_login) TextView buttonLogin;
-    @BindView(R.id.button_sign_up) Button buttonSignUp;
+    @BindView(R.id.edit_username)
+    EditText editUsername;
+    @BindView(R.id.edit_email)
+    EditText editEmail;
+    @BindView(R.id.edit_password)
+    EditText editPassword;
+    @BindView(R.id.button_login)
+    TextView buttonLogin;
+    @BindView(R.id.button_sign_up)
+    Button buttonSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

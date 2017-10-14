@@ -33,7 +33,8 @@ public class UserActonFragment extends Fragment {
     private long uid;
     private int actions;
 
-    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
+    @BindView(R.id.recyclerView)
+    RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private List<Action> mContentItems = new ArrayList<>();
     private int pageNum = 1;   // 当前页面的页码
@@ -100,7 +101,7 @@ public class UserActonFragment extends Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            if (response.getErrno()==1) {
+            if (response.getErrno() == 1) {
                 mContentItems.addAll(response.getRsm());
                 mAdapter.notifyDataSetChanged();
                 pageNum++;

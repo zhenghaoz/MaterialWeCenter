@@ -30,8 +30,10 @@ public class PostCommentActivity extends AppCompatActivity {
     int articleID;
     String artiicleTitle;
 
-    @BindView(R.id.question_title) TextView title;
-    @BindView(R.id.editText_answerContent) KnifeText editContent;
+    @BindView(R.id.question_title)
+    TextView title;
+    @BindView(R.id.editText_answerContent)
+    KnifeText editContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +42,14 @@ public class PostCommentActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         //获取intent
-        Intent mIntent=getIntent();
+        Intent mIntent = getIntent();
         articleID = mIntent.getIntExtra(Config.INT_ARTICLE_ID, -1);
         artiicleTitle = mIntent.getStringExtra(Config.INT_ARTICLE_TITLE);
 
         //init toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_publishAnswer);
         setSupportActionBar(toolbar);
-        title.setText("评论 "+ artiicleTitle);
+        title.setText("评论 " + artiicleTitle);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,7 +88,7 @@ public class PostCommentActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            if (response.getErrno() == 1){ // 发布成功
+            if (response.getErrno() == 1) { // 发布成功
                 PostCommentActivity.this.setResult(POST_COMMENT_POS);
                 PostCommentActivity.this.finish();
             } else                // 显示错误

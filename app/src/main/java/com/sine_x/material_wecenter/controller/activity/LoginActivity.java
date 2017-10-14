@@ -22,10 +22,14 @@ import butterknife.OnClick;
 
 public class LoginActivity extends AppCompatActivity {
 
-    @BindView(R.id.edit_username) EditText editUsername;
-    @BindView(R.id.edit_password) EditText editPassword;
-    @BindView(R.id.button_login) Button btnLogin;
-    @BindView(R.id.button_sign_up) TextView btnSignUp;
+    @BindView(R.id.edit_username)
+    EditText editUsername;
+    @BindView(R.id.edit_password)
+    EditText editPassword;
+    @BindView(R.id.button_login)
+    Button btnLogin;
+    @BindView(R.id.button_sign_up)
+    TextView btnSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         private String user_name;
         private String password;
         private Response<LoginProcess> response;
+
         // 获取用户输入的用户名和密码
         @Override
         protected void onPreExecute() {
@@ -60,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
             user_name = editUsername.getText().toString();
             password = editPassword.getText().toString();
         }
+
         // 验证登录信息
         @Override
         protected Void doInBackground(Void... params) {
@@ -80,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
             }
             return null;
         }
+
         // 通知用户登录结果
         @Override
         protected void onPostExecute(Void aVoid) {

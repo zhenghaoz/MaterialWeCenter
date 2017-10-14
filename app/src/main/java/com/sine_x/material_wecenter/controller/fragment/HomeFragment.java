@@ -116,7 +116,7 @@ public class HomeFragment extends Fragment {
             mSwipeRefreshLayout.setRefreshing(false);
             mAdapter.notifyDataSetChanged();
             //加载完成，更新flag
-            page ++;
+            page++;
             loading = false;
         }
     }

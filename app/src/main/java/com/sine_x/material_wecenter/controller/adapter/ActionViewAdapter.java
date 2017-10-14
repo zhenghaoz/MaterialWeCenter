@@ -84,10 +84,14 @@ public class ActionViewAdapter extends RecyclerView.Adapter<ActionViewAdapter.Ac
 
     public static class ActionViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.title) TextView title;
-        @BindView(R.id.info) TextView info;
-        @BindView(R.id.detail) TextView detail;
-        @BindView(R.id.card_view) CardView card;
+        @BindView(R.id.title)
+        TextView title;
+        @BindView(R.id.info)
+        TextView info;
+        @BindView(R.id.detail)
+        TextView detail;
+        @BindView(R.id.card_view)
+        CardView card;
 
         public ActionViewHolder(View item) {
             super(item);

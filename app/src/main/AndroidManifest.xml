@@ -64,7 +64,11 @@
             android:name=".controller.activity.PostCommentActivity"
             android:label=" "
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".controller.activity.ChatActivity"></activity>
+        <activity android:name=".controller.activity.ChatActivity" />
+        <activity
+            android:name=".controller.activity.TopicActivity"
+            android:label="@string/title_activity_topic"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

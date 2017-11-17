@@ -5,7 +5,7 @@ public class Config {
     // 应用配置
 
     // 网站目录
-    public static String HOST_NAME = "https://vps.sine-x.com/wecenter/";
+    public static String HOST_NAME = "https://wecenter.sine-x.com/";
     // 每页问题数量
     public static final int ITEM_PER_PAGE = 20;
     // 设置网络超时时间

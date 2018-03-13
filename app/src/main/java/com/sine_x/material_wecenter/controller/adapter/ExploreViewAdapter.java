@@ -3,6 +3,7 @@ package com.sine_x.material_wecenter.controller.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,7 @@ public class ExploreViewAdapter extends RecyclerView.Adapter<ExploreViewAdapter.
                     .into(holder.avatarImg);
         // 加载内容
         if (exploreItem.getPost_type().equals(ExploreItem.POST_TYPE_QUESTION)) {
-            holder.questionTitle.setText(exploreItem.getQuestion_content());
+            holder.questionTitle.setText(Html.fromHtml(exploreItem.getQuestion_content()));
             holder.questionInfo.setText(String.valueOf(exploreItem.getFocus_count()) + "人关注 • "
                     + String.valueOf(exploreItem.getAnswer_count()) + "个回答 • "
                     + String.valueOf(exploreItem.getView_count()) + "次浏览");
@@ -62,7 +63,7 @@ public class ExploreViewAdapter extends RecyclerView.Adapter<ExploreViewAdapter.
                 }
             });
         } else {
-            holder.questionTitle.setText(exploreItem.getTitle());
+            holder.questionTitle.setText(Html.fromHtml(exploreItem.getTitle()));
             holder.questionInfo.setText(String.valueOf(exploreItem.getVotes()) + "人赞同 • "
                     + String.valueOf(exploreItem.getViews()) + "次浏览");
             holder.questionTitle.setOnClickListener(new View.OnClickListener() {

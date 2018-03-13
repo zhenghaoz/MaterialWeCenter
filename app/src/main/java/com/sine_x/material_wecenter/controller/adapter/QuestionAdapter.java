@@ -125,7 +125,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     mContext.startActivity(intent);
                 }
             });
-            titleViewHolder.title.setText(questionInfo.getQuestion_content());
+            titleViewHolder.title.setText(Html.fromHtml(questionInfo.getQuestion_content()));
         } else if (holder instanceof TextViewHolder) {
             TextViewHolder textViewHolder = (TextViewHolder) holder;
             RichText.from(questionDetail.getQuestion_info().getQuestion_detail())

@@ -151,7 +151,7 @@ public class DynamicViewAdapter extends RecyclerView.Adapter<DynamicViewAdapter.
 
     //201 - 207
     private void setQuestionAndAnswerView(ViewHolder holder, final Dynamic dynamic) {
-        holder.dynamicTitle.setText(dynamic.getQuestion_info().getQuestion_content());
+        holder.dynamicTitle.setText(Html.fromHtml(dynamic.getQuestion_info().getQuestion_content()));
         CharSequence message = Html.fromHtml(dynamic.getAnswer_info().getAnswer_content());
         if (message.length() > Config.MAX_LENGTH) {
             message = message.subSequence(0, Config.MAX_LENGTH);
@@ -188,7 +188,7 @@ public class DynamicViewAdapter extends RecyclerView.Adapter<DynamicViewAdapter.
 
     //501 - 502
     private void setArticleView(ViewHolder holder, final Dynamic dynamic) {
-        holder.dynamicTitle.setText(dynamic.getArticle_info().getTitle());
+        holder.dynamicTitle.setText(Html.fromHtml(dynamic.getArticle_info().getTitle()));
         CharSequence message = Html.fromHtml(dynamic.getArticle_info().getMessage());
         if (message.length() > Config.MAX_LENGTH) {
             message = message.subSequence(0, Config.MAX_LENGTH);

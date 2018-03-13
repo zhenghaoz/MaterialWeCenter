@@ -128,7 +128,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 }
             });
             Log.d("UID", String.valueOf(articleInfo.getUser_info().getUid()));
-            titleViewHolder.title.setText(articleInfo.getTitle());
+            titleViewHolder.title.setText(Html.fromHtml(articleInfo.getTitle()));
         } else if (holder instanceof TopicViewHolder) {
             TopicViewHolder topicViewHolder = (TopicViewHolder) holder;
             List<String> topics = new ArrayList<>();

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,7 @@ public class TopicViewAdapter extends RecyclerView.Adapter<TopicViewAdapter.View
         if (topic.getTopic_pic() != null)
             Picasso.with(mContext).load(topic.getTopic_pic()).into(holder.topicImg);
         holder.topicTitle.setText(topic.getTopic_title());
-        holder.topicDescription.setText(topic.getTopic_description());
+        holder.topicDescription.setText(Html.fromHtml(topic.getTopic_description()));
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

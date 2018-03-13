@@ -14,6 +14,7 @@ import com.nispok.snackbar.Snackbar;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.R;
+import com.sine_x.material_wecenter.Util;
 import com.sine_x.material_wecenter.models.PublishQuestion;
 import com.sine_x.material_wecenter.models.Response;
 
@@ -125,24 +126,6 @@ public class PostActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private String htmlToBBcode(String html) {
-        html = html.replace("<br>", "\n");
-        html = html.replace("<i>", "[i]");
-        html = html.replace("</i>", "[/i]");
-        html = html.replace("<b>", "[b]");
-        html = html.replace("</b>", "[/b]");
-        html = html.replace("<blockquote>", "[quote]");
-        html = html.replace("</blockquote>", "[/quote]");
-        html = html.replace("<ul>", "[list]");
-        html = html.replace("</ul>", "[/list]");
-        html = html.replace("<li>", "[*]");
-        html = html.replace("</li>", "[/*]");
-        html = html.replaceAll("<a\\shref=\"(.*)\">", "[url=$1]");
-        html = html.replace("</a>", "[/url]");
-        html = StringEscapeUtils.unescapeHtml4(html);
-        return html;
-    }
-
     /**
      * 发布问题的异步任务
      */
@@ -154,7 +137,7 @@ public class PostActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            content = htmlToBBcode(editContent.toHtml());
+            content = Util.htmlToBBcode(editContent.toHtml());
 //            Log.d("CONTENT", content);
             title = editTitle.getText().toString();
         }

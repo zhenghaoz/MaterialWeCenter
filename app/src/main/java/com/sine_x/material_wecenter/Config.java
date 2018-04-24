@@ -15,7 +15,7 @@ public class Config {
     // API密钥
     static final String APP_SECRET = "12884789df747d7affbcd6a7cadd9359";
     // API密钥开关
-    static final boolean KEEP_SECRET = false;
+    static final boolean KEEP_SECRET = true;
     // 默认头像
     public static final String DEFAULT_AVATAR = HOST_NAME + "static/common/avatar-max-img.png";
     // 消息刷新周期

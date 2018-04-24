@@ -17,6 +17,7 @@ import com.nispok.snackbar.Snackbar;
 import com.sine_x.material_wecenter.Client;
 import com.sine_x.material_wecenter.Config;
 import com.sine_x.material_wecenter.R;
+import com.sine_x.material_wecenter.Util;
 import com.sine_x.material_wecenter.models.PublishAnswer;
 import com.sine_x.material_wecenter.models.Response;
 
@@ -126,24 +127,6 @@ public class PostAnswerActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private String htmlToBBcode(String html) {
-        html = html.replace("<br>", "\n");
-        html = html.replace("<i>", "[i]");
-        html = html.replace("</i>", "[/i]");
-        html = html.replace("<b>", "[b]");
-        html = html.replace("</b>", "[/b]");
-        html = html.replace("<blockquote>", "[quote]");
-        html = html.replace("</blockquote>", "[/quote]");
-        html = html.replace("<ul>", "[list]");
-        html = html.replace("</ul>", "[/list]");
-        html = html.replace("<li>", "[*]");
-        html = html.replace("</li>", "[/*]");
-        html = html.replaceAll("<a\\shref=\"(.*)\">", "[url=$1]");
-        html = html.replace("</a>", "[/url]");
-        html = StringEscapeUtils.unescapeHtml4(html);
-        return html;
-    }
-
     //异步发布答案
     private class PublishTask extends AsyncTask<Void, Void, Void> {
 
@@ -153,7 +136,8 @@ public class PostAnswerActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            content = editContent.getText().toString();
+            content = editContent.toHtml();
+            content = Util.htmlToBBcode(content);
         }
 
         @Override

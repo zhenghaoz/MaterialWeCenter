@@ -19,17 +19,19 @@
             android:theme="@style/nLiveoDrawer" />
         <activity
             android:name=".controller.activity.LoginActivity"
+            android:windowSoftInputMode="adjustResize"
             android:label="@string/title_activity_login" />
         <activity
             android:name=".controller.activity.PostActivity"
+            android:windowSoftInputMode="adjustResize"
             android:label="@string/title_activity_post" />
         <activity
             android:name=".controller.activity.UserActivity"
             android:label="@string/title_activity_user" />
         <activity
             android:name=".controller.activity.PostAnswerActivity"
-            android:label="@string/title_activity_post_answer"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"
+            android:label="@string/title_activity_post_answer" />
         <activity
             android:name=".controller.activity.QuestionActivity"
             android:label="QuestionActivity" />
@@ -44,15 +46,12 @@
         </activity>
         <activity
             android:name=".controller.activity.AnswerActivity"
+            android:windowSoftInputMode="adjustResize"
             android:label="查看答案"
-            android:theme="@style/AnswerTheme"
-            android:windowSoftInputMode="adjustResize" />
-        <!--
-             ATTENTION: This was auto-generated to add Google Play services to your project for
-             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
-        -->
+            android:theme="@style/AnswerTheme" />
         <activity
             android:name=".controller.activity.SignUpActivity"
+            android:windowSoftInputMode="adjustResize"
             android:label="@string/title_activity_sign_up"
             android:theme="@style/AppTheme" />
         <activity
@@ -61,13 +60,13 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".controller.activity.PostCommentActivity"
-            android:label=" "
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"
+            android:label=" " />
         <activity android:name=".controller.activity.ChatActivity" />
         <activity
             android:name=".controller.activity.TopicActivity"
             android:label="@string/title_activity_topic"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

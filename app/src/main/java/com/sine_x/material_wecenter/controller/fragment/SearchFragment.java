@@ -66,6 +66,17 @@ public class SearchFragment extends Fragment {
                 new SearchTask().execute();
             }
         });
+        searchView.setOnLeftMenuClickListener(new FloatingSearchView.OnLeftMenuClickListener() {
+            @Override
+            public void onMenuOpened() {
+
+            }
+
+            @Override
+            public void onMenuClosed() {
+
+            }
+        });
     }
 
     class SearchTask extends AsyncTask<Void, Void, Void> {

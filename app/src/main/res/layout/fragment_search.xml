@@ -22,7 +22,7 @@
         app:floatingSearch_searchHint="@string/search"
         app:floatingSearch_suggestionsListAnimDuration="250"
         app:floatingSearch_showSearchKey="true"
-        app:floatingSearch_leftActionMode="noLeftAction"
+        app:floatingSearch_leftActionMode="showHamburger"
         app:floatingSearch_close_search_on_keyboard_dismiss="true"/>
 
 </FrameLayout>

@@ -45,7 +45,7 @@ public class LaunchActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString(Config.PRE_AVATAR_FILE, response.getRsm().getAvatar_file());
                 editor.apply();
-                Intent intent = new Intent(LaunchActivity.this, MainActivity.class);
+                Intent intent = new Intent(LaunchActivity.this, DrawerActivity.class);
                 startActivity(intent);
                 finish();
             }

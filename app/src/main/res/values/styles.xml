@@ -17,7 +17,7 @@
         <item name="colorPrimary">@color/nliveo_blue_colorPrimary</item>
         <item name="colorPrimaryDark">@color/nliveo_blue_colorPrimaryDark</item>
         <item name="colorAccent">@color/nliveo_blue_colorPrimaryDark</item>
-        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
     </style>
 
     <style name="LaunchTheme" parent="AppTheme">

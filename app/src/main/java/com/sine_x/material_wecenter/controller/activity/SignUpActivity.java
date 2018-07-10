@@ -82,7 +82,7 @@ public class SignUpActivity extends AppCompatActivity {
                 editor.putString(Config.PRE_AVATAR_FILE, Config.DEFAULT_AVATAR);
                 editor.apply();
                 // 加载主页
-                Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                Intent intent = new Intent(SignUpActivity.this, DrawerActivity.class);
                 startActivity(intent);
                 finish();
             } else {

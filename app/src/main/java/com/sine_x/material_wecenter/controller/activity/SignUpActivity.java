@@ -80,6 +80,7 @@ public class SignUpActivity extends AppCompatActivity {
                 editor.putString(Config.PRE_PASSWORD, password);
                 editor.putString(Config.PRE_USER_NAME, response.getRsm().getUser_name());
                 editor.putString(Config.PRE_AVATAR_FILE, Config.DEFAULT_AVATAR);
+                editor.putString(Config.PRE_EMAIL, response.getRsm().getEmail());
                 editor.apply();
                 // 加载主页
                 Intent intent = new Intent(SignUpActivity.this, DrawerActivity.class);

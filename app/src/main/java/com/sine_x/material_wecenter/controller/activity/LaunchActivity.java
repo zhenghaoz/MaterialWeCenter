@@ -44,6 +44,7 @@ public class LaunchActivity extends AppCompatActivity {
                 SharedPreferences preferences = getSharedPreferences("account", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString(Config.PRE_AVATAR_FILE, response.getRsm().getAvatar_file());
+                editor.putString(Config.PRE_EMAIL, response.getRsm().getEmail());
                 editor.apply();
                 Intent intent = new Intent(LaunchActivity.this, DrawerActivity.class);
                 startActivity(intent);

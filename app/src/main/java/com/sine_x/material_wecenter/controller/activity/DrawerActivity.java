@@ -62,6 +62,7 @@ public class DrawerActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         TextView textViewTitle = navigationView.getHeaderView(0).findViewById(R.id.textView);
+        TextView textViewEmail = navigationView.getHeaderView(0).findViewById(R.id.textViewEmail);
         ImageView imageViewAvatar = navigationView.getHeaderView(0).findViewById(R.id.imageView);
         imageViewAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,10 +78,12 @@ public class DrawerActivity extends AppCompatActivity
         uid = preferences.getInt(Config.PRE_UID, -1);
         user_name = preferences.getString(Config.PRE_USER_NAME, "");
         avatar_file = preferences.getString(Config.PRE_AVATAR_FILE, "");
+        String email = preferences.getString(Config.PRE_EMAIL, "");
         // 加载用户头像/用户名
         if (!avatar_file.isEmpty())
             Picasso.with(this).load(avatar_file).into(imageViewAvatar);
         textViewTitle.setText(user_name);
+        textViewEmail.setText(email);
 
         // 加载动态页面
         homeFragment = new HomeFragment();

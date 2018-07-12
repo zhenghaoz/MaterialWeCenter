@@ -22,9 +22,6 @@
         app:viewpager_displayToolbarWhenSwipe="true"
         app:viewpager_transparentToolbar="false"
         app:viewpager_animatedHeaderImage="true"
-        app:viewpager_disableToolbar="false"
-
-
-        />
+        app:viewpager_disableToolbar="false" />
 
 </RelativeLayout>

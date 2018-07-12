@@ -27,7 +27,7 @@
         android:src="@mipmap/ic_edit"
         app:fab_hideAnimation="@anim/hide_to_bottom"
         app:fab_showAnimation="@anim/show_from_bottom"
-        fab:fab_colorNormal="@color/nliveo_blue_colorPrimary"
-        fab:fab_colorRipple="@color/nliveo_blue_colorPrimaryDark" />
+        fab:fab_colorNormal="@color/colorPrimary"
+        fab:fab_colorRipple="@color/colorPrimaryDark" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -24,7 +24,7 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".controller.activity.UserActivity"
-            android:theme="@style/AppTheme"
+            android:theme="@style/AppTheme.UserActivity"
             android:label="@string/title_activity_user" />
         <activity
             android:name=".controller.activity.PostAnswerActivity"

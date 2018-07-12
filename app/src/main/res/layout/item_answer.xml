@@ -41,7 +41,7 @@
                         android:gravity="center_vertical"
                         android:paddingTop="5dp"
                         android:text="name"
-                        android:textColor="@color/nliveo_blue_colorPrimary"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="12sp" />
                     <TextView
                         android:id="@+id/textView_addTime_answer"

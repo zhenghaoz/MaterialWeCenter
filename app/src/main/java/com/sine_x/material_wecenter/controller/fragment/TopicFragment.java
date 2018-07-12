@@ -1,9 +1,9 @@
 package com.sine_x.material_wecenter.controller.fragment;
 
-import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,13 +28,13 @@ import butterknife.ButterKnife;
 
 public class TopicFragment extends Fragment {
 
-    private List<Topic> mList = new ArrayList<>();
-    private TopicViewAdapter mAdapter;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private static int POST_ACTIVITY = 1;
     @BindView(R.id.dynamic_list)
     RecyclerView mRecyclerView;
-
-    private static int POST_ACTIVITY = 1;
+    @BindView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
+    private List<Topic> mList = new ArrayList<>();
+    private TopicViewAdapter mAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,7 +48,6 @@ public class TopicFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         // 实例化刷新布局
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light,
                 android.R.color.holo_red_light,
                 android.R.color.holo_green_light,

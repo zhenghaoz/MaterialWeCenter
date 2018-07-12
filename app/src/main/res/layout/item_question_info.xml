@@ -69,7 +69,8 @@
             <Button
                 android:layout_gravity="center_vertical"
                 android:id="@+id/btn_focus_question"
-                android:background="@color/nliveo_blue_colorAccent"
+                android:background="@color/colorAccent"
+                android:textColor="@color/text_white"
                 android:layout_width="90dp"
                 android:layout_height="35dp" />
         </LinearLayout>

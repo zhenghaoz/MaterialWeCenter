@@ -3,22 +3,19 @@ package com.sine_x.material_wecenter.controller.fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceFragmentCompat;
 import android.view.View;
 
 import com.sine_x.material_wecenter.BuildConfig;
 import com.sine_x.material_wecenter.R;
 
-public class SettingsFragment extends PreferenceFragment {
+public class SettingsFragment extends PreferenceFragmentCompat {
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         // 指定配置
         addPreferencesFromResource(R.xml.settings);
-        // 修改样式
-        getActivity().setTheme(R.style.nLiveo_Theme_Light);
     }
 
     @Override

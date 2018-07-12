@@ -1,12 +1,14 @@
 package com.sine_x.material_wecenter.controller.fragment;
 
-import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,19 +23,29 @@ import com.sine_x.material_wecenter.models.Responses;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class HomeFragment extends Fragment {
 
+    @BindView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
+    @BindView(R.id.dynamic_list)
+    RecyclerView mRecyclerView;
     private List<Dynamic> mList = new ArrayList<>();
     private DynamicViewAdapter mAdapter;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
+    private DrawerLayout drawerLayout;
     private Client client = Client.getInstance();
-
     //初始化一定处于刷新状态
     private boolean loading = true;
     //记录当前已经加载的页数
     private int page = 0;
+
+    @Override
+    public void setArguments(Bundle args) {
+        super.setArguments(args);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,10 +57,9 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        ButterKnife.bind(this, view);
         // 实例化刷新布局
         mAdapter = new DynamicViewAdapter(getActivity(), mList);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light,
                 android.R.color.holo_red_light,
                 android.R.color.holo_green_light,
@@ -66,7 +77,6 @@ public class HomeFragment extends Fragment {
         });
         mSwipeRefreshLayout.setRefreshing(true);
         // 实例化RecyclerView
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.dynamic_list);
         mRecyclerView.setAdapter(mAdapter);
         final LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);

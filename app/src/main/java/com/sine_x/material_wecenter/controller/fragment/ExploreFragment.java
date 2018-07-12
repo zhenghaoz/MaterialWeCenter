@@ -1,10 +1,10 @@
 package com.sine_x.material_wecenter.controller.fragment;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,17 +31,16 @@ import butterknife.OnClick;
 
 public class ExploreFragment extends Fragment {
 
+    private static int POST_ACTIVITY = 1;
     private final int ScrollOffset = 4;
+    @BindView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
+    @BindView(R.id.button_publish)
+    FloatingActionButton btnPublish;
     private boolean loading = true;
     private List<ExploreItem> mList = new ArrayList<>();
     private ExploreViewAdapter mAdapter;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
-    @BindView(R.id.button_publish)
-    FloatingActionButton btnPublish;
-
-    private static int POST_ACTIVITY = 1;
-
     private int page = 1;   // 当前页面的页码
 
     @Override
@@ -56,7 +55,6 @@ public class ExploreFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         // 实例化刷新布局
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light,
                 android.R.color.holo_red_light,
                 android.R.color.holo_green_light,

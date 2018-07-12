@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                 editor.putString(Config.PRE_AVATAR_FILE, response.getRsm().getAvatar_file());
                 editor.apply();
                 // 加载主页
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                Intent intent = new Intent(LoginActivity.this, DrawerActivity.class);
                 startActivity(intent);
                 finish();
             }

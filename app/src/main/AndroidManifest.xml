@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.sine_x.material_wecenter">
 
     <uses-sdk xmlns:tools="http://schemas.android.com/tools"
@@ -14,24 +15,21 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".controller.activity.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/nLiveoDrawer" />
-        <activity
             android:name=".controller.activity.LoginActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:label="@string/title_activity_login" />
+            android:label="@string/title_activity_login"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".controller.activity.PostActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:label="@string/title_activity_post" />
+            android:label="@string/title_activity_post"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".controller.activity.UserActivity"
+            android:theme="@style/AppTheme.UserActivity"
             android:label="@string/title_activity_user" />
         <activity
             android:name=".controller.activity.PostAnswerActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:label="@string/title_activity_post_answer" />
+            android:label="@string/title_activity_post_answer"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".controller.activity.QuestionActivity"
             android:label="QuestionActivity" />
@@ -46,27 +44,32 @@
         </activity>
         <activity
             android:name=".controller.activity.AnswerActivity"
-            android:windowSoftInputMode="adjustResize"
             android:label="查看答案"
-            android:theme="@style/AnswerTheme" />
+            android:theme="@style/AnswerTheme"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".controller.activity.SignUpActivity"
-            android:windowSoftInputMode="adjustResize"
             android:label="@string/title_activity_sign_up"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".controller.activity.ArticleActivity"
             android:label="@string/title_activity_article"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".controller.activity.PostCommentActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:label=" " />
+            android:label=" "
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".controller.activity.ChatActivity" />
         <activity
             android:name=".controller.activity.TopicActivity"
             android:label="@string/title_activity_topic"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".controller.activity.DrawerActivity"
+            android:label="@string/title_activity_drawer"
+            android:theme="@style/AppTheme">
+        </activity>
     </application>
 
 </manifest>

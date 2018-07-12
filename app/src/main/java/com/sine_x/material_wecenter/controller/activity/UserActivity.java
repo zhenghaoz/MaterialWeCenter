@@ -102,7 +102,7 @@ public class UserActivity extends AppCompatActivity {
             @Override
             public HeaderDesign getHeaderDesign(int page) {
                 return HeaderDesign.fromColorResAndUrl(
-                        R.color.nliveo_blue_colorPrimary,
+                        R.color.colorPrimary,
                         "file:///android_asset/background.jpg");
             }
         });

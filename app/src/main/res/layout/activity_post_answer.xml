@@ -10,7 +10,7 @@
         android:id="@+id/toolbar_publishAnswer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/nliveo_blue_colorPrimary"
+        android:background="@color/colorPrimary"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
     </android.support.v7.widget.Toolbar>
 
@@ -31,11 +31,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="right"
-        android:background="@color/nliveo_blue_colorPrimary">
+        android:background="@color/colorPrimary">
 
         <TextView
             android:id="@+id/question_title"
-            android:textColor="@color/nliveo_white"
+            android:textColor="@color/text_white"
             android:gravity="center_vertical"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"

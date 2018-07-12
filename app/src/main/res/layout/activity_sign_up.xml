@@ -1,5 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/nliveo_blue_colorPrimary"
+    android:background="@color/colorPrimary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -102,7 +102,7 @@
                 <TextView
                     android:id="@+id/button_login"
                     android:text="@string/login"
-                    android:textColor="@color/nliveo_blue_colorPrimary"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/abc_text_size_button_material"
                     android:background="@android:color/white"
                     android:gravity="center"
@@ -116,7 +116,7 @@
                     android:text="@string/sign_up"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/abc_text_size_button_material"
-                    android:background="@color/nliveo_blue_colorPrimary"
+                    android:background="@color/colorPrimary"
                     android:layout_marginTop="16dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"

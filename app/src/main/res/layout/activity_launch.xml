@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@color/nliveo_blue_colorPrimary"
+    android:background="@color/colorPrimary"
     tools:context="com.sine_x.material_wecenter.controller.activity.LaunchActivity">
 
     <ImageView

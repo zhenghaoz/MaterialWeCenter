@@ -9,7 +9,7 @@ public class Config {
     // 每页问题数量
     public static final int ITEM_PER_PAGE = 20;
     // 设置网络超时时间
-    static final int TIME_OUT = 1000;
+    static final int TIME_OUT = 3000;
     // 缓冲大小
     static final int MAX_LINE_BUFFER = 1024;
     // API密钥
@@ -88,6 +88,7 @@ public class Config {
     public static final String PRE_PASSWORD = "password";
     public static final String PRE_USER_NAME = "user_name";
     public static final String PRE_AVATAR_FILE = "avatar_file";
+    public static final String PRE_EMAIL = "email";
 
     public static final String INT_QUESTION_ID = "questionID";
     public static final String INT_QUESTION_TITLE = "questionTitle";

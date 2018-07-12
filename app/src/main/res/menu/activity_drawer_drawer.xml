@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:checked="true"
+            android:icon="@mipmap/ic_notifications_on_grey600_48dp"
+            android:title="@string/dynamic" />
+        <item
+            android:id="@+id/nav_explore"
+            android:icon="@mipmap/ic_explore_grey600_48dp"
+            android:title="@string/explore" />
+        <item
+            android:id="@+id/nav_topic"
+            android:icon="@drawable/ic_whatshot_grey600_48dp"
+            android:title="@string/topic" />
+        <item
+            android:id="@+id/nav_message"
+            android:icon="@drawable/ic_chat_grey600_48dp"
+            android:title="@string/inbox" />
+        <item
+            android:id="@+id/nav_search"
+            android:icon="@drawable/ic_search_grey600_48dp"
+            android:title="@string/search" />
+    </group>
+
+    <item android:title="@string/other">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@mipmap/ic_settings_grey600_48dp"
+                android:title="@string/settings" />
+            <item
+                android:id="@+id/nav_sign_out"
+                android:icon="@drawable/ic_exit_to_app_grey600_48dp"
+                android:title="@string/sign_out" />
+        </menu>
+    </item>
+
+</menu>

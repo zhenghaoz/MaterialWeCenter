@@ -1,10 +1,11 @@
 package com.sine_x.material_wecenter.controller.fragment;
 
 
-import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,6 +34,7 @@ public class SearchFragment extends Fragment {
     private List<SearchResult> mList = new ArrayList<>();
     private SearchViewAdapter mAdapter;
     private String q;
+    private DrawerLayout drawerLayout;
 
     @BindView(R.id.floating_search_view)
     FloatingSearchView searchView;
@@ -41,6 +43,11 @@ public class SearchFragment extends Fragment {
 
     public SearchFragment() {
         // Required empty public constructor
+    }
+
+
+    public void setDrawer(DrawerLayout drawerLayout) {
+        this.drawerLayout = drawerLayout;
     }
 
     @Override
@@ -66,6 +73,19 @@ public class SearchFragment extends Fragment {
                 new SearchTask().execute();
             }
         });
+        searchView.setOnLeftMenuClickListener(new FloatingSearchView.OnLeftMenuClickListener() {
+            @Override
+            public void onMenuOpened() {
+
+            }
+
+            @Override
+            public void onMenuClosed() {
+
+            }
+        });
+        if (drawerLayout != null)
+            searchView.attachNavigationDrawerToMenuButton(drawerLayout);
     }
 
     class SearchTask extends AsyncTask<Void, Void, Void> {

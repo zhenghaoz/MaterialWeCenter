@@ -17,7 +17,7 @@ Material-WeCenter是一个第三方的[WeCenter](http://www.wecenter.com/)安卓
 - [测试站点](https://wecenter.sine-x.com/)
 - [测试客户端](https://github.com/ZhangZhenghao/Material-WeCenter/releases)
 
-[![](https://okl2aaa54.qnssl.com/download-apk.png)](https://github.com/ZhangZhenghao/MaterialWeCenter/releases/download/0.1.8/app-debug.apk)
+[![](https://okl2aaa54.qnssl.com/download-apk.png)](https://github.com/ZhangZhenghao/MaterialWeCenter/releases/download/latest/app-debug.apk)
 
 ## Usage
 
@@ -30,7 +30,7 @@ Material-WeCenter是一个第三方的[WeCenter](http://www.wecenter.com/)安卓
 如果在使用本客户端的过程中遇到问题，或者有什么功能还没有实现，欢迎联系作者或者贡献自己的代码。
 
 ## License
-    Copyright 2017 ZhangZhenghao
+    Copyright 2018 ZhangZhenghao
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

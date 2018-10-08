@@ -4,7 +4,7 @@
 
 Material-WeCenter是一个第三方的[WeCenter](http://www.wecenter.com/)安卓(Android)客户端，最初为作者们为大学官方论坛开发。本客户端需要配合API使用：[ZhangZhenghao/WeCenterAPI](https://github.com/ZhangZhenghao/WeCenterAPI)）。
 
-[![Build Status](https://travis-ci.org/ZhangZhenghao/MaterialWeCenter.svg?branch=master)](https://travis-ci.org/ZhangZhenghao/MaterialWeCenter)
+[![Build Status](https://travis-ci.org/zhenghaoz/MaterialWeCenter.svg?branch=master)](https://travis-ci.org/zhenghaoz/MaterialWeCenter)
 [![GitHub release](https://img.shields.io/github/release/ZhangZhenghao/MaterialWeCenter.svg)](https://github.com/ZhangZhenghao/MaterialWeCenter/releases/latest)
 
 ## Screenshot

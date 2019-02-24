@@ -10,14 +10,14 @@ Material-WeCenter是一个第三方的[WeCenter](http://www.wecenter.com/)安卓
 ## Screenshot
 
 <img src="https://github.com/ZhangZhenghao/MaterialWeCenter/raw/master/screenshot/Screenshot_20170613-111048.png?raw=true" height="400px">    <img src="https://github.com/ZhangZhenghao/MaterialWeCenter/raw/master/screenshot/Screenshot_20170613-111055.png?raw=true" height="400px">    <img src="https://github.com/ZhangZhenghao/MaterialWeCenter/raw/master/screenshot/Screenshot_20170613-111432.png?raw=true" height="400px">
-<img src="https://okl2aaa54.qnssl.com/photo_2017-10-13_13-58-38.jpg" height="400px">    <img src="https://okl2aaa54.qnssl.com/photo_2017-10-13_14-02-55.jpg" height="400px">    <img src="https://okl2aaa54.qnssl.com/photo_2017-10-13_14-03-03.jpg" height="400px">
+<img src="https://img.sine-x.com/photo_2017-10-13_13-58-38.jpg" height="400px">    <img src="https://img.sine-x.com/photo_2017-10-13_14-02-55.jpg" height="400px">    <img src="https://img.sine-x.com/photo_2017-10-13_14-03-03.jpg" height="400px">
 
 ## Demo
 
 - [测试站点](https://wecenter.sine-x.com/)
 - [测试客户端](https://github.com/ZhangZhenghao/Material-WeCenter/releases)
 
-[![](https://okl2aaa54.qnssl.com/download-apk.png)](https://github.com/ZhangZhenghao/MaterialWeCenter/releases/download/latest/app-debug.apk)
+[![](https://img.sine-x.com/download-apk.png)](https://github.com/ZhangZhenghao/MaterialWeCenter/releases/download/latest/app-debug.apk)
 
 ## Usage
 
@@ -30,7 +30,7 @@ Material-WeCenter是一个第三方的[WeCenter](http://www.wecenter.com/)安卓
 如果在使用本客户端的过程中遇到问题，或者有什么功能还没有实现，欢迎联系作者或者贡献自己的代码。
 
 ## License
-    Copyright 2018 ZhangZhenghao
+    Copyright 2019 ZhangZhenghao
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
